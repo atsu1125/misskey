@@ -110,6 +110,11 @@ export default (opts: Opts = {}) => ({
 	},
 
 	methods: {
+		toggleStayTl() {
+			const old = this.appearNote.stayTl
+			this.$set(this.appearNote, 'stayTl', !old)
+		},
+
 		reply(viaKeyboard = false) {
 			this.$root.$post({
 				reply: this.appearNote,
