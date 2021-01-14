@@ -217,6 +217,11 @@ export default Vue.extend({
 				width 42px
 				height 42px
 
+			> .main
+				> .footer
+					> .button
+						margin 0 20px 0 0
+
 	&:last-of-type
 		border-bottom none
 
