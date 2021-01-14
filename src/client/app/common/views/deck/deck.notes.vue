@@ -74,8 +74,12 @@ export default Vue.extend({
 	},
 
 	computed: {
+		_notes0(): any[] {
+			return (this.notes as any).filter(x => x.stayTl).concat((this.notes as any).filter(x => !x.stayTl));
+		},
+
 		_notes(): any[] {
-			return (this.notes as any).map(note => {
+			return (this._notes0 as any).map(note => {
 				const date = new Date(note.createdAt).getDate();
 				const month = new Date(note.createdAt).getMonth() + 1;
 				note._date = date;
