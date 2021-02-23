@@ -38,6 +38,7 @@ ENTRYPOINT ["/sbin/tini", "--"]
 
 COPY --from=builder /misskey/node_modules ./node_modules
 COPY --from=builder /misskey/built ./built
+RUN node -e 'new require("sharp")("built/client/assets/apple-touch-icon.png").metadata().then(x => console.log(x))'
 COPY . ./
 
 CMD ["npm", "start"]
