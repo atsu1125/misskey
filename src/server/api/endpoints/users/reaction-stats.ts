@@ -156,7 +156,8 @@ export default define(meta, async (ps, me) => {
 
 	const reacteds2 = Object.keys(n)
 		.map(x => ({ reaction: x, count: n[x] }))
-		.sort((a, b) => a.count - b.count);
+		.sort((a, b) => a.count - b.count)
+		.splice(0, ps.limit);
 
 	const reactionNames = unique(concat([xs.map(x => x._id), ys.map(x => x._id)]));
 	const emojis = await packEmojis([], null, reactionNames.map(x => decodeReaction(x)).map(x => x.replace(/:/g, '')));
