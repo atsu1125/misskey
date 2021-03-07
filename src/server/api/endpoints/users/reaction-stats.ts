@@ -132,6 +132,7 @@ export default define(meta, async (ps, me) => {
 	const reactions = xs.map(x => {
 		return {
 			count: x.count,
+			raw: x._id,
 			reaction: decodeReaction(x._id)
 		}
 	});
@@ -139,6 +140,7 @@ export default define(meta, async (ps, me) => {
 	const reacteds = ys.map(x => {
 		return {
 			count: x.count,
+			raw: x._id,
 			reaction: decodeReaction(x._id)
 		}
 	});
