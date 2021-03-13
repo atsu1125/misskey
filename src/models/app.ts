@@ -49,7 +49,7 @@ export const pack = async (
 	if (isObjectId(app)) {
 		_app = await App.findOne({
 			_id: app
-		});
+		}, { fields });
 	} else if (typeof app === 'string') {
 		_app = await App.findOne({
 			_id: new mongo.ObjectID(app)

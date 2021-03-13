@@ -31,4 +31,6 @@ export type PackedNote = {
 	poll?: any | null;	// TODO
 	url: string | null;
 	uri: string | null;
+	appId: string | null;
+	app: any | null;	// TODO
 };

@@ -17,6 +17,7 @@ import { toString } from '../mfm/to-string';
 import { PackedNote } from './packedSchemas';
 import { awaitAll } from '../prelude/await-all';
 import { inspect } from 'util';
+import { pack as packApp } from './app';
 
 const Note = db.get<INote>('notes');
 Note.createIndex('uri', { sparse: true, unique: true });
@@ -403,6 +404,8 @@ export const pack = async (
 		files: packFileMany(db.fileIds || []),
 		uri: db.uri || null,
 		url: db.url || null,
+		appId: db.appId || null,
+		app: db.appId ? packApp(db.appId) : null,
 
 		...(opts.detail ? {
 			reply: (opts.detail && db.replyId) ? pack(db.replyId, meId, {
