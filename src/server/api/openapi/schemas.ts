@@ -366,9 +366,14 @@ export const schemas = {
 				$ref: '#/components/schemas/Poll',
 				nullable: true,
 			},
-			geo: {
-				type: 'object',
-			}
+			url: {
+				type: 'string',
+				nullable: true,
+			},
+			uri: {
+				type: 'string',
+				nullable: true,
+			},
 		},
 	},
 
