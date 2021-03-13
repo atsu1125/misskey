@@ -1,11 +1,9 @@
 import * as mongo from 'mongodb';
 import * as deepcopy from 'deepcopy';
-import rap from '@prezzemolo/rap';
 import db from '../db/mongodb';
 import isObjectId from '../misc/is-objectid';
 import { length } from 'stringz';
 import { IUser, pack as packUser } from './user';
-import { pack as packApp } from './app';
 import PollVote from './poll-vote';
 import NoteReaction from './note-reaction';
 import { packMany as packFileMany, IDriveFile } from './drive-file';
@@ -16,6 +14,9 @@ import { dbLogger } from '../db/logger';
 import { decodeReaction, decodeReactionCounts } from '../misc/reaction-lib';
 import { parse } from '../mfm/parse';
 import { toString } from '../mfm/to-string';
+import { PackedNote } from './packedSchemas';
+import { awaitAll } from '../prelude/await-all';
+import { inspect } from 'util';
 
 const Note = db.get<INote>('notes');
 Note.createIndex('uri', { sparse: true, unique: true });
@@ -139,7 +140,7 @@ export type IChoice = {
 	votes: number;
 };
 
-export const hideNote = async (packedNote: any, meId: mongo.ObjectID) => {
+export const hideNote = async (packedNote: any, meId: mongo.ObjectID | null) => {
 	let hide = false;
 
 	// visibility が private かつ投稿者のIDが自分のIDではなかったら非表示(後方互換性のため)
@@ -235,20 +236,20 @@ export const packMany = async (
  * @return response
  */
 export const pack = async (
-	note: string | mongo.ObjectID | INote,
-	me?: string | mongo.ObjectID | IUser,
+	src: string | mongo.ObjectID | INote,
+	me?: string | mongo.ObjectID | IUser | null,
 	options?: {
 		detail?: boolean;
 		skipHide?: boolean;
 	}
-) => {
+): Promise<PackedNote | null> => {
 	const opts = Object.assign({
 		detail: true,
 		skipHide: false
 	}, options);
 
 	// Me
-	const meId: mongo.ObjectID = me
+	const meId: mongo.ObjectID | null = me
 		? isObjectId(me)
 			? me as mongo.ObjectID
 			: typeof me === 'string'
@@ -256,217 +257,198 @@ export const pack = async (
 				: (me as IUser)._id
 		: null;
 
-	let _note: any;
+	let db: INote | undefined;
 
 	// Populate the note if 'note' is ID
-	if (isObjectId(note)) {
-		_note = await Note.findOne({
-			_id: note
+	if (isObjectId(src)) {
+		db = await Note.findOne({
+			_id: src
 		});
-	} else if (typeof note === 'string') {
-		_note = await Note.findOne({
-			_id: new mongo.ObjectID(note)
+	} else if (typeof src === 'string') {
+		db = await Note.findOne({
+			_id: new mongo.ObjectID(src)
 		});
 	} else {
-		_note = deepcopy(note);
+		db = deepcopy(src);
 	}
 
 	// (データベースの欠損などで)投稿がデータベース上に見つからなかったとき
-	if (_note == null) {
-		dbLogger.warn(`[DAMAGED DB] (missing) pkg: note :: ${note}`);
+	if (db == null) {
+		dbLogger.warn(`[DAMAGED DB] (missing) pkg: note :: ${src}`);
 		return null;
 	}
 
-	const id = _note._id;
+	let text = db.text;
 
-	// Some counts
-	_note.renoteCount = _note.renoteCount || 0;
-	_note.quoteCount = _note.quoteCount || 0;
-	_note.repliesCount = _note.repliesCount || 0;
-	_note.reactionCounts = _note.reactionCounts ? decodeReactionCounts(_note.reactionCounts) : {};
-	_note.reactions = _note.reactionCounts;
-	_note.score = _note.score || 0;
-
-	// _note._userを消す前か、_note.userを解決した後でないとホストがわからない
-	if (_note._user) {
-		const host = _note._user.host;
-		// 互換性のため。(古いMisskeyではNoteにemojisが無い)
-		if (_note.emojis == null) {
-			_note.emojis = Emoji.find({
-				host: host
-			}, {
-				fields: { _id: false }
-			});
-		} else {
-			_note.emojis = packEmojis(_note.emojis, host,
-				Object.keys(_note.reactionCounts)
-					.map(x => decodeReaction(x))
-					.map(x => x.replace(/:/g, '')))
-			.catch(e => {
-				console.warn(e);
-				return [];
-			});
-		}
+	if (db.name && (db.url || db.uri)) {
+		text = `【${db.name}】\n${(db.text || '').trim()}\n\n${db.url || db.uri}`;
 	}
 
-	// Rename _id to id
-	_note.id = _note._id;
-	delete _note._id;
+	const reactionCounts = db.reactionCounts ? decodeReactionCounts(db.reactionCounts) : {};
 
-	delete _note.prev;
-	delete _note.next;
-	delete _note.tagsLower;
-	delete _note.mecabWords;
-	delete _note.trendWords;
-	delete _note._user;
-	delete _note._reply;
-	delete _note._renote;
-	delete _note._files;
-	delete _note._replyIds;
-	delete _note.mentionedRemoteUsers;
-
-	if (_note.geo) delete _note.geo.type;
-
-	// Populate user
-	_note.user = packUser(_note.userId, meId);
-
-	// Populate app
-	if (_note.appId) {
-		_note.app = packApp(_note.appId);
-	}
-
-	// Populate files
-	_note.files = packFileMany(_note.fileIds || []);
-
-	// 後方互換性のため
-	_note.mediaIds = _note.fileIds;
-	_note.media = _note.files;
-
-	// When requested a detailed note data
-	if (opts.detail) {
-		if (_note.replyId) {
-			// Populate reply to note
-			_note.reply = pack(_note.replyId, meId, {
-				detail: false
-			});
-		}
-
-		if (_note.renoteId) {
-			// Populate renote
-			_note.renote = pack(_note.renoteId, meId, {
-				detail: _note.text == null
-			});
-		}
-
-		// Poll
-		if (meId && _note.poll) {
-			_note.poll = (async poll => {
-				if (poll.multiple) {
-					const votes = await PollVote.find({
-						userId: meId,
-						noteId: id
-					});
-
-					const myChoices = (poll.choices as IChoice[]).filter(x => votes.some(y => x.id == y.choice));
-					for (const myChoice of myChoices) {
-						(myChoice as any).isVoted = true;
-					}
-
-					return poll;
-				} else {
-					poll.multiple = false;
-				}
-
-				const vote = await PollVote
-					.findOne({
-						userId: meId,
-						noteId: id
-					});
-
-				if (vote) {
-					const myChoice = (poll.choices as IChoice[])
-						.filter(x => x.id == vote.choice)[0] as any;
-
-					myChoice.isVoted = true;
-				}
-
-				return poll;
-			})(_note.poll);
-		}
-
-		if (meId) {
-			// Fetch my reaction
-			_note.myReaction = (async () => {
-				const reaction = await NoteReaction
-					.findOne({
-						userId: meId,
-						noteId: id,
-						deletedAt: { $exists: false }
-					});
-
-				if (reaction) {
-					return decodeReaction(reaction.reaction);
-				}
-
-				return null;
-			})();
-
-			// Fetch my renote
-			_note.myRenoteId = (async () => {
-				const renote = await Note.findOne({
-					userId: meId,
-					renoteId: _note.id,
-					text: null,
-					poll: null,
-					'fileIds.0': { $exists: false },
-					deletedAt: { $exists: false }
+	const populateEmojis = async () => {
+		// _note._userを消す前か、_note.userを解決した後でないとホストがわからない
+		if (db!._user) {
+			const host = db!._user.host;
+			// 互換性のため。(古いMisskeyではNoteにemojisが無い)
+			if (db!.emojis == null) {
+				return Emoji.find({
+					host: host
 				}, {
-					_id: 1
+					fields: { _id: false }
 				});
-
-				return renote ? renote._id : null;
-			})();
+			} else {
+				return packEmojis(db!.emojis, host,
+					Object.keys(reactionCounts)
+						.map(x => decodeReaction(x))
+						.map(x => x.replace(/:/g, '')))
+					.catch(e => {
+						console.warn(e);
+						return [];
+					});
+			}
+		} else {
+			return [];
 		}
+	};
+
+	const populatePoll = async () => {
+		const poll = db!.poll;
+		if (poll.multiple) {
+			const votes = await PollVote.find({
+				userId: meId,
+				noteId: db!._id
+			});
+
+			const myChoices = (poll.choices as IChoice[]).filter(x => votes.some(y => x.id == y.choice));
+			for (const myChoice of myChoices) {
+				(myChoice as any).isVoted = true;
+			}
+
+			return poll;
+		} else {
+			poll.multiple = false;
+		}
+
+		const vote = await PollVote
+			.findOne({
+				userId: meId,
+				noteId: db!._id
+			});
+
+		if (vote) {
+			const myChoice = (poll.choices as IChoice[])
+				.filter(x => x.id == vote.choice)[0] as any;
+
+			myChoice.isVoted = true;
+		}
+
+		return poll;
+	};
+
+	const populateMyReaction = async () => {
+		const reaction = await NoteReaction
+			.findOne({
+				userId: meId,
+				noteId: db!._id,
+				deletedAt: { $exists: false }
+			});
+
+		if (reaction) {
+			return decodeReaction(reaction.reaction);
+		}
+
+		return null;
+	};
+
+	const populateMyRenote = async () => {
+		const renote = await Note.findOne({
+			userId: meId,
+			renoteId: db!._id,
+			text: null,
+			poll: null,
+			'fileIds.0': { $exists: false },
+			deletedAt: { $exists: false }
+		}, {
+			_id: 1
+		});
+
+		return renote ? `${renote._id}` : null;
+	};
+
+	console.log(inspect(db));
+
+	const packed: PackedNote = await awaitAll({
+		id: db._id.toHexString(),
+		createdAt: db.createdAt.toISOString(),
+		text: text,
+		cw: db.cw,
+		userId: `${db.userId}`,
+		user: packUser(db.userId, meId),
+		replyId: db.replyId ? `${db.replyId}` : null,
+		renoteId: db.renoteId ? `${db.renoteId}` : null,
+		viaMobile: !!db.viaMobile,
+		visibility: db.visibility,
+		tags: db.tags.length > 0 ? db.tags : [],
+		localOnly: !!db.localOnly,
+		copyOnce: !!db.copyOnce,
+		score: db.score || 0,
+		renoteCount: db.renoteCount || 0,
+		quoteCount: db.quoteCount || 0,
+		repliesCount: db.repliesCount || 0,
+		reactions: reactionCounts,
+		reactionCounts: reactionCounts,
+		emojis: populateEmojis(),
+		fileIds: db.fileIds ? db.fileIds.map(x => `${x}`) : [],
+		files: packFileMany(db.fileIds || []),
+		uri: db.uri || null,
+		url: db.url || null,
+
+		...(opts.detail ? {
+			reply: (opts.detail && db.replyId) ? pack(db.replyId, meId, {
+				detail: false
+			}) : null,
+
+			renote: db.renoteId ? pack(db.renoteId, meId, {
+				detail: db.text == null
+			}) : null,
+
+			poll: db.poll ? populatePoll() : null,
+
+			...(meId ? {
+				myReaction: populateMyReaction(),
+				myRenoteId: populateMyRenote(),
+			} : {})
+		} : {})
+	});
+
+	if (packed.user.isCat && packed.text) {
+		const tokens = packed.text ? parse(packed.text) : [];
+		packed.text = toString(tokens, { doNyaize: true });
 	}
 
-	// resolve promises in _note object
-	_note = await rap(_note);
+	if (!opts.skipHide) {
+		await hideNote(db, meId);
+	}
 
 	//#region (データベースの欠損などで)参照しているデータがデータベース上に見つからなかったとき
-	if (_note.user == null) {
-		dbLogger.warn(`[DAMAGED DB] (missing) pkg: note -> user :: ${_note.id} (user ${_note.userId})`);
+	if (packed.user == null) {
+		dbLogger.warn(`[DAMAGED DB] (missing) pkg: note -> user :: ${packed.id} (user ${packed.userId})`);
 		return null;
 	}
 
 	if (opts.detail) {
-		if (_note.replyId != null && _note.reply == null) {
-			dbLogger.warn(`[DAMAGED DB] (missing) pkg: note -> reply :: ${_note.id} (reply ${_note.replyId})`);
+		if (packed.replyId != null && packed.reply == null) {
+			dbLogger.warn(`[DAMAGED DB] (missing) pkg: note -> reply :: ${packed.id} (reply ${packed.replyId})`);
 			return null;
 		}
 
-		if (_note.renoteId != null && _note.renote == null) {
-			dbLogger.warn(`[DAMAGED DB] (missing) pkg: note -> renote :: ${_note.id} (renote ${_note.renoteId})`);
+		if (packed.renoteId != null && packed.renote == null) {
+			dbLogger.warn(`[DAMAGED DB] (missing) pkg: note -> renote :: ${packed.id} (renote ${packed.renoteId})`);
 			return null;
 		}
 	}
 	//#endregion
 
-	if (_note.user.isCat && _note.text) {
-		try {
-			const tokens = _note.text ? parse(_note.text) : [];
-			_note.text = toString(tokens, { doNyaize: true });
-		} catch (e) {
-			console.log(e);
-		}
-	}
-
-	if (_note.name && (_note.url || _note.uri)) {
-		_note.text = `【${_note.name}】\n${(_note.text || '').trim()}\n\n${_note.url || _note.uri}`;
-	}
-
-	if (!opts.skipHide) {
-		await hideNote(_note, meId);
-	}
-
-	return _note;
-};
+	return packed;
+}

@@ -327,7 +327,7 @@ export async function getRelation(me: mongo.ObjectId, target: mongo.ObjectId) {
  */
 export const pack = async (
 	user: string | mongo.ObjectID | IUser,
-	me?: string | mongo.ObjectID | IUser,
+	me?: string | mongo.ObjectID | IUser | null,
 	options?: {
 		detail?: boolean,
 		includeSecrets?: boolean,
@@ -380,7 +380,7 @@ export const pack = async (
 	}
 
 	// Me
-	const meId: mongo.ObjectID = me
+	const meId: mongo.ObjectID | null = me
 		? isObjectId(me)
 			? me as mongo.ObjectID
 			: typeof me === 'string'
