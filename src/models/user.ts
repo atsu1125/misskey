@@ -433,7 +433,6 @@ export const pack = async (
 		}): [],
 
 		...(opts.detail ? {
-			url: isRemoteUser(db) ? (db.url || null) : undefined,
 			createdAt: db.createdAt.toISOString(),
 			updatedAt: db.updatedAt ? db.updatedAt.toISOString() : null,
 			bannerUrl: db.bannerUrl ? DriveFile.findOne({
@@ -481,6 +480,12 @@ export const pack = async (
 					discriminator: db.discord?.discriminator,
 				} : undefined,
 			}: {}),
+
+			...(isRemoteUser(db) ? {
+				url: db.url || null,
+				uri: db.uri || null,
+			}: {}),
+
 		} : {}),
 
 		// detail && 自分を見てる

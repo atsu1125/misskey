@@ -4,7 +4,7 @@ export type PackedNote = {
 	text: string | null
 	cw: string | null;
 	userId: string;
-	user: any;	// TODO
+	user: PackedUser;
 	replyId: string | null;
 	renoteId: string | null;
 	reply?: PackedNote | null;
