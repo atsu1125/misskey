@@ -438,7 +438,7 @@ export const pack = async (
 			updatedAt: db.updatedAt ? db.updatedAt.toISOString() : null,
 			bannerUrl: db.bannerUrl ? DriveFile.findOne({
 				_id: db.bannerId
-			}).then(file => getDriveFileUrl(file, false) || undefined) : undefined,
+			}).then(file => getDriveFileUrl(file, false) || null) : null,
 			bannerColor: null, // 後方互換性のため
 			isLocked: !!db.isLocked,
 
