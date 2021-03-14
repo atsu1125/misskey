@@ -160,18 +160,18 @@ export interface ILocalUser extends IUserBase {
 	emailVerifyCode?: string;
 	password: string;
 	token: string;
-	twitter: {
+	twitter?: {
 		accessToken: string;
 		accessTokenSecret: string;
 		userId: string;
 		screenName: string;
 	};
-	github: {
+	github?: {
 		accessToken: string;
 		id: string;
 		login: string;
 	};
-	discord: {
+	discord?: {
 		accessToken: string;
 		refreshToken: string;
 		expiresDate: number;
@@ -409,7 +409,7 @@ export const pack = async (
 		return usertag?.tags || [];
 	};
 
-	const packed = await awaitAll({
+	const packed: PackedUser = await awaitAll({
 		id: db._id.toHexString(),
 		username: db.username,
 		name: db.name || null,
@@ -433,7 +433,7 @@ export const pack = async (
 		}): [],
 
 		...(opts.detail ? {
-			url: isRemoteUser(db) ? (db.url || null) : null,
+			url: isRemoteUser(db) ? (db.url || null) : undefined,
 			createdAt: db.createdAt.toISOString(),
 			updatedAt: db.updatedAt ? db.updatedAt.toISOString() : null,
 			bannerUrl: db.bannerUrl ? DriveFile.findOne({
@@ -441,14 +441,16 @@ export const pack = async (
 			}).then(file => getDriveFileUrl(file, false) || undefined) : undefined,
 			bannerColor: null, // 後方互換性のため
 			isLocked: !!db.isLocked,
-			isVerified: isLocalUser(db) ? !!db.isVerified : undefined,
-			isModerator: isLocalUser(db) ? !!db.isModerator : undefined,
+
 			isSilenced: !!db.isSilenced,
 			isSuspended: !!db.isSuspended,
-			description: db.description,
-			location: db.profile?.location,
-			birthday: db.profile?.birthday,
-			fields: db.fields,
+			description: db.description || null,
+			profile: {
+				birthday: db.profile?.birthday || null,
+				location: db.profile?.location || null,
+			},
+			tags: db.tags || [],
+			fields: db.fields || [],
 			followersCount: db.followersCount,
 			followingCount: db.followingCount,
 			notesCount: db.notesCount,
@@ -457,8 +459,28 @@ export const pack = async (
 				removeError: true,
 				detail: true
 			}) as Promise<PackedNote[]>,
-			twoFactorEnabled: isLocalUser(db) ? db.twoFactorEnabled : undefined,
+			movedToUser: db.movedToUserId ? pack(db.movedToUserId) : null,
 			usertags: populateUserTags(),
+
+			...(isLocalUser(db) ? {
+				isVerified: !!db.isVerified,
+				isModerator: !!db.isModerator,
+				twoFactorEnabled: db.twoFactorEnabled,
+
+				twitter: db.twitter ? {
+					screenName: db.twitter?.screenName,
+					userId: db.twitter?.userId
+				} : undefined,
+				github: db.github ? {
+					id: db.github?.id,
+					login: db.github?.login
+				} : undefined,
+				discord: db.discord ? {
+					id: db.discord?.id,
+					username: db.discord?.username,
+					discriminator: db.discord?.discriminator,
+				} : undefined,
+			}: {}),
 		} : {}),
 
 		// detail && 自分を見てる
@@ -467,23 +489,31 @@ export const pack = async (
 			bannerId: `${db.bannerId}`,
 			alwaysMarkNsfw: !!db.settings?.alwaysMarkNsfw,
 			carefulBot: !!db.carefulBot,
+			carefulRemote: !!db.carefulRemote,
+			carefulMassive: !!db.carefulMassive,
+			refuseFollow: !!db.refuseFollow,
 			autoAcceptFollowed: !!db.autoAcceptFollowed,
 			avoidSearchIndex: !!db.avoidSearchIndex,
 			isExplorable: !!db.isExplorable,
 			hideFollows: !!db.hideFollows,
 
+			wallpaperId: db.wallpaperId ? `${db.wallpaperId}` : null,
+			wallpaperUrl: db.wallpaperUrl || null,
+
 			hasUnreadMessagingMessage: !!db.hasUnreadMessagingMessage,
 			hasUnreadNotification: !!db.hasUnreadNotification,
 			hasUnreadSpecifiedNotes: !!db.hasUnreadSpecifiedNotes,
 			hasUnreadMentions: !!db.hasUnreadMentions,
+			pendingReceivedFollowRequestsCount: db.pendingReceivedFollowRequestsCount || 0,
 		} : {}),
 
 		// includeSecrets && 自分を見てる
 		...((opts.includeSecrets && meId && oidEquals(meId, db._id) && isLocalUser(db)) ? {
-			email: db.email,
-			emailVerified: db.emailVerified
+			email: db.email || null,
+			emailVerified: !!db.emailVerified
 		} : {}),
 
+		// 他人を見てる
 		...(relation ? {
 			isFollowing: relation.isFollowing,
 			isFollowed: relation.isFollowed,

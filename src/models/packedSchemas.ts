@@ -68,8 +68,11 @@ export type PackedUser = {
 	updatedAt?: string | null;
 	bannerUrl?: string | null;
 	bannerColor?: string | null;
-	location?: string | null;
-	birthday?: string | null;
+	profile?: {
+		birthday?: string | null;
+		location?: string | null;
+	};
+	tags?: string[];
 	fields?: {
 		name: string;
 		value: string;
@@ -83,8 +86,14 @@ export type PackedUser = {
 	bannerId?: string | null;
 	autoWatch?: boolean;
 
+	wallpaperId?: string | null;
+	wallpaperUrl?: string | null;
+
 	alwaysMarkNsfw?: boolean;
 	carefulBot?: boolean;
+	carefulRemote?: boolean;
+	carefulMassive?: boolean;
+	refuseFollow?: boolean;
 	avoidSearchIndex?: boolean;
 	autoAcceptFollowed?: boolean;
 	hasUnreadSpecifiedNotes?: boolean;
@@ -92,7 +101,7 @@ export type PackedUser = {
 	hasUnreadAnnouncement?: boolean;
 	hasUnreadMessagingMessage?: boolean;
 	hasUnreadNotification?: boolean;
-	hasPendingReceivedFollowRequest?: boolean;
+	pendingReceivedFollowRequestsCount?: number;
 	isFollowing?: boolean;
 	hasPendingFollowRequestFromYou?: boolean;
 	hasPendingFollowRequestToYou?: boolean;
@@ -105,4 +114,21 @@ export type PackedUser = {
 	movedToUser?: PackedUser | null;
 
 	usertags?: string[];
+
+	email?: string | null;
+	emailVerified?: boolean;
+
+	twitter?: {
+		screenName: string;
+		userId: string;
+	};
+	github?: {
+		id: string;
+		login: string;
+	};
+	discord?: {
+		id: string;
+		username: string;
+		discriminator: string;
+	};
 }
