@@ -217,7 +217,7 @@ export const hideNote = async (packedNote: any, meId: mongo.ObjectID | null) => 
 
 export const packMany = async (
 	notes: (string | mongo.ObjectID | INote)[],
-	me?: string | mongo.ObjectID | IUser,
+	me?: string | mongo.ObjectID | IUser | null,
 	options?: {
 		detail?: boolean;
 		skipHide?: boolean;
@@ -404,7 +404,7 @@ export const pack = async (
 		files: packFileMany(db.fileIds || []),
 		uri: db.uri || null,
 		url: db.url || null,
-		appId: db.appId || null,
+		appId: db.appId ? `${db.appId}` : null,
 		app: db.appId ? packApp(db.appId) : null,
 
 		...(opts.detail ? {

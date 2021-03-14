@@ -1,13 +1,11 @@
 import * as mongo from 'mongodb';
 import * as deepcopy from 'deepcopy';
-import rap from '@prezzemolo/rap';
 import db from '../db/mongodb';
 import isObjectId from '../misc/is-objectid';
 import { packMany as packNoteMany } from './note';
 import Following from './following';
 import Blocking from './blocking';
 import Mute from './mute';
-import { getFriendIds } from '../server/api/common/get-friends';
 import config from '../config';
 import FollowRequest from './follow-request';
 import fetchMeta from '../misc/fetch-meta';
@@ -20,6 +18,9 @@ import { transform } from '../misc/cafy-id';
 import Usertag from './usertag';
 import { registerOrFetchInstanceDoc } from '../services/register-or-fetch-instance-doc';
 import { toApHost } from '../misc/convert-host';
+import { awaitAll } from '../prelude/await-all';
+import { oidEquals } from '../prelude/oid';
+import { PackedUser, PackedNote } from './packedSchemas';
 
 const User = db.get<IUser>('users');
 
@@ -90,6 +91,8 @@ type IUserBase = {
 	 */
 	isBot: boolean;
 
+	isCat: boolean;
+
 	isOrganization?: boolean;
 	isGroup?: boolean;
 
@@ -142,6 +145,11 @@ type IUserBase = {
 	alsoKnownAsUserIds?: mongo.ObjectID[];
 
 	host: string | null;
+
+	fields?: {
+		name: string,
+		value: string
+	}[];
 };
 
 export interface ILocalUser extends IUserBase {
@@ -171,11 +179,6 @@ export interface ILocalUser extends IUserBase {
 		username: string;
 		discriminator: string;
 	};
-	fields?: {
-		name: string;
-		value: string;
-	}[];
-	isCat: boolean;
 	isAdmin?: boolean;
 	isModerator?: boolean;
 	isVerified?: boolean;
@@ -191,6 +194,8 @@ export interface ILocalUser extends IUserBase {
 	};
 	hasUnreadNotification: boolean;
 	hasUnreadMessagingMessage: boolean;
+	hasUnreadSpecifiedNotes?: boolean;
+	hasUnreadMentions?: boolean;
 }
 
 export function getPushNotificationsValue(pushNotifications: Record<string, boolean | undefined> | undefined, key: string) {
@@ -326,56 +331,37 @@ export async function getRelation(me: mongo.ObjectId, target: mongo.ObjectId) {
  * @return Packed user
  */
 export const pack = async (
-	user: string | mongo.ObjectID | IUser,
+	src: string | mongo.ObjectID | IUser,
 	me?: string | mongo.ObjectID | IUser | null,
 	options?: {
 		detail?: boolean,
 		includeSecrets?: boolean,
 		includeHasUnreadNotes?: boolean
 	}
-) => {
+): Promise<PackedUser | null> => {
 	const opts = Object.assign({
 		detail: false,
 		includeSecrets: false
 	}, options);
 
-	let _user: any;
-
-	const fields = opts.detail ? {} : {
-		name: true,
-		username: true,
-		host: true,
-		avatarColor: true,
-		avatarId: true,
-		bannerId: true,
-		emojis: true,
-		avoidSearchIndex: true,
-		isExplorable: true,
-		hideFollows: true,
-		isCat: true,
-		isBot: true,
-		isOrganization: true,
-		isGroup: true,
-		isAdmin: true,
-		isVerified: true
-	};
+	let db: IUser | undefined;
 
 	// Populate the user if 'user' is ID
-	if (isObjectId(user)) {
-		_user = await User.findOne({
-			_id: user
-		}, { fields });
-	} else if (typeof user === 'string') {
-		_user = await User.findOne({
-			_id: new mongo.ObjectID(user)
-		}, { fields });
+	if (isObjectId(src)) {
+		db = await User.findOne({
+			_id: src
+		});
+	} else if (typeof src === 'string') {
+		db = await User.findOne({
+			_id: new mongo.ObjectID(src)
+		});
 	} else {
-		_user = deepcopy(user);
+		db = deepcopy(src);
 	}
 
 	// (データベースの欠損などで)ユーザーがデータベース上に見つからなかったとき
-	if (_user == null) {
-		dbLogger.warn(`user not found on database: ${user}`);
+	if (db == null) {
+		dbLogger.warn(`user not found on database: ${src}`);
 		return null;
 	}
 
@@ -388,123 +374,8 @@ export const pack = async (
 				: (me as IUser)._id
 		: null;
 
-	// Rename _id to id
-	_user.id = _user._id;
-	delete _user._id;
-
-	_user.movedToUser = _user.movedToUserId ? pack(_user.movedToUserId) : null;
-
-	delete _user.usernameLower;
-	delete _user.emailVerifyCode;
-
-	delete _user.lang;	// 廃止のため
-
-	if (_user.host == null) {
-		// Remove private properties
-		delete _user.keypair;
-		delete _user.password;
-		delete _user.token;
-		delete _user.twoFactorTempSecret;
-		delete _user.two_factor_temp_secret; // 後方互換性のため
-		delete _user.twoFactorSecret;
-		if (_user.twitter) {
-			delete _user.twitter.accessToken;
-			delete _user.twitter.accessTokenSecret;
-		}
-		if (_user.github) {
-			delete _user.github.accessToken;
-		}
-		if (_user.discord) {
-			delete _user.discord.accessToken;
-			delete _user.discord.refreshToken;
-			delete _user.discord.expiresDate;
-		}
-
-		// Visible via only the official client
-		if (!opts.includeSecrets) {
-			delete _user.email;
-			delete _user.emailVerified;
-			delete _user.settings;
-			delete _user.clientSettings;
-		}
-
-		if (!opts.detail) {
-			delete _user.twoFactorEnabled;
-		}
-	} else {
-		delete _user.publicKey;
-	}
-
-	_user.avatarUrl = _user.avatarId ? DriveFile.findOne({
-		_id: _user.avatarId
-	}).then(file => getDriveFileUrl(file, true) || `${config.driveUrl}/default-avatar.jpg`) : `${config.driveUrl}/default-avatar.jpg`;
-
-	_user.bannerUrl = _user.bannerUrl ? DriveFile.findOne({
-		_id: _user.bannerId
-	}).then(file => getDriveFileUrl(file, false) || undefined) : undefined;
-
-	if (!meId || !meId.equals(_user.id) || !opts.detail) {
-		delete _user.avatarId;
-		delete _user.bannerId;
-		delete _user.hasUnreadMessagingMessage;
-		delete _user.hasUnreadNotification;
-	}
-
-	if (meId && !meId.equals(_user.id) && opts.detail) {
-		const relation = await getRelation(meId, _user.id);
-
-		_user.isFollowing = relation.isFollowing;
-		_user.isFollowed = relation.isFollowed;
-		_user.hasPendingFollowRequestFromYou = relation.hasPendingFollowRequestFromYou;
-		_user.hasPendingFollowRequestToYou = relation.hasPendingFollowRequestToYou;
-		_user.isBlocking = relation.isBlocking;
-		_user.isBlocked = relation.isBlocked;
-		_user.isMuted = relation.isMuted;
-		_user.isHideRenoting = relation.isHideRenoting;
-	}
-
-	if (opts.detail) {
-		if (_user.pinnedNoteIds) {
-			// Populate pinned notes
-			_user.pinnedNotes = packNoteMany(_user.pinnedNoteIds, meId, {
-				removeError: true,
-				detail: true
-			});
-		}
-
-		if (meId) {
-			const usertag = await Usertag.findOne({
-				ownerId: meId,
-				targetId: _user.id
-			});
-
-			_user.usertags = usertag?.tags || [];
-		}
-
-		if (meId && !meId.equals(_user.id)) {
-			const myFollowingIds = await getFriendIds(meId);
-
-			// Get following you know count
-			_user.followingYouKnowCount = Following.count({
-				followeeId: { $in: myFollowingIds },
-				followerId: _user.id
-			});
-
-			// Get followers you know count
-			_user.followersYouKnowCount = Following.count({
-				followeeId: _user.id,
-				followerId: { $in: myFollowingIds }
-			});
-		}
-	}
-
-	if (!opts.includeHasUnreadNotes) {
-		delete _user.hasUnreadSpecifiedNotes;
-		delete _user.hasUnreadMentions;
-	}
-
-	const fetchInstance = async () => {
-		if (_user.host == null) return null;
+		const fetchInstance = async () => {
+		if (db!.host == null) return null;
 
 		const info = {
 			host: null as unknown,
@@ -515,8 +386,8 @@ export const pack = async (
 			themeColor: null as unknown,
 		};
 
-		const instance = await registerOrFetchInstanceDoc(_user.host);
-		info.host = toApHost(_user.host);
+		const instance = await registerOrFetchInstanceDoc(db!.host);
+		info.host = toApHost(db!.host);
 		info.name = instance?.name || null;
 		info.softwareName = instance?.softwareName || null;
 		info.softwareVersion = instance?.softwareVersion || null;
@@ -525,33 +396,108 @@ export const pack = async (
 		return info;
 	};
 
-	_user.instance = fetchInstance();
+	const relation = (meId && !oidEquals(meId, db._id) && opts.detail) ? await getRelation(meId, db._id) : null;	// TODO
 
-	// カスタム絵文字添付
-	if (_user.emojis) {
-		_user.emojis = packEmojis(_user.emojis, _user.host).catch(e => {
+	const populateUserTags = async () => {
+		if (!meId) return undefined;
+
+		const usertag =await Usertag.findOne({
+			ownerId: meId,
+			targetId: db!._id
+		});
+
+		return usertag?.tags || [];
+	};
+
+	const packed = await awaitAll({
+		id: db._id.toHexString(),
+		username: db.username,
+		name: db.name || null,
+		host: db.host,
+
+		avatarUrl: db.avatarId ? DriveFile.findOne({
+			_id: db.avatarId
+		}).then(file => getDriveFileUrl(file, true) || `${config.driveUrl}/default-avatar.jpg`) : `${config.driveUrl}/default-avatar.jpg`,
+		avatarColor: null, // 後方互換性のため
+
+		isAdmin: isLocalUser(db) ? !!db.isAdmin : undefined,
+		isBot: !!db.isBot,
+		isCat: !!db.isCat,
+
+		instance: fetchInstance(),
+
+		// カスタム絵文字添付
+		emojis: db.emojis ? packEmojis(db.emojis, db.host).catch(e => {
 			console.warn(e);
 			return [];
-		});
-	}
+		}): [],
 
-	// resolve promises in _user object
-	_user = await rap(_user);
+		...(opts.detail ? {
+			url: isRemoteUser(db) ? (db.url || null) : null,
+			createdAt: db.createdAt.toISOString(),
+			updatedAt: db.updatedAt ? db.updatedAt.toISOString() : null,
+			bannerUrl: db.bannerUrl ? DriveFile.findOne({
+				_id: db.bannerId
+			}).then(file => getDriveFileUrl(file, false) || undefined) : undefined,
+			bannerColor: null, // 後方互換性のため
+			isLocked: !!db.isLocked,
+			isVerified: isLocalUser(db) ? !!db.isVerified : undefined,
+			isModerator: isLocalUser(db) ? !!db.isModerator : undefined,
+			isSilenced: !!db.isSilenced,
+			isSuspended: !!db.isSuspended,
+			description: db.description,
+			location: db.profile?.location,
+			birthday: db.profile?.birthday,
+			fields: db.fields,
+			followersCount: db.followersCount,
+			followingCount: db.followingCount,
+			notesCount: db.notesCount,
+			pinnedNoteIds: db.pinnedNoteIds ? db.pinnedNoteIds.map(x => `${x}`) : [],
+			pinnedNotes: packNoteMany(db.pinnedNoteIds || [], meId, {
+				removeError: true,
+				detail: true
+			}) as Promise<PackedNote[]>,
+			twoFactorEnabled: isLocalUser(db) ? db.twoFactorEnabled : undefined,
+			usertags: populateUserTags(),
+		} : {}),
 
-	return _user;
-};
+		// detail && 自分を見てる
+		...((opts.detail && meId && oidEquals(meId, db._id) && isLocalUser(db)) ? {
+			avatarId: `${db.avatarId}`,
+			bannerId: `${db.bannerId}`,
+			alwaysMarkNsfw: !!db.settings?.alwaysMarkNsfw,
+			carefulBot: !!db.carefulBot,
+			autoAcceptFollowed: !!db.autoAcceptFollowed,
+			avoidSearchIndex: !!db.avoidSearchIndex,
+			isExplorable: !!db.isExplorable,
+			hideFollows: !!db.hideFollows,
 
-/*
-function img(url) {
-	return {
-		thumbnail: {
-			large: `${url}`,
-			medium: '',
-			small: ''
-		}
-	};
+			hasUnreadMessagingMessage: !!db.hasUnreadMessagingMessage,
+			hasUnreadNotification: !!db.hasUnreadNotification,
+			hasUnreadSpecifiedNotes: !!db.hasUnreadSpecifiedNotes,
+			hasUnreadMentions: !!db.hasUnreadMentions,
+		} : {}),
+
+		// includeSecrets && 自分を見てる
+		...((opts.includeSecrets && meId && oidEquals(meId, db._id) && isLocalUser(db)) ? {
+			email: db.email,
+			emailVerified: db.emailVerified
+		} : {}),
+
+		...(relation ? {
+			isFollowing: relation.isFollowing,
+			isFollowed: relation.isFollowed,
+			hasPendingFollowRequestFromYou: relation.hasPendingFollowRequestFromYou,
+			hasPendingFollowRequestToYou: relation.hasPendingFollowRequestToYou,
+			isBlocking: relation.isBlocking,
+			isBlocked: relation.isBlocked,
+			isMuted: relation.isMuted,
+			isHideRenoting: relation.isHideRenoting,
+		} : {}),
+	});
+
+	return packed;
 }
-*/
 
 export async function fetchProxyAccount(): Promise<ILocalUser> {
 	const meta = await fetchMeta();
