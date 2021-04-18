@@ -18,7 +18,7 @@
 					v-autocomplete="{ model: 'text' }"
 				></textarea>
 				<button class="emoji" @click="emoji" ref="emoji" v-if="!$root.isMobile">
-					<fa :icon="['far', 'laugh']"/>
+					<fa :icon="faLaugh"/>
 				</button>
 			</div>
 			<x-post-form-attaches class="files" :files="files" :detachMediaFn="detachMedia"/>
@@ -53,6 +53,7 @@ import MkVisibilityChooser from '../../../common/views/components/visibility-cho
 import XPostFormAttaches from '../components/post-form-attaches.vue';
 import XVisibilityIcon from '../components/visibility-icon.vue';
 import { faFish } from '@fortawesome/free-solid-svg-icons';
+import { faLaugh } from '@fortawesome/free-regular-svg-icons';
 import { parseVisibility } from '../../../common/scripts/parse-visibility';
 
 export default define({
@@ -79,7 +80,7 @@ export default define({
 			copyOnce: false,
 			secondaryNoteVisibility: 'none',
 			tertiaryNoteVisibility: 'none',
-			faFish
+			faFish, faLaugh
 		};
 	},
 

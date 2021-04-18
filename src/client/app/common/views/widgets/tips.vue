@@ -1,6 +1,6 @@
 <template>
 <div class="mkw-tips">
-	<p ref="tip"><fa :icon="['far', 'lightbulb']"/><span v-html="tip"></span></p>
+	<p ref="tip"><fa :icon="faLightbulb"/><span v-html="tip"></span></p>
 </div>
 </template>
 
@@ -8,6 +8,7 @@
 import anime from 'animejs';
 import define from '../../../common/define-widget';
 import i18n from '../../../i18n';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 
 export default define({
 	name: 'tips'
@@ -16,6 +17,7 @@ export default define({
 
 	data() {
 		return {
+			faLightbulb,
 			tips: [],
 			tip: null,
 			clock: null

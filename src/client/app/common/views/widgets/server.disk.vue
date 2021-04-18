@@ -2,7 +2,7 @@
 <div class="disk">
 	<x-pie class="pie" :value="usage"/>
 	<div>
-		<p><fa :icon="['far', 'hdd']"/>Storage</p>
+		<p><fa :icon="faHdd"/>Storage</p>
 		<p>Total: {{ total | bytes(1) }}</p>
 		<p>Free: {{ available | bytes(1) }}</p>
 		<p>Used: {{ used | bytes(1) }}</p>
@@ -13,6 +13,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import XPie from './server.pie.vue';
+import { faHdd } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	components: {
@@ -21,6 +22,7 @@ export default Vue.extend({
 	props: ['connection'],
 	data() {
 		return {
+			faHdd,
 			usage: 0,
 			total: 0,
 			used: 0,

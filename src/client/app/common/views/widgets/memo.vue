@@ -1,7 +1,7 @@
 <template>
 <div class="mkw-memo">
 	<ui-container :show-header="!props.compact">
-		<template #header><fa :icon="['far', 'sticky-note']"/>{{ $t('title') }}</template>
+		<template #header><fa :icon="faStickyNote"/>{{ $t('title') }}</template>
 
 		<div class="mkw-memo--body">
 			<textarea v-model="text" :placeholder="$t('placeholder')" @input="onChange"></textarea>
@@ -14,6 +14,7 @@
 <script lang="ts">
 import define from '../../define-widget';
 import i18n from '../../../i18n';
+import { faStickyNote } from '@fortawesome/free-regular-svg-icons';
 
 export default define({
 	name: 'memo',
@@ -24,6 +25,7 @@ export default define({
 	i18n: i18n('common/views/widgets/memo.vue'),
 	data() {
 		return {
+			faStickyNote,
 			text: null,
 			changed: false,
 			timeoutId: null
