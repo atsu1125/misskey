@@ -1,6 +1,6 @@
 <template>
 <ui-card>
-	<template #title><fa :icon="['far', 'bell']"/> {{ $t('title') }}</template>
+	<template #title><fa :icon="faBell"/> {{ $t('title') }}</template>
 	<section>
 		<header>{{ $t('pushNotifications') }}</header>
 		<ui-switch v-model="follow" @change="onChangePushNotifications">{{ $t('follow') }}</ui-switch>
@@ -30,12 +30,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../../i18n';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/notification-settings.vue'),
 
 	data() {
 		return {
+			faBell,
 			follow: true,
 			mention: true,
 			reply: true,

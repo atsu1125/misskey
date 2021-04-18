@@ -55,8 +55,8 @@
 					<span>{{ $t('add-emoji.url') }}</span>
 				</ui-input>
 				<ui-horizon-group class="fit-bottom">
-					<ui-button @click="updateEmoji(emoji)"><fa :icon="['far', 'save']"/> {{ $t('emojis.update') }}</ui-button>
-					<ui-button @click="removeEmoji(emoji)"><fa :icon="['far', 'trash-alt']"/> {{ $t('emojis.remove') }}</ui-button>
+					<ui-button @click="updateEmoji(emoji)"><fa :icon="faSave"/> {{ $t('emojis.update') }}</ui-button>
+					<ui-button @click="removeEmoji(emoji)"><fa :icon="faTrashAlt"/> {{ $t('emojis.remove') }}</ui-button>
 				</ui-horizon-group>
 			</div>
 		</section>
@@ -106,7 +106,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../i18n';
-import { faGrin } from '@fortawesome/free-regular-svg-icons';
+import { faGrin, faSave, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { unique } from '../../../../prelude/array';
 
 export default Vue.extend({
@@ -129,7 +129,7 @@ export default Vue.extend({
 			searchRemote: '',
 			searchHost: '',
 			origin: 'all',
-			faGrin
+			faGrin, faSave, faTrashAlt
 		};
 	},
 

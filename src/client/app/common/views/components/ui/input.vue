@@ -61,8 +61,8 @@
 	</div>
 	<div class="toggle" v-if="withPasswordToggle">
 		<a @click='togglePassword'>
-			<span v-if="type == 'password'"><fa :icon="['fa', 'eye']"/> {{ $t('@.show-password') }}</span>
-			<span v-if="type != 'password'"><fa :icon="['far', 'eye-slash']"/> {{ $t('@.hide-password') }}</span>
+			<span v-if="type == 'password'"><fa :icon="faEye"/> {{ $t('@.show-password') }}</span>
+			<span v-if="type != 'password'"><fa :icon="faEyeSlash"/> {{ $t('@.hide-password') }}</span>
 		</a>
 	</div>
 	<div class="desc"><slot name="desc"></slot></div>
@@ -72,6 +72,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import debounce from 'v-debounce';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 const getPasswordStrength = require('syuilo-password-strength');
 
 export default Vue.extend({
@@ -154,6 +156,7 @@ export default Vue.extend({
 	},
 	data() {
 		return {
+			faEye, faEyeSlash,
 			v: this.value,
 			focused: false,
 			passwordStrength: '',

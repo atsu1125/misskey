@@ -8,7 +8,7 @@
 		<div class="text">
 			<input v-model="text" :placeholder="$t('emoji')" @keyup.enter="reactText" @keydown.esc="close" @input="tryReactText" v-autocomplete="{ model: 'text', noZwsp: true }" ref="text">
 			<button :title="$t('react')" @click="reactText"><fa icon="check"/></button>
-			<button :title="$t('pick')" class="emoji" @click="emoji" ref="emoji"><fa :icon="['far', 'laugh']"/></button>
+			<button :title="$t('pick')" class="emoji" @click="emoji" ref="emoji"><fa :icon="faLaugh"/></button>
 			<button :title="$t('random')" @click="reactRandom()"><fa :icon="faRandom"/></button>
 			<button title="Dislike" class="dislike" v-if="$store.state.device.showDislikeInPicker" :class="{ disliked }" @click="toggleDisliked()"><fa :icon="disliked ? faThumbsDown : faThumbsUp"/></button>
 		</div>
@@ -22,6 +22,8 @@ import i18n from '../../../i18n';
 import anime from 'animejs';
 import { emojiRegex, vendorEmojiRegex, localEmojiRegex } from '../../../../../misc/emoji-regex';
 import { faRandom, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { faLaugh } from '@fortawesome/free-regular-svg-icons';
+
 import { emojilist } from '../../../../../misc/emojilist';
 
 export default Vue.extend({
@@ -44,7 +46,7 @@ export default Vue.extend({
 
 	data() {
 		return {
-			faRandom, faThumbsUp, faThumbsDown,
+			faRandom, faThumbsUp, faThumbsDown, faLaugh,
 			rs: this.reactions || this.$store.state.settings.reactions,
 			text: null,
 			disliked: false,

@@ -1,6 +1,6 @@
 <template>
 <x-column :name="name" :column="column" :is-stacked="isStacked" :pos="pos">
-	<template #header><fa :icon="['far', 'envelope']"/>{{ name }}</template>
+	<template #header><fa :icon="faEnvelope"/>{{ name }}</template>
 
 	<x-direct/>
 </x-column>
@@ -11,6 +11,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import XColumn from './deck.column.vue';
 import XDirect from './deck.direct.vue';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n(),
@@ -33,6 +34,12 @@ export default Vue.extend({
 			required: false,
 			default: () => {}
 		},
+	},
+
+	data() {
+		return {
+			faEnvelope
+		};
 	},
 
 	computed: {

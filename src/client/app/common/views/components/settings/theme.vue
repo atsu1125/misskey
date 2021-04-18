@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			<ui-button @click="preview()"><fa icon="eye"/> {{ $t('preview-created-theme') }}</ui-button>
-			<ui-button primary @click="gen()"><fa :icon="['far', 'save']"/> {{ $t('save-created-theme') }}</ui-button>
+			<ui-button primary @click="gen()"><fa :icon="faSave"/> {{ $t('save-created-theme') }}</ui-button>
 		</details>
 
 		<details>
@@ -113,7 +113,7 @@
 					<span>{{ $t('theme-code') }}</span>
 				</ui-textarea>
 				<ui-button @click="export_()" link :download="`${selectedTheme.name}.misskeytheme`" ref="export"><fa icon="box"/> {{ $t('export') }}</ui-button>
-				<ui-button @click="uninstall()" v-if="!builtinThemes.some(t => t.id == selectedTheme.id)"><fa :icon="['far', 'trash-alt']"/> {{ $t('uninstall') }}</ui-button>
+				<ui-button @click="uninstall()" v-if="!builtinThemes.some(t => t.id == selectedTheme.id)"><fa :icon="faTrashAlt"/> {{ $t('uninstall') }}</ui-button>
 			</template>
 		</details>
 	</section>
@@ -128,7 +128,7 @@ import { Chrome } from 'vue-color';
 import { v4 as uuid } from 'uuid';
 import * as tinycolor from 'tinycolor2';
 import * as JSON5 from 'json5';
-import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
+import { faMoon, faSun, faSave, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 // 後方互換性のため
 function convertOldThemedefinition(t) {
@@ -161,7 +161,7 @@ export default Vue.extend({
 			myThemePrimary: lightTheme.vars.primary,
 			myThemeSecondary: lightTheme.vars.secondary,
 			myThemeText: lightTheme.vars.text,
-			faMoon, faSun
+			faMoon, faSun, faSave, faTrashAlt
 		};
 	},
 

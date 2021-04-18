@@ -1,6 +1,6 @@
 <template>
 <x-column :name="name" :column="column" :is-stacked="isStacked" :pos="pos" :menu="menu">
-	<template #header><fa :icon="['far', 'bell']"/>{{ name }}</template>
+	<template #header><fa :icon="faBell"/>{{ name }}</template>
 
 	<x-notifications :type="column.notificationType === 'all' ? null : column.notificationType"/>
 </x-column>
@@ -11,6 +11,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import XColumn from './deck.column.vue';
 import XNotifications from './deck.notifications.vue';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n(),
@@ -37,6 +38,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			faBell,
 			menu: null,
 		}
 	},

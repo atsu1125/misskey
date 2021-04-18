@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<fa :icon="['fa', 'star']"/>{{ $t('@.favorites') }}
+		<fa :icon="faStar"/>{{ $t('@.favorites') }}
 	</template>
 
 	<div>
@@ -15,6 +15,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import XColumn from './deck.column.vue';
 import XNotes from './deck.notes.vue';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const fetchLimit = 10;
 
@@ -28,6 +29,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			faStar,
 			makePromise: cursor => this.$root.api('i/favorites', {
 				limit: fetchLimit + 1,
 				untilId: cursor ? cursor : undefined,

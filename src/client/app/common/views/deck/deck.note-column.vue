@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<fa :icon="['far', 'comment-alt']"/><mk-user-name :user="note.user" v-if="note"/>
+		<fa :icon="faCommentAlt"/><mk-user-name :user="note.user" v-if="note"/>
 	</template>
 
 	<div class="rvtscbadixhhbsczoorqoaygovdeecsx" v-if="note">
@@ -20,6 +20,7 @@
 import Vue from 'vue';
 import i18n from '../../../i18n';
 import XColumn from './deck.column.vue';
+import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n(),
@@ -29,6 +30,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			faCommentAlt,
 			note: null,
 			fetching: true
 		};

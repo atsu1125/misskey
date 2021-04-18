@@ -14,7 +14,7 @@
 <div v-else class="mk-url-preview">
 	<a :class="{ mini: narrow, compact }" :href="landingUrl" rel="nofollow noopener" target="_blank" :title="landingUrl" v-if="!fetching">
 		<div class="thumbnail" v-if="thumbnail && (!sensitive || $store.state.device.alwaysShowNsfw)" :style="`background-image: url('${thumbnail}')`">
-			<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="['far', 'play-circle']"/></button>
+			<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="faPlayCircle"/></button>
 		</div>
 		<article>
 			<header>
@@ -40,6 +40,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import { url as misskeyUrl, lang } from '../../../config';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/url-preview.vue'),
@@ -90,7 +91,7 @@ export default Vue.extend({
 			tweetLeft: 0,
 			playerEnabled: false,
 			misskeyUrl,
-			faTwitter
+			faTwitter, faPlayCircle
 		};
 	},
 

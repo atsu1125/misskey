@@ -6,7 +6,7 @@
 		<button @click="setVisibility" class="visibility" ref="visibilityButton">
 			<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
 		</button>
-		<button class="cw" title="Hide" @click="useCw = !useCw" :class="{ useCW: this.useCw }"><fa :icon="['far', 'eye-slash']"/></button>
+		<button class="cw" title="Hide" @click="useCw = !useCw" :class="{ useCW: this.useCw }"><fa :icon="faEyeSlash"/></button>
 		<ui-input v-if="useCw" ref="cw" v-model="cw" style="margin: 0"/>
 	</footer>
 </div>
@@ -18,6 +18,7 @@ import i18n from '../../../../i18n';
 import XVisibilityIcon from '../visibility-icon.vue';
 import MkVisibilityChooser from '../visibility-chooser.vue';
 import { parseVisibility } from '../../../scripts/parse-visibility';
+import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('pages'),
@@ -41,6 +42,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			faEyeSlash,
 			text: this.script.interpolate(this.value.text),
 			visibility: 'public',
 			localOnly: false,

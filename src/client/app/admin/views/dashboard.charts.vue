@@ -1,7 +1,7 @@
 <template>
 <div class="qvgidhudpqhjttdhxubzuyrhyzgslujw">
 	<header>
-		<b><fa :icon="['far', 'chart-bar']"/> {{ $t('title') }}:</b>
+		<b><fa :icon="faChartBar"/> {{ $t('title') }}:</b>
 		<select v-model="src">
 			<optgroup :label="$t('federation')">
 				<option value="federation-instances">{{ $t('charts.federation-instances') }}</option>
@@ -49,6 +49,7 @@ import Vue from 'vue';
 import i18n from '../../i18n';
 import * as tinycolor from 'tinycolor2';
 import ApexCharts from 'apexcharts';
+import { faChartBar } from '@fortawesome/free-regular-svg-icons';
 
 const limit = 90;
 
@@ -59,6 +60,7 @@ export default Vue.extend({
 	i18n: i18n('admin/views/charts.vue'),
 	data() {
 		return {
+			faChartBar,
 			chart: null,
 			src: 'notes',
 			span: 'hour',

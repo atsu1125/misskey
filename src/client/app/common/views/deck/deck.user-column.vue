@@ -14,7 +14,7 @@
 		<header :style="bannerStyle">
 			<div>
 				<button class="menu" @click="menu" ref="menu"><fa icon="ellipsis-h"/></button>
-				<button class="listMenu" @click="listMenu" ref="listMenu"><fa :icon="['fas', 'list']"/></button>
+				<button class="listMenu" @click="listMenu" ref="listMenu"><fa :icon="faList"/></button>
 				<mk-follow-button v-if="$store.getters.isSignedIn && user.id != $store.state.i.id" :user="user" :key="`${user.id}-follow`" class="follow" mini/>
 				<mk-avatar class="avatar" :user="user" :disable-preview="true" :disable-link="true" :key="`${user.id}-avatar`" @click="onAvatarClick()" style="cursor: pointer"/>
 				<router-link class="name" :to="user | userPage()">
@@ -87,7 +87,7 @@ import XUserMenu from '../../../common/views/components/user-menu.vue';
 import XListMenu from '../../../common/views/components/list-menu.vue';
 import XIntegrations from '../../../common/views/components/integrations.vue';
 import ImageViewer from '../../../common/views/components/image-viewer.vue';
-import { faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag, faList } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('deck/deck.user-column.vue'),
@@ -99,7 +99,7 @@ export default Vue.extend({
 		return {
 			user: null,
 			fetching: true,
-			faUserTag
+			faUserTag, faList
 		};
 	},
 

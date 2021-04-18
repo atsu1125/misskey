@@ -1,14 +1,14 @@
 <template>
 <x-column :menu="menu" :name="name" :column="column" :is-stacked="isStacked" :pos="pos">
 	<template #header>
-		<fa v-if="column.type == 'home'" icon="home"/>
-		<fa v-if="column.type == 'local'" :icon="['far', 'comments']"/>
-		<fa v-if="column.type == 'locao'" icon="heart"/>
-		<fa v-if="column.type == 'hybrid'" icon="share-alt"/>
-		<fa v-if="column.type == 'global'" icon="globe"/>
+		<fa v-if="column.type == 'home'" :icon="faHome"/>
+		<fa v-if="column.type == 'local'" :icon="faComment"/>
+		<fa v-if="column.type == 'locao'" :icon="faHeart"/>
+		<fa v-if="column.type == 'hybrid'" :icon="faShareAlt"/>
+		<fa v-if="column.type == 'global'" :icon="faGlobe"/>
 		<fa v-if="column.type == 'hot'" :icon="faThumbsUp"/>
-		<fa v-if="column.type == 'list'" icon="list"/>
-		<fa v-if="column.type == 'hashtag'" icon="hashtag"/>
+		<fa v-if="column.type == 'list'" :icon="faList"/>
+		<fa v-if="column.type == 'hashtag'" :icon="faHashtag"/>
 		<span>{{ name }}</span>
 	</template>
 
@@ -47,7 +47,8 @@ import XColumn from './deck.column.vue';
 import XTl from './deck.tl.vue';
 import XListTl from './deck.list-tl.vue';
 import XHashtagTl from './deck.hashtag-tl.vue';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faHome, faHeart, faShareAlt, faGlobe, faList, faHashtag } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('deck/deck.tl-column.vue'),
@@ -84,7 +85,7 @@ export default Vue.extend({
 					this.edit = !this.edit;
 				}
 			}],
-			faThumbsUp
+			faThumbsUp, faHome, faHeart, faShareAlt, faGlobe, faList, faHashtag, faComment
 		}
 	},
 

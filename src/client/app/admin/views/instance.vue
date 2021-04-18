@@ -14,7 +14,7 @@
 		<section class="fit-bottom">
 			<header><fa :icon="faHeadset"/> {{ $t('maintainer-config') }}</header>
 			<ui-input v-model="maintainerName">{{ $t('maintainer-name') }}</ui-input>
-			<ui-input v-model="maintainerEmail" type="email"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('maintainer-email') }}</ui-input>
+			<ui-input v-model="maintainerEmail" type="email"><template #icon><fa :icon="faEnvelope"/></template>{{ $t('maintainer-email') }}</ui-input>
 		</section>
 		<section class="fit-top fit-bottom">
 			<ui-input v-model="maxNoteTextLength">{{ $t('max-note-text-length') }}</ui-input>
@@ -47,7 +47,7 @@
 			<ui-info warn>{{ $t('proxy-account-warn') }}</ui-info>
 		</section>
 		<section>
-			<header><fa :icon="farEnvelope"/> {{ $t('email-config') }}</header>
+			<header><fa :icon="faEnvelope"/> {{ $t('email-config') }}</header>
 			<ui-switch v-model="enableEmail">{{ $t('enable-email') }}<template #desc>{{ $t('email-config-info') }}</template></ui-switch>
 			<ui-input v-model="email" type="email" :disabled="!enableEmail">{{ $t('email') }}</ui-input>
 			<ui-horizon-group inputs>
@@ -89,7 +89,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="['fab', 'twitter']"/> {{ $t('twitter-integration-config') }}</template>
+		<template #title><fa :icon="faTwitter"/> {{ $t('twitter-integration-config') }}</template>
 		<section>
 			<ui-switch v-model="enableTwitterIntegration">{{ $t('enable-twitter-integration') }}</ui-switch>
 			<ui-horizon-group>
@@ -102,7 +102,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="['fab', 'github']"/> {{ $t('github-integration-config') }}</template>
+		<template #title><fa :icon="faGithub"/> {{ $t('github-integration-config') }}</template>
 		<section>
 			<ui-switch v-model="enableGithubIntegration">{{ $t('enable-github-integration') }}</ui-switch>
 			<ui-horizon-group>
@@ -115,7 +115,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="['fab', 'discord']"/> {{ $t('discord-integration-config') }}</template>
+		<template #title><fa :icon="faDiscord"/> {{ $t('discord-integration-config') }}</template>
 		<section>
 			<ui-switch v-model="enableDiscordIntegration">{{ $t('enable-discord-integration') }}</ui-switch>
 			<ui-horizon-group>
@@ -135,7 +135,8 @@ import i18n from '../../i18n';
 import { url, host } from '../../config';
 import { toUnicode } from 'punycode/';
 import { faHeadset, faShieldAlt, faGhost, faUserPlus, faBolt } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope as farEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faTwitter, faGithub, faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('admin/views/instance.vue'),
@@ -187,7 +188,7 @@ export default Vue.extend({
 			enableServiceWorker: false,
 			swPublicKey: null,
 			swPrivateKey: null,
-			faHeadset, faShieldAlt, faGhost, faUserPlus, farEnvelope, faBolt
+			faHeadset, faShieldAlt, faGhost, faUserPlus, faEnvelope, faBolt, faTwitter, faGithub, faDiscord
 		};
 	},
 

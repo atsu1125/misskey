@@ -20,11 +20,11 @@
 		<fa icon="upload"/>
 	</button>
 	<button class="attach-from-drive" @click="chooseFileFromDrive" :title="$t('attach-from-drive')">
-		<fa :icon="['far', 'folder-open']"/>
+		<fa :icon="faFolderOpen"/>
 	</button>
 	<input ref="file" type="file" @change="onChangeFile"/>
 	<button class="emoji" @click="emoji" ref="emoji">
-		<fa :icon="['far', 'laugh']"/>
+		<fa :icon="faLaugh"/>
 	</button>
 </div>
 </template>
@@ -34,12 +34,14 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import * as autosize from 'autosize';
 import insertTextAtCursor from 'insert-text-at-cursor';
+import { faFolderOpen, faLaugh } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/messaging-room.form.vue'),
 	props: ['user'],
 	data() {
 		return {
+			faFolderOpen, faLaugh,
 			text: null,
 			file: null,
 			sending: false

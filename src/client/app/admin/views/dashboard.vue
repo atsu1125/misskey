@@ -20,7 +20,7 @@
 			</div>
 			<div>
 				<span><fa icon="home"/> {{ $t('this-instance') }}</span>
-				<span @click="setChartSrc('users')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('users')"><fa :icon="faChartBar"/></span>
 			</div>
 		</div>
 		<div>
@@ -33,7 +33,7 @@
 			</div>
 			<div>
 				<span><fa icon="home"/> {{ $t('this-instance') }}</span>
-				<span @click="setChartSrc('notes')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('notes')"><fa :icon="faChartBar"/></span>
 			</div>
 		</div>
 		<div>
@@ -46,12 +46,12 @@
 			</div>
 			<div>
 				<span><fa icon="home"/> {{ $t('this-instance') }}</span>
-				<span @click="setChartSrc('drive')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('drive')"><fa :icon="faChartBar"/></span>
 			</div>
 		</div>
 		<div>
 			<div>
-				<div><fa :icon="['far', 'hdd']"/></div>
+				<div><fa :icon="faHdd"/></div>
 				<div>
 					<span>{{ $t('instances') }}</span>
 					<b>{{ stats.instances | number }}</b>
@@ -59,7 +59,7 @@
 			</div>
 			<div>
 				<span><fa icon="globe"/> {{ $t('federated') }}</span>
-				<span @click="setChartSrc('federation-instances-total')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('federation-instances-total')"><fa :icon="faChartBar"/></span>
 			</div>
 		</div>
 	</div>
@@ -85,6 +85,7 @@ import XCpuMemory from "./dashboard.cpu-memory.vue";
 import XQueue from "./dashboard.queue-charts.vue";
 import XCharts from "./dashboard.charts.vue";
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar, faHdd } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('admin/views/dashboard.vue'),
@@ -102,7 +103,7 @@ export default Vue.extend({
 			connection: null,
 			meta: null,
 			clock: null,
-			faDatabase
+			faDatabase, faChartBar, faHdd
 		};
 	},
 

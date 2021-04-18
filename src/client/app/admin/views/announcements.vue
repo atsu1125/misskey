@@ -10,8 +10,8 @@
 				<span>{{ $t('text') }}</span>
 			</ui-textarea>
 			<ui-horizon-group class="fit-bottom">
-				<ui-button @click="save()"><fa :icon="['far', 'save']"/> {{ $t('save') }}</ui-button>
-				<ui-button @click="remove(i)"><fa :icon="['far', 'trash-alt']"/> {{ $t('remove') }}</ui-button>
+				<ui-button @click="save()"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+				<ui-button @click="remove(i)"><fa :icon="faTrashAlt"/> {{ $t('remove') }}</ui-button>
 			</ui-horizon-group>
 		</section>
 		<section>
@@ -24,12 +24,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../i18n';
+import { faSave, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('admin/views/announcements.vue'),
 	data() {
 		return {
 			announcements: [],
+			faSave, faTrashAlt
 		};
 	},
 
