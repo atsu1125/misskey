@@ -15,6 +15,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
+import { faHourglassHalf, faSpinner, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/follow-button.vue'),
@@ -48,6 +49,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			faHourglassHalf, faSpinner, faMinus, faPlus,
 			isFollowing: this.user.isFollowing,
 			hasPendingFollowRequestFromYou: this.user.hasPendingFollowRequestFromYou,
 			wait: false,
@@ -58,11 +60,11 @@ export default Vue.extend({
 	computed: {
 		iconAndText(): any[] {
 			return (
-				(this.hasPendingFollowRequestFromYou && this.user.isLocked) ? ['hourglass-half', this.$t('request-pending')] :
-				(this.hasPendingFollowRequestFromYou && !this.user.isLocked) ? ['spinner', this.$t('follow-processing')] :
-				(this.isFollowing) ? ['minus', this.$t('following')] :
-				(!this.isFollowing && this.user.isLocked) ? ['plus', this.$t('follow-request')] :
-				(!this.isFollowing && !this.user.isLocked) ? ['plus', this.$t('follow')] :
+				(this.hasPendingFollowRequestFromYou && this.user.isLocked) ? [faHourglassHalf, this.$t('request-pending')] :
+				(this.hasPendingFollowRequestFromYou && !this.user.isLocked) ? [faSpinner, this.$t('follow-processing')] :
+				(this.isFollowing) ? [faMinus, this.$t('following')] :
+				(!this.isFollowing && this.user.isLocked) ? [faPlus, this.$t('follow-request')] :
+				(!this.isFollowing && !this.user.isLocked) ? [faPlus, this.$t('follow')] :
 				[]
 			);
 		}
