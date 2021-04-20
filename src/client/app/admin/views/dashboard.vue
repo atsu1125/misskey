@@ -12,14 +12,14 @@
 	<div v-if="stats" class="stats">
 		<div>
 			<div>
-				<div><fa icon="user"/></div>
+				<div><i class="fas fa-user"></i></div>
 				<div>
 					<span>{{ $t('accounts') }}</span>
 					<b>{{ stats.originalUsersCount | number }}</b>
 				</div>
 			</div>
 			<div>
-				<span><fa icon="home"/> {{ $t('this-instance') }}</span>
+				<span><i class="fas fa-home"></i> {{ $t('this-instance') }}</span>
 				<span @click="setChartSrc('users')"><fa :icon="['far', 'chart-bar']"/></span>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div>
-				<span><fa icon="home"/> {{ $t('this-instance') }}</span>
+				<span><i class="fas fa-home"></i> {{ $t('this-instance') }}</span>
 				<span @click="setChartSrc('notes')"><fa :icon="['far', 'chart-bar']"/></span>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div>
-				<span><fa icon="home"/> {{ $t('this-instance') }}</span>
+				<span><i class="fas fa-home"></i> {{ $t('this-instance') }}</span>
 				<span @click="setChartSrc('drive')"><fa :icon="['far', 'chart-bar']"/></span>
 			</div>
 		</div>
@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div>
-				<span><fa icon="globe"/> {{ $t('federated') }}</span>
+				<span><i class="fas fa-globe"></i> {{ $t('federated') }}</span>
 				<span @click="setChartSrc('federation-instances-total')"><fa :icon="['far', 'chart-bar']"/></span>
 			</div>
 		</div>

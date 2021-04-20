@@ -1,8 +1,8 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa icon="home"/></span>{{ $t('dashboard') }}</template>
+	<template #header><span style="margin-right:4px;"><i class="fas fa-home"></i></span>{{ $t('dashboard') }}</template>
 	<template #func>
-		<button @click="customizing = !customizing"><fa icon="cog"/></button>
+		<button @click="customizing = !customizing"><i class="fas fa-cog"></i></button>
 	</template>
 	<main>
 		<template v-if="customizing">
@@ -34,7 +34,7 @@
 			>
 				<div v-for="widget in widgets" class="customize-container" :key="widget.id">
 					<header>
-						<span class="handle"><fa icon="bars"/></span>{{ widget.name }}<button class="remove" @click="removeWidget(widget)"><fa icon="times"/></button>
+						<span class="handle"><i class="fas fa-bars"></i></span>{{ widget.name }}<button class="remove" @click="removeWidget(widget)"><i class="fas fa-times"></i></button>
 					</header>
 					<div @click="widgetFunc(widget.id)">
 						<component :is="`mkw-${widget.name}`" :widget="widget" :ref="widget.id" :is-customize-mode="true" platform="mobile"/>

@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><fa icon="search"/> {{ q }}</template>
+	<template #header><i class="fas fa-search"></i> {{ q }}</template>
 
 	<main>
 		<div class="search-area">

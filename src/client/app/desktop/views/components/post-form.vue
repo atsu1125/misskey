@@ -34,8 +34,8 @@
 		<mk-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
 		
 		<footer>
-			<button class="upload" :title="$t('attach-media-from-local')" @click="chooseFile"><fa icon="upload"/></button>
-			<button class="drive" :title="$t('attach-media-from-drive')" @click="chooseFileFromDrive"><fa icon="cloud"/></button>
+			<button class="upload" :title="$t('attach-media-from-local')" @click="chooseFile"><i class="fas fa-upload"></i></button>
+			<button class="drive" :title="$t('attach-media-from-drive')" @click="chooseFileFromDrive"><i class="fas fa-cloud"></i></button>
 			<button class="jpeg" :class="{ enabled: useJpeg }" :title="$t('use-jpeg')" @click="useJpeg = !useJpeg"><fa :icon="faShareSquare"/></button>
 			<button class="kao" :title="$t('insert-a-kao')" @click="kao"><fa :icon="faFish"/></button>
 			<button class="poll" :class="{ enabled: !!poll }" :title="$t('create-poll')" @click="poll = !poll"><fa icon="chart-pie"/></button>

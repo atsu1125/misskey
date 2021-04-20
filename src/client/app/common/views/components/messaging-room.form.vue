@@ -17,7 +17,7 @@
 		<template v-if="!sending"><fa icon="paper-plane"/></template><template v-if="sending"><fa icon="spinner .spin"/></template>
 	</button>
 	<button class="attach-from-local" @click="chooseFile" :title="$t('attach-from-local')">
-		<fa icon="upload"/>
+		<i class="fas fa-upload"></i>
 	</button>
 	<button class="attach-from-drive" @click="chooseFileFromDrive" :title="$t('attach-from-drive')">
 		<fa :icon="['far', 'folder-open']"/>

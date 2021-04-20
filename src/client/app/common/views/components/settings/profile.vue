@@ -1,7 +1,7 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa icon="user"/> {{ $t('title') }}</template>
+		<template #title><i class="fas fa-user"></i> {{ $t('title') }}</template>
 
 		<section class="esokaraujimuwfttfzgocmutcihewscl">
 			<div class="header" :style="bannerStyle" @click.stop="updateBanner()" title="Update banner" style="cursor:pointer">
@@ -31,13 +31,13 @@
 				<ui-horizon-group inputs>
 					<ui-input type="file" @change="onAvatarChange">
 						<span>{{ $t('avatar') }}</span>
-						<template #icon><fa icon="image"/></template>
+						<template #icon><i class="fas fa-image"></i></template>
 						<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
 					</ui-input>
 
 					<ui-input type="file" @change="onBannerChange">
 						<span>{{ $t('banner') }}</span>
-						<template #icon><fa icon="image"/></template>
+						<template #icon><i class="fas fa-image"></i></template>
 						<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
 					</ui-input>
 				</ui-horizon-group>

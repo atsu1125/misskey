@@ -2,7 +2,7 @@
 <div class="mk-messaging" :data-compact="compact">
 	<div class="search" v-if="!compact" :style="{ top: headerTop + 'px' }">
 		<div class="form">
-			<label for="search-input"><i><fa icon="search"/></i></label>
+			<label for="search-input"><i><i class="fas fa-search"></i></i></label>
 			<input v-model="q" type="search" @input="search" @keydown="onSearchKeydown" :placeholder="$t('search-user')"/>
 		</div>
 		<div class="result">

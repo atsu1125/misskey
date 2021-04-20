@@ -8,11 +8,11 @@
 	</ui-input>
 	<ui-input v-model="password" type="password" :with-password-toggle="true" required>
 		<span>{{ $t('password') }}</span>
-		<template #prefix><fa icon="lock"/></template>
+		<template #prefix><i class="fas fa-lock"></i></template>
 	</ui-input>
 	<ui-input v-if="user && user.twoFactorEnabled" v-model="token" type="number" required>
 		<span>{{ $t('@.2fa') }}</span>
-		<template #prefix><fa icon="gavel"/></template>
+		<template #prefix><i class="fas fa-gavel"></i></template>
 	</ui-input>
 	<ui-button type="submit" :disabled="signing">{{ signing ? $t('signing-in') : $t('@.signin') }}</ui-button>
 	<p v-if="meta && meta.enableTwitterIntegration" style="margin: 8px 0;"><a :href="`${apiUrl}/signin/twitter`">{{ $t('signin-with-twitter') }}</a></p>

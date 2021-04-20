@@ -2,7 +2,7 @@
 <div class="nav" :class="navbar">
 	<ul>
 		<li class="timeline" :class="{ active: $route.name == 'index' }" @click="goToTop">
-			<router-link to="/"><fa icon="home"/><p>{{ $t('@.timeline') }}</p></router-link>
+			<router-link to="/"><i class="fas fa-home"></i><p>{{ $t('@.timeline') }}</p></router-link>
 		</li>
 		<li class="featured" :class="{ active: $route.name == 'featured' }">
 			<router-link to="/featured"><fa :icon="faNewspaper"/><p>{{ $t('@.featured-notes') }}</p></router-link>
@@ -12,9 +12,9 @@
 		</li>
 		<li class="game">
 			<a @click="game">
-				<fa icon="gamepad"/>
+				<i class="fas fa-gamepad"></i>
 				<p>{{ $t('game') }}</p>
-				<template v-if="hasGameInvitations"><fa icon="circle"/></template>
+				<template v-if="hasGameInvitations"><i class="fas fa-circle"></i></template>
 			</a>
 		</li>
 	</ul>

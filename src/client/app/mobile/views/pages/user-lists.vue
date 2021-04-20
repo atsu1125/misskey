@@ -1,7 +1,7 @@
 <template>
 <mk-ui>
-	<template #header><fa icon="list"/>{{ $t('title') }}</template>
-	<template #func><button @click="$refs.lists.add()"><fa icon="plus"/></button></template>
+	<template #header><i class="fas fa-list"></i>{{ $t('title') }}</template>
+	<template #func><button @click="$refs.lists.add()"><i class="fas fa-plus"></i></button></template>
 
 	<x-lists ref="lists" @choosen="choosen"/>
 </mk-ui>

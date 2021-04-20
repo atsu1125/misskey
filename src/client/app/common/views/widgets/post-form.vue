@@ -25,8 +25,8 @@
 			<input ref="file" type="file" multiple="multiple" tabindex="-1" @change="onChangeFile"/>
 			<mk-uploader ref="uploader" @uploaded="attachMedia"/>
 			<footer>
-				<button @click="chooseFile"><fa icon="upload"/></button>
-				<button @click="chooseFileFromDrive"><fa icon="cloud"/></button>
+				<button @click="chooseFile"><i class="fas fa-upload"></i></button>
+				<button @click="chooseFileFromDrive"><i class="fas fa-cloud"></i></button>
 				<button @click="kao"><fa :icon="faFish"/></button>
 				<button @click="setVisibility" class="visibility" ref="visibilityButton">
 					<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>

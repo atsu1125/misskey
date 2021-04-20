@@ -2,7 +2,7 @@
 <div class="pyvicwrksnfyhpfgkjwqknuururpaztw">
 	<div class="preview">
 		<x-file-thumbnail class="preview" :file="file" :detail="true"/>
-		<template v-if="kind != 'image'"><fa icon="file"/></template>
+		<template v-if="kind != 'image'"><i class="fas fa-file"></i></template>
 		<footer v-if="kind == 'image' && file.properties && file.properties.width && file.properties.height">
 			<span class="size">
 				<span class="width">{{ file.properties.width }}</span>
@@ -39,7 +39,7 @@
 	<div class="hash">
 		<div>
 			<p>
-				<fa icon="hashtag"/>{{ $t('hash') }}
+				<i class="fas fa-hashtag"></i>{{ $t('hash') }}
 			</p>
 			<code>{{ file.md5 }}</code>
 		</div>

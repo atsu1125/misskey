@@ -2,7 +2,7 @@
 <div class="mkw-posts-monitor">
 	<ui-container :show-header="props.design == 0" :naked="props.design == 2">
 		<template #header><fa icon="chart-line"/>{{ $t('title') }}</template>
-		<template #func><button @click="toggle" :title="$t('toggle')"><fa icon="sort"/></button></template>
+		<template #func><button @click="toggle" :title="$t('toggle')"><i class="fas fa-sort"></i></button></template>
 
 		<div class="qpdmibaztplkylerhdbllwcokyrfxeyj" :class="{ dual: props.view == 0 }">
 			<svg :viewBox="`0 0 ${ viewBoxX } ${ viewBoxY }`" v-show="props.view != 2">

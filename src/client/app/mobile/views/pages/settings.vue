@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa icon="cog"/></span>{{ $t('@.settings') }}</template>
+	<template #header><span style="margin-right:4px;"><i class="fas fa-cog"></i></span>{{ $t('@.settings') }}</template>
 	<main>
 		<div class="signed-in-as">
 			<mfm :text="$t('signed-in-as').replace('{}', name)" :plain="true" :custom-emojis="$store.state.i.emojis"/>

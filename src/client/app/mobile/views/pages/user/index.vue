@@ -67,9 +67,9 @@
 		</header>
 		<nav v-if="$route.name == 'user'">
 			<div class="nav-container">
-				<a :data-active="page == 'home'" @click="page = 'home'"><fa icon="home"/> {{ $t('overview') }}</a>
+				<a :data-active="page == 'home'" @click="page = 'home'"><i class="fas fa-home"></i> {{ $t('overview') }}</a>
 				<a :data-active="page == 'notes'" @click="page = 'notes'"><fa :icon="['far', 'comment-alt']"/> {{ $t('timeline') }}</a>
-				<a :data-active="page == 'media'" @click="page = 'media'"><fa icon="image"/> {{ $t('media') }}</a>
+				<a :data-active="page == 'media'" @click="page = 'media'"><i class="fas fa-image"></i> {{ $t('media') }}</a>
 			</div>
 		</nav>
 		<main>

@@ -1,7 +1,7 @@
 <template>
 <div class="mkw-users">
 	<ui-container :show-header="!props.compact">
-		<template #header><fa icon="users"/>{{ $t('title') }}</template>
+		<template #header><i class="fas fa-users"></i>{{ $t('title') }}</template>
 		<template #func>
 			<button :title="$t('title')" @click="refresh">
 				<fa v-if="!fetching && more" icon="arrow-right"/>

@@ -1,6 +1,6 @@
 <template>
 <mk-window ref="window" width="500px" height="560px" :popout-url="popout" @closed="destroyDom">
-	<template #header><fa icon="comments"/> {{ $t('@.messaging') }}: <mk-user-name :user="user"/></template>
+	<template #header><i class="fas fa-comments"></i> {{ $t('@.messaging') }}: <mk-user-name :user="user"/></template>
 	<x-messaging-room :user="user" :class="$style.content"/>
 </mk-window>
 </template>

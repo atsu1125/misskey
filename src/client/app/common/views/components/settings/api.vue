@@ -1,6 +1,6 @@
 <template>
 <ui-card>
-	<template #title><fa icon="key"/> API</template>
+	<template #title><i class="fas fa-key"></i> API</template>
 
 	<section class="fit-top">
 		<ui-input :value="$store.state.i.token" readonly>
@@ -13,7 +13,7 @@
 	</section>
 
 	<section>
-		<header><fa icon="terminal"/> {{ $t('console.title') }}</header>
+		<header><i class="fas fa-terminal"></i> {{ $t('console.title') }}</header>
 		<ui-input v-model="endpoint" :datalist="endpoints">
 			<span>{{ $t('console.endpoint') }}</span>
 		</ui-input>

@@ -2,7 +2,7 @@
 <component :is="customize ? 'mk-dummy' : 'mk-ui'" v-hotkey.global="keymap" v-if="$store.getters.isSignedIn || $route.name != 'index'">
 	<div class="wqsofvpm" :data-customize="customize">
 		<div class="customize" v-if="customize">
-			<a @click="done()"><fa icon="check"/>{{ $t('done') }}</a>
+			<a @click="done()"><i class="fas fa-check"></i>{{ $t('done') }}</a>
 			<div>
 				<div class="adder">
 					<p>{{ $t('add-widget') }}</p>

@@ -46,7 +46,7 @@
 				<div class="content" v-show="appearNote.cw == null || showContent">
 					<div class="text" :class="{ scroll : !detail }">
 						<span v-if="appearNote.isHidden" style="opacity: 0.5">{{ $t('private') }}</span>
-						<a class="reply" v-if="appearNote.reply"><fa icon="reply"/></a>
+						<a class="reply" v-if="appearNote.reply"><i class="fas fa-reply"></i></a>
 						<mfm v-if="appearNote.text" :text="appearNote.text" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" :hashtags="appearNote.tags" :basic="!!appearNote.notHaveDecorationMfm"
 							:style="{ 'font-size': appearNote.text && appearNote.text.length > 500 ? '11px' : 'inherit' }"/>
 					</div>
@@ -75,15 +75,15 @@
 					<p class="count" v-if="appearNote.repliesCount + appearNote.quoteCount > 0">{{ appearNote.repliesCount + appearNote.quoteCount }}</p>
 				</button>
 				<button v-if="appearNote.myRenoteId != null" class="renoteButton button renoted" @click="undoRenote()" title="Undo">
-					<fa icon="retweet"/>
+					<i class="fas fa-retweet"></i>
 					<p class="count" v-if="appearNote.renoteCount - appearNote.quoteCount > 0">{{ appearNote.renoteCount - appearNote.quoteCount }}</p>
 				</button>
 				<button v-else-if="['public', 'home'].includes(appearNote.visibility)" class="renoteButton button" @click="renote()" :title="$t('renote')">
-					<fa icon="retweet"/>
+					<i class="fas fa-retweet"></i>
 					<p class="count" v-if="appearNote.renoteCount - appearNote.quoteCount > 0">{{ appearNote.renoteCount - appearNote.quoteCount }}</p>
 				</button>
 				<button v-else class="inhibitedButton button">
-					<fa icon="ban"/>
+					<i class="fas fa-ban"></i>
 				</button>
 				<button v-if="appearNote.myReaction == null" class="reactionButton button" @click="react()" ref="reactButton" :title="$t('add-reaction')">
 					<fa-layers>
@@ -97,7 +97,7 @@
 				<button @click="menu()" ref="menuButton" class="button">
 					<fa icon="ellipsis-h"/>
 				</button>
-				<button class="button stayTl" :class="{ pinned: !!appearNote.stayTl }" @click="toggleStayTl"><fa icon="thumbtack"/></button>
+				<button class="button stayTl" :class="{ pinned: !!appearNote.stayTl }" @click="toggleStayTl"><i class="fas fa-thumbtack"></i></button>
 			</footer>
 			<div class="deleted" v-if="appearNote.deletedAt != null">{{ $t('deleted') }}</div>
 		</div>

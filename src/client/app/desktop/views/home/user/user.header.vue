@@ -9,7 +9,7 @@
 			</p>
 			<div>
 				<span class="username"><mk-acct :user="user" :detail="true" /></span>
-				<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
+				<span v-if="user.isBot" :title="$t('is-bot')"><i class="fas fa-robot"></i></span>
 				<span v-if="user.movedToUser != null">moved to <router-link :to="user.movedToUser | userPage()"><mk-acct :user="user.movedToUser" :detail="true"/></router-link></span>
 			</div>
 		</div>

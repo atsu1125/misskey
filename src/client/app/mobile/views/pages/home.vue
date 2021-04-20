@@ -3,22 +3,22 @@
 	<template #header>
 		<span @click="showNav = true">
 			<span :class="$style.title">
-				<span v-if="src == 'home'"><fa icon="home"/>{{ $t('home') }}</span>
+				<span v-if="src == 'home'"><i class="fas fa-home"></i>{{ $t('home') }}</span>
 				<span v-if="src == 'local'"><fa :icon="['far', 'comments']"/>{{ $t('local') }}</span>
-				<span v-if="src == 'locao'"><fa icon="heart"/>{{ $t('locao') }}</span>
+				<span v-if="src == 'locao'"><i class="fas fa-heart"></i>{{ $t('locao') }}</span>
 				<span v-if="src == 'hybrid'"><fa icon="share-alt"/>{{ $t('hybrid') }}</span>
-				<span v-if="src == 'global'"><fa icon="globe"/>{{ $t('global') }}</span>
+				<span v-if="src == 'global'"><i class="fas fa-globe"></i>{{ $t('global') }}</span>
 				<span v-if="src == 'hot'"><fa :icon="faThumbsUp"/>{{ $t('reacted') }}</span>
-				<span v-if="src == 'mentions'"><fa icon="at"/>{{ $t('mentions') }}</span>
+				<span v-if="src == 'mentions'"><i class="fas fa-at"></i>{{ $t('mentions') }}</span>
 				<span v-if="src == 'messages'"><fa :icon="['far', 'envelope']"/>{{ $t('messages') }}</span>
-				<span v-if="src == 'list'"><fa icon="list"/>{{ list.title }}</span>
-				<span v-if="src == 'tag'"><fa icon="hashtag"/>{{ tagTl.title }}</span>
+				<span v-if="src == 'list'"><i class="fas fa-list"></i>{{ list.title }}</span>
+				<span v-if="src == 'tag'"><i class="fas fa-hashtag"></i>{{ tagTl.title }}</span>
 			</span>
 			<span style="margin-left:8px">
 				<template v-if="!showNav"><fa icon="angle-down"/></template>
 				<template v-else><fa icon="angle-up"/></template>
 			</span>
-			<i :class="$style.badge" v-if="$store.state.i.hasUnreadMentions || $store.state.i.hasUnreadSpecifiedNotes"><fa icon="circle"/></i>
+			<i :class="$style.badge" v-if="$store.state.i.hasUnreadMentions || $store.state.i.hasUnreadSpecifiedNotes"><i class="fas fa-circle"></i></i>
 		</span>
 	</template>
 
@@ -32,21 +32,21 @@
 			<div class="pointer"></div>
 			<div class="body">
 				<div>
-					<span :data-active="src == 'home'" @click="src = 'home'"><fa icon="home"/> {{ $t('home') }}</span>
+					<span :data-active="src == 'home'" @click="src = 'home'"><i class="fas fa-home"></i> {{ $t('home') }}</span>
 					<span :data-active="src == 'local'" @click="src = 'local'" v-if="enableLocalTimeline"><fa :icon="['far', 'comments']"/> {{ $t('local') }}</span>
 					<span :data-active="src == 'hybrid'" @click="src = 'hybrid'" v-if="enableLocalTimeline"><fa icon="share-alt"/> {{ $t('hybrid') }}</span>
-					<span :data-active="src == 'global'" @click="src = 'global'" v-if="enableGlobalTimeline"><fa icon="globe"/> {{ $t('global') }}</span>
+					<span :data-active="src == 'global'" @click="src = 'global'" v-if="enableGlobalTimeline"><i class="fas fa-globe"></i> {{ $t('global') }}</span>
 					<div class="hr"></div>
 					<span :data-active="src == 'hot'" @click="src = 'hot'" v-if="enableGlobalTimeline"><fa :icon="faThumbsUp"/> {{ $t('reacted') }}</span>
-					<span :data-active="src == 'locao'" @click="src = 'locao'" v-if="enableLocalTimeline"><fa icon="heart"/> {{ $t('locao') }}</span>
-					<span :data-active="src == 'mentions'" @click="src = 'mentions'"><fa icon="at"/> {{ $t('mentions') }}<i class="badge" v-if="$store.state.i.hasUnreadMentions"><fa icon="circle"/></i></span>
-					<span :data-active="src == 'messages'" @click="src = 'messages'"><fa :icon="['far', 'envelope']"/> {{ $t('messages') }}<i class="badge" v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa icon="circle"/></i></span>
+					<span :data-active="src == 'locao'" @click="src = 'locao'" v-if="enableLocalTimeline"><i class="fas fa-heart"></i> {{ $t('locao') }}</span>
+					<span :data-active="src == 'mentions'" @click="src = 'mentions'"><i class="fas fa-at"></i> {{ $t('mentions') }}<i class="badge" v-if="$store.state.i.hasUnreadMentions"><i class="fas fa-circle"></i></i></span>
+					<span :data-active="src == 'messages'" @click="src = 'messages'"><fa :icon="['far', 'envelope']"/> {{ $t('messages') }}<i class="badge" v-if="$store.state.i.hasUnreadSpecifiedNotes"><i class="fas fa-circle"></i></i></span>
 					<template v-if="lists">
 						<div class="hr" v-if="lists.length > 0"></div>
-						<span v-for="l in lists" :data-active="src == 'list' && list == l" @click="src = 'list'; list = l" :key="l.id"><fa icon="list"/> {{ l.title }}</span>
+						<span v-for="l in lists" :data-active="src == 'list' && list == l" @click="src = 'list'; list = l" :key="l.id"><i class="fas fa-list"></i> {{ l.title }}</span>
 					</template>
 					<div class="hr" v-if="$store.state.settings.tagTimelines && $store.state.settings.tagTimelines.length > 0"></div>
-					<span v-for="tl in $store.state.settings.tagTimelines" :data-active="src == 'tag' && tagTl == tl" @click="src = 'tag'; tagTl = tl" :key="tl.id"><fa icon="hashtag"/> {{ tl.title }}</span>
+					<span v-for="tl in $store.state.settings.tagTimelines" :data-active="src == 'tag' && tagTl == tl" @click="src = 'tag'; tagTl = tl" :key="tl.id"><i class="fas fa-hashtag"></i> {{ tl.title }}</span>
 				</div>
 			</div>
 		</div>

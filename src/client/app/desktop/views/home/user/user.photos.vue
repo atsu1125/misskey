@@ -2,7 +2,7 @@
 <ui-container :body-togglable="true"
 	:expanded="$store.state.device.expandUsersPhotos"
 	@toggle="expanded => $store.commit('device/set', { key: 'expandUsersPhotos', value: expanded })">
-	<template #header><fa icon="camera"/> {{ $t('title') }}</template>
+	<template #header><i class="fas fa-camera"></i> {{ $t('title') }}</template>
 
 	<div class="dzsuvbsrrrwobdxifudxuefculdfiaxd">
 		<p class="initializing" v-if="fetching"><fa icon="spinner" pulse fixed-width/>{{ $t('loading') }}<mk-ellipsis/></p>

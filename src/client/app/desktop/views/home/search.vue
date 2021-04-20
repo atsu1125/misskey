@@ -3,7 +3,7 @@
 	<mk-notes ref="timeline" :make-promise="makePromise" @inited="inited">
 		<template #header>
 			<header class="oxgbmvii">
-				<span><fa icon="search"/> {{ q }}</span>
+				<span><i class="fas fa-search"></i> {{ q }}</span>
 			</header>
 		</template>
 	</mk-notes>

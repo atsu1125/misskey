@@ -8,7 +8,7 @@
 		</div>
 	</ui-container>
 	<ui-container :body-togglable="true">
-		<template #header><fa icon="image"/>{{ $t('images') }}</template>
+		<template #header><i class="fas fa-image"></i>{{ $t('images') }}</template>
 		<div>
 			<x-photos :user="user"/>
 		</div>
@@ -20,8 +20,8 @@
 		</div>
 	</ui-container>
 	<x-reactions :user="user" style="margin-top: 16px; margin-bottom: 16px; "/>
-	<mk-user-list :make-promise="makeFrequentlyRepliedUsersPromise" :icon-only="true"><fa icon="users"/> {{ $t('frequently-replied-users') }}</mk-user-list>
-	<mk-user-list v-if="$store.getters.isSignedIn && $store.state.i.id !== user.id" :make-promise="makeFollowersYouKnowPromise" :icon-only="true"><fa icon="users"/> {{ $t('followers-you-know') }}</mk-user-list>
+	<mk-user-list :make-promise="makeFrequentlyRepliedUsersPromise" :icon-only="true"><i class="fas fa-users"></i> {{ $t('frequently-replied-users') }}</mk-user-list>
+	<mk-user-list v-if="$store.getters.isSignedIn && $store.state.i.id !== user.id" :make-promise="makeFollowersYouKnowPromise" :icon-only="true"><i class="fas fa-users"></i> {{ $t('followers-you-know') }}</mk-user-list>
 </div>
 </template>
 

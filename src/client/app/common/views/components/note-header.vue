@@ -8,7 +8,7 @@
 	<span class="is-bot" v-if="note.user.isBot">bot</span>
 	<span class="is-cat" v-if="note.user.isCat">cat</span>
 	<span class="username"><mk-acct :user="note.user"/></span>
-	<span class="is-verified" v-if="note.user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
+	<span class="is-verified" v-if="note.user.isVerified" :title="$t('@.verified-user')"><i class="fas fa-star"></i></span>
 	<div class="info" v-if="!noInfo">
 		<span class="mobile" v-if="note.viaMobile"><fa icon="mobile-alt"/></span>
 		<router-link class="created-at" :to="note | notePage">

@@ -7,7 +7,7 @@
 		</div>
 		<div class="text">
 			<input v-model="text" :placeholder="$t('emoji')" @keyup.enter="reactText" @keydown.esc="close" @input="tryReactText" v-autocomplete="{ model: 'text', noZwsp: true }" ref="text">
-			<button :title="$t('react')" @click="reactText"><fa icon="check"/></button>
+			<button :title="$t('react')" @click="reactText"><i class="fas fa-check"></i></button>
 			<button :title="$t('pick')" class="emoji" @click="emoji" ref="emoji"><fa :icon="['far', 'laugh']"/></button>
 			<button :title="$t('random')" @click="reactRandom()"><fa :icon="faRandom"/></button>
 			<button title="Dislike" class="dislike" v-if="$store.state.device.showDislikeInPicker" :class="{ disliked }" @click="toggleDisliked()"><fa :icon="disliked ? faThumbsDown : faThumbsUp"/></button>

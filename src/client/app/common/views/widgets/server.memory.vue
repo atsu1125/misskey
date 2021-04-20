@@ -2,7 +2,7 @@
 <div class="memory">
 	<x-pie class="pie" :value="usage"/>
 	<div>
-		<p><fa icon="memory"/>Memory</p>
+		<p><i class="fas fa-memory"></i>Memory</p>
 		<p>Total: {{ total | bytes(1) }}</p>
 		<p>Active: {{ active | bytes(1) }}</p>
 		<p>Free: {{ free | bytes(1) }}</p>

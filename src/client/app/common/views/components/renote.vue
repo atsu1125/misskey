@@ -1,7 +1,7 @@
 <template>
 <div class="puqkfets" :class="{ mini: narrow }">
 	<mk-avatar class="avatar" :user="note.user"/>
-	<fa icon="retweet"/>
+	<i class="fas fa-retweet"></i>
 	<i18n path="@.renoted-by" tag="span">
 		<router-link class="name" :to="note.user | userPage" v-user-preview="note.userId" place="user">
 			<mk-user-name :user="note.user"/>

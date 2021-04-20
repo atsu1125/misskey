@@ -3,8 +3,8 @@
 <div class="signins" v-if="signins.length != 0">
 	<div v-for="signin in signins">
 		<header @click="signin._show = !signin._show">
-			<template v-if="signin.success"><fa icon="check"/></template>
-			<template v-else><fa icon="times"/></template>
+			<template v-if="signin.success"><i class="fas fa-check"></i></template>
+			<template v-else><i class="fas fa-times"></i></template>
 			<span class="ip">{{ signin.ip }}</span>
 			<mk-time :time="signin.createdAt"/>
 		</header>

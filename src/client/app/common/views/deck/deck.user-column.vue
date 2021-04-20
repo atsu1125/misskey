@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<fa icon="user"/><mk-user-name :user="user" v-if="user" :key="user.id"/>
+		<i class="fas fa-user"></i><mk-user-name :user="user" v-if="user" :key="user.id"/>
 	</template>
 
 	<div class="zubukjlciycdsyynicqrnlsmdwmymzqu" v-if="user">

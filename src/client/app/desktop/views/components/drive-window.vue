@@ -2,7 +2,7 @@
 <mk-window ref="window" @closed="destroyDom" width="800px" height="500px" :popout-url="popout">
 	<template #header>
 		<p v-if="usage" :class="$style.info"><b>{{ usage.toFixed(1) }}%</b> {{ $t('used') }}</p>
-		<span :class="$style.title"><fa icon="cloud"/>{{ $t('@.drive') }}</span>
+		<span :class="$style.title"><i class="fas fa-cloud"></i>{{ $t('@.drive') }}</span>
 	</template>
 	<x-drive :class="$style.browser" multiple :init-folder="folder" ref="browser"/>
 </mk-window>

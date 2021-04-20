@@ -1,6 +1,6 @@
 <template>
 <mk-window ref="window" width="450px" height="500px" @closed="destroyDom">
-	<template #header><fa icon="list"/> {{ $t('title') }}</template>
+	<template #header><i class="fas fa-list"></i> {{ $t('title') }}</template>
 	<x-lists :class="$style.content" @choosen="choosen"/>
 </mk-window>
 </template>

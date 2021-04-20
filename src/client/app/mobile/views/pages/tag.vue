@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa icon="hashtag"/></span>{{ $route.params.tag }}</template>
+	<template #header><span style="margin-right:4px;"><i class="fas fa-hashtag"></i></span>{{ $route.params.tag }}</template>
 
 	<main>
 		<div class="search-area">

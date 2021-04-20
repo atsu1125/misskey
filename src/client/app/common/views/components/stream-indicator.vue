@@ -23,7 +23,7 @@
 			<span>{{ $t('reconnecting') }}<mk-ellipsis/></span>
 		</p>
 		<p v-if="stream.state == 'connected'">
-			<fa icon="check"/>
+			<i class="fas fa-check"></i>
 			<span>{{ $t('connected') }}</span>
 		</p>
 	</div>

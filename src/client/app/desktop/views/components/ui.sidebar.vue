@@ -6,7 +6,7 @@
 				<button :title="$t('@.new-post')" @click="post"><fa icon="pencil-alt"/></button>
 			</div>
 			<div :title="$t('@.timeline')" class="home" :class="{ active: $route.name == 'index' }" @click="goToTop">
-				<router-link to="/"><fa icon="home"/></router-link>
+				<router-link to="/"><i class="fas fa-home"></i></router-link>
 			</div>
 			<div :title="$t('@.featured')" class="featured" :class="{ active: $route.name == 'featured' }">
 				<router-link to="/featured"><fa :icon="faNewspaper"/></router-link>
@@ -15,7 +15,7 @@
 				<router-link to="/explore"><fa :icon="faUsers"/></router-link>
 			</div>
 			<div :title="$t('@.game')" class="game">
-				<a @click="game"><fa icon="gamepad"/><template v-if="hasGameInvitations"><fa icon="circle"/></template></a>
+				<a @click="game"><i class="fas fa-gamepad"></i><template v-if="hasGameInvitations"><i class="fas fa-circle"></i></template></a>
 			</div>
 			<div :title="$t('@.pages')" class="pages">
 				<router-link to="/i/pages"><fa :icon="faStickyNote"/></router-link>
@@ -27,22 +27,22 @@
 
 		<div class="nav bottom" style="margin-top: auto" v-if="$store.getters.isSignedIn">
 			<div :title="$t('@.search')">
-				<a @click="search"><fa icon="search"/></a>
+				<a @click="search"><i class="fas fa-search"></i></a>
 			</div>
 			<div :title="$t('@.drive')">
-				<a @click="drive"><fa icon="cloud"/></a>
+				<a @click="drive"><i class="fas fa-cloud"></i></a>
 			</div>
 			<div :title="$t('@.notifications')" ref="notificationsButton" :class="{ active: showNotifications }">
 				<a @click="notifications"><fa :icon="['far', 'bell']"/></a>
 			</div>
 			<div :title="$t('@.messaging')" class="messaging">
-				<a @click="messaging"><fa icon="comments"/><template v-if="hasUnreadMessagingMessage"><fa icon="circle"/></template></a>
+				<a @click="messaging"><i class="fas fa-comments"></i><template v-if="hasUnreadMessagingMessage"><i class="fas fa-circle"></i></template></a>
 			</div>
 			<div :title="$t('@.settings')">
-				<a @click="settings"><fa icon="cog"/></a>
+				<a @click="settings"><i class="fas fa-cog"></i></a>
 			</div>
 			<div :title="$t('@.favorites')">
-				<router-link to="/i/favorites"><fa icon="star"/></router-link>
+				<router-link to="/i/favorites"><i class="fas fa-star"></i></router-link>
 			</div>
 			<div :title="$t('@.noteReactions')">
 				<router-link to="/i/reactions"><fa :icon="faThumbsUp"/></router-link>
@@ -52,14 +52,14 @@
 			</div>
 			<div :title="$t($store.state.device.inDeckMode ? '@.home' : '@.deck')">
 				<template v-if="$store.state.device.inDeckMode">
-					<a @click="toggleDeckMode(false)"><fa icon="home"/></a>
+					<a @click="toggleDeckMode(false)"><i class="fas fa-home"></i></a>
 				</template>
 				<template v-else>
-					<a @click="toggleDeckMode(true)"><fa icon="columns"/></a>
+					<a @click="toggleDeckMode(true)"><i class="fas fa-columns"></i></a>
 				</template>
 			</div>
 			<div :title="$t($store.state.device.darkmode ? '@.turn-off-darkmode' : '@.turn-on-darkmode')">
-				<a @click="dark"><template v-if="$store.state.device.darkmode"><fa icon="moon"/></template><template v-else><fa :icon="['far', 'moon']"/></template></a>
+				<a @click="dark"><template v-if="$store.state.device.darkmode"><i class="fas fa-moon"></i></template><template v-else><fa :icon="['far', 'moon']"/></template></a>
 			</div>
 		</div>
 	</div>

@@ -1,38 +1,38 @@
 <template>
 	<div style="display: inline-flex; align-items: center;">
 		<div v-if="visibility == 'public'" :title="$t('@.note-visibility.public')">
-			<fa icon="globe"/>
+			<i class="fas fa-globe"></i>
 		</div>
 		<div v-else-if="visibility == 'home'" :title="$t('@.note-visibility.home')">
-			<fa icon="home"/>
+			<i class="fas fa-home"></i>
 		</div>
 		<div v-else-if="visibility == 'followers'" :title="$t('@.note-visibility.followers')">
-			<fa icon="lock"/>
+			<i class="fas fa-lock"></i>
 		</div>
 		<div v-else-if="visibility == 'specified'" :title="$t('@.note-visibility.specified')">
-			<fa icon="envelope"/>
+			<i class="fas fa-envelope"></i>
 		</div>
 		<div v-else-if="visibility == 'local-public'" :title="$t('@.note-visibility.local-public')">
 			<fa-layers>
-				<fa icon="globe"/>
+				<i class="fas fa-globe"></i>
 				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
 			</fa-layers>
 		</div>
 		<div v-else-if="visibility == 'local-home'" :title="$t('@.note-visibility.local-home')">
 			<fa-layers>
-				<fa icon="home"/>
+				<i class="fas fa-home"></i>
 				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
 			</fa-layers>
 		</div>
 		<div v-else-if="visibility == 'local-followers'" :title="$t('@.note-visibility.local-followers')">
 			<fa-layers>
-				<fa icon="lock"/>
+				<i class="fas fa-lock"></i>
 				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
 			</fa-layers>
 		</div>
 		<div v-else-if="visibility == 'local-specified'" :title="$t('@.note-visibility.local-specified')">
 			<fa-layers>
-				<fa icon="envelope"/>
+				<i class="fas fa-envelope"></i>
 				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
 			</fa-layers>
 		</div>

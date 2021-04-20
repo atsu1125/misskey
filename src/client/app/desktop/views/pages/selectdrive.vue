@@ -6,7 +6,7 @@
 		@change-selection="onChangeSelection"
 	/>
 	<footer>
-		<button class="upload" :title="$t('upload')" @click="upload"><fa icon="upload"/></button>
+		<button class="upload" :title="$t('upload')" @click="upload"><i class="fas fa-upload"></i></button>
 		<button class="cancel" @click="close">{{ $t('cancel') }}</button>
 		<button class="ok" @click="ok">{{ $t('ok') }}</button>
 	</footer>

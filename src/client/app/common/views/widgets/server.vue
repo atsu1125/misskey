@@ -1,8 +1,8 @@
 <template>
 <div class="mkw-server">
 	<ui-container :show-header="props.design == 0" :naked="props.design == 2">
-		<template #header><fa icon="server"/>{{ $t('title') }}</template>
-		<template #func><button @click="toggle" :title="$t('toggle')"><fa icon="sort"/></button></template>
+		<template #header><i class="fas fa-server"></i>{{ $t('title') }}</template>
+		<template #func><button @click="toggle" :title="$t('toggle')"><i class="fas fa-sort"></i></button></template>
 
 		<p :class="$style.fetching" v-if="fetching"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}<mk-ellipsis/></p>
 		<template v-if="!fetching">

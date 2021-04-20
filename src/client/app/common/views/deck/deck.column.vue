@@ -17,7 +17,7 @@
 		<span class="header"><slot name="header"></slot></span>
 		<span class="count" v-if="count > 0">({{ count }})</span>
 		<button v-if="!isTemporaryColumn" class="menu" ref="menu" @click.stop="showMenu"><fa icon="caret-down"/></button>
-		<button v-else class="close" @click.stop="close"><fa icon="times"/></button>
+		<button v-else class="close" @click.stop="close"><i class="fas fa-times"></i></button>
 	</header>
 	<div ref="body" v-show="active">
 		<slot></slot>

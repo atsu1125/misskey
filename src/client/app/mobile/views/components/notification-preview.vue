@@ -11,7 +11,7 @@
 	<template v-if="notification.type == 'renote'">
 		<mk-avatar class="avatar" :user="notification.note.user"/>
 		<div class="text">
-			<p><fa icon="retweet"/><mk-user-name :user="notification.note.user"/></p>
+			<p><i class="fas fa-retweet"></i><mk-user-name :user="notification.note.user"/></p>
 			<p class="note-ref"><fa icon="quote-left"/>{{ getNoteSummary(notification.note.renote) }}<fa icon="quote-right"/></p>
 		</div>
 	</template>
@@ -41,7 +41,7 @@
 	<template v-if="notification.type == 'reply'">
 		<mk-avatar class="avatar" :user="notification.note.user"/>
 		<div class="text">
-			<p><fa icon="reply"/><mk-user-name :user="notification.note.user"/></p>
+			<p><i class="fas fa-reply"></i><mk-user-name :user="notification.note.user"/></p>
 			<p class="note-preview">{{ getNoteSummary(notification.note) }}</p>
 		</div>
 	</template>
@@ -49,7 +49,7 @@
 	<template v-if="notification.type == 'mention'">
 		<mk-avatar class="avatar" :user="notification.note.user"/>
 		<div class="text">
-			<p><fa icon="at"/><mk-user-name :user="notification.note.user"/></p>
+			<p><i class="fas fa-at"></i><mk-user-name :user="notification.note.user"/></p>
 			<p class="note-preview">{{ getNoteSummary(notification.note) }}</p>
 		</div>
 	</template>

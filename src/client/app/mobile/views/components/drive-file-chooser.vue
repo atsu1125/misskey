@@ -3,8 +3,8 @@
 	<div class="body">
 		<header>
 			<h1>{{ $t('select-file') }}<span class="count" v-if="files.length > 0">({{ files.length }})</span></h1>
-			<button class="close" @click="cancel"><fa icon="times"/></button>
-			<button v-if="multiple" class="ok" @click="ok"><fa icon="check"/></button>
+			<button class="close" @click="cancel"><i class="fas fa-times"></i></button>
+			<button v-if="multiple" class="ok" @click="ok"><i class="fas fa-check"></i></button>
 		</header>
 		<x-drive class="drive" ref="browser"
 			:select-file="true"

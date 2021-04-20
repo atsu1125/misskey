@@ -2,7 +2,7 @@
 <div class="mk-activity">
 	<ui-container :show-header="design == 0" :naked="design == 2">
 		<template #header><fa icon="chart-bar"/>{{ $t('title') }}</template>
-		<template #func><button :title="$t('toggle')" @click="toggle"><fa icon="sort"/></button></template>
+		<template #func><button :title="$t('toggle')" @click="toggle"><i class="fas fa-sort"></i></button></template>
 
 		<p :class="$style.fetching" v-if="fetching"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}<mk-ellipsis/></p>
 		<template v-else>

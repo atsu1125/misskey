@@ -1,8 +1,8 @@
 <template>
 <div class="mkw-trends">
 	<ui-container :show-header="!props.compact">
-		<template #header><fa icon="fire"/>{{ $t('title') }}</template>
-		<template #func><button :title="$t('title')" @click="fetch"><fa icon="sync"/></button></template>
+		<template #header><i class="fas fa-fire"></i>{{ $t('title') }}</template>
+		<template #func><button :title="$t('title')" @click="fetch"><i class="fas fa-sync"></i></button></template>
 
 		<div class="mkw-trends--body">
 			<p class="fetching" v-if="fetching"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}<mk-ellipsis/></p>

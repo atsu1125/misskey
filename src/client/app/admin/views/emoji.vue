@@ -1,7 +1,7 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa icon="plus"/> {{ $t('add-emoji.title') }}</template>
+		<template #title><i class="fas fa-plus"></i> {{ $t('add-emoji.title') }}</template>
 		<section class="fit-top">
 			<ui-horizon-group inputs>
 				<ui-input v-model="name">
@@ -17,7 +17,7 @@
 				</ui-input>
 			</ui-horizon-group>
 			<ui-input v-model="url">
-				<template #icon><fa icon="link"/></template>
+				<template #icon><i class="fas fa-link"></i></template>
 				<span>{{ $t('add-emoji.url') }}</span>
 			</ui-input>
 			<ui-info>{{ $t('add-emoji.info') }}</ui-info>
@@ -51,7 +51,7 @@
 					</ui-input>
 				</ui-horizon-group>
 				<ui-input v-model="emoji.url">
-					<template #icon><fa icon="link"/></template>
+					<template #icon><i class="fas fa-link"></i></template>
 					<span>{{ $t('add-emoji.url') }}</span>
 				</ui-input>
 				<ui-horizon-group class="fit-bottom">

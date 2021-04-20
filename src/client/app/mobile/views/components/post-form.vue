@@ -2,7 +2,7 @@
 <div class="mk-post-form">
 	<div class="form">
 		<header v-if="!inside">
-			<button class="cancel" @click="cancel"><fa icon="times"/></button>
+			<button class="cancel" @click="cancel"><i class="fas fa-times"></i></button>
 			<div>
 				<span v-if="!renote || quote" class="text-count" :class="{ over: trimmedLength(text) > maxNoteTextLength }">{{ maxNoteTextLength - trimmedLength(text) }}</span>
 				<span class="geo" v-if="geo"><fa icon="map-marker-alt"/></span>
@@ -35,8 +35,8 @@
 			<mk-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
 			<mk-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
 			<footer v-if="!renote || quote">
-				<button class="upload" @click="chooseFile"><fa icon="upload"/></button>
-				<button class="drive" @click="chooseFileFromDrive"><fa icon="cloud"/></button>
+				<button class="upload" @click="chooseFile"><i class="fas fa-upload"></i></button>
+				<button class="drive" @click="chooseFileFromDrive"><i class="fas fa-cloud"></i></button>
 				<button class="jpeg" :class="{ enabled: useJpeg }" @click="useJpeg = !useJpeg"><fa :icon="faShareSquare"/></button>
 				<button class="kao" @click="kao"><fa :icon="faFish"/></button>
 				<button v-if="!inside" class="poll" :class="{ enabled: !!poll }" @click="poll = !poll"><fa icon="chart-pie"/></button>

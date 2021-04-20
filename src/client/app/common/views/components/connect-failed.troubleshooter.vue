@@ -1,26 +1,26 @@
 <template>
 <div class="troubleshooter">
 	<div class="body">
-		<h1><fa icon="wrench"/>{{ $t('title') }}</h1>
+		<h1><i class="fas fa-wrench"></i>{{ $t('title') }}</h1>
 		<div>
 			<p :data-wip="network == null">
 				<template v-if="network != null">
-					<template v-if="network"><fa icon="check"/></template>
-					<template v-if="!network"><fa icon="times"/></template>
+					<template v-if="network"><i class="fas fa-check"></i></template>
+					<template v-if="!network"><i class="fas fa-times"></i></template>
 				</template>
 				{{ network == null ? this.$t('checking-network') : this.$t('network') }}<mk-ellipsis v-if="network == null"/>
 			</p>
 			<p v-if="network == true" :data-wip="internet == null">
 				<template v-if="internet != null">
-					<template v-if="internet"><fa icon="check"/></template>
-					<template v-if="!internet"><fa icon="times"/></template>
+					<template v-if="internet"><i class="fas fa-check"></i></template>
+					<template v-if="!internet"><i class="fas fa-times"></i></template>
 				</template>
 				{{ internet == null ? this.$t('checking-internet') : this.$t('internet') }}<mk-ellipsis v-if="internet == null"/>
 			</p>
 			<p v-if="internet == true" :data-wip="server == null">
 				<template v-if="server != null">
-					<template v-if="server"><fa icon="check"/></template>
-					<template v-if="!server"><fa icon="times"/></template>
+					<template v-if="server"><i class="fas fa-check"></i></template>
+					<template v-if="!server"><i class="fas fa-times"></i></template>
 				</template>
 				{{ server == null ? this.$t('checking-server') : this.$t('server') }}<mk-ellipsis v-if="server == null"/>
 			</p>

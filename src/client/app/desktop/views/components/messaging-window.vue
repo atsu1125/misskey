@@ -1,6 +1,6 @@
 <template>
 <mk-window ref="window" width="500px" height="560px" @closed="destroyDom">
-	<template #header :class="$style.header"><fa icon="comments"/>{{ $t('@.messaging') }}</template>
+	<template #header :class="$style.header"><i class="fas fa-comments"></i>{{ $t('@.messaging') }}</template>
 	<x-messaging :class="$style.content" @navigate="navigate"/>
 </mk-window>
 </template>

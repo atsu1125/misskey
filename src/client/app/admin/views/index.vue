@@ -1,7 +1,7 @@
 <template>
 <div class="mk-admin" :class="{ isMobile }">
 	<header v-show="isMobile">
-		<button class="nav" @click="navOpend = true"><fa icon="bars"/></button>
+		<button class="nav" @click="navOpend = true"><i class="fas fa-bars"></i></button>
 		<span>MisskeyMyAdmin</span>
 	</header>
 	<div class="nav-backdrop"

@@ -1,15 +1,15 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa icon="cog"/> {{ $t('instance') }}</template>
+		<template #title><i class="fas fa-cog"></i> {{ $t('instance') }}</template>
 		<section class="fit-top fit-bottom">
 			<ui-input :value="host" readonly>{{ $t('host') }}</ui-input>
 			<ui-input v-model="name">{{ $t('instance-name') }}</ui-input>
 			<ui-textarea v-model="description">{{ $t('instance-description') }}</ui-textarea>
-			<ui-input v-model="mascotImageUrl"><template #icon><fa icon="link"/></template>{{ $t('logo-url') }}</ui-input>
-			<ui-input v-model="bannerUrl"><template #icon><fa icon="link"/></template>{{ $t('banner-url') }}</ui-input>
-			<ui-input v-model="errorImageUrl"><template #icon><fa icon="link"/></template>{{ $t('error-image-url') }}</ui-input>
-			<ui-input v-model="languages"><template #icon><fa icon="language"/></template>{{ $t('languages') }}<template #desc>{{ $t('languages-desc') }}</template></ui-input>
+			<ui-input v-model="mascotImageUrl"><template #icon><i class="fas fa-link"></i></template>{{ $t('logo-url') }}</ui-input>
+			<ui-input v-model="bannerUrl"><template #icon><i class="fas fa-link"></i></template>{{ $t('banner-url') }}</ui-input>
+			<ui-input v-model="errorImageUrl"><template #icon><i class="fas fa-link"></i></template>{{ $t('error-image-url') }}</ui-input>
+			<ui-input v-model="languages"><template #icon><i class="fas fa-language"></i></template>{{ $t('languages') }}<template #desc>{{ $t('languages-desc') }}</template></ui-input>
 		</section>
 		<section class="fit-bottom">
 			<header><fa :icon="faHeadset"/> {{ $t('maintainer-config') }}</header>
@@ -26,7 +26,7 @@
 			<ui-switch v-model="showReplayInPublicTimeline">{{ $t('showReplayInPublicTimeline') }}</ui-switch>
 		</section>
 		<section class="fit-bottom">
-			<header><fa icon="cloud"/> {{ $t('drive-config') }}</header>
+			<header><i class="fas fa-cloud"></i> {{ $t('drive-config') }}</header>
 			<ui-switch v-model="cacheRemoteFiles">{{ $t('cache-remote-files') }}<template #desc>{{ $t('cache-remote-files-desc') }}</template></ui-switch>
 			<ui-input v-model="localDriveCapacityMb" type="number">{{ $t('local-drive-capacity-mb') }}<template #suffix>MB</template><template #desc>{{ $t('mb') }}</template></ui-input>
 			<ui-input v-model="remoteDriveCapacityMb" type="number" :disabled="!cacheRemoteFiles">{{ $t('remote-drive-capacity-mb') }}<template #suffix>MB</template><template #desc>{{ $t('mb') }}</template></ui-input>
@@ -36,8 +36,8 @@
 			<ui-switch v-model="enableRecaptcha">{{ $t('enable-recaptcha') }}</ui-switch>
 			<ui-info>{{ $t('recaptcha-info') }}</ui-info>
 			<ui-horizon-group inputs>
-				<ui-input v-model="recaptchaSiteKey" :disabled="!enableRecaptcha"><template #icon><fa icon="key"/></template>{{ $t('recaptcha-site-key') }}</ui-input>
-				<ui-input v-model="recaptchaSecretKey" :disabled="!enableRecaptcha"><template #icon><fa icon="key"/></template>{{ $t('recaptcha-secret-key') }}</ui-input>
+				<ui-input v-model="recaptchaSiteKey" :disabled="!enableRecaptcha"><template #icon><i class="fas fa-key"></i></template>{{ $t('recaptcha-site-key') }}</ui-input>
+				<ui-input v-model="recaptchaSecretKey" :disabled="!enableRecaptcha"><template #icon><i class="fas fa-key"></i></template>{{ $t('recaptcha-secret-key') }}</ui-input>
 			</ui-horizon-group>
 		</section>
 		<section>
@@ -67,8 +67,8 @@
 			<ui-switch v-model="enableServiceWorker">{{ $t('enable-serviceworker') }}<template #desc>{{ $t('serviceworker-info') }}</template></ui-switch>
 			<ui-info>{{ $t('vapid-info') }}<br><code>npx web-push generate-vapid-keys<br>OR<br>docker-compose run --rm web npx web-push generate-vapid-keys # Docker</code></ui-info>
 			<ui-horizon-group inputs class="fit-bottom">
-				<ui-input v-model="swPublicKey" :disabled="!enableServiceWorker"><template #icon><fa icon="key"/></template>{{ $t('vapid-publickey') }}</ui-input>
-				<ui-input v-model="swPrivateKey" :disabled="!enableServiceWorker"><template #icon><fa icon="key"/></template>{{ $t('vapid-privatekey') }}</ui-input>
+				<ui-input v-model="swPublicKey" :disabled="!enableServiceWorker"><template #icon><i class="fas fa-key"></i></template>{{ $t('vapid-publickey') }}</ui-input>
+				<ui-input v-model="swPrivateKey" :disabled="!enableServiceWorker"><template #icon><i class="fas fa-key"></i></template>{{ $t('vapid-privatekey') }}</ui-input>
 			</ui-horizon-group>
 		</section>
 		<section>
@@ -93,8 +93,8 @@
 		<section>
 			<ui-switch v-model="enableTwitterIntegration">{{ $t('enable-twitter-integration') }}</ui-switch>
 			<ui-horizon-group>
-				<ui-input v-model="twitterConsumerKey" :disabled="!enableTwitterIntegration"><template #icon><fa icon="key"/></template>{{ $t('twitter-integration-consumer-key') }}</ui-input>
-				<ui-input v-model="twitterConsumerSecret" :disabled="!enableTwitterIntegration"><template #icon><fa icon="key"/></template>{{ $t('twitter-integration-consumer-secret') }}</ui-input>
+				<ui-input v-model="twitterConsumerKey" :disabled="!enableTwitterIntegration"><template #icon><i class="fas fa-key"></i></template>{{ $t('twitter-integration-consumer-key') }}</ui-input>
+				<ui-input v-model="twitterConsumerSecret" :disabled="!enableTwitterIntegration"><template #icon><i class="fas fa-key"></i></template>{{ $t('twitter-integration-consumer-secret') }}</ui-input>
 			</ui-horizon-group>
 			<ui-info>{{ $t('twitter-integration-info', { url: `${url}/api/tw/cb` }) }}</ui-info>
 			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
@@ -106,8 +106,8 @@
 		<section>
 			<ui-switch v-model="enableGithubIntegration">{{ $t('enable-github-integration') }}</ui-switch>
 			<ui-horizon-group>
-				<ui-input v-model="githubClientId" :disabled="!enableGithubIntegration"><template #icon><fa icon="key"/></template>{{ $t('github-integration-client-id') }}</ui-input>
-				<ui-input v-model="githubClientSecret" :disabled="!enableGithubIntegration"><template #icon><fa icon="key"/></template>{{ $t('github-integration-client-secret') }}</ui-input>
+				<ui-input v-model="githubClientId" :disabled="!enableGithubIntegration"><template #icon><i class="fas fa-key"></i></template>{{ $t('github-integration-client-id') }}</ui-input>
+				<ui-input v-model="githubClientSecret" :disabled="!enableGithubIntegration"><template #icon><i class="fas fa-key"></i></template>{{ $t('github-integration-client-secret') }}</ui-input>
 			</ui-horizon-group>
 			<ui-info>{{ $t('github-integration-info', { url: `${url}/api/gh/cb` }) }}</ui-info>
 			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
@@ -119,8 +119,8 @@
 		<section>
 			<ui-switch v-model="enableDiscordIntegration">{{ $t('enable-discord-integration') }}</ui-switch>
 			<ui-horizon-group>
-				<ui-input v-model="discordClientId" :disabled="!enableDiscordIntegration"><template #icon><fa icon="key"/></template>{{ $t('discord-integration-client-id') }}</ui-input>
-				<ui-input v-model="discordClientSecret" :disabled="!enableDiscordIntegration"><template #icon><fa icon="key"/></template>{{ $t('discord-integration-client-secret') }}</ui-input>
+				<ui-input v-model="discordClientId" :disabled="!enableDiscordIntegration"><template #icon><i class="fas fa-key"></i></template>{{ $t('discord-integration-client-id') }}</ui-input>
+				<ui-input v-model="discordClientSecret" :disabled="!enableDiscordIntegration"><template #icon><i class="fas fa-key"></i></template>{{ $t('discord-integration-client-secret') }}</ui-input>
 			</ui-horizon-group>
 			<ui-info>{{ $t('discord-integration-info', { url: `${url}/api/dc/cb` }) }}</ui-info>
 			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>

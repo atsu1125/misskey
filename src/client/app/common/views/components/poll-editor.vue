@@ -7,14 +7,14 @@
 		<li v-for="(choice, i) in choices" :key="i">
 			<input :value="choice" @input="onInput(i, $event)" @keydown="onKeydown" :placeholder="$t('choice-n').replace('{}', i + 1)">
 			<button @click="remove(i)" :title="$t('remove')">
-				<fa icon="times"/>
+				<i class="fas fa-times"></i>
 			</button>
 		</li>
 	</ul>
 	<button class="add" v-if="choices.length < 20" @click="add">{{ $t('add') }}</button>
 	<button class="add" v-else disabled>{{ $t('no-more') }}</button>
 	<button class="destroy" @click="destroy" :title="$t('destroy')">
-		<fa icon="times"/>
+		<i class="fas fa-times"></i>
 	</button>
 	<section>
 		<ui-switch v-model="multiple">{{ $t('multiple') }}</ui-switch>

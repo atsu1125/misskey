@@ -3,7 +3,7 @@
 	<div class="banner" :style="{ backgroundImage: banner ? `url(${banner})` : null }"></div>
 
 	<button @click="dark">
-		<template v-if="$store.state.device.darkmode"><fa icon="moon"/></template>
+		<template v-if="$store.state.device.darkmode"><i class="fas fa-moon"></i></template>
 		<template v-else><fa :icon="['far', 'moon']"/></template>
 	</button>
 
@@ -17,7 +17,7 @@
 					<div class="info">
 						<span><b>{{ host }}</b> - <span v-html="$t('powered-by-misskey')"></span></span>
 						<span class="stats" v-if="stats">
-							<span><fa icon="user"/> {{ stats.originalUsersCount | number }}</span>
+							<span><i class="fas fa-user"></i> {{ stats.originalUsersCount | number }}</span>
 							<span><fa icon="pencil-alt"/> {{ stats.originalNotesCount | number }}</span>
 						</span>
 					</div>

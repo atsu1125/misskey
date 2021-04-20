@@ -34,7 +34,7 @@
 				<span class="state">{{ g.isEnded ? $t('game-state.ended') : $t('game-state.playing') }}</span>
 				<mk-time :time="g.createdAt" />
 			</a>
-			<a class="re" @click="matchWith(getOtherUser(g))"><fa icon="gamepad"/></a>
+			<a class="re" @click="matchWith(getOtherUser(g))"><i class="fas fa-gamepad"></i></a>
 		</div>
 	</section>
 	<section v-if="games.length > 0">

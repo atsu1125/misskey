@@ -12,7 +12,7 @@
 						<i><fa :icon="['far', 'window-restore']"/></i>
 					</button>
 					<button class="close" v-if="canClose" @mousedown.stop="() => {}" @click="close" :title="$t('close')">
-						<i><fa icon="times"/></i>
+						<i><i class="fas fa-times"></i></i>
 					</button>
 				</div>
 			</header>

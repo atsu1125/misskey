@@ -15,7 +15,7 @@
 			</ui-horizon-group>
 		</section>
 		<section>
-			<ui-button @click="add"><fa icon="plus"/> {{ $t('add') }}</ui-button>
+			<ui-button @click="add"><i class="fas fa-plus"></i> {{ $t('add') }}</ui-button>
 		</section>
 	</ui-card>
 </div>

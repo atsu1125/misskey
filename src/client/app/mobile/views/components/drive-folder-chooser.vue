@@ -3,8 +3,8 @@
 	<div class="body">
 		<header>
 			<h1>{{ $t('select-folder') }}</h1>
-			<button class="close" @click="cancel"><fa icon="times"/></button>
-			<button class="ok" @click="ok"><fa icon="check"/></button>
+			<button class="close" @click="cancel"><i class="fas fa-times"></i></button>
+			<button class="ok" @click="ok"><i class="fas fa-check"></i></button>
 		</header>
 		<x-drive ref="browser"
 			select-folder

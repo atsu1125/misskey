@@ -3,7 +3,7 @@
 	<div class="body">
 		<span v-if="note.isHidden" style="opacity: 0.5">{{ $t('private') }}</span>
 		<span v-if="note.deletedAt" style="opacity: 0.5">{{ $t('deleted') }}</span>
-		<a class="reply" v-if="note.replyId"><fa icon="reply"/></a>
+		<a class="reply" v-if="note.replyId"><i class="fas fa-reply"></i></a>
 		<mfm v-if="note.text" :text="note.text" :author="note.user" :i="$store.state.i" :custom-emojis="note.emojis" :hashtags="note.tags" :basic="!!note.notHaveDecorationMfm"/>
 		<router-link class="rp" v-if="note.renoteId" :to="`/notes/${note.renoteId}`">RN: ...</router-link>
 	</div>

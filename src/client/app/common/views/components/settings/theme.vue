@@ -1,6 +1,6 @@
 <template>
 <ui-card>
-	<template #title><fa icon="palette"/> {{ $t('theme') }}</template>
+	<template #title><i class="fas fa-palette"></i> {{ $t('theme') }}</template>
 	<section class="nicnklzforebnpfgasiypmpdaaglujqm fit-top">
 		<div class="dark">
 			<div class="toggleWrapper">
@@ -46,7 +46,7 @@
 		</label>
 
 		<details class="creator">
-			<summary><fa icon="palette"/> {{ $t('create-a-theme') }}</summary>
+			<summary><i class="fas fa-palette"></i> {{ $t('create-a-theme') }}</summary>
 			<div>
 				<span>{{ $t('base-theme') }}:</span>
 				<ui-radio v-model="myThemeBase" value="light">{{ $t('base-theme-light') }}</ui-radio>
@@ -74,19 +74,19 @@
 					<color-picker v-model="myThemeText" style="width: 180px"/>
 				</div>
 			</div>
-			<ui-button @click="preview()"><fa icon="eye"/> {{ $t('preview-created-theme') }}</ui-button>
+			<ui-button @click="preview()"><i class="fas fa-eye"></i> {{ $t('preview-created-theme') }}</ui-button>
 			<ui-button primary @click="gen()"><fa :icon="['far', 'save']"/> {{ $t('save-created-theme') }}</ui-button>
 		</details>
 
 		<details>
-			<summary><fa icon="download"/> {{ $t('install-a-theme') }}</summary>
+			<summary><i class="fas fa-download"></i> {{ $t('install-a-theme') }}</summary>
 			<ui-button @click="import_()"><fa icon="file-import"/> {{ $t('import') }}</ui-button>
 			<input ref="file" type="file" accept=".misskeytheme" style="display:none;" @change="onUpdateImportFile"/>
 			<p>{{ $t('import-by-code') }}:</p>
 			<ui-textarea v-model="installThemeCode">
 				<span>{{ $t('theme-code') }}</span>
 			</ui-textarea>
-			<ui-button @click="() => install(this.installThemeCode)"><fa icon="check"/> {{ $t('install') }}</ui-button>
+			<ui-button @click="() => install(this.installThemeCode)"><i class="fas fa-check"></i> {{ $t('install') }}</ui-button>
 		</details>
 
 		<details>
@@ -112,7 +112,7 @@
 				<ui-textarea readonly tall :value="selectedThemeCode">
 					<span>{{ $t('theme-code') }}</span>
 				</ui-textarea>
-				<ui-button @click="export_()" link :download="`${selectedTheme.name}.misskeytheme`" ref="export"><fa icon="box"/> {{ $t('export') }}</ui-button>
+				<ui-button @click="export_()" link :download="`${selectedTheme.name}.misskeytheme`" ref="export"><i class="fas fa-box"></i> {{ $t('export') }}</ui-button>
 				<ui-button @click="uninstall()" v-if="!builtinThemes.some(t => t.id == selectedTheme.id)"><fa :icon="['far', 'trash-alt']"/> {{ $t('uninstall') }}</ui-button>
 			</template>
 		</details>

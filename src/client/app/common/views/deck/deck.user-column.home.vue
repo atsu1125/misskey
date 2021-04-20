@@ -2,7 +2,7 @@
 <div>
 	<!-- ピン留め投稿 -->
 	<ui-container v-if="user.pinnedNotes && user.pinnedNotes.length > 0" :body-togglable="true">
-		<template #header><fa icon="thumbtack"/> {{ $t('pinned-notes') }}</template>
+		<template #header><i class="fas fa-thumbtack"></i> {{ $t('pinned-notes') }}</template>
 		<div>
 			<mk-note v-for="n in user.pinnedNotes" :key="n.id" :note="n"/>
 		</div>

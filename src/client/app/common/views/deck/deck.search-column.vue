@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<fa icon="search"/><span>{{ q }}</span>
+		<i class="fas fa-search"></i><span>{{ q }}</span>
 	</template>
 
 	<div>

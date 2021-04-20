@@ -2,8 +2,8 @@
 <div class="mk-selectdrive">
 	<header>
 		<h1>{{ $t('select-file') }}<span class="count" v-if="files.length > 0">({{ files.length }})</span></h1>
-		<button class="upload" @click="upload"><fa icon="upload"/></button>
-		<button v-if="multiple" class="ok" @click="ok"><fa icon="check"/></button>
+		<button class="upload" @click="upload"><i class="fas fa-upload"></i></button>
+		<button v-if="multiple" class="ok" @click="ok"><i class="fas fa-check"></i></button>
 	</header>
 	<x-drive ref="browser" select-file :multiple="multiple" is-naked :top="$store.state.uiHeaderHeight"/>
 </div>

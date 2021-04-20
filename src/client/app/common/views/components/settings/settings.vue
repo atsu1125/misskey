@@ -9,7 +9,7 @@
 		<x-theme/>
 
 		<ui-card>
-			<template #title><fa icon="desktop"/> {{ $t('@._settings.appearance') }}</template>
+			<template #title><i class="fas fa-desktop"></i> {{ $t('@._settings.appearance') }}</template>
 
 			<section v-if="!$root.isMobile">
 				<ui-switch v-model="showPostFormOnTopOfTl">{{ $t('@._settings.post-form-on-timeline') }}</ui-switch>
@@ -271,7 +271,7 @@
 
 	<template v-if="page == null || page == 'hashtags'">
 		<ui-card>
-			<template #title><fa icon="hashtag"/> {{ $t('@._settings.tags') }}</template>
+			<template #title><i class="fas fa-hashtag"></i> {{ $t('@._settings.tags') }}</template>
 			<section>
 				<x-tags/>
 			</section>
@@ -343,7 +343,7 @@
 		</ui-card>
 
 		<ui-card>
-			<template #title><fa icon="cogs"/> {{ $t('@._settings.advanced-settings') }}</template>
+			<template #title><i class="fas fa-cogs"></i> {{ $t('@._settings.advanced-settings') }}</template>
 			<section>
 				<ui-switch v-model="debug" v-if="isAdvanced">
 					{{ $t('@._settings.debug-mode') }}<template #desc>{{ $t('@._settings.debug-mode-desc') }}</template>

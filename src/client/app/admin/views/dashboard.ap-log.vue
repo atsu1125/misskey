@@ -5,8 +5,8 @@
 			<tr>
 				<th><fa :icon="faExchangeAlt"/> In/Out</th>
 				<th><fa :icon="faBolt"/> Activity</th>
-				<th><fa icon="server"/> Host</th>
-				<th><fa icon="user"/> Actor</th>
+				<th><i class="fas fa-server"></i> Host</th>
+				<th><i class="fas fa-user"></i> Actor</th>
 			</tr>
 		</thead>
 		<tbody>

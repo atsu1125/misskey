@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header v-if="!fetching"><fa icon="list"/>{{ list.title }}</template>
+	<template #header v-if="!fetching"><i class="fas fa-list"></i>{{ list.title }}</template>
 
 	<main v-if="!fetching">
 		<x-editor :listId="list.id"/>

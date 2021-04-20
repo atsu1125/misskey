@@ -20,7 +20,7 @@
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div>
 			<header>
-				<fa icon="retweet"/>
+				<i class="fas fa-retweet"></i>
 				<router-link class="name" :to="notification.user | userPage"><mk-user-name :user="notification.user"/></router-link>
 				<mk-time :time="notification.createdAt"/>
 			</header>

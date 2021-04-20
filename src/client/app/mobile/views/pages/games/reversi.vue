@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa icon="gamepad"/></span>{{ $t('reversi') }}</template>
+	<template #header><span style="margin-right:4px;"><i class="fas fa-gamepad"></i></span>{{ $t('reversi') }}</template>
 	<x-reversi :game-id="$route.params.game" @nav="nav" :self-nav="false"/>
 </mk-ui>
 </template>

@@ -1,6 +1,6 @@
 <template>
 <ui-card>
-	<template #title><fa icon="ban"/> {{ $t('mute-and-block') }}</template>
+	<template #title><i class="fas fa-ban"></i> {{ $t('mute-and-block') }}</template>
 	<section>
 		<header>{{ $t('word-mute') }}</header>
 		<ui-textarea v-model="mutedWords">
@@ -16,7 +16,7 @@
 			<div class="user" v-for="m in mute" :key="m.id">
 				<x-user :user="m.mutee" :expiresAt="m.expiresAt"/>
 				<span @click="unmute(m.mutee)">
-					<fa icon="times"/>
+					<i class="fas fa-times"></i>
 				</span>
 			</div>
 			<ui-button v-if="this.muteCursor != null" @click="updateMute()">{{ $t('@.load-more') }}</ui-button>
@@ -30,7 +30,7 @@
 			<div class="user" v-for="user in block" :key="user.id">
 				<x-user :user="user"/>
 				<span @click="unblock(user)">
-					<fa icon="times"/>
+					<i class="fas fa-times"></i>
 				</span>
 			</div>
 			<ui-button v-if="this.blockCursor != null" @click="updateBlock()">{{ $t('@.load-more') }}</ui-button>

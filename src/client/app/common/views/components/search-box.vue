@@ -2,7 +2,7 @@
 <form class="serchbox24" @submit.prevent="onSubmit">
 	<div class="line">
 		<input v-model="q" type="search" :placeholder="$t('placeholder')" v-autocomplete="{ model: 'q', noEmoji: true }"/>
-		<button type="submit"><fa icon="search"/></button>
+		<button type="submit"><i class="fas fa-search"></i></button>
 	</div>
 	<div class="result"></div>
 </form>
