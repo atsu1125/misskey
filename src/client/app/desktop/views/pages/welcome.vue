@@ -4,7 +4,7 @@
 
 	<button @click="dark">
 		<template v-if="$store.state.device.darkmode"><i class="fas fa-moon"></i></template>
-		<template v-else><fa :icon="['far', 'moon']"/></template>
+		<template v-else><i class="far fa-moon"></i></template>
 	</button>
 
 	<main>
@@ -18,7 +18,7 @@
 						<span><b>{{ host }}</b> - <span v-html="$t('powered-by-misskey')"></span></span>
 						<span class="stats" v-if="stats">
 							<span><i class="fas fa-user"></i> {{ stats.originalUsersCount | number }}</span>
-							<span><fa icon="pencil-alt"/> {{ stats.originalNotesCount | number }}</span>
+							<span><i class="fas fa-pencil-alt"></i> {{ stats.originalNotesCount | number }}</span>
 						</span>
 					</div>
 
@@ -37,7 +37,7 @@
 			</div>
 
 			<div class="announcements block">
-				<header><fa icon="broadcast-tower"/> {{ $t('announcements') }}</header>
+				<header><i class="fas fa-broadcast-tower"></i> {{ $t('announcements') }}</header>
 				<div v-if="announcements && announcements.length > 0">
 					<div v-for="(announcement, i) in announcements" :key="i">
 						<h1 v-html="announcement.title"></h1>
@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="photos block">
-				<header><fa :icon="['far', 'images']"/> {{ $t('photos') }}</header>
+				<header><i class="far fa-images"></i> {{ $t('photos') }}</header>
 				<div>
 					<div v-for="(photo, i) in photos" :key="i" :style="`background-image: url(${photo.thumbnailUrl})`"></div>
 				</div>
@@ -73,14 +73,14 @@
 				</div>
 
 				<div class="tl block">
-					<header><fa :icon="['far', 'comment-alt']"/> {{ $t('@.featured-notes') }}</header>
+					<header><i class="far fa-comment-alt"></i> {{ $t('@.featured-notes') }}</header>
 					<div>
 						<mk-welcome-timeline class="tl" :max="20"/>
 					</div>
 				</div>
 
 				<div class="info block">
-					<header><fa icon="info-circle"/> {{ $t('info') }}</header>
+					<header><i class="fas fa-info-circle"></i> {{ $t('info') }}</header>
 					<div>
 						<div v-if="meta" class="body">
 							<p>Version: <b>{{ meta.version }}</b></p>

@@ -7,14 +7,14 @@
 	<div class="zubukjlciycdsyynicqrnlsmdwmymzqu" v-if="user">
 		<div class="is-remote" v-if="user.host != null">
 			<details>
-				<summary><fa icon="exclamation-triangle"/> {{ $t('@.is-remote-user') }}</summary>
+				<summary><i class="fas fa-exclamation-triangle"></i> {{ $t('@.is-remote-user') }}</summary>
 				<a :href="user.url || user.uri" rel="nofollow noopener" target="_blank">{{ $t('@.view-on-remote') }}</a>
 			</details>
 		</div>
 		<header :style="bannerStyle">
 			<div>
-				<button class="menu" @click="menu" ref="menu"><fa icon="ellipsis-h"/></button>
-				<button class="listMenu" @click="listMenu" ref="listMenu"><fa :icon="['fas', 'list']"/></button>
+				<button class="menu" @click="menu" ref="menu"><i class="fas fa-ellipsis-h"></i></button>
+				<button class="listMenu" @click="listMenu" ref="listMenu"><i class="fas fa-list"></i></button>
 				<mk-follow-button v-if="$store.getters.isSignedIn && user.id != $store.state.i.id" :user="user" :key="`${user.id}-follow`" class="follow" mini/>
 				<mk-avatar class="avatar" :user="user" :disable-preview="true" :disable-link="true" :key="`${user.id}-avatar`" @click="onAvatarClick()" style="cursor: pointer"/>
 				<router-link class="name" :to="user | userPage()">

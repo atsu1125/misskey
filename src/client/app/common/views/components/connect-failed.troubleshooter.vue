@@ -26,10 +26,10 @@
 			</p>
 		</div>
 		<p v-if="!end">{{ $t('finding') }}<mk-ellipsis/></p>
-		<p v-if="network === false"><b><fa icon="exclamation-triangle"/>{{ $t('no-network') }}</b><br>{{ $t('no-network-desc') }}</p>
-		<p v-if="internet === false"><b><fa icon="exclamation-triangle"/>{{ $t('no-internet') }}</b><br>{{ $t('no-internet-desc') }}</p>
-		<p v-if="server === false"><b><fa icon="exclamation-triangle"/>{{ $t('no-server') }}</b><br>{{ $t('no-server-desc') }}</p>
-		<p v-if="server === true" class="success"><b><fa icon="info-circle"/>{{ $t('success') }}</b><br>{{ $t('success-desc') }}</p>
+		<p v-if="network === false"><b><i class="fas fa-exclamation-triangle"></i>{{ $t('no-network') }}</b><br>{{ $t('no-network-desc') }}</p>
+		<p v-if="internet === false"><b><i class="fas fa-exclamation-triangle"></i>{{ $t('no-internet') }}</b><br>{{ $t('no-internet-desc') }}</p>
+		<p v-if="server === false"><b><i class="fas fa-exclamation-triangle"></i>{{ $t('no-server') }}</b><br>{{ $t('no-server-desc') }}</p>
+		<p v-if="server === true" class="success"><b><i class="fas fa-info-circle"></i>{{ $t('success') }}</b><br>{{ $t('success-desc') }}</p>
 	</div>
 	<footer>
 		<a href="/assets/flush.html">{{ $t('flush') }}</a> | <a href="/assets/version.html">{{ $t('set-version') }}</a>

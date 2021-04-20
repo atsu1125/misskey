@@ -23,9 +23,9 @@
 								<mk-time :time="notification.createdAt"/>
 							</header>
 							<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-								<fa icon="quote-left"/>
+								<i class="fas fa-quote-left"></i>
 									<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-								<fa icon="quote-right"/>
+								<i class="fas fa-quote-right"></i>
 							</router-link>
 						</div>
 					</template>
@@ -43,7 +43,7 @@
 							<router-link v-if="notification.note.renote" class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note.renote)">
 								<fa icon="quote-left" class="icon"/>
 									<mfm :text="getNoteSummary(notification.note.renote)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.renote.emojis"/>
-								<fa icon="quote-right"/>
+								<i class="fas fa-quote-right"></i>
 							</router-link>
 						</div>
 					</template>
@@ -133,9 +133,9 @@
 								<mk-time :time="notification.createdAt"/>
 							</header>
 							<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-								<fa icon="quote-left"/>
+								<i class="fas fa-quote-left"></i>
 									<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-								<fa icon="quote-right"/>
+								<i class="fas fa-quote-right"></i>
 							</router-link>
 						</div>
 					</template>
@@ -149,9 +149,9 @@
 								<mk-time :time="notification.createdAt"/>
 							</header>
 							<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-								<fa icon="quote-left"/>
+								<i class="fas fa-quote-left"></i>
 									<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-								<fa icon="quote-right"/>
+								<i class="fas fa-quote-right"></i>
 							</router-link>
 						</div>
 					</template>
@@ -174,8 +174,8 @@
 				</div>
 
 				<p class="date" v-if="i != notifications.length - 1 && notification && _notifications[i + 1] && notification._date != _notifications[i + 1]._date" :key="notification.id + '-time'">
-					<span><fa icon="angle-up"/>{{ notification._datetext }}</span>
-					<span><fa icon="angle-down"/>{{ _notifications[i + 1]._datetext }}</span>
+					<span><i class="fas fa-angle-up"></i>{{ notification._datetext }}</span>
+					<span><i class="fas fa-angle-down"></i>{{ _notifications[i + 1]._datetext }}</span>
 				</p>
 			</template>
 		</component>

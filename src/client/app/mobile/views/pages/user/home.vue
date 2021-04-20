@@ -2,7 +2,7 @@
 <div class="wojmldye">
 	<mk-note-detail class="note" v-for="n in user.pinnedNotes" :key="n.id" :note="n" :compact="true"/>
 	<ui-container :body-togglable="true">
-		<template #header><fa :icon="['far', 'comments']"/>{{ $t('recent-notes') }}</template>
+		<template #header><i class="far fa-comments"></i>{{ $t('recent-notes') }}</template>
 		<div>
 			<x-notes :user="user"/>
 		</div>
@@ -14,7 +14,7 @@
 		</div>
 	</ui-container>
 	<ui-container :body-togglable="true">
-		<template #header><fa icon="chart-bar"/>{{ $t('activity') }}</template>
+		<template #header><i class="fas fa-chart-bar"></i>{{ $t('activity') }}</template>
 		<div style="padding:8px; color:black">
 			<x-activity :user="user"/>
 		</div>

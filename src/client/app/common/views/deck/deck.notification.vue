@@ -11,9 +11,9 @@
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>
@@ -29,9 +29,9 @@
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link v-if="notification.note.renote" class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note.renote)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note.renote)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.renote.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>
@@ -73,9 +73,9 @@
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>
@@ -89,9 +89,9 @@
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>

@@ -1,9 +1,9 @@
 <template>
 <div class="mk-calendar" :data-melt="design == 4 || design == 5">
 	<template v-if="design == 0 || design == 1">
-		<button @click="prev" :title="$t('prev')"><fa icon="chevron-circle-left"/></button>
+		<button @click="prev" :title="$t('prev')"><i class="fas fa-chevron-circle-left"></i></button>
 		<p class="title">{{ $t('title', { year, month }) }}</p>
-		<button @click="next" :title="$t('next')"><fa icon="chevron-circle-right"/></button>
+		<button @click="next" :title="$t('next')"><i class="fas fa-chevron-circle-right"></i></button>
 	</template>
 
 	<div class="calendar">

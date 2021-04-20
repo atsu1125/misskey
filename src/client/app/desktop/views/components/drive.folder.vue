@@ -16,8 +16,8 @@
 	:title="title"
 >
 	<p class="name">
-		<template v-if="hover"><fa :icon="['far', 'folder-open']" fixed-width/></template>
-		<template v-if="!hover"><fa :icon="['far', 'folder']" fixed-width/></template>
+		<template v-if="hover"><i class="far fa-folder-open fa-fw"></i></template>
+		<template v-if="!hover"><i class="far fa-folder fa-fw"></i></template>
 		{{ folder.name }}
 	</p>
 </div>

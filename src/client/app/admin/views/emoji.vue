@@ -55,8 +55,8 @@
 					<span>{{ $t('add-emoji.url') }}</span>
 				</ui-input>
 				<ui-horizon-group class="fit-bottom">
-					<ui-button @click="updateEmoji(emoji)"><fa :icon="['far', 'save']"/> {{ $t('emojis.update') }}</ui-button>
-					<ui-button @click="removeEmoji(emoji)"><fa :icon="['far', 'trash-alt']"/> {{ $t('emojis.remove') }}</ui-button>
+					<ui-button @click="updateEmoji(emoji)"><i class="far fa-save"></i> {{ $t('emojis.update') }}</ui-button>
+					<ui-button @click="removeEmoji(emoji)"><i class="far fa-trash-alt"></i> {{ $t('emojis.remove') }}</ui-button>
 				</ui-horizon-group>
 			</div>
 		</section>

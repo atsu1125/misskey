@@ -5,8 +5,8 @@
 		<component :is="src == 'list' ? 'mk-user-list-timeline' : 'x-core'" ref="tl" v-bind="options">
 			<header class="zahtxcqi">
 				<div :data-active="src == 'home'" @click="src = 'home'"><i class="fas fa-home"></i> {{ $t('home') }}</div>
-				<div :data-active="src == 'local'" @click="src = 'local'" v-if="enableLocalTimeline"><fa :icon="['far', 'comments']"/> {{ $t('local') }}</div>
-				<div :data-active="src == 'hybrid'" @click="src = 'hybrid'" v-if="enableLocalTimeline" :title="$t('hybrid-desc')"><fa icon="share-alt"/> {{ $t('hybrid') }}</div>
+				<div :data-active="src == 'local'" @click="src = 'local'" v-if="enableLocalTimeline"><i class="far fa-comments"></i> {{ $t('local') }}</div>
+				<div :data-active="src == 'hybrid'" @click="src = 'hybrid'" v-if="enableLocalTimeline" :title="$t('hybrid-desc')"><i class="fas fa-share-alt"></i> {{ $t('hybrid') }}</div>
 				<div :data-active="src == 'global'" @click="src = 'global'" v-if="enableGlobalTimeline"><i class="fas fa-globe"></i> {{ $t('global') }}</div>
 				<div :data-active="src == 'tag'" @click="src = 'tag'" v-if="tagTl"><i class="fas fa-hashtag"></i> {{ tagTl.title }}</div>
 				<div :data-active="src == 'list'" @click="src = 'list'" v-if="list"><i class="fas fa-list"></i> {{ list.title }}</div>
@@ -14,7 +14,7 @@
 					<button :data-active="src == 'hot'" @click="src = 'hot'" :title="$t('reacted')"><fa :icon="faThumbsUp"/></button>
 					<button :data-active="src == 'locao'" @click="src = 'locao'" :title="$t('locao')" v-if="enableLocalTimeline"><i class="fas fa-heart"></i></button>
 					<button :data-active="src == 'mentions'" @click="src = 'mentions'" :title="$t('mentions')"><i class="fas fa-at"></i><i class="indicator" v-if="$store.state.i.hasUnreadMentions"><i class="fas fa-circle"></i></i></button>
-					<button :data-active="src == 'messages'" @click="src = 'messages'" :title="$t('messages')"><fa :icon="['far', 'envelope']"/><i class="indicator" v-if="$store.state.i.hasUnreadSpecifiedNotes"><i class="fas fa-circle"></i></i></button>
+					<button :data-active="src == 'messages'" @click="src = 'messages'" :title="$t('messages')"><i class="far fa-envelope"></i><i class="indicator" v-if="$store.state.i.hasUnreadSpecifiedNotes"><i class="fas fa-circle"></i></i></button>
 					<button @click="chooseTag" :title="$t('hashtag')" ref="tagButton"><i class="fas fa-hashtag"></i></button>
 					<button @click="chooseList" :title="$t('list')" ref="listButton"><i class="fas fa-list"></i></button>
 				</div>

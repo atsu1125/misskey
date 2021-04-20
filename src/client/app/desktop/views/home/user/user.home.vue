@@ -9,7 +9,7 @@
 		<ui-container :body-togglable="true"
 			:expanded="$store.state.device.expandUsersActivity"
 			@toggle="expanded => $store.commit('device/set', { key: 'expandUsersActivity', value: expanded })">
-			<template #header><fa icon="chart-bar"/>Activity</template>
+			<template #header><i class="fas fa-chart-bar"></i>Activity</template>
 			<x-activity :user="user" :limit="35" style="padding: 16px;"/>
 		</ui-container>
 	</div>

@@ -23,7 +23,7 @@
 		</div>
 		<div class="stats" v-if="stats">
 			<span><i class="fas fa-user"></i> {{ stats.originalUsersCount | number }}</span>
-			<span><fa icon="pencil-alt"/> {{ stats.originalNotesCount | number }}</span>
+			<span><i class="fas fa-pencil-alt"></i> {{ stats.originalNotesCount | number }}</span>
 		</div>
 		<div class="announcements" v-if="announcements && announcements.length > 0">
 			<article v-for="(announcement, i) in announcements" :key="i">

@@ -1,7 +1,7 @@
 <template>
 <div>
 	<ui-container :show-header="props.design == 0">
-		<template #header><fa icon="pencil-alt"/>{{ $t('title') }}</template>
+		<template #header><i class="fas fa-pencil-alt"></i>{{ $t('title') }}</template>
 
 		<div class="lhcuptdmcdkfwmipgazeawoiuxpzaclc-body"
 			@dragover.stop="onDragover"
@@ -18,7 +18,7 @@
 					v-autocomplete="{ model: 'text' }"
 				></textarea>
 				<button class="emoji" @click="emoji" ref="emoji" v-if="!$root.isMobile">
-					<fa :icon="['far', 'laugh']"/>
+					<i class="far fa-laugh"></i>
 				</button>
 			</div>
 			<x-post-form-attaches class="files" :files="files" :detachMediaFn="detachMedia"/>

@@ -6,7 +6,7 @@
 		<button @click="setVisibility" class="visibility" ref="visibilityButton">
 			<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
 		</button>
-		<button class="cw" title="Hide" @click="useCw = !useCw" :class="{ useCW: this.useCw }"><fa :icon="['far', 'eye-slash']"/></button>
+		<button class="cw" title="Hide" @click="useCw = !useCw" :class="{ useCW: this.useCw }"><i class="far fa-eye-slash"></i></button>
 		<ui-input v-if="useCw" ref="cw" v-model="cw" style="margin: 0"/>
 	</footer>
 </div>

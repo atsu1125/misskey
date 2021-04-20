@@ -9,7 +9,7 @@
 				<h1><slot name="header"></slot></h1>
 				<div>
 					<button class="popout" v-if="popoutUrl" @mousedown.stop="() => {}" @click="popout" :title="$t('popout')">
-						<i><fa :icon="['far', 'window-restore']"/></i>
+						<i><i class="far fa-window-restore"></i></i>
 					</button>
 					<button class="close" v-if="canClose" @mousedown.stop="() => {}" @click="close" :title="$t('close')">
 						<i><i class="fas fa-times"></i></i>

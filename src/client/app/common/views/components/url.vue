@@ -6,7 +6,7 @@
 	<span class="pathname" v-if="pathname != ''">{{ pathname }}</span>
 	<span class="query">{{ query }}</span>
 	<span class="hash">{{ hash }}</span>
-	<fa icon="external-link-square-alt"/>
+	<i class="fas fa-external-link-square-alt"></i>
 </a>
 </template>
 

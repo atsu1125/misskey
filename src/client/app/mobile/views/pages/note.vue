@@ -1,13 +1,13 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa :icon="['far', 'sticky-note']"/></span>{{ $t('title') }}</template>
+	<template #header><span style="margin-right:4px;"><i class="far fa-sticky-note"></i></span>{{ $t('title') }}</template>
 	<main v-if="!fetching">
 		<div>
 			<mk-note-detail :note="note" :key="note.id"/>
 		</div>
 		<footer>
-			<router-link v-if="note.prev" :to="note.prev"><fa icon="angle-left"/> {{ $t('prev') }}</router-link>
-			<router-link v-if="note.next" :to="note.next">{{ $t('next') }} <fa icon="angle-right"/></router-link>
+			<router-link v-if="note.prev" :to="note.prev"><i class="fas fa-angle-left"></i> {{ $t('prev') }}</router-link>
+			<router-link v-if="note.next" :to="note.next">{{ $t('next') }} <i class="fas fa-angle-right"></i></router-link>
 		</footer>
 	</main>
 </mk-ui>

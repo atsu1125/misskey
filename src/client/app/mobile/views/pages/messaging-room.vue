@@ -1,7 +1,7 @@
 <template>
 <mk-ui>
 	<template #header>
-		<template v-if="user"><span style="margin-right:4px;"><fa :icon="['far', 'comments']"/></span><mk-user-name :user="user"/></template>
+		<template v-if="user"><span style="margin-right:4px;"><i class="far fa-comments"></i></span><mk-user-name :user="user"/></template>
 		<template v-else><mk-ellipsis/></template>
 	</template>
 	<x-messaging-room v-if="!fetching" :user="user" :is-naked="true"/>

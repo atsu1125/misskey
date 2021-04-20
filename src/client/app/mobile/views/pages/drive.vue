@@ -1,11 +1,11 @@
 <template>
 <mk-ui>
 	<template #header>
-		<template v-if="folder"><span style="margin-right:4px;"><fa :icon="['far', 'folder-open']"/></span>{{ folder.name }}</template>
+		<template v-if="folder"><span style="margin-right:4px;"><i class="far fa-folder-open"></i></span>{{ folder.name }}</template>
 		<template v-if="file"><mk-file-type-icon data-icon :type="file.type" style="margin-right:4px;"/>{{ file.name }}</template>
 		<template v-if="!folder && !file"><span style="margin-right:4px;"><i class="fas fa-cloud"></i></span>{{ $t('@.drive') }}</template>
 	</template>
-	<template #func v-if="folder || (!folder && !file)"><button @click="openContextMenu" ref="contextSource"><fa icon="ellipsis-h"/></button></template>
+	<template #func v-if="folder || (!folder && !file)"><button @click="openContextMenu" ref="contextSource"><i class="fas fa-ellipsis-h"></i></button></template>
 	<x-drive
 		ref="browser"
 		:init-folder="initFolder"

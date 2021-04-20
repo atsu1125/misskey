@@ -1,6 +1,6 @@
 <template>
 <mk-window ref="window" is-modal width="450px" height="500px" @closed="destroyDom">
-	<template #header><fa :icon="['far', 'envelope']"/> {{ $t('title') }}</template>
+	<template #header><i class="far fa-envelope"></i> {{ $t('title') }}</template>
 
 	<div class="slpqaxdoxhvglersgjukmvizkqbmbokc">
 		<div class="user" v-for="req in requests" :key="req.id">

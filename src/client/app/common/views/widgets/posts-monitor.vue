@@ -1,7 +1,7 @@
 <template>
 <div class="mkw-posts-monitor">
 	<ui-container :show-header="props.design == 0" :naked="props.design == 2">
-		<template #header><fa icon="chart-line"/>{{ $t('title') }}</template>
+		<template #header><i class="fas fa-chart-line"></i>{{ $t('title') }}</template>
 		<template #func><button @click="toggle" :title="$t('toggle')"><i class="fas fa-sort"></i></button></template>
 
 		<div class="qpdmibaztplkylerhdbllwcokyrfxeyj" :class="{ dual: props.view == 0 }">

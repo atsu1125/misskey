@@ -11,8 +11,8 @@
 				<fa :icon="faBars"/>
 			</button>
 			<button @click="toggleContent(!showBody)">
-				<template v-if="showBody"><fa icon="angle-up"/></template>
-				<template v-else><fa icon="angle-down"/></template>
+				<template v-if="showBody"><i class="fas fa-angle-up"></i></template>
+				<template v-else><i class="fas fa-angle-down"></i></template>
 			</button>
 		</div>
 	</header>

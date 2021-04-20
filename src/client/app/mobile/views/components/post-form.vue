@@ -5,7 +5,7 @@
 			<button class="cancel" @click="cancel"><i class="fas fa-times"></i></button>
 			<div>
 				<span v-if="!renote || quote" class="text-count" :class="{ over: trimmedLength(text) > maxNoteTextLength }">{{ maxNoteTextLength - trimmedLength(text) }}</span>
-				<span class="geo" v-if="geo"><fa icon="map-marker-alt"/></span>
+				<span class="geo" v-if="geo"><i class="fas fa-map-marker-alt"></i></span>
 				<button v-if="tertiaryNoteVisibility != null && tertiaryNoteVisibility != 'none'" class="tertiary" :disabled="!canPost" @click="post(tertiaryNoteVisibility)">
 					<x-visibility-icon :v="tertiaryNoteVisibility"/>
 				</button>
@@ -28,7 +28,7 @@
 			<div class="textarea">
 				<textarea v-if="!renote || quote" v-model="text" ref="text" :disabled="posting" :placeholder="placeholder" v-autocomplete="{ model: 'text' }"></textarea>
 				<button class="emoji" @click="emoji" ref="emoji">
-					<fa :icon="['far', 'laugh']"/>
+					<i class="far fa-laugh"></i>
 				</button>
 			</div>
 			<x-post-form-attaches class="attaches" :files="files"/>
@@ -39,8 +39,8 @@
 				<button class="drive" @click="chooseFileFromDrive"><i class="fas fa-cloud"></i></button>
 				<button class="jpeg" :class="{ enabled: useJpeg }" @click="useJpeg = !useJpeg"><fa :icon="faShareSquare"/></button>
 				<button class="kao" @click="kao"><fa :icon="faFish"/></button>
-				<button v-if="!inside" class="poll" :class="{ enabled: !!poll }" @click="poll = !poll"><fa icon="chart-pie"/></button>
-				<button class="cw" :class="{ enabled: useCw }" @click="useCw = !useCw"><fa :icon="['far', 'eye-slash']"/></button>
+				<button v-if="!inside" class="poll" :class="{ enabled: !!poll }" @click="poll = !poll"><i class="fas fa-chart-pie"></i></button>
+				<button class="cw" :class="{ enabled: useCw }" @click="useCw = !useCw"><i class="far fa-eye-slash"></i></button>
 				<button class="visibility" @click="setVisibility" ref="visibilityButton">
 					<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
 				</button>

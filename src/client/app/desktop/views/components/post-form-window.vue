@@ -2,7 +2,7 @@
 <mk-window class="mk-post-form-window" ref="window" is-modal @closed="onWindowClosed" :animation="animation">
 	<template #header>
 		<span class="mk-post-form-window--header">
-			<span class="icon" v-if="geo"><fa icon="map-marker-alt"/></span>
+			<span class="icon" v-if="geo"><i class="fas fa-map-marker-alt"></i></span>
 			<span v-if="!reply">{{ $t('note') }}</span>
 			<span v-if="reply">{{ $t('reply') }}</span>
 			<span class="count" v-if="files.length != 0">{{ $t('attaches').replace('{}', files.length) }}</span>

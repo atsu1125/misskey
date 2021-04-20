@@ -15,8 +15,8 @@
 		</div>
 		<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
 		<div class="actions" v-if="$store.getters.isSignedIn">
-			<button @click="menu" class="menu" ref="menu"><fa icon="ellipsis-h"/></button>
-			<button @click="listMenu" class="listMenu" ref="listMenu"><fa :icon="['fas', 'list']"/></button>
+			<button @click="menu" class="menu" ref="menu"><i class="fas fa-ellipsis-h"></i></button>
+			<button @click="listMenu" class="listMenu" ref="listMenu"><i class="fas fa-list"></i></button>
 			<mk-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
 		</div>
 	</div>
@@ -38,8 +38,8 @@
 			</dl>
 		</div>
 		<div class="info">
-			<span class="location" v-if="user.profile && user.profile.location"><fa icon="map-marker"/> {{ user.profile.location }}</span>
-			<span class="birthday" v-if="user.profile && user.profile.birthday"><fa icon="birthday-cake"/> {{ user.profile.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
+			<span class="location" v-if="user.profile && user.profile.location"><i class="fas fa-map-marker"></i> {{ user.profile.location }}</span>
+			<span class="birthday" v-if="user.profile && user.profile.birthday"><i class="fas fa-birthday-cake"></i> {{ user.profile.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
 		</div>
 		<div class="status">
 			<a v-if="isPostsPage" class="notes-count" @click="scrollToTL()"><b>{{ user.notesCount | number }}</b>{{ $t('posts') }}</a>

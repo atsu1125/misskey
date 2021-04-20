@@ -4,9 +4,9 @@
 		<img :src="avator" alt=""><mk-user-name :user="user" :key="user.id"/>
 	</template>
 	<div class="wwtwuxyh" v-if="!fetching">
-		<div class="is-suspended" v-if="user.isSuspended"><p><fa icon="exclamation-triangle"/> {{ $t('@.user-suspended') }}</p></div>
-		<div class="is-remote" v-if="user.host != null"><p><fa icon="exclamation-triangle"/> {{ $t('@.is-remote-user') }}<a :href="user.url || user.uri" rel="nofollow noopener" target="_blank">{{ $t('@.view-on-remote') }}</a></p></div>
-		<div class="no-federation" v-if="user.noFederation"><p><fa icon="exclamation-triangle"/> {{ $t('@.user-no-federation') }}</p></div>
+		<div class="is-suspended" v-if="user.isSuspended"><p><i class="fas fa-exclamation-triangle"></i> {{ $t('@.user-suspended') }}</p></div>
+		<div class="is-remote" v-if="user.host != null"><p><i class="fas fa-exclamation-triangle"></i> {{ $t('@.is-remote-user') }}<a :href="user.url || user.uri" rel="nofollow noopener" target="_blank">{{ $t('@.view-on-remote') }}</a></p></div>
+		<div class="no-federation" v-if="user.noFederation"><p><i class="fas fa-exclamation-triangle"></i> {{ $t('@.user-no-federation') }}</p></div>
 		<header>
 			<div class="banner" :style="style"></div>
 			<div class="body">
@@ -14,8 +14,8 @@
 					<a class="avatar" :href="user.avatarUrl">
 						<img :src="avator" alt="avatar"/>
 					</a>
-					<button class="menu" ref="menu" @click="menu"><fa icon="ellipsis-h"/></button>
-					<button class="listMenu" ref="listMenu" @click="listMenu"><fa :icon="['fas', 'list']"/></button>
+					<button class="menu" ref="menu" @click="menu"><i class="fas fa-ellipsis-h"></i></button>
+					<button class="listMenu" ref="listMenu" @click="listMenu"><i class="fas fa-list"></i></button>
 					<mk-follow-button v-if="$store.getters.isSignedIn && $store.state.i.id != user.id" :user="user" :key="user.id"/>
 				</div>
 				<div class="title">
@@ -40,10 +40,10 @@
 				</div>
 				<div class="info">
 					<p class="location" v-if="user.profile && user.profile.location">
-						<fa icon="map-marker"/>{{ user.profile.location }}
+						<i class="fas fa-map-marker"></i>{{ user.profile.location }}
 					</p>
 					<p class="birthday" v-if="user.profile && user.profile.birthday">
-						<fa icon="birthday-cake"/>{{ user.profile.birthday.replace('-', '年').replace('-', '月') + '日' }} ({{ $t('years-old', { age }) }})
+						<i class="fas fa-birthday-cake"></i>{{ user.profile.birthday.replace('-', '年').replace('-', '月') + '日' }} ({{ $t('years-old', { age }) }})
 					</p>
 				</div>
 				<div class="status">
@@ -68,7 +68,7 @@
 		<nav v-if="$route.name == 'user'">
 			<div class="nav-container">
 				<a :data-active="page == 'home'" @click="page = 'home'"><i class="fas fa-home"></i> {{ $t('overview') }}</a>
-				<a :data-active="page == 'notes'" @click="page = 'notes'"><fa :icon="['far', 'comment-alt']"/> {{ $t('timeline') }}</a>
+				<a :data-active="page == 'notes'" @click="page = 'notes'"><i class="far fa-comment-alt"></i> {{ $t('timeline') }}</a>
 				<a :data-active="page == 'media'" @click="page = 'media'"><i class="fas fa-image"></i> {{ $t('media') }}</a>
 			</div>
 		</nav>

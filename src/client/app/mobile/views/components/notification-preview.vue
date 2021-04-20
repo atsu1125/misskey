@@ -4,7 +4,7 @@
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div class="text">
 			<p><mk-reaction-icon :reaction="notification.reaction"/><mk-user-name :user="notification.user"/></p>
-			<p class="note-ref"><fa icon="quote-left"/>{{ getNoteSummary(notification.note) }}<fa icon="quote-right"/></p>
+			<p class="note-ref"><i class="fas fa-quote-left"></i>{{ getNoteSummary(notification.note) }}<i class="fas fa-quote-right"></i></p>
 		</div>
 	</template>
 
@@ -12,14 +12,14 @@
 		<mk-avatar class="avatar" :user="notification.note.user"/>
 		<div class="text">
 			<p><i class="fas fa-retweet"></i><mk-user-name :user="notification.note.user"/></p>
-			<p class="note-ref"><fa icon="quote-left"/>{{ getNoteSummary(notification.note.renote) }}<fa icon="quote-right"/></p>
+			<p class="note-ref"><i class="fas fa-quote-left"></i>{{ getNoteSummary(notification.note.renote) }}<i class="fas fa-quote-right"></i></p>
 		</div>
 	</template>
 
 	<template v-if="notification.type == 'quote'">
 		<mk-avatar class="avatar" :user="notification.note.user"/>
 		<div class="text">
-			<p><fa icon="quote-left"/><mk-user-name :user="notification.note.user"/></p>
+			<p><i class="fas fa-quote-left"></i><mk-user-name :user="notification.note.user"/></p>
 			<p class="note-preview">{{ getNoteSummary(notification.note) }}</p>
 		</div>
 	</template>
@@ -27,14 +27,14 @@
 	<template v-if="notification.type == 'follow'">
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div class="text">
-			<p><fa icon="user-plus"/><mk-user-name :user="notification.user"/></p>
+			<p><i class="fas fa-user-plus"></i><mk-user-name :user="notification.user"/></p>
 		</div>
 	</template>
 
 	<template v-if="notification.type == 'receiveFollowRequest'">
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div class="text">
-			<p><fa icon="user-clock"/><mk-user-name :user="notification.user"/></p>
+			<p><i class="fas fa-user-clock"></i><mk-user-name :user="notification.user"/></p>
 		</div>
 	</template>
 
@@ -57,16 +57,16 @@
 	<template v-if="notification.type == 'poll_vote'">
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div class="text">
-			<p><fa icon="chart-pie"/><mk-user-name :user="notification.user"/></p>
-			<p class="note-ref"><fa icon="quote-left"/>{{ getNoteSummary(notification.note) }}<fa icon="quote-right"/></p>
+			<p><i class="fas fa-chart-pie"></i><mk-user-name :user="notification.user"/></p>
+			<p class="note-ref"><i class="fas fa-quote-left"></i>{{ getNoteSummary(notification.note) }}<i class="fas fa-quote-right"></i></p>
 		</div>
 	</template>
 
 	<template v-if="notification.type == 'poll_finished'">
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div class="text">
-			<p><fa icon="chart-pie"/><mk-user-name :user="notification.user"/></p>
-			<p class="note-ref"><fa icon="quote-left"/>{{ getNoteSummary(notification.note) }}<fa icon="quote-right"/></p>
+			<p><i class="fas fa-chart-pie"></i><mk-user-name :user="notification.user"/></p>
+			<p class="note-ref"><i class="fas fa-quote-left"></i>{{ getNoteSummary(notification.note) }}<i class="fas fa-quote-right"></i></p>
 		</div>
 	</template>
 

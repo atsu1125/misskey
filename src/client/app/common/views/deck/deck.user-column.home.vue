@@ -11,7 +11,7 @@
 	<ui-container :body-togglable="true"
 		:expanded="$store.state.device.expandUsersActivity"
 		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersActivity', value: expanded })">
-		<template #header><fa :icon="['far', 'chart-bar']"/> {{ $t('activity') }}</template>
+		<template #header><i class="far fa-chart-bar"></i> {{ $t('activity') }}</template>
 		<div>
 			<div ref="chart"></div>
 		</div>
@@ -22,7 +22,7 @@
 	<ui-container v-if="images.length > 0" :body-togglable="true"
 		:expanded="$store.state.device.expandUsersPhotos"
 		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersPhotos', value: expanded })">
-		<template #header><fa :icon="['far', 'images']"/> {{ $t('images') }}</template>
+		<template #header><i class="far fa-images"></i> {{ $t('images') }}</template>
 		<div class="sainvnaq">
 			<router-link v-for="image in images"
 				:style="`background-image: url(${image.thumbnailUrl})`"
@@ -34,7 +34,7 @@
 	</ui-container>
 	<!-- タイムライン -->
 	<ui-container>
-		<template #header><fa :icon="['far', 'comment-alt']"/> {{ $t('timeline') }}</template>
+		<template #header><i class="far fa-comment-alt"></i> {{ $t('timeline') }}</template>
 		<div>
 			<div class="command">
 				<ui-button @click="fetchOutbox()">{{ $t('fetch-posts') }}</ui-button>

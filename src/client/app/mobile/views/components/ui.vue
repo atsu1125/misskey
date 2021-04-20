@@ -10,7 +10,7 @@
 	</div>
 	<mk-stream-indicator v-if="$store.getters.isSignedIn"/>
 	<button class="nav button" v-if="$store.state.device.inDeckMode" @click="isDrawerOpening = !isDrawerOpening"><i class="fas fa-bars"></i><i v-if="indicate"><i class="fas fa-circle"></i></i></button>
-	<button class="post button" v-if="$store.state.device.inDeckMode" @click="$post()"><fa icon="pencil-alt"/></button>
+	<button class="post button" v-if="$store.state.device.inDeckMode" @click="$post()"><i class="fas fa-pencil-alt"></i></button>
 </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa icon="broadcast-tower"/> {{ $t('announcements') }}</template>
+		<template #title><i class="fas fa-broadcast-tower"></i> {{ $t('announcements') }}</template>
 		<section v-for="(announcement, i) in announcements" class="fit-top">
 			<ui-input v-model="announcement.title" @change="save">
 				<span>{{ $t('title') }}</span>
@@ -10,8 +10,8 @@
 				<span>{{ $t('text') }}</span>
 			</ui-textarea>
 			<ui-horizon-group class="fit-bottom">
-				<ui-button @click="save()"><fa :icon="['far', 'save']"/> {{ $t('save') }}</ui-button>
-				<ui-button @click="remove(i)"><fa :icon="['far', 'trash-alt']"/> {{ $t('remove') }}</ui-button>
+				<ui-button @click="save()"><i class="far fa-save"></i> {{ $t('save') }}</ui-button>
+				<ui-button @click="remove(i)"><i class="far fa-trash-alt"></i> {{ $t('remove') }}</ui-button>
 			</ui-horizon-group>
 		</section>
 		<section>

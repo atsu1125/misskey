@@ -3,7 +3,7 @@
 	<!-- (今は繋がってるけど) 切断履歴があったときに出るやつ -->
 	<div class="disconnect-notify" v-if="stream.state == 'connected' && hasDisconnected
 		&& ($store.state.device.hasDisconnectedAction !== 'nothing' || newVersion != null)" @click="resetDisconnected">
-		<div><fa icon="exclamation-triangle"/> {{ $t('has-disconnected') }} ({{ disconnectedTime }})</div>
+		<div><i class="fas fa-exclamation-triangle"></i> {{ $t('has-disconnected') }} ({{ disconnectedTime }})</div>
 		<div v-if="newVersion != null">
 			{{ $t('update-available') }} ({{ newVersion }})<br />
 		</div>

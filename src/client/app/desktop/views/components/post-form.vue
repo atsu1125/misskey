@@ -25,7 +25,7 @@
 					v-autocomplete="{ model: 'text' }"
 				></textarea>
 				<button class="emoji" @click="emoji" ref="emoji">
-					<fa :icon="['far', 'laugh']"/>
+					<i class="far fa-laugh"></i>
 				</button>
 				<x-post-form-attaches class="files" :files="files" :detachMediaFn="detachMedia"/>
 				<mk-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()" @keydown="onKeydown"/>
@@ -38,8 +38,8 @@
 			<button class="drive" :title="$t('attach-media-from-drive')" @click="chooseFileFromDrive"><i class="fas fa-cloud"></i></button>
 			<button class="jpeg" :class="{ enabled: useJpeg }" :title="$t('use-jpeg')" @click="useJpeg = !useJpeg"><fa :icon="faShareSquare"/></button>
 			<button class="kao" :title="$t('insert-a-kao')" @click="kao"><fa :icon="faFish"/></button>
-			<button class="poll" :class="{ enabled: !!poll }" :title="$t('create-poll')" @click="poll = !poll"><fa icon="chart-pie"/></button>
-			<button class="cw" :class="{ enabled: useCw }" :title="$t('hide-contents')" @click="useCw = !useCw"><fa :icon="['far', 'eye-slash']"/></button>
+			<button class="poll" :class="{ enabled: !!poll }" :title="$t('create-poll')" @click="poll = !poll"><i class="fas fa-chart-pie"></i></button>
+			<button class="cw" :class="{ enabled: useCw }" :title="$t('hide-contents')" @click="useCw = !useCw"><i class="far fa-eye-slash"></i></button>
 			<button class="visibility" :title="$t('visibility')" @click="setVisibility" ref="visibilityButton">
 				<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
 			</button>

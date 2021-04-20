@@ -1,6 +1,6 @@
 <template>
 <div class="xqnhankfuuilcwvhgsopeqncafzsquya">
-	<button class="go-index" v-if="selfNav" @click="goIndex"><fa icon="arrow-left"/></button>
+	<button class="go-index" v-if="selfNav" @click="goIndex"><i class="fas fa-arrow-left"></i></button>
 	<header><b><router-link :to="blackUser | userPage"><mk-user-name :user="blackUser"/></router-link></b><span> <fa :icon="fasCircle"/></span> vs <b><router-link :to="whiteUser | userPage"><mk-user-name :user="whiteUser"/></router-link></b><span> <fa :icon="farCircle"/></span></header>
 
 	<div style="overflow: hidden; line-height: 16px;">

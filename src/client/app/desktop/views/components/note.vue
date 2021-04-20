@@ -54,7 +54,7 @@
 						<mk-media-list :hide="!$store.state.device.alwaysShowNsfw && appearNote.cw == null" :media-list="appearNote.files"/>
 					</div>
 					<mk-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
-					<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><fa icon="map-marker-alt"/> 位置情報</a>
+					<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><i class="fas fa-map-marker-alt"></i> 位置情報</a>
 					<div class="renote" v-if="appearNote.renote"><mk-note-preview :note="appearNote.renote"/></div>
 					<mk-url-preview v-for="url in urls" :url="url" :key="url" :mini="mini" :compact="compact" :detail="detail"/>
 				</div>
@@ -95,7 +95,7 @@
 					<fa :icon="faLaugh"/>
 				</button>
 				<button @click="menu()" ref="menuButton" class="button">
-					<fa icon="ellipsis-h"/>
+					<i class="fas fa-ellipsis-h"></i>
 				</button>
 				<button class="button stayTl" :class="{ pinned: !!appearNote.stayTl }" @click="toggleStayTl"><i class="fas fa-thumbtack"></i></button>
 			</footer>

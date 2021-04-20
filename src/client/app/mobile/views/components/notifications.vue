@@ -11,8 +11,8 @@
 		<template v-for="(notification, i) in _notifications">
 			<mk-notification v-if="notification" :notification="notification" :key="notification.id"/>
 			<p class="date" :key="notification.id + '_date'" v-if="i != notifications.length - 1 && notification && _notifications[i + 1] && notification._date != _notifications[i + 1]._date">
-				<span><fa icon="angle-up"/>{{ notification._datetext }}</span>
-				<span><fa icon="angle-down"/>{{ _notifications[i + 1]._datetext }}</span>
+				<span><i class="fas fa-angle-up"></i>{{ notification._datetext }}</span>
+				<span><i class="fas fa-angle-down"></i>{{ _notifications[i + 1]._datetext }}</span>
 			</p>
 		</template>
 	</component>

@@ -1,7 +1,7 @@
 <template>
 <div class="mkw-polls">
 	<ui-container :show-header="!props.compact">
-		<template #header><fa icon="chart-pie"/>{{ $t('title') }}</template>
+		<template #header><i class="fas fa-chart-pie"></i>{{ $t('title') }}</template>
 		<template #func>
 			<button :title="$t('title')" @click="fetch">
 				<fa v-if="!fetching && more" icon="arrow-right"/>

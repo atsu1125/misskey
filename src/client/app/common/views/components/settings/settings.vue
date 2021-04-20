@@ -112,7 +112,7 @@
 
 	<template v-if="page == null || page == 'behavior'">
 		<ui-card>
-			<template #title><fa icon="sliders-h"/> {{ $t('@._settings.behavior') }}</template>
+			<template #title><i class="fas fa-sliders-h"></i> {{ $t('@._settings.behavior') }}</template>
 
 			<section>
 				<ui-switch v-model="fetchOnScroll">{{ $t('@._settings.fetch-on-scroll') }}
@@ -229,7 +229,7 @@
 		</ui-card>
 
 		<ui-card>
-			<template #title><fa icon="volume-up"/> {{ $t('@._settings.sound') }}</template>
+			<template #title><i class="fas fa-volume-up"></i> {{ $t('@._settings.sound') }}</template>
 
 			<section>
 				<ui-switch v-model="enableSounds">{{ $t('@._settings.enable-sounds') }}
@@ -248,7 +248,7 @@
 						step="0.1"
 					/>
 				</div>
-				<ui-button @click="soundTest"><fa icon="volume-up"/> {{ $t('@._settings.test') }}</ui-button>
+				<ui-button @click="soundTest"><i class="fas fa-volume-up"></i> {{ $t('@._settings.test') }}</ui-button>
 			</section>
 
 			<section>
@@ -288,7 +288,7 @@
 
 	<template v-if="page == null || page == 'apps'">
 		<ui-card>
-			<template #title><fa icon="puzzle-piece"/> {{ $t('@._settings.apps') }}</template>
+			<template #title><i class="fas fa-puzzle-piece"></i> {{ $t('@._settings.apps') }}</template>
 			<section>
 				<x-apps/>
 			</section>
@@ -297,14 +297,14 @@
 
 	<template v-if="page == null || page == 'security'">
 		<ui-card>
-			<template #title><fa icon="unlock-alt"/> {{ $t('@._settings.password') }}</template>
+			<template #title><i class="fas fa-unlock-alt"></i> {{ $t('@._settings.password') }}</template>
 			<section>
 				<x-password/>
 			</section>
 		</ui-card>
 
 		<ui-card v-if="!$root.isMobile">
-			<template #title><fa icon="mobile-alt"/> {{ $t('@.2fa') }}</template>
+			<template #title><i class="fas fa-mobile-alt"></i> {{ $t('@.2fa') }}</template>
 			<section>
 				<x-2fa/>
 			</section>
@@ -312,7 +312,7 @@
 
 		<!--
 		<ui-card>
-			<template #title><fa icon="sign-in-alt"/> {{ $t('@._settings.signin') }}</template>
+			<template #title><i class="fas fa-sign-in-alt"></i> {{ $t('@._settings.signin') }}</template>
 			<section>
 				<x-signins/>
 			</section>
@@ -326,7 +326,7 @@
 
 	<template v-if="page == null || page == 'other'">
 		<ui-card>
-			<template #title><fa icon="sync-alt"/> {{ $t('@._settings.update') }}</template>
+			<template #title><i class="fas fa-sync-alt"></i> {{ $t('@._settings.update') }}</template>
 			<section>
 				<p>
 					<span>{{ $t('@._settings.version') }} <i>{{ version }}</i></span>

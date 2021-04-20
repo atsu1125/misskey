@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><fa :icon="['far', 'envelope']"/>{{ $t('title') }}</template>
+	<template #header><i class="far fa-envelope"></i>{{ $t('title') }}</template>
 
 	<main>
 		<div class="user" v-for="req in requests" :key="req.id">

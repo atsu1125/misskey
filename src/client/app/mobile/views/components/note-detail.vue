@@ -6,7 +6,7 @@
 		@click="fetchConversation"
 		:disabled="conversationFetching"
 	>
-		<template v-if="!conversationFetching"><fa icon="ellipsis-v"/></template>
+		<template v-if="!conversationFetching"><i class="fas fa-ellipsis-v"></i></template>
 		<template v-if="conversationFetching"><fa icon="spinner" pulse/></template>
 	</button>
 	<mk-renote class="renote" v-if="isRenote" :note="note" mini/>
@@ -41,7 +41,7 @@
 				</div>
 				<mk-poll v-if="appearNote.poll" :note="appearNote"/>
 				<mk-url-preview v-for="url in urls" :url="url" :key="url" :detail="true"/>
-				<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><fa icon="map-marker-alt"/> {{ $t('location') }}</a>
+				<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><i class="fas fa-map-marker-alt"></i> {{ $t('location') }}</a>
 				<div class="map" v-if="appearNote.geo" ref="map"></div>
 				<div class="renote" v-if="appearNote.renote">
 					<mk-note-preview :note="appearNote.renote"/>
@@ -82,7 +82,7 @@
 				<fa :icon="faLaugh"/>
 			</button>
 			<button @click="menu()" ref="menuButton">
-				<fa icon="ellipsis-h"/>
+				<i class="fas fa-ellipsis-h"></i>
 			</button>
 		</footer>
 	</article>

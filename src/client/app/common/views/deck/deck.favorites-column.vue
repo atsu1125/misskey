@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<fa :icon="['fa', 'star']"/>{{ $t('@.favorites') }}
+		<i class="fa fa-star"></i>{{ $t('@.favorites') }}
 	</template>
 
 	<div>

@@ -9,9 +9,9 @@
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>
@@ -25,9 +25,9 @@
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link v-if="notification.note.renote" class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note.renote)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note.renote)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.renote.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div>
 			<header>
-				<fa icon="user-plus"/>
+				<i class="fas fa-user-plus"></i>
 				<router-link class="name" :to="notification.user | userPage"><mk-user-name :user="notification.user"/></router-link>
 				<mk-time :time="notification.createdAt"/>
 			</header>
@@ -47,7 +47,7 @@
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div>
 			<header>
-				<fa icon="user-clock"/>
+				<i class="fas fa-user-clock"></i>
 				<router-link class="name" :to="notification.user | userPage"><mk-user-name :user="notification.user"/></router-link>
 				<mk-time :time="notification.createdAt"/>
 			</header>
@@ -58,14 +58,14 @@
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div>
 			<header>
-				<fa icon="chart-pie"/>
+				<i class="fas fa-chart-pie"></i>
 				<router-link class="name" :to="notification.user | userPage"><mk-user-name :user="notification.user"/></router-link>
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>
@@ -74,14 +74,14 @@
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div>
 			<header>
-				<fa icon="chart-pie"/>
+				<i class="fas fa-chart-pie"></i>
 				<span>{{ $t('@.poll_finished') }}</span>
 				<mk-time :time="notification.createdAt"/>
 			</header>
 			<router-link class="note-ref" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-				<fa icon="quote-left"/>
+				<i class="fas fa-quote-left"></i>
 					<mfm :text="getNoteSummary(notification.note)" :plain="true" :extra="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-				<fa icon="quote-right"/>
+				<i class="fas fa-quote-right"></i>
 			</router-link>
 		</div>
 	</div>

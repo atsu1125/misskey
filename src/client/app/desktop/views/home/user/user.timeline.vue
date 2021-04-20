@@ -6,9 +6,9 @@
 	<mk-notes ref="timeline" :make-promise="makePromise" @inited="() => $emit('loaded')">
 		<template #header>
 			<header class="oh5y2r7l5lx8j6jj791ykeiwgihheguk">
-				<span :data-active="mode == 'default'" @click="mode = 'default'"><fa :icon="['far', 'comment-alt']"/> {{ $t('default') }}</span>
+				<span :data-active="mode == 'default'" @click="mode = 'default'"><i class="far fa-comment-alt"></i> {{ $t('default') }}</span>
 				<span :data-active="mode == 'with-replies'" @click="mode = 'with-replies'"><i class="fas fa-comments"></i> {{ $t('with-replies') }}</span>
-				<span :data-active="mode == 'with-media'" @click="mode = 'with-media'"><fa :icon="['far', 'images']"/> {{ $t('with-media') }}</span>
+				<span :data-active="mode == 'with-media'" @click="mode = 'with-media'"><i class="far fa-images"></i> {{ $t('with-media') }}</span>
 				<span :data-active="mode == 'my-posts'" @click="mode = 'my-posts'"><i class="fas fa-user"></i> {{ $t('my-posts') }}</span>
 			</header>
 		</template>

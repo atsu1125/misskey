@@ -20,12 +20,12 @@
 			</div>
 			<div>
 				<span><i class="fas fa-home"></i> {{ $t('this-instance') }}</span>
-				<span @click="setChartSrc('users')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('users')"><i class="far fa-chart-bar"></i></span>
 			</div>
 		</div>
 		<div>
 			<div>
-				<div><fa icon="pencil-alt"/></div>
+				<div><i class="fas fa-pencil-alt"></i></div>
 				<div>
 					<span>{{ $t('notes') }}</span>
 					<b>{{ stats.originalNotesCount | number }}</b>
@@ -33,7 +33,7 @@
 			</div>
 			<div>
 				<span><i class="fas fa-home"></i> {{ $t('this-instance') }}</span>
-				<span @click="setChartSrc('notes')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('notes')"><i class="far fa-chart-bar"></i></span>
 			</div>
 		</div>
 		<div>
@@ -46,12 +46,12 @@
 			</div>
 			<div>
 				<span><i class="fas fa-home"></i> {{ $t('this-instance') }}</span>
-				<span @click="setChartSrc('drive')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('drive')"><i class="far fa-chart-bar"></i></span>
 			</div>
 		</div>
 		<div>
 			<div>
-				<div><fa :icon="['far', 'hdd']"/></div>
+				<div><i class="far fa-hdd"></i></div>
 				<div>
 					<span>{{ $t('instances') }}</span>
 					<b>{{ stats.instances | number }}</b>
@@ -59,7 +59,7 @@
 			</div>
 			<div>
 				<span><i class="fas fa-globe"></i> {{ $t('federated') }}</span>
-				<span @click="setChartSrc('federation-instances-total')"><fa :icon="['far', 'chart-bar']"/></span>
+				<span @click="setChartSrc('federation-instances-total')"><i class="far fa-chart-bar"></i></span>
 			</div>
 		</div>
 	</div>

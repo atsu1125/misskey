@@ -1,18 +1,18 @@
 <template>
 <div class="mk-settings">
 	<div class="nav" :class="{ inWindow }">
-		<router-link to="/i/settings/profile" active-class="active"><fa icon="user" fixed-width/>{{ $t('@._settings.profile') }}</router-link>
-		<router-link to="/i/settings/appearance" active-class="active"><fa icon="palette" fixed-width/>{{ $t('@._settings.appearance') }}</router-link>
-		<router-link to="/i/settings/behavior" active-class="active"><fa icon="desktop" fixed-width/>{{ $t('@._settings.behavior') }}</router-link>
-		<router-link to="/i/settings/notification" active-class="active"><fa :icon="['far', 'bell']" fixed-width/>{{ $t('@._settings.notification') }}</router-link>
-		<router-link to="/i/settings/drive" active-class="active"><fa icon="cloud" fixed-width/>{{ $t('@.drive') }}</router-link>
-		<router-link to="/i/settings/hashtags" active-class="active"><fa icon="hashtag" fixed-width/>{{ $t('@._settings.tags') }}</router-link>
-		<router-link to="/i/settings/muteAndBlock" active-class="active"><fa icon="ban" fixed-width/>{{ $t('@._settings.mute-and-block') }}</router-link>
+		<router-link to="/i/settings/profile" active-class="active"><i class="fas fa-user fa-fw"></i>{{ $t('@._settings.profile') }}</router-link>
+		<router-link to="/i/settings/appearance" active-class="active"><i class="fas fa-palette fa-fw"></i>{{ $t('@._settings.appearance') }}</router-link>
+		<router-link to="/i/settings/behavior" active-class="active"><i class="fas fa-desktop fa-fw"></i>{{ $t('@._settings.behavior') }}</router-link>
+		<router-link to="/i/settings/notification" active-class="active"><i class="far fa-bell fa-fw"></i>{{ $t('@._settings.notification') }}</router-link>
+		<router-link to="/i/settings/drive" active-class="active"><i class="fas fa-cloud fa-fw"></i>{{ $t('@.drive') }}</router-link>
+		<router-link to="/i/settings/hashtags" active-class="active"><i class="fas fa-hashtag fa-fw"></i>{{ $t('@._settings.tags') }}</router-link>
+		<router-link to="/i/settings/muteAndBlock" active-class="active"><i class="fas fa-ban fa-fw"></i>{{ $t('@._settings.mute-and-block') }}</router-link>
 		<router-link to="/i/settings/extendedNotification" active-class="active"><fa :icon="faLightbulb" fixed-width/>{{ $t('@._settings.extended-notification') }}</router-link>
-		<router-link to="/i/settings/apps" active-class="active"><fa icon="puzzle-piece" fixed-width/>{{ $t('@._settings.apps') }}</router-link>
-		<router-link to="/i/settings/security" active-class="active"><fa icon="unlock-alt" fixed-width/>{{ $t('@._settings.security') }}</router-link>
-		<router-link to="/i/settings/api" active-class="active"><fa icon="key" fixed-width/>API</router-link>
-		<router-link to="/i/settings/other" active-class="active"><fa icon="cogs" fixed-width/>{{ $t('@._settings.other') }}</router-link>
+		<router-link to="/i/settings/apps" active-class="active"><i class="fas fa-puzzle-piece fa-fw"></i>{{ $t('@._settings.apps') }}</router-link>
+		<router-link to="/i/settings/security" active-class="active"><i class="fas fa-unlock-alt fa-fw"></i>{{ $t('@._settings.security') }}</router-link>
+		<router-link to="/i/settings/api" active-class="active"><i class="fas fa-key fa-fw"></i>API</router-link>
+		<router-link to="/i/settings/other" active-class="active"><i class="fas fa-cogs fa-fw"></i>{{ $t('@._settings.other') }}</router-link>
 	</div>
 	<div class="pages">
 		<x-settings :page="page"/>

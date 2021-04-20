@@ -75,12 +75,12 @@
 				</div>
 			</div>
 			<ui-button @click="preview()"><i class="fas fa-eye"></i> {{ $t('preview-created-theme') }}</ui-button>
-			<ui-button primary @click="gen()"><fa :icon="['far', 'save']"/> {{ $t('save-created-theme') }}</ui-button>
+			<ui-button primary @click="gen()"><i class="far fa-save"></i> {{ $t('save-created-theme') }}</ui-button>
 		</details>
 
 		<details>
 			<summary><i class="fas fa-download"></i> {{ $t('install-a-theme') }}</summary>
-			<ui-button @click="import_()"><fa icon="file-import"/> {{ $t('import') }}</ui-button>
+			<ui-button @click="import_()"><i class="fas fa-file-import"></i> {{ $t('import') }}</ui-button>
 			<input ref="file" type="file" accept=".misskeytheme" style="display:none;" @change="onUpdateImportFile"/>
 			<p>{{ $t('import-by-code') }}:</p>
 			<ui-textarea v-model="installThemeCode">
@@ -90,7 +90,7 @@
 		</details>
 
 		<details>
-			<summary><fa icon="folder-open"/> {{ $t('manage-themes') }}</summary>
+			<summary><i class="fas fa-folder-open"></i> {{ $t('manage-themes') }}</summary>
 			<ui-select v-model="selectedThemeId" :placeholder="$t('select-theme')">
 				<optgroup :label="$t('builtin-themes')">
 					<option v-for="x in builtinThemes" :value="x.id" :key="x.id">{{ x.name }}</option>
@@ -113,7 +113,7 @@
 					<span>{{ $t('theme-code') }}</span>
 				</ui-textarea>
 				<ui-button @click="export_()" link :download="`${selectedTheme.name}.misskeytheme`" ref="export"><i class="fas fa-box"></i> {{ $t('export') }}</ui-button>
-				<ui-button @click="uninstall()" v-if="!builtinThemes.some(t => t.id == selectedTheme.id)"><fa :icon="['far', 'trash-alt']"/> {{ $t('uninstall') }}</ui-button>
+				<ui-button @click="uninstall()" v-if="!builtinThemes.some(t => t.id == selectedTheme.id)"><i class="far fa-trash-alt"></i> {{ $t('uninstall') }}</ui-button>
 			</template>
 		</details>
 	</section>

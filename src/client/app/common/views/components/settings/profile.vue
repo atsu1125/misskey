@@ -20,12 +20,12 @@
 
 				<ui-input v-model="location">
 					<span>{{ $t('location') }}</span>
-					<template #prefix><fa icon="map-marker-alt"/></template>
+					<template #prefix><i class="fas fa-map-marker-alt"></i></template>
 				</ui-input>
 
 				<ui-input v-model="birthday" type="date">
 					<template #title>{{ $t('birthday') }}</template>
-					<template #prefix><fa icon="birthday-cake"/></template>
+					<template #prefix><i class="fas fa-birthday-cake"></i></template>
 				</ui-input>
 
 				<ui-horizon-group inputs>

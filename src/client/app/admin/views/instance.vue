@@ -89,7 +89,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="['fab', 'twitter']"/> {{ $t('twitter-integration-config') }}</template>
+		<template #title><i class="fab fa-twitter"></i> {{ $t('twitter-integration-config') }}</template>
 		<section>
 			<ui-switch v-model="enableTwitterIntegration">{{ $t('enable-twitter-integration') }}</ui-switch>
 			<ui-horizon-group>
@@ -102,7 +102,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="['fab', 'github']"/> {{ $t('github-integration-config') }}</template>
+		<template #title><i class="fab fa-github"></i> {{ $t('github-integration-config') }}</template>
 		<section>
 			<ui-switch v-model="enableGithubIntegration">{{ $t('enable-github-integration') }}</ui-switch>
 			<ui-horizon-group>
@@ -115,7 +115,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="['fab', 'discord']"/> {{ $t('discord-integration-config') }}</template>
+		<template #title><i class="fab fa-discord"></i> {{ $t('discord-integration-config') }}</template>
 		<section>
 			<ui-switch v-model="enableDiscordIntegration">{{ $t('enable-discord-integration') }}</ui-switch>
 			<ui-horizon-group>

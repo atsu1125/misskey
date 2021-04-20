@@ -3,7 +3,7 @@
 	<div class="body" style="display: flex; flex-direction: column;">
 		<div class="nav" v-if="$store.getters.isSignedIn">
 			<div class="post" >
-				<button :title="$t('@.new-post')" @click="post"><fa icon="pencil-alt"/></button>
+				<button :title="$t('@.new-post')" @click="post"><i class="fas fa-pencil-alt"></i></button>
 			</div>
 			<div :title="$t('@.timeline')" class="home" :class="{ active: $route.name == 'index' }" @click="goToTop">
 				<router-link to="/"><i class="fas fa-home"></i></router-link>
@@ -33,7 +33,7 @@
 				<a @click="drive"><i class="fas fa-cloud"></i></a>
 			</div>
 			<div :title="$t('@.notifications')" ref="notificationsButton" :class="{ active: showNotifications }">
-				<a @click="notifications"><fa :icon="['far', 'bell']"/></a>
+				<a @click="notifications"><i class="far fa-bell"></i></a>
 			</div>
 			<div :title="$t('@.messaging')" class="messaging">
 				<a @click="messaging"><i class="fas fa-comments"></i><template v-if="hasUnreadMessagingMessage"><i class="fas fa-circle"></i></template></a>
@@ -48,7 +48,7 @@
 				<router-link to="/i/reactions"><fa :icon="faThumbsUp"/></router-link>
 			</div>
 			<div :title="$t('@.follow-requests')">
-				<a @click="followRequests"><fa :icon="['far', 'envelope']"/><i v-if="$store.state.i.pendingReceivedFollowRequestsCount">{{ $store.state.i.pendingReceivedFollowRequestsCount }}</i></a>
+				<a @click="followRequests"><i class="far fa-envelope"></i><i v-if="$store.state.i.pendingReceivedFollowRequestsCount">{{ $store.state.i.pendingReceivedFollowRequestsCount }}</i></a>
 			</div>
 			<div :title="$t($store.state.device.inDeckMode ? '@.home' : '@.deck')">
 				<template v-if="$store.state.device.inDeckMode">
@@ -59,7 +59,7 @@
 				</template>
 			</div>
 			<div :title="$t($store.state.device.darkmode ? '@.turn-off-darkmode' : '@.turn-on-darkmode')">
-				<a @click="dark"><template v-if="$store.state.device.darkmode"><i class="fas fa-moon"></i></template><template v-else><fa :icon="['far', 'moon']"/></template></a>
+				<a @click="dark"><template v-if="$store.state.device.darkmode"><i class="fas fa-moon"></i></template><template v-else><i class="far fa-moon"></i></template></a>
 			</div>
 		</div>
 	</div>

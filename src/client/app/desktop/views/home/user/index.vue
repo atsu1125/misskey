@@ -1,13 +1,13 @@
 <template>
 <div class="omechnps" v-if="!fetching && user">
 	<div class="is-suspended" v-if="user.isSuspended">
-		<fa icon="exclamation-triangle"/> {{ $t('@.user-suspended') }}
+		<i class="fas fa-exclamation-triangle"></i> {{ $t('@.user-suspended') }}
 	</div>
 	<div class="is-remote" v-if="user.host != null">
-		<fa icon="exclamation-triangle"/> {{ $t('@.is-remote-user') }}<a :href="user.url || user.uri" rel="nofollow noopener" target="_blank">{{ $t('@.view-on-remote') }}</a>
+		<i class="fas fa-exclamation-triangle"></i> {{ $t('@.is-remote-user') }}<a :href="user.url || user.uri" rel="nofollow noopener" target="_blank">{{ $t('@.view-on-remote') }}</a>
 	</div>
 	<div class="no-federation" v-if="user.noFederation">
-		<fa icon="exclamation-triangle"/> {{ $t('@.user-no-federation') }}
+		<i class="fas fa-exclamation-triangle"></i> {{ $t('@.user-no-federation') }}
 	</div>
 	<div class="main">
 		<x-header class="header" :user="user"/>

@@ -9,7 +9,7 @@
 		<p>{{ $t('intro') }}</p>
 		<ui-info warn>{{ $t('caution') }}</ui-info>
 		<p>{{ $t('regeneration-of-token') }}</p>
-		<ui-button @click="regenerateToken"><fa icon="sync-alt"/> {{ $t('regenerate-token') }}</ui-button>
+		<ui-button @click="regenerateToken"><i class="fas fa-sync-alt"></i> {{ $t('regenerate-token') }}</ui-button>
 	</section>
 
 	<section>
@@ -23,7 +23,7 @@
 		</ui-textarea>
 		<ui-button @click="send" :disabled="sending">
 			<template v-if="sending">{{ $t('console.sending') }}</template>
-			<template v-else><fa icon="paper-plane"/> {{ $t('console.send') }}</template>
+			<template v-else><i class="fas fa-paper-plane"></i> {{ $t('console.send') }}</template>
 		</ui-button>
 		<div v-if="res" style="opacity: 0.7; font-size: 13px; margin-top: 1.5em; margin-bottom: -8px;">{{ $t('console.response') + ` (${resTime} ms)` }}</div>
 		<highlightjs v-if="res" :language="json" :code="res"/>

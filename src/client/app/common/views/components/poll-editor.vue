@@ -1,7 +1,7 @@
 <template>
 <div class="mk-poll-editor">
 	<p class="caution" v-if="choices.length < 2">
-		<fa icon="exclamation-triangle"/>{{ $t('no-only-one-choice') }}
+		<i class="fas fa-exclamation-triangle"></i>{{ $t('no-only-one-choice') }}
 	</p>
 	<ul ref="choices">
 		<li v-for="(choice, i) in choices" :key="i">

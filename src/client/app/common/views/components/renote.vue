@@ -8,7 +8,7 @@
 		</router-link>
 	</i18n>
 	<div class="info">
-		<span class="mobile" v-if="note.viaMobile"><fa icon="mobile-alt"/></span>
+		<span class="mobile" v-if="note.viaMobile"><i class="fas fa-mobile-alt"></i></span>
 		<mk-time :time="note.createdAt"/>
 	</div>
 </div>

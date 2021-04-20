@@ -1,7 +1,7 @@
 <template>
 <div class="mkw-rss">
 	<ui-container :show-header="!props.compact">
-		<template #header><fa icon="rss-square"/>RSS</template>
+		<template #header><i class="fas fa-rss-square"></i>RSS</template>
 		<template #func><button title="設定" @click="setting"><i class="fas fa-cog"></i></button></template>
 
 		<div class="mkw-rss--body" :data-mobile="platform == 'mobile'">

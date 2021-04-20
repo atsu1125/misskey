@@ -18,10 +18,10 @@
 			<span class="separator"></span>
 			<span class="data-size">{{ file.datasize | bytes }}</span>
 			<span class="separator"></span>
-			<span class="created-at" @click="showCreatedAt"><fa :icon="['far', 'clock']"/><mk-time :time="file.createdAt"/></span>
+			<span class="created-at" @click="showCreatedAt"><i class="far fa-clock"></i><mk-time :time="file.createdAt"/></span>
 			<template v-if="file.isSensitive">
 				<span class="separator"></span>
-				<span class="nsfw"><fa :icon="['far', 'eye-slash']"/> {{ $t('nsfw') }}</span>
+				<span class="nsfw"><i class="far fa-eye-slash"></i> {{ $t('nsfw') }}</span>
 			</template>
 		</div>
 	</div>
@@ -29,11 +29,11 @@
 		<div>
 			<ui-input readonly :value="file.url">URL</ui-input>
 			<ui-button link :href="dlUrl"><fa :icon="faExternalLinkAlt"/> {{ $t('open') }}</ui-button>
-			<ui-button @click="rename"><fa icon="pencil-alt"/> {{ $t('rename') }}</ui-button>
-			<ui-button @click="move"><fa :icon="['far', 'folder-open']"/> {{ $t('move') }}</ui-button>
-			<ui-button @click="toggleSensitive" v-if="file.isSensitive"><fa :icon="['far', 'eye']"/> {{ $t('unmark-as-sensitive') }}</ui-button>
-			<ui-button @click="toggleSensitive" v-else><fa :icon="['far', 'eye-slash']"/> {{ $t('mark-as-sensitive') }}</ui-button>
-			<ui-button @click="del"><fa :icon="['far', 'trash-alt']"/> {{ $t('delete') }}</ui-button>
+			<ui-button @click="rename"><i class="fas fa-pencil-alt"></i> {{ $t('rename') }}</ui-button>
+			<ui-button @click="move"><i class="far fa-folder-open"></i> {{ $t('move') }}</ui-button>
+			<ui-button @click="toggleSensitive" v-if="file.isSensitive"><i class="far fa-eye"></i> {{ $t('unmark-as-sensitive') }}</ui-button>
+			<ui-button @click="toggleSensitive" v-else><i class="far fa-eye-slash"></i> {{ $t('mark-as-sensitive') }}</ui-button>
+			<ui-button @click="del"><i class="far fa-trash-alt"></i> {{ $t('delete') }}</ui-button>
 		</div>
 	</div>
 	<div class="hash">

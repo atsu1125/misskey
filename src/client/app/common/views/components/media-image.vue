@@ -1,7 +1,7 @@
 <template>
 <div class="qjewsnkgzzxlxtzncydssfbgjibiehcy" v-if="image.isSensitive && hide" @click="hide = false">
 	<div>
-		<b><fa icon="exclamation-triangle"/> {{ $t('sensitive') }}</b>
+		<b><i class="fas fa-exclamation-triangle"></i> {{ $t('sensitive') }}</b>
 		<span>{{ $t('click-to-show') }}</span>
 	</div>
 </div>

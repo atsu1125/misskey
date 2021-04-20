@@ -5,7 +5,7 @@
 >
 	<div class="body">
 		<p class="init" v-if="init"><fa icon="spinner .spin"/>{{ $t('@.loading') }}</p>
-		<p class="empty" v-if="!init && messages.length == 0"><fa icon="info-circle"/>{{ $t('empty') }}</p>
+		<p class="empty" v-if="!init && messages.length == 0"><i class="fas fa-info-circle"></i>{{ $t('empty') }}</p>
 		<p class="no-history" v-if="!init && messages.length > 0 && !existMoreMessages"><i class="fas fa-flag"></i>{{ $t('no-history') }}</p>
 		<button class="more" :class="{ fetching: fetchingMoreMessages }" v-if="existMoreMessages" @click="fetchMoreMessages" :disabled="fetchingMoreMessages">
 			<template v-if="fetchingMoreMessages"><fa icon="spinner" pulse fixed-width/></template>{{ fetchingMoreMessages ? $t('@.loading') : $t('@.load-more') }}

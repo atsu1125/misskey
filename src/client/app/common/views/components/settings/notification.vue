@@ -1,6 +1,6 @@
 <template>
 <ui-card>
-	<template #title><fa :icon="['far', 'bell']"/> {{ $t('title') }}</template>
+	<template #title><i class="far fa-bell"></i> {{ $t('title') }}</template>
 	<section>
 		<header>{{ $t('pushNotifications') }}</header>
 		<ui-switch v-model="follow" @change="onChangePushNotifications">{{ $t('follow') }}</ui-switch>
