@@ -8,7 +8,7 @@ find({wanted => \&process, no_chdir => 1}, 'src/');
 sub process {
 	return unless /\.vue$/;
 
-	#print "$_\n";
+	print "$_\n";
 
 	open my $FH, '<', $_ or die "$_ $!";
 	my @inputs = <$FH>;
@@ -18,14 +18,14 @@ sub process {
 	my @ss;
 
 	for my $input (@inputs) {
-		if ($input =~ m|^import\s+{\s*(.+)\s*}\sfrom\s'\@fortawesome/free-solid-svg-icons'|) {
-			@ss = grep { /^\w+$/ } split(/,\s*/, $1);
-			#printf "  regular: %s\n", join('|', @ss) if @ss;
+		if ($input =~ m|^import\s+{\s*([^}]+)\s*}\sfrom\s'\@fortawesome/free-solid-svg-icons'|) {
+			@ss = grep { /^\w+$/ } map {s/\s+$//; $_} split(/,\s*/, $1);
+			printf "  solid: %s\n", join('|', @ss) if @ss;
 		}
 
-		if ($input =~ m|^import\s+{\s*(.+)\s*}\sfrom\s'\@fortawesome/free-regular-svg-icons'|) {
-			@rs = grep { /^\w+$/ } split(/,\s*/, $1);
-			#printf "  solid: %s\n", join('|', @rs) if @rs;
+		if ($input =~ m|^import\s+{\s*([^}]+)\s*}\sfrom\s'\@fortawesome/free-regular-svg-icons'|) {
+			@rs = grep { /^\w+$/ } map {s/\s+$//; $_}  split(/,\s*/, $1);
+			printf "  regular: %s\n", join('|', @rs) if @rs;
 		}
 	}
 
