@@ -1,7 +1,7 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa :icon="faChartBar"/> {{ $t('title') }}</template>
+		<template #title><i class="far fa-chart-bar"><i> {{ $t('title') }}</template>
 
 		<!-- Deliver -->
 		<section class="wptihjuy">

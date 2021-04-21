@@ -16,7 +16,7 @@
 		<router-link :to="`./${page.name}/view-source`">{{ $t('view-source') }}</router-link>
 		<div class="like">
 			<button @click="unlike()" v-if="page.isLiked" :title="$t('unlike')"><fa :icon="faHeartS"/></button>
-			<button @click="like()" v-else :title="$t('like')"><fa :icon="faHeart"/></button>
+			<button @click="like()" v-else :title="$t('like')"><i class="far fa-heart"><i></button>
 			<span class="count" v-if="page.likedCount > 0">{{ page.likedCount }}</span>
 		</div>
 	</footer>

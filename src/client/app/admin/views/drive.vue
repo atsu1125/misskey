@@ -7,11 +7,11 @@
 				<span>{{ $t('fileid-or-url') }}</span>
 			</ui-input>
 			<ui-horizon-group>
-				<ui-button @click="findAndToggleSensitive(true)"><fa :icon="faEyeSlash"/> {{ $t('mark-as-sensitive') }}</ui-button>
+				<ui-button @click="findAndToggleSensitive(true)"><i class="far fa-eye-slash"><i> {{ $t('mark-as-sensitive') }}</ui-button>
 				<ui-button @click="findAndToggleSensitive(false)"><i class="far fa-eye"><i> {{ $t('unmark-as-sensitive') }}</ui-button>
 			</ui-horizon-group>
 			<ui-button @click="findAndDel()"><i class="far fa-trash-alt"><i> {{ $t('delete') }}</ui-button>
-			<ui-button @click="show()"><fa :icon="faSearch"/> {{ $t('lookup') }}</ui-button>
+			<ui-button @click="show()"><i class="fas fa-search"><i> {{ $t('lookup') }}</ui-button>
 			<ui-textarea v-if="file" :value="file | json5" readonly tall style="margin-top:16px;"></ui-textarea>
 		</section>
 	</ui-card>

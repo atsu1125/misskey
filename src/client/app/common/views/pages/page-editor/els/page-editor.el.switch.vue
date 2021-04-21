@@ -3,7 +3,7 @@
 	<template #header><i class="fas fa-bolt"><i> {{ $t('blocks.switch') }}</template>
 
 	<section class="kjuadyyj">
-		<ui-input v-model="value.name"><template #prefix><fa :icon="faMagic"/></template><span>{{ $t('blocks._switch.name') }}</span></ui-input>
+		<ui-input v-model="value.name"><template #prefix><i class="fas fa-magic"><i></template><span>{{ $t('blocks._switch.name') }}</span></ui-input>
 		<ui-input v-model="value.text"><span>{{ $t('blocks._switch.text') }}</span></ui-input>
 		<ui-switch v-model="value.default"><span>{{ $t('blocks._switch.default') }}</span></ui-switch>
 	</section>

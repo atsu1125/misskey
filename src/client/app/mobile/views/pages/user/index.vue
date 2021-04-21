@@ -61,7 +61,7 @@
 					</router-link>
 				</div>
 				<div class="usertags">
-					<a class="usertag" v-for="usertag in user.usertags" :key="usertag" @click="removeUsertag(usertag)"><fa :icon="faUserTag"/>{{ usertag }}</a>
+					<a class="usertag" v-for="usertag in user.usertags" :key="usertag" @click="removeUsertag(usertag)"><i class="fas fa-user-tag"><i>{{ usertag }}</a>
 				</div>
 			</div>
 		</header>

@@ -133,7 +133,7 @@
 					<ui-button @click="setRandomReactions"><i class="far fa-random"></i> {{ $t('@._settings.random') }}</ui-button>
 				</ui-horizon-group>
 				<ui-horizon-group>
-					<ui-button @click="previewReaction()" ref="reactionsPreviewButton"><fa :icon="faEye"/> {{ $t('@._settings.preview') }}</ui-button>
+					<ui-button @click="previewReaction()" ref="reactionsPreviewButton"><i class="far fa-eye"><i> {{ $t('@._settings.preview') }}</ui-button>
 					<ui-button @click="save('reactions', splitedReactions)" primary><i class="far fa-save"><i> {{ $t('@._settings.save') }}</ui-button>
 				</ui-horizon-group>
 				<ui-select v-model="recentReactionsCount">

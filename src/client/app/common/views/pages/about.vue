@@ -53,7 +53,7 @@
 	</ui-container>
 
 	<ui-container v-if="popularReactions">
-		<template #header><fa :icon="faThumbsUp"/> {{ $t('popularReactions') }}</template>
+		<template #header><i class="fas fa-thumbs-up"><i> {{ $t('popularReactions') }}</template>
 		<div class="items">
 			<div class="item" v-for="reaction in popularReactions.reactions" :key="reaction.reaction">
 				<div class="key">

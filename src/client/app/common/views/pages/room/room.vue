@@ -22,7 +22,7 @@
 			<ui-button v-if="isTranslateMode || isRotateMode" @click="exit()"><i class="fas fa-ban"><i> {{ $t('exit') }}</ui-button>
 		</section>
 		<section>
-			<ui-button @click="remove()"><fa :icon="faTrashAlt"/> {{ $t('remove') }}</ui-button>
+			<ui-button @click="remove()"><i class="far fa-trash-alt"><i> {{ $t('remove') }}</ui-button>
 		</section>
 	</div>
 
@@ -53,7 +53,7 @@
 			<ui-input v-model="floor">
 				<template #suffix>F</template>
 			</ui-input>
-			<ui-button inline @click="goTo(Number(floor))" style="max-width: 48px"><fa :icon="faWalking"/></ui-button>
+			<ui-button inline @click="goTo(Number(floor))" style="max-width: 48px"><i class="fas fa-walking"><i></ui-button>
 		</ui-horizon-group>
 		<ui-button @click="goDown()"><i class="fas fa-arrow-down"><i></ui-button>
 	</div>

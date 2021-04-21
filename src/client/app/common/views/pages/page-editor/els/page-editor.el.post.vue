@@ -1,6 +1,6 @@
 <template>
 <x-container @remove="() => $emit('remove')" :draggable="true">
-	<template #header><fa :icon="faPaperPlane"/> {{ $t('blocks.post') }}</template>
+	<template #header><i class="far fa-paper-plane"><i> {{ $t('blocks.post') }}</template>
 
 	<section style="padding: 0 16px 16px 16px;">
 		<ui-textarea v-model="value.text">{{ $t('blocks._post.text') }}</ui-textarea>

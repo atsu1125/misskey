@@ -3,7 +3,7 @@
 	<ui-container :body-togglable="true" class="user-reactions"
 		:expanded="$store.state.device.expandUsersReactions"
 		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersReactions', value: expanded })">
-		<template #header><fa :icon="faHeart"/> {{ $t('@.favoriteReactions') }}</template>
+		<template #header><i class="fas fa-heart"><i> {{ $t('@.favoriteReactions') }}</template>
 		<div class="items" :class="{ deck }" v-if="reactionStats">
 			<div class="item" v-for="reaction in reactionStats.reactions" :key="reaction.reaction" :title="reaction.count">
 				<mk-reaction-icon :reaction="reaction.reaction" :customEmojis="reactionStats.emojis"/>
@@ -13,7 +13,7 @@
 	<ui-container :body-togglable="true" class="user-reactions"
 		:expanded="$store.state.device.expandUsersReacteds"
 		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersReacteds', value: expanded })">
-		<template #header><fa :icon="faHeart"/> {{ $t('@.mostReacteds') }}</template>
+		<template #header><i class="fas fa-heart"><i> {{ $t('@.mostReacteds') }}</template>
 		<div class="items" :class="{ deck }" v-if="reactionStats">
 			<div class="item" v-for="reaction in reactionStats.reacteds" :key="reaction.reaction" :title="reaction.count">
 				<mk-reaction-icon :reaction="reaction.reaction" :customEmojis="reactionStats.emojis"/>

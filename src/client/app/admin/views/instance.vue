@@ -63,7 +63,7 @@
 			<ui-button @click="testEmail()">{{ $t('test-mail') }}</ui-button>
 		</section>
 		<section>
-			<header><fa :icon="faBolt"/> {{ $t('serviceworker-config') }}</header>
+			<header><i class="fas fa-bolt"><i> {{ $t('serviceworker-config') }}</header>
 			<ui-switch v-model="enableServiceWorker">{{ $t('enable-serviceworker') }}<template #desc>{{ $t('serviceworker-info') }}</template></ui-switch>
 			<ui-info>{{ $t('vapid-info') }}<br><code>npx web-push generate-vapid-keys<br>OR<br>docker-compose run --rm web npx web-push generate-vapid-keys # Docker</code></ui-info>
 			<ui-horizon-group inputs class="fit-bottom">

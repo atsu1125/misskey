@@ -1,7 +1,7 @@
 <template>
 <div>
 	<ui-container :show-header="!props.compact">
-		<template #header><fa :icon="faTasks"/>Queue</template>
+		<template #header><i class="fas fa-tasks"><i>Queue</template>
 
 		<div class="mntrproz">
 			<div>

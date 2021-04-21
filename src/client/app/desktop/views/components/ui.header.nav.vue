@@ -8,7 +8,7 @@
 			<router-link to="/featured"><i class="fas fa-newspaper"><i><p>{{ $t('@.featured-notes') }}</p></router-link>
 		</li>
 		<li class="explore" :class="{ active: $route.name == 'explore' || $route.name == 'explore-tag' }">
-			<router-link to="/explore"><fa :icon="faUsers"/><p>{{ $t('@.explore') }}</p></router-link>
+			<router-link to="/explore"><i class="fas fa-users"><i><p>{{ $t('@.explore') }}</p></router-link>
 		</li>
 		<li class="game">
 			<a @click="game">

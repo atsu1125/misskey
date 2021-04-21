@@ -1,7 +1,7 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa :icon="faExclamationCircle"/> {{ $t('title') }}</template>
+		<template #title><i class="fas fa-exclamation-circle"><i> {{ $t('title') }}</template>
 		<section class="fit-top">
 			<sequential-entrance animation="entranceFromTop" delay="25">
 				<div v-for="report in userReports" :key="report.id" class="haexwsjc">

@@ -3,7 +3,7 @@
 	<template #header><i class="fas fa-bolt"><i> {{ $t('blocks.radioButton') }}</template>
 
 	<section style="padding: 0 16px 16px 16px;">
-		<ui-input v-model="value.name"><template #prefix><fa :icon="faMagic"/></template><span>{{ $t('blocks._radioButton.name') }}</span></ui-input>
+		<ui-input v-model="value.name"><template #prefix><i class="fas fa-magic"><i></template><span>{{ $t('blocks._radioButton.name') }}</span></ui-input>
 		<ui-input v-model="value.title"><span>{{ $t('blocks._radioButton.title') }}</span></ui-input>
 		<ui-textarea v-model="values"><span>{{ $t('blocks._radioButton.values') }}</span></ui-textarea>
 		<ui-input v-model="value.default"><span>{{ $t('blocks._radioButton.default') }}</span></ui-input>

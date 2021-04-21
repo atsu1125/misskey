@@ -3,7 +3,7 @@
 	<template #header><i class="far fa-image"><i> {{ $t('blocks.image') }}</template>
 	<template #func>
 		<button @click="choose()">
-			<fa :icon="faFolderOpen"/>
+			<i class="far fa-folder-open"><i>
 		</button>
 	</template>
 

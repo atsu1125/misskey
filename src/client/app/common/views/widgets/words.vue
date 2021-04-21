@@ -1,7 +1,7 @@
 <template>
 <div class="mkw-words">
 	<ui-container :show-header="!props.compact">
-		<template #header><fa :icon="faChartLine"/>{{ $t('@.widgets.words') }}</template>
+		<template #header><i class="fas fa-chart-line"><i>{{ $t('@.widgets.words') }}</template>
 
 		<div class="mkw-words--body" :data-mobile="platform == 'mobile'">
 			<mk-trend-words/>
