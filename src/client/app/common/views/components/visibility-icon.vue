@@ -12,29 +12,21 @@
 		<div v-else-if="visibility == 'specified'" :title="$t('@.note-visibility.specified')">
 			<i class="fas fa-envelope"></i>
 		</div>
-		<div v-else-if="visibility == 'local-public'" :title="$t('@.note-visibility.local-public')">
-			<fa-layers>
-				<i class="fas fa-globe"></i>
-				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
-			</fa-layers>
+		<div class="wrap" v-else-if="visibility == 'local-public'" :title="$t('@.note-visibility.local-public')">
+			<div><i class="fas fa-globe"></i></div>
+			<div class="localOnly"><i class="fas fa-heart"></i></div>
 		</div>
-		<div v-else-if="visibility == 'local-home'" :title="$t('@.note-visibility.local-home')">
-			<fa-layers>
-				<i class="fas fa-home"></i>
-				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
-			</fa-layers>
+		<div class="wrap" v-else-if="visibility == 'local-home'" :title="$t('@.note-visibility.local-home')">
+			<div><i class="fas fa-home"></i></div>
+			<div class="localOnly"><i class="fas fa-heart"></i></div>
 		</div>
-		<div v-else-if="visibility == 'local-followers'" :title="$t('@.note-visibility.local-followers')">
-			<fa-layers>
-				<i class="fas fa-lock"></i>
-				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
-			</fa-layers>
+		<div class="wrap" v-else-if="visibility == 'local-followers'" :title="$t('@.note-visibility.local-followers')">
+			<div><i class="fas fa-lock"></i></div>
+			<div class="localOnly"><i class="fas fa-heart"></i></div>
 		</div>
-		<div v-else-if="visibility == 'local-specified'" :title="$t('@.note-visibility.local-specified')">
-			<fa-layers>
-				<i class="fas fa-envelope"></i>
-				<fa icon="heart" transform="shrink-5 up-6 right-6" style="color:var(--primary)"/>
-			</fa-layers>
+		<div class="wrap" v-else-if="visibility == 'local-specified'" :title="$t('@.note-visibility.local-specified')">
+			<div><i class="fas fa-envelope"></i></div>
+			<div class="localOnly"><i class="fas fa-heart"></i></div>
 		</div>
 		<div v-if="visibility == 'once-public'" :title="$t('@.note-visibility.once-public')">
 			<fa :icon="faHandHoldingHeart"/>
@@ -103,4 +95,11 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
+	.wrap
+		> .localOnly
+			color var(--primary)
+			position absolute
+			top -0.5em
+			right -0.5em
+			transform scale(0.8)
 </style>
