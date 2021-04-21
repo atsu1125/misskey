@@ -9,19 +9,19 @@
 				<router-link to="/"><i class="fas fa-home"></i></router-link>
 			</div>
 			<div :title="$t('@.featured')" class="featured" :class="{ active: $route.name == 'featured' }">
-				<router-link to="/featured"><fa :icon="faNewspaper"/></router-link>
+				<router-link to="/featured"><i class="fas fa-newspaper"></i></router-link>
 			</div>
 			<div :title="$t('@.explore')" class="explore" :class="{ active: $route.name == 'explore' || $route.name == 'explore-tag' }">
-				<router-link to="/explore"><fa :icon="faUsers"/></router-link>
+				<router-link to="/explore"><i class="fas fa-users"></i></router-link>
 			</div>
 			<div :title="$t('@.game')" class="game">
 				<a @click="game"><i class="fas fa-gamepad"></i><template v-if="hasGameInvitations"><i class="fas fa-circle"></i></template></a>
 			</div>
 			<div :title="$t('@.pages')" class="pages">
-				<router-link to="/i/pages"><fa :icon="faStickyNote"/></router-link>
+				<router-link to="/i/pages"><i class="fas fa-sticky-note"></i></router-link>
 			</div>
 			<div :title="$t('@.room')" class="room">
-				<router-link :to="`/@${ $store.state.i.username }/room`"><fa :icon="faDoorOpen"/></router-link>
+				<router-link :to="`/@${ $store.state.i.username }/room`"><i class="fas fa-door-open"></i></router-link>
 			</div>
 		</div>
 
@@ -45,7 +45,7 @@
 				<router-link to="/i/favorites"><i class="fas fa-star"></i></router-link>
 			</div>
 			<div :title="$t('@.noteReactions')">
-				<router-link to="/i/reactions"><fa :icon="faThumbsUp"/></router-link>
+				<router-link to="/i/reactions"><i class="fas fa-thumbs-up"></i></router-link>
 			</div>
 			<div :title="$t('@.follow-requests')">
 				<a @click="followRequests"><i class="far fa-envelope"></i><i v-if="$store.state.i.pendingReceivedFollowRequestsCount">{{ $store.state.i.pendingReceivedFollowRequestsCount }}</i></a>

@@ -1,23 +1,23 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa :icon="faPlus"/> {{ $t('add-relay') }}</template>
+		<template #title><i class="fas fa-plus"></i> {{ $t('add-relay') }}</template>
 		<section class="fit-top">
 			<ui-horizon-group inputs>
 				<ui-input v-model="inbox">
 					<span>{{ $t('inbox') }}</span>
 				</ui-input>
 			</ui-horizon-group>
-			<ui-button @click="add(inbox)"><fa :icon="faPlus"/> {{ $t('add') }}</ui-button>
+			<ui-button @click="add(inbox)"><i class="fas fa-plus"></i> {{ $t('add') }}</ui-button>
 		</section>
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="faProjectDiagram"/> {{ $t('added-relays') }}</template>
+		<template #title><i class="fas fa-project-diagram"></i> {{ $t('added-relays') }}</template>
 		<section v-for="relay in relays" :key="relay.inbox" class="relayath">
 			<div>{{ relay.inbox }}</div>
 			<div>{{ $t(`status.${relay.status}`) }}</div>
-			<ui-button @click="remove(relay.inbox)"><fa :icon="faTrashAlt"/> {{ $t('remove') }}</ui-button>
+			<ui-button @click="remove(relay.inbox)"><i class="far fa-trash-alt"></i> {{ $t('remove') }}</ui-button>
 		</section>
 	</ui-card>
 </div>

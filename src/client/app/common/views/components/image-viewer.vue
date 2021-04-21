@@ -3,7 +3,7 @@
 	<div class="bg" @click="close"></div>
 	<img ref="img" :src="img.url" :alt="img.name" :title="img.name" @click="close" @load="loaded"/>
 	<button v-if="isMultiple && !isFirst" class="prev" @click="prev">
-		<fa :icon="faChevronLeft"/>
+		<i class="fas fa-chevron-left"></i>
 	</button>
 	<button v-if="isMultiple" class="next" @click="next">
 		<fa :icon="isLast ? faAngleDoubleLeft : faChevronRight"/>

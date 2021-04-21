@@ -7,7 +7,7 @@
 
 	<!-- 基本 -->
 	<ui-container>
-		<template #header><fa :icon="faServer"/> {{ $t('basic') }}</template>
+		<template #header><i class="fas fa-server"></i> {{ $t('basic') }}</template>
 		<div class="items" v-if="meta">
 			<div class="item">
 				<div class="key">Misskey</div>
@@ -26,7 +26,7 @@
 
 	<!-- 統計 -->
 	<ui-container>
-		<template #header><fa :icon="faChartBar"/> {{ $t('stats') }}</template>
+		<template #header><i class="fas fa-chart-bar"></i> {{ $t('stats') }}</template>
 		<div class="items">
 			<div class="item" v-if="stats">
 				<div class="key">{{ $t('users') }}</div>
@@ -53,7 +53,7 @@
 	</ui-container>
 
 	<ui-container v-if="popularReactions">
-		<template #header><fa :icon="faThumbsUp"/> {{ $t('popularReactions') }}</template>
+		<template #header><i class="fas fa-thumbs-up"></i> {{ $t('popularReactions') }}</template>
 		<div class="items">
 			<div class="item" v-for="reaction in popularReactions.reactions" :key="reaction.reaction">
 				<div class="key">

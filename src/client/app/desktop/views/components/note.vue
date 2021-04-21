@@ -61,7 +61,7 @@
 			</div>
 			<footer v-if="appearNote.deletedAt == null && !preview" class="footer">
 				<router-link v-if="detail" class="time" :to="appearNote | notePage">
-					<fa :icon="faClock"/>
+					<i class="far fa-clock"></i>
 					{{ }}
 					<mk-time :time="appearNote.createdAt" mode="detail"/>
 				</router-link>
@@ -87,12 +87,12 @@
 				</button>
 				<button v-if="appearNote.myReaction == null" class="reactionButton button" @click="react()" ref="reactButton" :title="$t('add-reaction')">
 					<fa-layers>
-						<fa :icon="faLaugh"/>
+						<i class="far fa-laugh"></i>
 						<fa icon="plus" transform="shrink-8 down-4 right-5" style="color: var(--noteActionsReactionHover)"/>
 					</fa-layers>
 				</button>
 				<button v-if="appearNote.myReaction != null" class="reactionButton reacted button" @click="undoReact(appearNote)" ref="reactButton" :title="$t('undo-reaction')">
-					<fa :icon="faLaugh"/>
+					<i class="far fa-laugh"></i>
 				</button>
 				<button @click="menu()" ref="menuButton" class="button">
 					<i class="fas fa-ellipsis-h"></i>

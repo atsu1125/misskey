@@ -1,12 +1,12 @@
 <template>
 <x-container @remove="() => $emit('remove')" :draggable="true">
-	<template #header><fa :icon="faStickyNote"/> {{ value.title }}</template>
+	<template #header><i class="far fa-sticky-note"></i> {{ value.title }}</template>
 	<template #func>
 		<button @click="rename()">
-			<fa :icon="faPencilAlt"/>
+			<i class="fas fa-pencil-alt"></i>
 		</button>
 		<button @click="add()">
-			<fa :icon="faPlus"/>
+			<i class="fas fa-plus"></i>
 		</button>
 	</template>
 

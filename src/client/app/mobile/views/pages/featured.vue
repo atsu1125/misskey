@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa :icon="faNewspaper"/></span>{{ $t('@.featured-notes') }}</template>
+	<template #header><span style="margin-right:4px;"><i class="fas fa-newspaper"></i></span>{{ $t('@.featured-notes') }}</template>
 
 	<main>
 		<details>

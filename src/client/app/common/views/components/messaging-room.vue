@@ -20,7 +20,7 @@
 	<footer>
 		<transition name="fade">
 			<div class="new-message" v-show="showIndicator">
-				<button @click="onIndicatorClick"><i><fa :icon="faArrowCircleDown"/></i>{{ $t('new-message') }}</button>
+				<button @click="onIndicatorClick"><i><i class="fas fa-arrow-circle-down"></i></i>{{ $t('new-message') }}</button>
 			</div>
 		</transition>
 		<x-form :user="user" ref="form"/>

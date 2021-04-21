@@ -23,7 +23,7 @@
 
 		<label>
 			<ui-select v-model="light" :placeholder="$t('light-theme')">
-				<template #label><fa :icon="faSun"/> {{ $t('light-theme') }}</template>
+				<template #label><i class="far fa-sun"></i> {{ $t('light-theme') }}</template>
 				<optgroup :label="$t('light-themes')">
 					<option v-for="x in lightThemes" :value="x.id" :key="x.id" :style="getStyle(x)">{{ x.name }}</option>
 				</optgroup>
@@ -35,7 +35,7 @@
 
 		<label>
 			<ui-select v-model="dark" :placeholder="$t('dark-theme')">
-				<template #label><fa :icon="faMoon"/> {{ $t('dark-theme') }}</template>
+				<template #label><i class="far fa-moon"></i> {{ $t('dark-theme') }}</template>
 				<optgroup :label="$t('dark-themes')">
 					<option v-for="x in darkThemes" :value="x.id" :key="x.id" :style="getStyle(x)">{{ x.name }}</option>
 				</optgroup>

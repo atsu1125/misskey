@@ -73,7 +73,7 @@
 	<template v-if="notification.type == 'highlight'">
 		<mk-avatar class="avatar" :user="notification.note.user"/>
 		<div class="text">
-			<p><fa :icon="faLightbulb"/><mk-user-name :user="notification.note.user"/></p>
+			<p><i class="far fa-lightbulb"></i><mk-user-name :user="notification.note.user"/></p>
 			<p class="note-preview">{{ getNoteSummary(notification.note) }}</p>
 		</div>
 	</template>

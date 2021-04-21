@@ -3,8 +3,8 @@
 	<table>
 		<thead>
 			<tr>
-				<th><fa :icon="faExchangeAlt"/> In/Out</th>
-				<th><fa :icon="faBolt"/> Activity</th>
+				<th><i class="fas fa-exchange-alt"></i> In/Out</th>
+				<th><i class="fas fa-bolt"></i> Activity</th>
 				<th><i class="fas fa-server"></i> Host</th>
 				<th><i class="fas fa-user"></i> Actor</th>
 			</tr>

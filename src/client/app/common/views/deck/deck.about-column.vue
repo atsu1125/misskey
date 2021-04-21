@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<fa :icon="faInfoCircle"/>{{ $t('@.aboutInstance') }}
+		<i class="fas fa-info-circle"></i>{{ $t('@.aboutInstance') }}
 	</template>
 
 	<div>

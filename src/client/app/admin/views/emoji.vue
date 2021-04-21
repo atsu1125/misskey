@@ -26,7 +26,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="faGrin"/> {{ $t('emojis.title') }}</template>
+		<template #title><i class="far fa-grin"></i> {{ $t('emojis.title') }}</template>
 		<section style="padding: 16px 32px">
 			<ui-horizon-group searchboxes>
 				<ui-input v-model="searchLocal" type="text" spellcheck="false" @input="fetchEmojis('local', true)">
@@ -67,7 +67,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><fa :icon="faGrin"/> {{ $t('remoteEmojis') }}</template>
+		<template #title><i class="far fa-grin"></i> {{ $t('remoteEmojis') }}</template>
 		<section style="padding: 16px 32px">
 			<ui-horizon-group searchboxes>
 				<ui-select v-model="origin">

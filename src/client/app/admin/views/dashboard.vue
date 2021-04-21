@@ -38,7 +38,7 @@
 		</div>
 		<div>
 			<div>
-				<div><fa :icon="faDatabase"/></div>
+				<div><i class="fas fa-database"></i></div>
 				<div>
 					<span>{{ $t('drive') }}</span>
 					<b>{{ stats.driveUsageLocal | bytes }}</b>

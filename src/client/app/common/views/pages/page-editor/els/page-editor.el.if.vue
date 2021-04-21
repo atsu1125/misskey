@@ -1,9 +1,9 @@
 <template>
 <x-container @remove="() => $emit('remove')" :draggable="true">
-	<template #header><fa :icon="faQuestion"/> {{ $t('blocks.if') }}</template>
+	<template #header><i class="fas fa-question"></i> {{ $t('blocks.if') }}</template>
 	<template #func>
 		<button @click="add()">
-			<fa :icon="faPlus"/>
+			<i class="fas fa-plus"></i>
 		</button>
 	</template>
 
