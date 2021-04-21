@@ -33,12 +33,12 @@ sub process {
 	for my $input (@inputs) {
 		for my $from (@ss) {
 			my $name = conv_case($from);
-			$input =~ s|<fa :icon="$from"/>|<i class="fas $name"><i>|;
+			$input =~ s|<fa :icon="$from"/>|<i class="fas $name"></i>|;
 		}
 
 		for my $from (@rs) {
 			my $name = conv_case($from);
-			$input =~ s|<fa :icon="$from"/>|<i class="far $name"><i>|;
+			$input =~ s|<fa :icon="$from"/>|<i class="far $name"></i>|;
 		}
 
 		push(@outputs, $input);
