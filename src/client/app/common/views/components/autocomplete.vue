@@ -126,6 +126,32 @@ const angleDb: MfmDef[] = [
 	{ name: 'marquee slide', head: '<marquee slide>', tail: '</marquee>' },
 ];
 
+const fnDb: MfmDef[] = [
+	{ name: 'jerry', head: '[jerry ', tail: ']', desc: '[jerry 🍮]' },
+	{ name: 'tada', head: '[tada ', tail: ']', desc: '[tada 🍮]' },
+	{ name: 'jump', head: '[jump ', tail: ']', desc: '[jump 🍮]' },
+	{ name: 'bounce', head: '[bounce ', tail: ']', desc: '[bounce 🍮]' },
+	{ name: 'shake', head: '[shake ', tail: ']', desc: '[shake 🍮]' },
+	{ name: 'twitch', head: '[twitch ', tail: ']', desc: '[twitch 🍮]' },
+
+	{ name: 'flip', head: '[flip ', tail: ']', desc: '[flip flip]' },
+	{ name: 'flip.v', head: '[flip.v ', tail: ']', desc: '[flip.v flip]' },
+	{ name: 'flip.v,h', head: '[flip.v,h ', tail: ']', desc: '[flip.v,h flip]' },
+
+	{ name: 'spin', head: '[spin ', tail: ']', desc: '[spin spin]' },
+	{ name: 'spin.x', head: '[spin.x ', tail: ']', desc: '[spin.x spin]' },
+	{ name: 'spin.y', head: '[spin.y ', tail: ']', desc: '[spin.y spin]' },
+
+	{ name: 'x2', head: '[x2 ', tail: ']', desc: '[x2 🍮]' },
+	{ name: 'x3', head: '[x3 ', tail: ']', desc: '[x3 🍮]' },
+	{ name: 'x4', head: '[x4 ', tail: ']', desc: '[x4 🍮]' },
+
+	{ name: 'blur', head: '[blur ', tail: ']', desc: '[blur 🍮]' },
+
+	{ name: 'font.serif', head: '[font.serif ', tail: ']', desc: '[font.serif serif]' },
+	{ name: 'font.monospace', head: '[font.monospace ', tail: ']', desc: '[font.monospace monospace]' },
+];
+
 export default Vue.extend({
 	props: ['type', 'q', 'textarea', 'complete', 'close', 'x', 'y', 'localOnly'],
 
@@ -287,6 +313,10 @@ export default Vue.extend({
 				if (this.q.startsWith('<')) {
 					const name = this.q.substr(1);
 					const db = angleDb.filter(x => x.name.startsWith(name));
+					this.mfms = db;
+				} else if (this.q.startsWith('[')) {
+					const name = this.q.substr(1);
+					const db = fnDb.filter(x => x.name.startsWith(name));
 					this.mfms = db;
 				}
 			}

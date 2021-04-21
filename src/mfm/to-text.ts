@@ -13,6 +13,11 @@ function visit(node: MfmNode): string {
 			return [node.props.lang, node.props.code].filter(check).join(' ');
 		}
 
+		case 'mathBlock':
+		case 'mathInline': {
+			return node.props.formula;
+		}
+
 		/*
 		case 'mention': {
 			return node.props.canonical;

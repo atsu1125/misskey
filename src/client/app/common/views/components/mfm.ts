@@ -4,6 +4,7 @@ import { parseFull, parsePlain, parsePlainX, parseBasic } from '../../../../../m
 import MkUrl from './url.vue';
 import MkMention from './mention.vue';
 import { concat } from '../../../../../prelude/array';
+import MkFormula from './formula.vue';
 import MkCode from './code.vue';
 import MkGoogle from './google.vue';
 import { host } from '../../../config';
@@ -62,6 +63,11 @@ export default Vue.component('misskey-flavored-markdown', {
 
 		let bigCount = 0;
 		let motionCount = 0;
+
+		const validTime = (t: string | null | undefined) => {
+			if (t == null) return null;
+			return t.match(/^[0-9.]+s$/) ? t : null;
+		}
 
 		const genEl = (nodes: MfmNode[], inQuote?: string) => concat(nodes.map((node): VNode[] => {
 			switch (node.type) {
@@ -135,6 +141,103 @@ export default Vue.component('misskey-flavored-markdown', {
 							name: 'animate-css',
 							value: { classes: 'wobble', iteration: 'infinite' }
 						}]
+					}, genEl(node.children, inQuote));
+				}
+
+				case 'fn': {
+					// TODO: CSSを文字列で組み立てていくと node.props.args.~~~ 経由でCSSインジェクションできるのでよしなにやる
+					let style;
+					switch (node.props.name) {
+						case 'tada': {
+							style = `font-size: 150%;` + (!this.$store.state.settings.disableAnimatedMfm ? 'animation: tada 1s linear infinite both;' : '');
+							break;
+						}
+						case 'jelly': {
+							const speed = validTime(node.props.args.speed) || '1s';
+							style = (!this.$store.state.settings.disableAnimatedMfm ? `animation: mfm-rubberBand ${speed} linear infinite both;` : '');
+							break;
+						}
+						case 'twitch': {
+							const speed = validTime(node.props.args.speed) || '0.5s';
+							style = !this.$store.state.settings.disableAnimatedMfm ? `animation: mfm-twitch ${speed} ease infinite;` : '';
+							break;
+						}
+						case 'shake': {
+							const speed = validTime(node.props.args.speed) || '0.5s';
+							style = !this.$store.state.settings.disableAnimatedMfm ? `animation: mfm-shake ${speed} ease infinite;` : '';
+							break;
+						}
+						case 'spin': {
+							const direction =
+								node.props.args.left ? 'reverse' :
+								node.props.args.alternate ? 'alternate' :
+								'normal';
+							const anime =
+								node.props.args.x ? 'mfm-spinX' :
+								node.props.args.y ? 'mfm-spinY' :
+								'mfm-spin';
+							const speed = validTime(node.props.args.speed) || '1.5s';
+							const delay = validTime(node.props.args.delay) || '0s';
+							style = !this.$store.state.settings.disableAnimatedMfm ? `animation: ${anime} ${speed} ${delay} linear infinite; animation-direction: ${direction};` : '';
+							break;
+						}
+						case 'jump': {
+							style = !this.$store.state.settings.disableAnimatedMfm ? 'animation: mfm-jump 0.75s linear infinite;' : '';
+							break;
+						}
+						case 'bounce': {
+							style = !this.$store.state.settings.disableAnimatedMfm ? 'animation: mfm-bounce 0.75s linear infinite; transform-origin: center bottom;' : '';
+							break;
+						}
+						case 'flip': {
+							const transform =
+								(node.props.args.h && node.props.args.v) ? 'scale(-1, -1)' :
+								node.props.args.v ? 'scaleY(-1)' :
+								'scaleX(-1)';
+							style = `transform: ${transform};`;
+							break;
+						}
+						case 'rgbshift': {
+							style = !this.$store.state.settings.disableAnimatedMfm ? 'animation: mfm-rgbshift 2s linear infinite;' : '';
+							break;
+						}
+						case 'x2': {
+							style = `font-size: 200%;`;
+							break;
+						}
+						case 'x3': {
+							style = `font-size: 400%;`;
+							break;
+						}
+						case 'x4': {
+							style = `font-size: 600%;`;
+							break;
+						}
+						case 'font': {
+							const family =
+								node.props.args.serif ? 'serif' :
+								node.props.args.monospace ? 'monospace' :
+								node.props.args.cursive ? 'cursive' :
+								node.props.args.fantasy ? 'fantasy' :
+								node.props.args.emoji ? 'emoji' :
+								node.props.args.math ? 'math' :
+								null;
+							if (family) style = `font-family: ${family};`;
+							break;
+						}
+						case 'blur': {
+							return [createElement('span', {
+								attrs: {
+									class: '_mfm_blur_'
+								}
+							}, genEl(node.children, inQuote))];
+						}
+					}
+
+					return (createElement as any)('span', {
+						attrs: {
+							style: 'display: inline-block;' + style
+						},
 					}, genEl(node.children, inQuote));
 				}
 
@@ -410,6 +513,28 @@ export default Vue.component('misskey-flavored-markdown', {
 						props: {
 							customEmojis: this.customEmojis || customEmojis,
 							normal: this.plain
+						}
+					})];
+				}
+
+				case 'mathInline': {
+					//const MkFormula = () => import('./formula.vue').then(m => m.default);
+					return [createElement(MkFormula, {
+						key: Math.random(),
+						props: {
+							formula: node.props.formula,
+							block: false
+						}
+					})];
+				}
+
+				case 'mathBlock': {
+					//const MkFormula = () => import('./formula.vue').then(m => m.default);
+					return [createElement(MkFormula, {
+						key: Math.random(),
+						props: {
+							formula: node.props.formula,
+							block: true
 						}
 					})];
 				}

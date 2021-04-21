@@ -82,12 +82,14 @@ class Autocomplete {
 		const hashtagIndex = text.lastIndexOf('#');
 		const emojiIndex = text.lastIndexOf(':');
 		const angleIndex = text.lastIndexOf('<');
+		const fnIndex = text.lastIndexOf('[');
 
 		const max = Math.max(
 			mentionIndex,
 			hashtagIndex,
 			emojiIndex,
 			angleIndex,
+			fnIndex,
 		);
 
 		if (max == -1) {
@@ -99,6 +101,7 @@ class Autocomplete {
 		const isHashtag = hashtagIndex != -1;
 		const isEmoji = emojiIndex != -1;
 		const isAngle = angleIndex != -1;
+		const isFn = fnIndex != -1;
 
 		let opened = false;
 
@@ -130,6 +133,14 @@ class Autocomplete {
 			const angle = text.substr(angleIndex + 1);
 			if (angle.match(/^[a-z]*$/)) {
 				this.open('mfm', `<${angle}`);
+				opened = true;
+			}
+		}
+
+		if (isFn && opened == false) {
+			const fn = text.substr(fnIndex + 1);
+			if (fn.match(/^[a-z]*$/)) {
+				this.open('mfm', `[${fn}`);
 				opened = true;
 			}
 		}

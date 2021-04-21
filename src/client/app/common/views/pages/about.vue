@@ -64,6 +64,19 @@
 		</div>
 	</ui-container>
 
+	<ui-container v-if="reacters">
+		<template #header><fa :icon="['far', 'smile']"/> {{ $t('reacters') }}</template>
+		<div class="items">
+			<div class="item" v-for="(item, i) in reacters.global" :key="`r-${item.user.id}`">
+				<div class="key" style="display: flex; gap: 0.5em; align-items: center;">
+					<mk-avatar class="avatar" :user="item.user" :key="`ra-${item.user.id}`" style="width: 1.5em; height: 1.5em;"/>
+					<mk-user-name :user="item.user" :key="`ru-${item.user.id}`"/>
+				</div>
+				<div class="value">{{ item.count }}</div>
+			</div>
+		</div>
+	</ui-container>
+
 </div>
 </template>
 
@@ -82,6 +95,7 @@ export default Vue.extend({
 			reactions: null,
 			popularReactions: null,
 			activeUsersCount: null,
+			reacters: null,
 			faServer, faChartBar, faThumbsUp
 		};
 	},
@@ -98,6 +112,9 @@ export default Vue.extend({
 		});
 		this.$root.api('active-users-count', {}, false, true).then((activeUsersCount: any) => {
 			this.activeUsersCount = activeUsersCount;
+		});
+		this.$root.api('notes/reactions/ranking', {}, false, true).then((reacters: any) => {
+			this.reacters = reacters;
 		});
 	},
 
