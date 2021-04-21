@@ -85,13 +85,13 @@
 			<ul>
 				<li @click="toggleDeckMode">
 					<p>
-						<template v-if="$store.state.device.inDeckMode"><span>{{ $t('@.undeck') }}</span><i><fa :icon="faHome"/></i></template>
-						<template v-else><span>{{ $t('@.deck') }}</span><i><fa :icon="faColumns"/></i></template>
+						<template v-if="$store.state.device.inDeckMode"><span>{{ $t('@.undeck') }}</span><i><i class="fas fa-home"><i></i></template>
+						<template v-else><span>{{ $t('@.deck') }}</span><i><i class="fas fa-columns"><i></i></template>
 					</p>
 				</li>
 				<li @click="toggleAppType">
 					<p>
-						<template v-if="$root.isMobile"><span>{{ $t('@.desktop-mode') }}</span><i><fa :icon="faDesktop"/></i></template>
+						<template v-if="$root.isMobile"><span>{{ $t('@.desktop-mode') }}</span><i><i class="fas fa-desktop"><i></i></template>
 						<template v-else><span>{{ $t('@.mobile-mode') }}</span><i><fa :icon="faMobileAlt" style="margin-right: 3px"/></i></template>
 					</p>
 				</li>

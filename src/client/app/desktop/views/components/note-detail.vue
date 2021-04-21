@@ -51,7 +51,7 @@
 		</div>
 		<footer>
 			<router-link class="time" :to="appearNote | notePage">
-				<fa :icon="faClock"/>
+				<i class="far fa-clock"><i>
 				{{ }}
 				<mk-time :time="appearNote.createdAt" mode="detail"/>
 			</router-link>

@@ -3,7 +3,7 @@
 	<template #header><fa v-if="icon" :icon="icon"/> <template v-if="title">{{ title }} <span class="turmquns" v-if="typeText">({{ typeText }})</span></template><template v-else-if="typeText">{{ typeText }}</template></template>
 	<template #func>
 		<button @click="changeType()">
-			<fa :icon="faPencilAlt"/>
+			<i class="fas fa-pencil-alt"><i>
 		</button>
 	</template>
 

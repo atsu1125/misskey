@@ -1,7 +1,7 @@
 <template>
 <div class="anltbovirfeutcigvwgmgxipejaeozxi">
 	<ui-container :show-header="!props.compact">
-		<template #header><fa :icon="faBroadcastTower"/>{{ $t('title') }}</template>
+		<template #header><i class="fas fa-broadcast-tower"><i>{{ $t('title') }}</template>
 		<template #func>
 			<button v-if="announcements.length > 1" @click="next">
 				<fa v-if="i == announcements.length - 1" :icon="faUndo"/>

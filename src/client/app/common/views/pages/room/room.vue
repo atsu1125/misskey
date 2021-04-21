@@ -17,9 +17,9 @@
 			</template>
 		</section>
 		<section>
-			<ui-button @click="translate()" :primary="isTranslateMode"><fa :icon="faArrowsAlt"/> {{ $t('translate') }}</ui-button>
-			<ui-button @click="rotate()" :primary="isRotateMode"><fa :icon="faUndo"/> {{ $t('rotate') }}</ui-button>
-			<ui-button v-if="isTranslateMode || isRotateMode" @click="exit()"><fa :icon="faBan"/> {{ $t('exit') }}</ui-button>
+			<ui-button @click="translate()" :primary="isTranslateMode"><i class="fas fa-arrows-alt"><i> {{ $t('translate') }}</ui-button>
+			<ui-button @click="rotate()" :primary="isRotateMode"><i class="fas fa-undo"><i> {{ $t('rotate') }}</ui-button>
+			<ui-button v-if="isTranslateMode || isRotateMode" @click="exit()"><i class="fas fa-ban"><i> {{ $t('exit') }}</ui-button>
 		</section>
 		<section>
 			<ui-button @click="remove()"><fa :icon="faTrashAlt"/> {{ $t('remove') }}</ui-button>
@@ -28,7 +28,7 @@
 
 	<div class="menu" v-if="isMyRoom">
 		<section>
-			<ui-button @click="add()"><fa :icon="faBoxOpen"/> {{ $t('add-furniture') }}</ui-button>
+			<ui-button @click="add()"><i class="fas fa-box-open"><i> {{ $t('add-furniture') }}</ui-button>
 		</section>
 		<section>
 			<ui-select :value="roomType" @input="updateRoomType($event)">
@@ -42,20 +42,20 @@
 			</label>
 		</section>
 		<section>
-			<ui-button :primary="changed" @click="save()"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
-			<ui-button @click="clear()"><fa :icon="faBroom"/> {{ $t('clear') }}</ui-button>
+			<ui-button :primary="changed" @click="save()"><i class="far fa-save"><i> {{ $t('save') }}</ui-button>
+			<ui-button @click="clear()"><i class="fas fa-broom"><i> {{ $t('clear') }}</ui-button>
 		</section>
 	</div>
 
 	<div class="nav">
-		<ui-button @click="goUp()"><fa :icon="faArrowUp"/></ui-button>
+		<ui-button @click="goUp()"><i class="fas fa-arrow-up"><i></ui-button>
 		<ui-horizon-group>
 			<ui-input v-model="floor">
 				<template #suffix>F</template>
 			</ui-input>
 			<ui-button inline @click="goTo(Number(floor))" style="max-width: 48px"><fa :icon="faWalking"/></ui-button>
 		</ui-horizon-group>
-		<ui-button @click="goDown()"><fa :icon="faArrowDown"/></ui-button>
+		<ui-button @click="goDown()"><i class="fas fa-arrow-down"><i></ui-button>
 	</div>
 </div>
 </template>

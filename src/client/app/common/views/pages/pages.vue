@@ -3,7 +3,7 @@
 	<ui-container :body-togglable="true">
 		<template #header><fa :icon="faEdit" fixed-width/>{{ $t('my-pages') }}</template>
 		<div class="rknalgpo my">
-			<ui-button class="new" @click="create()"><fa :icon="faPlus"/></ui-button>
+			<ui-button class="new" @click="create()"><i class="fas fa-plus"><i></ui-button>
 			<ui-pagination :pagination="myPagesPagination" #default="{items}">
 				<x-page-preview v-for="page in items" class="ckltabjg" :page="page" :key="page.id"/>
 			</ui-pagination>

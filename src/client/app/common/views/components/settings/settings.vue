@@ -129,12 +129,12 @@
 					{{ $t('@._settings.reactions') }}<template #desc>{{ $t('@._settings.reactions-description') }}</template>
 				</ui-input>
 				<ui-horizon-group>
-					<ui-button @click="setDefaultReactions"><fa :icon="faUndoAlt"/> {{ $t('@._settings.default') }}</ui-button>
+					<ui-button @click="setDefaultReactions"><i class="fas fa-undo-alt"><i> {{ $t('@._settings.default') }}</ui-button>
 					<ui-button @click="setRandomReactions"><i class="far fa-random"></i> {{ $t('@._settings.random') }}</ui-button>
 				</ui-horizon-group>
 				<ui-horizon-group>
 					<ui-button @click="previewReaction()" ref="reactionsPreviewButton"><fa :icon="faEye"/> {{ $t('@._settings.preview') }}</ui-button>
-					<ui-button @click="save('reactions', splitedReactions)" primary><fa :icon="faSave"/> {{ $t('@._settings.save') }}</ui-button>
+					<ui-button @click="save('reactions', splitedReactions)" primary><i class="far fa-save"><i> {{ $t('@._settings.save') }}</ui-button>
 				</ui-horizon-group>
 				<ui-select v-model="recentReactionsCount">
 					<template #label>{{ $t('@._settings.recentReactionsCount') }}</template>

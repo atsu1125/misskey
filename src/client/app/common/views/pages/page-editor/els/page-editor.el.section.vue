@@ -6,7 +6,7 @@
 			<fa :icon="faPencilAlt"/>
 		</button>
 		<button @click="add()">
-			<fa :icon="faPlus"/>
+			<i class="fas fa-plus"><i>
 		</button>
 	</template>
 

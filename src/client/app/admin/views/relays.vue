@@ -1,14 +1,14 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><fa :icon="faPlus"/> {{ $t('add-relay') }}</template>
+		<template #title><i class="fas fa-plus"><i> {{ $t('add-relay') }}</template>
 		<section class="fit-top">
 			<ui-horizon-group inputs>
 				<ui-input v-model="inbox">
 					<span>{{ $t('inbox') }}</span>
 				</ui-input>
 			</ui-horizon-group>
-			<ui-button @click="add(inbox)"><fa :icon="faPlus"/> {{ $t('add') }}</ui-button>
+			<ui-button @click="add(inbox)"><i class="fas fa-plus"><i> {{ $t('add') }}</ui-button>
 		</section>
 	</ui-card>
 

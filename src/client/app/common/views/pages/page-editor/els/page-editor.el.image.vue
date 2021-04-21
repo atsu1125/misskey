@@ -1,6 +1,6 @@
 <template>
 <x-container @remove="() => $emit('remove')" :draggable="true">
-	<template #header><fa :icon="faImage"/> {{ $t('blocks.image') }}</template>
+	<template #header><i class="far fa-image"><i> {{ $t('blocks.image') }}</template>
 	<template #func>
 		<button @click="choose()">
 			<fa :icon="faFolderOpen"/>

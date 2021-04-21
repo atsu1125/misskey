@@ -2,11 +2,11 @@
 <div>
 	<div class="gwbmwxkm">
 		<header>
-			<div class="title"><fa :icon="faStickyNote"/> {{ readonly ? $t('read-page') : pageId ? $t('edit-page') : $t('new-page') }}</div>
+			<div class="title"><i class="far fa-sticky-note"><i> {{ readonly ? $t('read-page') : pageId ? $t('edit-page') : $t('new-page') }}</div>
 			<div class="buttons">
 				<button @click="del()" v-if="!readonly"><fa :icon="faTrashAlt"/></button>
-				<button @click="() => showOptions = !showOptions"><fa :icon="faCog"/></button>
-				<button @click="save()" v-if="!readonly"><fa :icon="faSave"/></button>
+				<button @click="() => showOptions = !showOptions"><i class="fas fa-cog"><i></button>
+				<button @click="save()" v-if="!readonly"><i class="far fa-save"><i></button>
 			</div>
 		</header>
 
@@ -37,7 +37,7 @@
 				</ui-select>
 
 				<div class="eyeCatch">
-					<ui-button v-if="eyeCatchingImageId == null && !readonly" @click="setEyeCatchingImage()"><fa :icon="faPlus"/> {{ $t('set-eye-catching-image') }}</ui-button>
+					<ui-button v-if="eyeCatchingImageId == null && !readonly" @click="setEyeCatchingImage()"><i class="fas fa-plus"><i> {{ $t('set-eye-catching-image') }}</ui-button>
 					<div v-else-if="eyeCatchingImage">
 						<img :src="eyeCatchingImage.url" :alt="eyeCatchingImage.name"/>
 						<ui-button @click="removeEyeCatchingImage()" v-if="!readonly"><fa :icon="faTrashAlt"/> {{ $t('remove-eye-catching-image') }}</ui-button>
@@ -47,12 +47,12 @@
 
 			<x-blocks class="content" v-model="content" :ai-script="aiScript"/>
 
-			<ui-button @click="add()" v-if="!readonly"><fa :icon="faPlus"/></ui-button>
+			<ui-button @click="add()" v-if="!readonly"><i class="fas fa-plus"><i></ui-button>
 		</section>
 	</div>
 
 	<ui-container :body-togglable="true">
-		<template #header><fa :icon="faMagic"/> {{ $t('variables') }}</template>
+		<template #header><i class="fas fa-magic"><i> {{ $t('variables') }}</template>
 		<div class="qmuvgica">
 			<x-draggable tag="div" class="variables" v-show="variables.length > 0" :list="variables" handle=".drag-handle" :group="{ name: 'variables' }" animation="150" swap-threshold="0.5">
 				<x-variable v-for="variable in variables"
@@ -68,7 +68,7 @@
 				/>
 			</x-draggable>
 
-			<ui-button @click="addVariable()" class="add" v-if="!readonly"><fa :icon="faPlus"/></ui-button>
+			<ui-button @click="addVariable()" class="add" v-if="!readonly"><i class="fas fa-plus"><i></ui-button>
 
 			<ui-info><span v-html="$t('variables-info')"></span><a @click="() => moreDetails = true" style="display:block;">{{ $t('more-details') }}</a></ui-info>
 
@@ -81,7 +81,7 @@
 	</ui-container>
 
 	<ui-container :body-togglable="true" :expanded="false">
-		<template #header><fa :icon="faCode"/> {{ $t('inspector') }}</template>
+		<template #header><i class="fas fa-code"><i> {{ $t('inspector') }}</template>
 		<div style="padding:0 32px 32px 32px;">
 			<ui-textarea :value="JSON.stringify(content, null, 2)" readonly tall>{{ $t('content') }}</ui-textarea>
 			<ui-textarea :value="JSON.stringify(variables, null, 2)" readonly tall>{{ $t('variables') }}</ui-textarea>
