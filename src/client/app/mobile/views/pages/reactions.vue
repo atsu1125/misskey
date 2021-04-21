@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><i class="fas fa-thumbs-up"><i></span>{{ $t('@.noteReactions') }}</template>
+	<template #header><span style="margin-right:4px;"><fa :icon="faThumbsUp"/></span>{{ $t('@.noteReactions') }}</template>
 
 	<main>
 		<sequential-entrance animation="entranceFromTop" delay="25">

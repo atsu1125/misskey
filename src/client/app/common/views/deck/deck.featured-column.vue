@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<i class="fas fa-newspaper"><i>{{ $t('@.featured-notes') }}
+		<fa :icon="faNewspaper"/>{{ $t('@.featured-notes') }}
 	</template>
 
 	<div>

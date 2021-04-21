@@ -45,7 +45,7 @@
 				<router-link to="/i/favorites"><i class="fas fa-star"></i></router-link>
 			</div>
 			<div :title="$t('@.noteReactions')">
-				<router-link to="/i/reactions"><i class="fas fa-thumbs-up"><i></router-link>
+				<router-link to="/i/reactions"><fa :icon="faThumbsUp"/></router-link>
 			</div>
 			<div :title="$t('@.follow-requests')">
 				<a @click="followRequests"><i class="far fa-envelope"></i><i v-if="$store.state.i.pendingReceivedFollowRequestsCount">{{ $store.state.i.pendingReceivedFollowRequestsCount }}</i></a>

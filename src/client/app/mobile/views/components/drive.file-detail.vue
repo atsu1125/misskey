@@ -28,7 +28,7 @@
 	<div class="menu">
 		<div>
 			<ui-input readonly :value="file.url">URL</ui-input>
-			<ui-button link :href="dlUrl"><i class="fas fa-external-link-alt"><i> {{ $t('open') }}</ui-button>
+			<ui-button link :href="dlUrl"><fa :icon="faExternalLinkAlt"/> {{ $t('open') }}</ui-button>
 			<ui-button @click="rename"><i class="fas fa-pencil-alt"></i> {{ $t('rename') }}</ui-button>
 			<ui-button @click="move"><i class="far fa-folder-open"></i> {{ $t('move') }}</ui-button>
 			<ui-button @click="toggleSensitive" v-if="file.isSensitive"><i class="far fa-eye"></i> {{ $t('unmark-as-sensitive') }}</ui-button>

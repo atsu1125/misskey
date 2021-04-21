@@ -68,7 +68,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><i class="fas fa-cogs"><i> {{ $t('advanced') }}</template>
+		<template #title><fa :icon="faCogs"/> {{ $t('advanced') }}</template>
 
 		<section>
 			<div>
@@ -99,7 +99,7 @@
 		</section>
 
 		<section v-if="enableEmail">
-			<header><i class="far fa-envelope"><i> {{ $t('email') }}</header>
+			<header><fa :icon="faEnvelope"/> {{ $t('email') }}</header>
 
 			<div>
 				<template v-if="$store.state.i.email != null">

@@ -1,6 +1,6 @@
 <template>
 <x-container @remove="() => $emit('remove')" :draggable="true">
-	<template #header><i class="fas fa-align-left"><i> {{ $t('blocks.text') }}</template>
+	<template #header><fa :icon="faAlignLeft"/> {{ $t('blocks.text') }}</template>
 
 	<section class="ihymsbbe">
 		<textarea v-model="value.text"></textarea>

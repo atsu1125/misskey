@@ -5,10 +5,10 @@
 		<div class="buttons">
 			<slot name="func"></slot>
 			<button v-if="removable" @click="remove()">
-				<i class="far fa-trash-alt"><i>
+				<fa :icon="faTrashAlt"/>
 			</button>
 			<button v-if="draggable" class="drag-handle">
-				<i class="fas fa-bars"><i>
+				<fa :icon="faBars"/>
 			</button>
 			<button @click="toggleContent(!showBody)">
 				<template v-if="showBody"><i class="fas fa-angle-up"></i></template>

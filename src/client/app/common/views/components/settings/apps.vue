@@ -6,7 +6,7 @@
 			<p><b>{{ app.name }}</b></p>
 			<p>{{ app.createdAt }}</p>
 			<p>{{ app.description }}</p>
-			<ui-button @click="revoke(app.id)"><i class="fas fa-trash-alt"><i></ui-button>
+			<ui-button @click="revoke(app.id)"><fa :icon="faTrashAlt"/></ui-button>
 		</div>
 	</div>
 	<div>

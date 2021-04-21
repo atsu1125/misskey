@@ -2,14 +2,14 @@
 <div class="mzxlfysy">
 	<div>
 		<header>
-			<span><i class="fas fa-inbox"><i> In</span>
+			<span><fa :icon="faInbox"/> In</span>
 			<span v-if="latestStats">{{ latestStats.inbox.activeSincePrevTick | number }} / {{ latestStats.inbox.delayed | number }}</span>
 		</header>
 		<div ref="in"></div>
 	</div>
 	<div>
 		<header>
-			<span><i class="far fa-paper-plane"><i> Out</span>
+			<span><fa :icon="faPaperPlane"/> Out</span>
 			<span v-if="latestStats">{{ latestStats.deliver.activeSincePrevTick | number }} / {{ latestStats.deliver.delayed | number }}</span>
 		</header>
 		<div ref="out"></div>

@@ -35,7 +35,7 @@
 			<i class="fas fa-hand-holding-heart"><i>
 		</div>
 		<div v-else-if="visibility == 'once-specified'" :title="$t('@.note-visibility.once-specified')">
-			<i class="fas fa-satellite-dish"><i>
+			<fa :icon="faSatelliteDish"/>
 		</div>
 
 		<div v-if="withText" style="margin-left: 0.3em">

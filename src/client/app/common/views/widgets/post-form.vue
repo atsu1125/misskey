@@ -27,7 +27,7 @@
 			<footer>
 				<button @click="chooseFile"><i class="fas fa-upload"></i></button>
 				<button @click="chooseFileFromDrive"><i class="fas fa-cloud"></i></button>
-				<button @click="kao"><i class="fas fa-fish"><i></button>
+				<button @click="kao"><fa :icon="faFish"/></button>
 				<button @click="setVisibility" class="visibility" ref="visibilityButton">
 					<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
 				</button>

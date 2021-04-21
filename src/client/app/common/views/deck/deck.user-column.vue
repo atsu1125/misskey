@@ -70,7 +70,7 @@
 				</div>
 			</div>
 			<div class="usertags">
-				<a class="usertag" v-for="usertag in user.usertags" :key="usertag" @click="removeUsertag(usertag)"><i class="fas fa-user-tag"><i>{{ usertag }}</a>
+				<a class="usertag" v-for="usertag in user.usertags" :key="usertag" @click="removeUsertag(usertag)"><fa :icon="faUserTag"/>{{ usertag }}</a>
 			</div>
 		</div>
 		<router-view :user="user"></router-view>

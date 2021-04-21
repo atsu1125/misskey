@@ -11,7 +11,7 @@
 				<div :data-active="src == 'tag'" @click="src = 'tag'" v-if="tagTl"><i class="fas fa-hashtag"></i> {{ tagTl.title }}</div>
 				<div :data-active="src == 'list'" @click="src = 'list'" v-if="list"><i class="fas fa-list"></i> {{ list.title }}</div>
 				<div class="buttons">
-					<button :data-active="src == 'hot'" @click="src = 'hot'" :title="$t('reacted')"><i class="fas fa-thumbs-up"><i></button>
+					<button :data-active="src == 'hot'" @click="src = 'hot'" :title="$t('reacted')"><fa :icon="faThumbsUp"/></button>
 					<button :data-active="src == 'locao'" @click="src = 'locao'" :title="$t('locao')" v-if="enableLocalTimeline"><i class="fas fa-heart"></i></button>
 					<button :data-active="src == 'mentions'" @click="src = 'mentions'" :title="$t('mentions')"><i class="fas fa-at"></i><i class="indicator" v-if="$store.state.i.hasUnreadMentions"><i class="fas fa-circle"></i></i></button>
 					<button :data-active="src == 'messages'" @click="src = 'messages'" :title="$t('messages')"><i class="far fa-envelope"></i><i class="indicator" v-if="$store.state.i.hasUnreadSpecifiedNotes"><i class="fas fa-circle"></i></i></button>

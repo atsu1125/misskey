@@ -1,6 +1,6 @@
 <template>
 <ui-card>
-	<template #title><i class="far fa-lightbulb"><i> {{ $t('extended-notification') }}</template>
+	<template #title><fa :icon="faLightbulb"/> {{ $t('extended-notification') }}</template>
 
 	<section>
 		<header>{{ $t('highlighted-words') }}</header>

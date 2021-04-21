@@ -1,6 +1,6 @@
 <template>
 <ui-card style="margin: 1em auto">
-	<template #title><i class="far fa-question-circle"><i> 文字装飾チートシート</template>
+	<template #title><fa :icon="faQuestionCircle"/> 文字装飾チートシート</template>
 
 	<details style="padding: 0 32px 8px 32px">
 		<summary style="padding: 16px 0; cursor: pointer">Playground</summary>

@@ -1,7 +1,7 @@
 <template>
 <div class="iwaalbte" v-if="disabled">
 	<p>
-		<i class="fas fa-minus-circle"><i>
+		<fa :icon="faMinusCircle"/>
 		{{ $t('disabled-timeline.title') }}
 	</p>
 	<p class="desc">{{ $t('disabled-timeline.description') }}</p>

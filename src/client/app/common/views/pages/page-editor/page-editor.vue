@@ -4,14 +4,14 @@
 		<header>
 			<div class="title"><i class="far fa-sticky-note"><i> {{ readonly ? $t('read-page') : pageId ? $t('edit-page') : $t('new-page') }}</div>
 			<div class="buttons">
-				<button @click="del()" v-if="!readonly"><i class="far fa-trash-alt"><i></button>
+				<button @click="del()" v-if="!readonly"><fa :icon="faTrashAlt"/></button>
 				<button @click="() => showOptions = !showOptions"><i class="fas fa-cog"><i></button>
 				<button @click="save()" v-if="!readonly"><i class="far fa-save"><i></button>
 			</div>
 		</header>
 
 		<section>
-			<router-link class="view" v-if="pageId" :to="`/@${ author.username }/pages/${ currentName }`"><i class="fas fa-external-link-square-alt"><i> {{ $t('view-page') }}</router-link>
+			<router-link class="view" v-if="pageId" :to="`/@${ author.username }/pages/${ currentName }`"><fa :icon="faExternalLinkSquareAlt"/> {{ $t('view-page') }}</router-link>
 
 			<ui-input v-model="title">
 				<span>{{ $t('title') }}</span>
@@ -40,7 +40,7 @@
 					<ui-button v-if="eyeCatchingImageId == null && !readonly" @click="setEyeCatchingImage()"><i class="fas fa-plus"><i> {{ $t('set-eye-catching-image') }}</ui-button>
 					<div v-else-if="eyeCatchingImage">
 						<img :src="eyeCatchingImage.url" :alt="eyeCatchingImage.name"/>
-						<ui-button @click="removeEyeCatchingImage()" v-if="!readonly"><i class="far fa-trash-alt"><i> {{ $t('remove-eye-catching-image') }}</ui-button>
+						<ui-button @click="removeEyeCatchingImage()" v-if="!readonly"><fa :icon="faTrashAlt"/> {{ $t('remove-eye-catching-image') }}</ui-button>
 					</div>
 				</div>
 			</template>

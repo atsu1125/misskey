@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<i class="far fa-sticky-note"><i>{{ page ? page.name : '' }}
+		<fa :icon="faStickyNote"/>{{ page ? page.name : '' }}
 	</template>
 
 	<div v-if="page">

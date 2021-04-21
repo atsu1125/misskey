@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<i class="fas fa-thumbs-up"><i>{{ $t('@.noteReactions') }}
+		<fa :icon="faThumbsUp"/>{{ $t('@.noteReactions') }}
 	</template>
 
 	<div>

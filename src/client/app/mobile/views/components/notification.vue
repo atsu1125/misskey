@@ -90,7 +90,7 @@
 		<mk-avatar class="avatar" :user="notification.user"/>
 		<div>
 			<header>
-				<i class="far fa-lightbulb"><i>
+				<fa :icon="faLightbulb"/>
 				<router-link class="name" :to="notification.user | userPage">
 					<mk-user-name :user="notification.user"/>
 				</router-link>

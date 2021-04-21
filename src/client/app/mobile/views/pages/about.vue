@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><i class="fas fa-info-circle"><i></span>{{ $t('@.aboutInstance') }}</template>
+	<template #header><span style="margin-right:4px;"><fa :icon="faInfoCircle"/></span>{{ $t('@.aboutInstance') }}</template>
 
 	<main>
 		<x-about v-bind="$attrs"/>

@@ -77,12 +77,12 @@
 				</button>
 				<button v-if="appearNote.myReaction == null" class="button" @click="react()" ref="reactButton">
 					<fa-layers>
-						<i class="far fa-laugh"><i>
+						<fa :icon="faLaugh"/>
 						<fa icon="plus" transform="shrink-8 down-4 right-5" style="color: var(--noteActionsReactionHover)"/>
 					</fa-layers>
 				</button>
 				<button v-if="appearNote.myReaction != null" class="button reacted" @click="undoReact(appearNote)" ref="reactButton">
-					<i class="far fa-laugh"><i>
+					<fa :icon="faLaugh"/>
 				</button>
 				<button class="button" @click="menu()" ref="menuButton">
 					<i class="fas fa-ellipsis-h"></i>

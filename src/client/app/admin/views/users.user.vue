@@ -12,8 +12,8 @@
 			<span class="is-admin" v-if="user.isAdmin">admin</span>
 			<span class="is-moderator" v-if="user.isModerator">moderator</span>
 			<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><i class="fas fa-star"></i></span>
-			<span class="is-silenced" v-if="user.isSilenced" :title="$t('@.silenced-user')"><i class="fas fa-microphone-slash"><i></span>
-			<span class="is-suspended" v-if="user.isSuspended" :title="$t('@.suspended-user')"><i class="far fa-snowflake"><i></span>
+			<span class="is-silenced" v-if="user.isSilenced" :title="$t('@.silenced-user')"><fa :icon="faMicrophoneSlash"/></span>
+			<span class="is-suspended" v-if="user.isSuspended" :title="$t('@.suspended-user')"><fa :icon="faSnowflake"/></span>
 		</header>
 		<div>
 			<span>{{ $t('users.updatedAt') }}: <mk-time :time="user.updatedAt" mode="detail"/></span>

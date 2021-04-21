@@ -6,14 +6,14 @@
 
 		<section>
 			<ui-button @click="rename"><i class="fas fa-i-cursor"><i> {{ $t('rename') }}</ui-button>
-			<ui-button @click="del"><i class="far fa-trash-alt"><i> {{ $t('delete') }}</ui-button>
+			<ui-button @click="del"><fa :icon="faTrashAlt"/> {{ $t('delete') }}</ui-button>
 			<ui-switch v-model="list.hideFromHome" @change="update">{{ $t('hide-from-home') }}</ui-switch>
 			<ui-switch v-model="list.mediaOnly" @change="update">{{ $t('media-only') }}</ui-switch>
 		</section>
 	</ui-card>
 
 	<ui-card v-if="list">
-		<template #title><i class="fas fa-users"><i> {{ $t('users') }}</template>
+		<template #title><fa :icon="faUsers"/> {{ $t('users') }}</template>
 		<div style="margin: 8px">
 			<a @click="addUser">{{ $t('add-user') }}</a>
 		</div>
@@ -40,7 +40,7 @@
 	</ui-card>
 
 	<ui-card v-if="list">
-		<template #title><i class="fas fa-users"><i> {{ $t('hosts') }}</template>
+		<template #title><fa :icon="faUsers"/> {{ $t('hosts') }}</template>
 		<div style="margin: 8px">
 			<a @click="addHost">{{ $t('add-host') }}</a>
 		</div>

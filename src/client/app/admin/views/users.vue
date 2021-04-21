@@ -17,11 +17,11 @@
 						<ui-button @click="unverifyUser" :disabled="unverifying">{{ $t('unverify') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button @click="silenceUser"><i class="fas fa-microphone-slash"><i> {{ $t('make-silence') }}</ui-button>
+						<ui-button @click="silenceUser"><fa :icon="faMicrophoneSlash"/> {{ $t('make-silence') }}</ui-button>
 						<ui-button @click="unsilenceUser">{{ $t('unmake-silence') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button @click="suspendUser" :disabled="suspending"><i class="far fa-snowflake"><i> {{ $t('suspend') }}</ui-button>
+						<ui-button @click="suspendUser" :disabled="suspending"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
 						<ui-button @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
 					</ui-horizon-group>
 					<ui-button v-if="user.host != null" @click="updateRemoteUser"><i class="fas fa-sync"><i> {{ $t('update-remote-user') }}</ui-button>

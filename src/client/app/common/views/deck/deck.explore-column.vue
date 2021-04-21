@@ -1,7 +1,7 @@
 <template>
 <x-column>
 	<template #header>
-		<i class="fas fa-hashtag"><i>{{ $t('@.explore') }}
+		<fa :icon="faHashtag"/>{{ $t('@.explore') }}
 	</template>
 
 	<div>

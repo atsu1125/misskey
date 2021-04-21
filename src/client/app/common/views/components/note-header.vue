@@ -15,7 +15,7 @@
 			<mk-time :time="note.createdAt"/>
 		</router-link>
 		<x-visibility-icon class="visibility" :v="note.visibility" :localOnly="note.localOnly" :copyOnce="note.copyOnce"/>
-		<span class="remote" title="Remote post" v-if="note.user.host != null"><i class="fas fa-globe-americas"><i></span>
+		<span class="remote" title="Remote post" v-if="note.user.host != null"><fa :icon="faGlobeAmericas"/></span>
 	</div>
 </header>
 </template>
