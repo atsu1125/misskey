@@ -32,7 +32,7 @@
 			<li><router-link to="/abuse" active-class="active" v-if="$store.getters.isAdminOrModerator"><fa :icon="faExclamationCircle" fixed-width/>{{ $t('abuse') }}</router-link></li>
 		</ul>
 		<div class="back-to-misskey">
-			<a href="/"><i class="fas fa-arrow-left"><i> {{ $t('back-to-misskey') }}</a>
+			<a href="/"><fa :icon="faArrowLeft"/> {{ $t('back-to-misskey') }}</a>
 		</div>
 		<div class="version">
 			<small>Misskey {{ version }}</small>

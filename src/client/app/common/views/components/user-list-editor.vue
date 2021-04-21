@@ -2,10 +2,10 @@
 <div class="cudqjmnl">
 	<p class="fetching" v-if="!list" style="text-align: center; color: var(--text);"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}<mk-ellipsis/></p>
 	<ui-card v-if="list">
-		<template #title><i class="fas fa-list"><i> {{ list.title }}</template>
+		<template #title><fa :icon="faList"/> {{ list.title }}</template>
 
 		<section>
-			<ui-button @click="rename"><i class="fas fa-i-cursor"><i> {{ $t('rename') }}</ui-button>
+			<ui-button @click="rename"><fa :icon="faICursor"/> {{ $t('rename') }}</ui-button>
 			<ui-button @click="del"><fa :icon="faTrashAlt"/> {{ $t('delete') }}</ui-button>
 			<ui-switch v-model="list.hideFromHome" @change="update">{{ $t('hide-from-home') }}</ui-switch>
 			<ui-switch v-model="list.mediaOnly" @change="update">{{ $t('media-only') }}</ui-switch>

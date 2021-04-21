@@ -12,7 +12,7 @@
 			<ui-input v-model="languages"><template #icon><i class="fas fa-language"></i></template>{{ $t('languages') }}<template #desc>{{ $t('languages-desc') }}</template></ui-input>
 		</section>
 		<section class="fit-bottom">
-			<header><i class="fas fa-headset"><i> {{ $t('maintainer-config') }}</header>
+			<header><fa :icon="faHeadset"/> {{ $t('maintainer-config') }}</header>
 			<ui-input v-model="maintainerName">{{ $t('maintainer-name') }}</ui-input>
 			<ui-input v-model="maintainerEmail" type="email"><template #icon><i class="far fa-envelope"></i></template>{{ $t('maintainer-email') }}</ui-input>
 		</section>
@@ -32,7 +32,7 @@
 			<ui-input v-model="remoteDriveCapacityMb" type="number" :disabled="!cacheRemoteFiles">{{ $t('remote-drive-capacity-mb') }}<template #suffix>MB</template><template #desc>{{ $t('mb') }}</template></ui-input>
 		</section>
 		<section class="fit-bottom">
-			<header><i class="fas fa-shield-alt"><i> {{ $t('recaptcha-config') }}</header>
+			<header><fa :icon="faShieldAlt"/> {{ $t('recaptcha-config') }}</header>
 			<ui-switch v-model="enableRecaptcha">{{ $t('enable-recaptcha') }}</ui-switch>
 			<ui-info>{{ $t('recaptcha-info') }}</ui-info>
 			<ui-horizon-group inputs>
@@ -41,7 +41,7 @@
 			</ui-horizon-group>
 		</section>
 		<section>
-			<header><i class="fas fa-ghost"><i> {{ $t('proxy-account-config') }}</header>
+			<header><fa :icon="faGhost"/> {{ $t('proxy-account-config') }}</header>
 			<ui-info>{{ $t('proxy-account-info') }}</ui-info>
 			<ui-input v-model="proxyAccount"><template #prefix>@</template>{{ $t('proxy-account-username') }}<template #desc>{{ $t('proxy-account-username-desc') }}</template></ui-input>
 			<ui-info warn>{{ $t('proxy-account-warn') }}</ui-info>

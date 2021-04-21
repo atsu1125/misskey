@@ -1,19 +1,19 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><i class="fas fa-terminal"><i> {{ $t('operation') }}</template>
+		<template #title><fa :icon="faTerminal"/> {{ $t('operation') }}</template>
 		<section class="fit-top">
 			<ui-input class="target" v-model="target" type="text" @enter="showUser">
 				<span>{{ $t('username-or-userid') }}</span>
 			</ui-input>
-			<ui-button @click="showUser"><i class="fas fa-search"><i> {{ $t('lookup') }}</ui-button>
+			<ui-button @click="showUser"><fa :icon="faSearch"/> {{ $t('lookup') }}</ui-button>
 
 			<div ref="user" class="user" v-if="user" :key="user.id">
 				<x-user :user="user"/>
 				<div class="actions">
-					<ui-button @click="resetPassword"><i class="fas fa-key"><i> {{ $t('reset-password') }}</ui-button>
+					<ui-button @click="resetPassword"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
 					<ui-horizon-group>
-						<ui-button @click="verifyUser" :disabled="verifying"><i class="fas fa-certificate"><i> {{ $t('verify') }}</ui-button>
+						<ui-button @click="verifyUser" :disabled="verifying"><fa :icon="faCertificate"/> {{ $t('verify') }}</ui-button>
 						<ui-button @click="unverifyUser" :disabled="unverifying">{{ $t('unverify') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
@@ -24,7 +24,7 @@
 						<ui-button @click="suspendUser" :disabled="suspending"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
 						<ui-button @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
 					</ui-horizon-group>
-					<ui-button v-if="user.host != null" @click="updateRemoteUser"><i class="fas fa-sync"><i> {{ $t('update-remote-user') }}</ui-button>
+					<ui-button v-if="user.host != null" @click="updateRemoteUser"><fa :icon="faSync"/> {{ $t('update-remote-user') }}</ui-button>
 					<ui-textarea v-if="user" :value="user | json5" readonly tall style="margin-top:16px;"></ui-textarea>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><i class="fas fa-users"><i> {{ $t('users.title') }}</template>
+		<template #title><fa :icon="faUsers"/> {{ $t('users.title') }}</template>
 		<section class="fit-top">
 			<ui-horizon-group inputs>
 				<ui-select v-model="sort">
@@ -69,7 +69,7 @@
 				<ui-input v-model="searchDescription" type="text" spellcheck="false" @input="fetchUsers(true)">
 					<span>{{ $t('description') }}</span>
 				</ui-input>
-				<ui-button @click="fetchUsers(true)"><i class="fas fa-sync"><i></ui-button>
+				<ui-button @click="fetchUsers(true)"><fa :icon="faSync"/></ui-button>
 			</ui-horizon-group>
 			<sequential-entrance animation="entranceFromTop" delay="25">
 				<x-user v-for="user in users" :key="user.id" :user='user' :click="showUserOnClick"/>

@@ -1,12 +1,12 @@
 <template>
 <div>
 	<ui-card>
-		<template #title><i class="fas fa-terminal"><i> {{ $t('instance') }}</template>
+		<template #title><fa :icon="faTerminal"/> {{ $t('instance') }}</template>
 		<section class="fit-top">
 			<ui-input class="target" v-model="target" type="text" @enter="showInstance()">
 				<span>{{ $t('host') }}</span>
 			</ui-input>
-			<ui-button @click="showInstance()"><i class="fas fa-search"><i> {{ $t('lookup') }}</ui-button>
+			<ui-button @click="showInstance()"><fa :icon="faSearch"/> {{ $t('lookup') }}</ui-button>
 
 			<div class="instance" v-if="instance">
 				<ui-horizon-group inputs>
@@ -108,7 +108,7 @@
 				</details>
 				<details v-if="$store.getters.isAdminOrModerator">
 					<summary>{{ $t('remove-all-following') }}</summary>
-					<ui-button @click="removeAllFollowing()" style="margin-top: 16px;"><i class="fas fa-minus-circle"><i> {{ $t('remove-all-following') }}</ui-button>
+					<ui-button @click="removeAllFollowing()" style="margin-top: 16px;"><fa :icon="faMinusCircle"/> {{ $t('remove-all-following') }}</ui-button>
 					<ui-info warn>{{ $t('remove-all-following-info', { host: instance.host }) }}</ui-info>
 				</details>
 			</div>
@@ -116,7 +116,7 @@
 	</ui-card>
 
 	<ui-card>
-		<template #title><i class="fas fa-server"><i> {{ $t('instances') }}</template>
+		<template #title><fa :icon="faServer"/> {{ $t('instances') }}</template>
 		<section class="fit-top">
 			<ui-horizon-group inputs>
 				<ui-select v-model="sort">

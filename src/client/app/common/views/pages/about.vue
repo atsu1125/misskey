@@ -7,7 +7,7 @@
 
 	<!-- 基本 -->
 	<ui-container>
-		<template #header><i class="fas fa-server"><i> {{ $t('basic') }}</template>
+		<template #header><fa :icon="faServer"/> {{ $t('basic') }}</template>
 		<div class="items" v-if="meta">
 			<div class="item">
 				<div class="key">Misskey</div>
@@ -26,7 +26,7 @@
 
 	<!-- 統計 -->
 	<ui-container>
-		<template #header><i class="fas fa-chart-bar"><i> {{ $t('stats') }}</template>
+		<template #header><fa :icon="faChartBar"/> {{ $t('stats') }}</template>
 		<div class="items">
 			<div class="item" v-if="stats">
 				<div class="key">{{ $t('users') }}</div>

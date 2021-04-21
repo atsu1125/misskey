@@ -1,6 +1,6 @@
 <template>
 <x-container @remove="() => $emit('remove')" :draggable="true">
-	<template #header><i class="fas fa-bolt"><i> {{ $t('blocks.numberInput') }}</template>
+	<template #header><fa :icon="faBolt"/> {{ $t('blocks.numberInput') }}</template>
 
 	<section style="padding: 0 16px 0 16px;">
 		<ui-input v-model="value.name"><template #prefix><fa :icon="faMagic"/></template><span>{{ $t('blocks._numberInput.name') }}</span></ui-input>

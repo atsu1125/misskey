@@ -3,7 +3,7 @@
 	<template #header><fa :icon="faQuestion"/> {{ $t('blocks.if') }}</template>
 	<template #func>
 		<button @click="add()">
-			<i class="fas fa-plus"><i>
+			<fa :icon="faPlus"/>
 		</button>
 	</template>
 

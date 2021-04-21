@@ -61,7 +61,7 @@
 			</div>
 			<footer v-if="appearNote.deletedAt == null && !preview" class="footer">
 				<router-link v-if="detail" class="time" :to="appearNote | notePage">
-					<i class="far fa-clock"><i>
+					<fa :icon="faClock"/>
 					{{ }}
 					<mk-time :time="appearNote.createdAt" mode="detail"/>
 				</router-link>

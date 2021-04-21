@@ -29,10 +29,10 @@
 			<div class="localOnly"><i class="fas fa-heart"></i></div>
 		</div>
 		<div v-if="visibility == 'once-public'" :title="$t('@.note-visibility.once-public')">
-			<i class="fas fa-hand-holding-heart"><i>
+			<fa :icon="faHandHoldingHeart"/>
 		</div>
 		<div v-else-if="visibility == 'once-home'" :title="$t('@.note-visibility.once-home')">
-			<i class="fas fa-hand-holding-heart"><i>
+			<fa :icon="faHandHoldingHeart"/>
 		</div>
 		<div v-else-if="visibility == 'once-specified'" :title="$t('@.note-visibility.once-specified')">
 			<fa :icon="faSatelliteDish"/>

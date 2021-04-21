@@ -5,7 +5,7 @@
 
 		<!-- Deliver -->
 		<section class="wptihjuy">
-			<header><i class="far fa-paper-plane"><i> Deliver</header>
+			<header><fa :icon="faPaperPlane"/> Deliver</header>
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
 				<ui-input :value="latestStats.deliver.activeSincePrevTick | number" type="text" readonly>
 					<span>Process</span>
@@ -19,12 +19,12 @@
 				</ui-input>
 				<ui-input :value="latestStats.deliver.waiting | number" type="text" readonly>
 					<span>Waiting</span>
-					<template #prefix><i class="far fa-stop-circle"><i></template>
+					<template #prefix><fa :icon="faStopCircle"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
 				<ui-input :value="latestStats.deliver.delayed | number" type="text" readonly>
 					<span>Delayed</span>
-					<template #prefix><i class="fas fa-stopwatch"><i></template>
+					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
 			</ui-horizon-group>
@@ -37,7 +37,7 @@
 
 		<!-- Inbox -->
 		<section class="wptihjuy">
-			<header><i class="fas fa-inbox"><i> Inbox</header>
+			<header><fa :icon="faInbox"/> Inbox</header>
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
 				<ui-input :value="latestStats.inbox.activeSincePrevTick | number" type="text" readonly>
 					<span>Process</span>
@@ -51,12 +51,12 @@
 				</ui-input>
 				<ui-input :value="latestStats.inbox.waiting | number" type="text" readonly>
 					<span>Waiting</span>
-					<template #prefix><i class="far fa-stop-circle"><i></template>
+					<template #prefix><fa :icon="faStopCircle"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
 				<ui-input :value="latestStats.inbox.delayed | number" type="text" readonly>
 					<span>Delayed</span>
-					<template #prefix><i class="fas fa-stopwatch"><i></template>
+					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
 			</ui-horizon-group>
@@ -69,7 +69,7 @@
 	</ui-card>
 
 	<ui-card v-if="$store.getters.isAdminOrModerator">
-		<template #title><i class="fas fa-tasks"><i> {{ $t('jobs') }}</template>
+		<template #title><fa :icon="faTasks"/> {{ $t('jobs') }}</template>
 		<section class="fit-top">
 			<ui-horizon-group inputs>
 				<ui-select v-model="domain">
