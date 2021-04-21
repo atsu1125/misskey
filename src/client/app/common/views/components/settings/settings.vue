@@ -130,7 +130,7 @@
 				</ui-input>
 				<ui-horizon-group>
 					<ui-button @click="setDefaultReactions"><fa :icon="faUndoAlt"/> {{ $t('@._settings.default') }}</ui-button>
-					<ui-button @click="setRandomReactions"><fa :icon="faRandom"/> {{ $t('@._settings.random') }}</ui-button>
+					<ui-button @click="setRandomReactions"><i class="far fa-random"></i> {{ $t('@._settings.random') }}</ui-button>
 				</ui-horizon-group>
 				<ui-horizon-group>
 					<ui-button @click="previewReaction()" ref="reactionsPreviewButton"><fa :icon="faEye"/> {{ $t('@._settings.preview') }}</ui-button>

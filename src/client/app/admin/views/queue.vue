@@ -9,12 +9,12 @@
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
 				<ui-input :value="latestStats.deliver.activeSincePrevTick | number" type="text" readonly>
 					<span>Process</span>
-					<template #prefix><fa :icon="fasPlayCircle"/></template>
+					<template #prefix><i class="fas fa-play-circle"></i></template>
 					<template #suffix>jobs/tick</template>
 				</ui-input>
 				<ui-input :value="latestStats.deliver.active | number" type="text" readonly>
 					<span>Active</span>
-					<template #prefix><fa :icon="farPlayCircle"/></template>
+					<template #prefix><i class="far fa-play-circle"></i></template>
 					<template #suffix>{{ `/ ${latestStats.deliver.limit | number} jobs` }}</template>
 				</ui-input>
 				<ui-input :value="latestStats.deliver.waiting | number" type="text" readonly>
@@ -41,12 +41,12 @@
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
 				<ui-input :value="latestStats.inbox.activeSincePrevTick | number" type="text" readonly>
 					<span>Process</span>
-					<template #prefix><fa :icon="fasPlayCircle"/></template>
+					<template #prefix><i class="fas fa-play-circle"></i></template>
 					<template #suffix>jobs/tick</template>
 				</ui-input>
 				<ui-input :value="latestStats.inbox.active | number" type="text" readonly>
 					<span>Active</span>
-					<template #prefix><fa :icon="farPlayCircle"/></template>
+					<template #prefix><i class="far fa-play-circle"></i></template>
 					<template #suffix>{{ `/ ${latestStats.inbox.limit | number} jobs` }}</template>
 				</ui-input>
 				<ui-input :value="latestStats.inbox.waiting | number" type="text" readonly>
