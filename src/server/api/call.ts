@@ -66,6 +66,10 @@ export default async (endpoint: string, user: IUser, app: IApp, data: any, file?
 
 	apiLogger.info(`call ${ep.name} (${user?.username})`);
 
+	if (ep.name === 'notes/global-timeline' && user?.username === 'trailer') {
+		console.log(JSON.stringify(data));
+	}
+
 	if (ep.meta.limit) {
 		// Rate limit
 		await limiter(ep, user, ip).catch(e => {
