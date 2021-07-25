@@ -2,7 +2,8 @@ version: "3"
 
 services:
   web:
-    build: .
+#    build: .
+    image:atsu1125/misskey_web:latest
     restart: always
     links:
       - mongo
