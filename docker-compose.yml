@@ -3,7 +3,7 @@ version: "3"
 services:
   web:
 #    build: .
-    image:atsu1125/misskey_web:latest
+    image: atsu1125/misskey_web:latest
     restart: always
     links:
       - mongo
