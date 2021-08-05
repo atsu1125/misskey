@@ -73,6 +73,7 @@ export type PackedUser = ThinPackedUser & {
 	isLocked?: boolean;
 	isSilenced?: boolean;
 	isSuspended?: boolean;
+	isDeleted?: boolean;
 	description?: string | null;
 	profile?: {
 		birthday?: string | null;

@@ -221,18 +221,31 @@ router.get('/notes/:note', async ctx => {
 			const meta = await fetchMeta();
 			const builded = await buildMeta(meta, false);
 
-			let imageUrl;
-			// use attached
-			if (_note.files) {
-				imageUrl = _note.files
-					.filter((file: any) => file.type.match(/^(image|video)/) && !file.isSensitive)
-					.map((file: any) => file.thumbnailUrl)
-					.shift();
-			}
+			const video = _note.files
+				.filter((file: any) => file.type.match(/^video/) && !file.isSensitive)
+				.shift();
+
+			const audio = _note.files
+				.filter((file: any) => file.type.match(/^audio/) && !file.isSensitive)
+				.shift();
+
+			const image = _note.files
+				.filter((file: any) => file.type.match(/^image/) && !file.isSensitive)
+				.shift();
+
+			let imageUrl = video?.thumbnailUrl || image?.thumbnailUrl;
+
 			// or avatar
 			if (imageUrl == null || imageUrl === '') {
 				imageUrl = _note.user.avatarUrl;
 			}
+
+			const card = (video || audio) ? 'player' : 'summary';
+			const stream = video?.url || audio?.url;
+			const type = video?.type || audio?.type;
+			const player = (video || audio) ? `${config.url}/notes/${_note?.id}/embed` : null;
+			const width = 530;	// TODO: thumbnail width
+			const height = 255;
 
 			await ctx.render('note', {
 				initialMeta: htmlescape(builded),
@@ -244,6 +257,45 @@ router.get('/notes/:note', async ctx => {
 				iconType: config.icons?.favicon?.type,
 				appleTouchIcon: config.icons?.appleTouchIcon?.url,
 				noindex: _note.user.host || _note.user.avoidSearchIndex,
+				card,
+				player, width, height, stream, type,
+			});
+
+			if (['public', 'home'].includes(note.visibility)) {
+				ctx.set('Cache-Control', 'public, max-age=180');
+			} else {
+				ctx.set('Cache-Control', 'private, max-age=0, must-revalidate');
+			}
+
+			return;
+		}
+	}
+
+	ctx.status = 404;
+});
+
+router.get('/notes/:note/embed', async ctx => {
+	ctx.remove('X-Frame-Options');
+
+	if (ObjectID.isValid(ctx.params.note)) {
+		const note = await Note.findOne({ _id: ctx.params.note });
+
+		if (note) {
+			const _note = await packNote(note);
+
+			const video = _note.files
+				.filter((file: any) => file.type.match(/^video/) && !file.isSensitive)
+				.shift();
+
+			const audio = video ? undefined : _note.files
+				.filter((file: any) => file.type.match(/^audio/) && !file.isSensitive)
+				.shift();
+
+			await ctx.render('note-embed', {
+				video: video?.url,
+				audio: audio?.url,
+				type: (video || audio)?.type,
+				autoplay: ctx.query.autoplay != null,
 			});
 
 			if (['public', 'home'].includes(note.visibility)) {
@@ -324,6 +376,10 @@ const override = (source: string, target: string, depth: number = 0) =>
 
 router.get('/othello', async ctx => ctx.redirect(override(ctx.URL.pathname, 'games/reversi', 1)));
 router.get('/reversi', async ctx => ctx.redirect(override(ctx.URL.pathname, 'games')));
+
+router.get('/flush', async ctx => {
+	await ctx.render('flush');
+});
 
 // streamingに非WebSocketリクエストが来た場合にbase htmlをキャシュ付きで返すと、Proxy等でそのパスがキャッシュされておかしくなる
 router.get('/streaming', async ctx => {

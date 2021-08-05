@@ -45,9 +45,11 @@
 				<ui-switch v-model="alwaysShowNsfw">{{ $t('@._settings.always-show-nsfw') }}</ui-switch>
 				<ui-switch v-model="alwaysOpenCw">{{ $t('@._settings.alwaysOpenCw') }}</ui-switch>
 				<ui-switch v-model="showReplyTarget">{{ $t('@._settings.show-reply-target') }}</ui-switch>
+				<ui-switch v-model="enableDecoratedMfm">{{ $t('@._settings.enable-decorated-mfm') }}</ui-switch>
 				<ui-switch v-model="disableAnimatedMfm">{{ $t('@._settings.disable-animated-mfm') }}</ui-switch>
 				<ui-switch v-model="disableShowingAnimatedImages">{{ $t('@._settings.disable-showing-animated-images') }}</ui-switch>
-				<ui-switch v-model="disableShowingInstanceInfo">{{ $t('@._settings.disableShowingInstanceInfo') }}</ui-switch>
+				<ui-switch v-model="showInstanceInfo">{{ $t('@._settings.showInstanceInfo') }}</ui-switch>
+				<ui-switch v-model="showTlPin">{{ $t('@._settings.showTlPin') }}</ui-switch>
 			</section>
 			<section v-if="$root.isMobile">
 				<header>{{ $t('@._settings.post-style') }}</header>
@@ -639,6 +641,11 @@ export default Vue.extend({
 			set(value) { this.$store.dispatch('settings/set', { key: 'games.reversi.useAvatarStones', value }); }
 		},
 
+		enableDecoratedMfm: {
+			get() { return this.$store.state.settings.enableDecoratedMfm; },
+			set(value) { this.$store.dispatch('settings/set', { key: 'enableDecoratedMfm', value }); }
+		},
+
 		disableAnimatedMfm: {
 			get() { return this.$store.state.settings.disableAnimatedMfm; },
 			set(value) { this.$store.dispatch('settings/set', { key: 'disableAnimatedMfm', value }); }
@@ -649,9 +656,14 @@ export default Vue.extend({
 			set(value) { this.$store.commit('device/set', { key: 'disableShowingAnimatedImages', value }); }
 		},
 
-		disableShowingInstanceInfo: {
-			get() { return !!this.$store.state.device.disableShowingInstanceInfo; },
-			set(value) { this.$store.commit('device/set', { key: 'disableShowingInstanceInfo', value }); }
+		showInstanceInfo: {
+			get() { return !!this.$store.state.device.showInstanceInfo; },
+			set(value) { this.$store.commit('device/set', { key: 'showInstanceInfo', value }); }
+		},
+
+		showTlPin: {
+			get() { return !!this.$store.state.device.showTlPin; },
+			set(value) { this.$store.commit('device/set', { key: 'showTlPin', value }); }
 		},
 
 		enableKeyboardShortcutInNote: {

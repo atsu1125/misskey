@@ -24,7 +24,14 @@ block meta
 	meta(name='misskey:user-id' content=user.id)
 	meta(name='misskey:note-id' content=note.id)
 
-	meta(name='twitter:card' content='summary')
+	meta(name='twitter:card' content=card)
+
+	if player
+		meta(name='twitter:player' content=player)
+		meta(name='twitter:player:width' content=width)
+		meta(name='twitter:player:height' content=height)
+		meta(name='twitter:player:stream' content=stream)
+		meta(name='twitter:player:stream:content_type' content=type)
 
 	if !user.host
 		link(rel='alternate' href=url type='application/activity+json')

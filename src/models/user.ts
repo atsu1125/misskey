@@ -459,6 +459,7 @@ export async function pack(
 
 			isSilenced: !!db.isSilenced,
 			isSuspended: !!db.isSuspended,
+			isDeleted: !!db.isDeleted,
 			description: db.description || null,
 			profile: {
 				birthday: db.profile?.birthday || null,

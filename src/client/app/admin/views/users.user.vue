@@ -14,6 +14,7 @@
 			<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
 			<span class="is-silenced" v-if="user.isSilenced" :title="$t('@.silenced-user')"><fa :icon="faMicrophoneSlash"/></span>
 			<span class="is-suspended" v-if="user.isSuspended" :title="$t('@.suspended-user')"><fa :icon="faSnowflake"/></span>
+			<span class="is-deleted" v-if="user.isDeleted" :title="$t('@.deleted-user')"><fa :icon="faArrowDown"/></span>
 		</header>
 		<div>
 			<span>{{ $t('users.updatedAt') }}: <mk-time :time="user.updatedAt" mode="detail"/></span>
@@ -30,13 +31,14 @@ import Vue from 'vue';
 import i18n from '../../i18n';
 import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake } from '@fortawesome/free-regular-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('admin/views/users.vue'),
 	props: ['user', 'click'],
 	data() {
 		return {
-			faSnowflake, faMicrophoneSlash
+			faSnowflake, faMicrophoneSlash, faArrowDown
 		};
 	},
 });
@@ -81,6 +83,7 @@ export default Vue.extend({
 			> .is-verified
 			> .is-silenced
 			> .is-suspended
+			> .is-deleted
 				margin 0 0 0 .5em
 				color #4dabf7
 

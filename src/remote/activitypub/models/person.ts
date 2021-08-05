@@ -30,7 +30,15 @@ import { extractDbHost } from '../../../misc/convert-host';
 import DbResolver from '../db-resolver';
 import resolveUser from '../../resolve-user';
 import { normalizeTag } from '../../../misc/normalize-tag';
+import { substr } from 'stringz';
 const logger = apLogger;
+
+const MAX_NAME_LENGTH = 512;
+const MAX_SUMMARY_LENGTH = 8192;
+
+const truncate = (value: string, maxLength: number) => {
+	return substr(value, 0, maxLength);
+}
 
 /**
  * Validate and convert to actor object
@@ -56,8 +64,14 @@ function validateActor(x: IObject, uri: string): IActor {
 	validate('id', x.id, $.str.min(1));
 	validate('inbox', x.inbox, $.str.min(1));
 	validate('preferredUsername', x.preferredUsername, $.str.min(1).max(128).match(/^\w([\w-.]*\w)?$/));
-	validate('name', x.name, $.optional.nullable.str.max(128));
-	validate('summary', x.summary, $.optional.nullable.str.max(2048));
+	validate('name', x.name, $.optional.nullable.str);
+	validate('summary', x.summary, $.optional.nullable.str);
+
+	// サロゲートペアは2文字としてカウントされるので、サロゲートペアと合字を考慮して大きめにしておく
+	validate('name', x.name, $.optional.nullable.str.max(512));
+
+	// 入力値はHTMLなので大きめにしておく
+	validate('summary', x.summary, $.optional.nullable.str.max(8192));
 
 	const idHost = toUnicode(new URL(x.id!).hostname.toLowerCase());
 	if (idHost !== expectHost) {
@@ -130,11 +144,11 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 			bannerId: null,
 			createdAt: new Date(),
 			lastFetchedAt: new Date(),
-			description: person.summary ? htmlToMfm(person.summary, person.tag) : '',
+			description: person.summary ? htmlToMfm(truncate(person.summary, MAX_SUMMARY_LENGTH), person.tag) : '',
 			followersCount,
 			followingCount,
 			notesCount,
-			name: person.name,
+			name: person.name ? truncate(person.name, MAX_NAME_LENGTH) : person.name,
 			isLocked: person.manuallyApprovesFollowers,
 			isExplorable: !!person.discoverable,
 			username: person.preferredUsername,
@@ -335,11 +349,11 @@ export async function updatePerson(uri: string, resolver?: Resolver, hint?: IAct
 		outbox: person.outbox,
 		featured: person.featured,
 		emojis: emojiNames,
-		description: person.summary ? htmlToMfm(person.summary, person.tag) : '',
+		description: person.summary ? htmlToMfm(truncate(person.summary, MAX_SUMMARY_LENGTH), person.tag) : '',
 		followersCount,
 		followingCount,
 		notesCount,
-		name: person.name,
+		name: person.name ? truncate(person.name, MAX_NAME_LENGTH) : person.name,
 		movedToUserId,
 		alsoKnownAsUserIds,
 		url: getOneApHrefNullable(person.url),

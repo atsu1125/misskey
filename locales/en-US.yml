@@ -98,6 +98,7 @@ common:
   favorites: "Favorites"
   noteReactions: "Reacted notes"
   poll_finished: "Poll finished"
+  flush: "Clear cache"
   permissions:
     "read:account": "View your account information"
     "write:account": "Edit your account information"
@@ -233,9 +234,11 @@ common:
     i-like-sushi: "I prefer sushi rather than pudding"
     show-reversi-board-labels: "Show row and column labels in Reversi"
     use-avatar-reversi-stones: "Use avatar as a stone in reversi"
+    enable-decorated-mfm: "Enable decorated MFM"
     disable-animated-mfm: "Disable animated texts in a post"
     disable-showing-animated-images: "Do not play animated images"
-    disableShowingInstanceInfo: "Do not display instance information"
+    showInstanceInfo: "Show instance information"
+    showTlPin: "Show TL pin buttons"
     enableKeyboardShortcutInNote: "Enable keyboard shortcut in post"
     suggest-recent-hashtags: "Show recent popular hashtags on the post form"
     always-show-nsfw: "Always show NSFW contents"
@@ -1342,7 +1345,13 @@ admin/views/dashboard.vue:
   federated: "Federated"
 admin/views/queue.vue:
   title: "Queue"
+  promoteJobs: "Promote 50 jobs"
   remove-all-jobs: "Clear all queued jobs"
+  jobs: "Jobs"
+  queue: "Queue"
+  state: "State"
+  limit: "Limit"
+
 admin/views/abuse.vue:
   title: "Abuse"
   target: "Target"

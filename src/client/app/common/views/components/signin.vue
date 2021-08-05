@@ -19,6 +19,7 @@
 	<p v-if="meta && meta.enableTwitterIntegration" style="margin: 8px 0;"><a :href="`${apiUrl}/signin/twitter`">{{ $t('signin-with-twitter') }}</a></p>
 	<p v-if="meta && meta.enableGithubIntegration"  style="margin: 8px 0;"><a :href="`${apiUrl}/signin/github`">{{ $t('signin-with-github') }}</a></p>
 	<p v-if="meta && meta.enableDiscordIntegration" style="margin: 8px 0;"><a :href="`${apiUrl}/signin/discord`">{{ $t('signin-with-discord') /* TODO: Make these layouts better */ }}</a></p>
+	<p style="margin: 8px 0;"><a @click="onFlush">{{ $t('@.flush') }}</a></p>
 </form>
 </template>
 
@@ -87,6 +88,11 @@ export default Vue.extend({
 
 		onReminder() {
 			this.$emit('reminder');
+		},
+
+		onFlush() {
+			const r = confirm('ブラウザに保存されたキャッシュをクリアしますか？');
+			if (r) location.href = '/flush';
 		},
 	}
 });

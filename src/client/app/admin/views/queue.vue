@@ -68,8 +68,10 @@
 		</section>
 	</ui-card>
 
+	<!-- job queue list -->
 	<ui-card v-if="$store.getters.isAdminOrModerator">
 		<template #title><fa :icon="faTasks"/> {{ $t('jobs') }}</template>
+		<!-- selector -->
 		<section class="fit-top">
 			<ui-horizon-group inputs>
 				<ui-select v-model="domain">
@@ -84,20 +86,31 @@
 					<option value="active">{{ $t('states.active') }}</option>
 					<option value="waiting">{{ $t('states.waiting') }}</option>
 				</ui-select>
+				<ui-select v-model="jobsLimit">
+					<template #label>{{ $t('limit') }}</template>
+					<option value="1000">1000</option>
+					<option value="3000">3000</option>
+					<option value="5000">5000</option>
+					<option value="10000">10000</option>
+				</ui-select>
 			</ui-horizon-group>
-			<div class="xvvuvgsv" v-for="job in jobs" :key="job.id">
-				<b>{{ job.id }}</b>
-				<template v-if="domain === 'deliver'">
-					<span>{{ job.data.to }}</span>
-				</template>
-				<template v-if="domain === 'inbox'">
-					<span>{{ job.data.activity.id }}</span>
-				</template>
-				<template v-if="domain === 'db'">
-					<span>{{ job.name }}</span>
-				</template>
-				<span>{{ `(${job.attempts}/${job.maxAttempts}, age=${Math.floor((jobsFetched - job.timestamp) / 1000 / 60)}min${job.delay ? `, firstAttemptDelay=${Math.floor(job.delay / 1000 / 60)}min` : ''})` }}</span>
-			</div>
+			<!-- jobs -->
+			<details class="gsjs280" v-for="gsj in groupSortedJobs" :key="gsj.key">
+				<summary>{{ `${gsj.key} (${gsj.len})` }}</summary>
+				<div class="xvvuvgsv" v-for="job in gsj.jobs" :key="job.id">
+					<b>{{ job.id }}</b>
+					<template v-if="domain === 'deliver'">
+						<span>{{ job.data.to }}</span>
+					</template>
+					<template v-if="domain === 'inbox'">
+						<span>{{ job.data.activity.id }}</span>
+					</template>
+					<template v-if="domain === 'db'">
+						<span>{{ job.name }}</span>
+					</template>
+					<span>{{ `(${job.attempts}/${job.maxAttempts}, age=${Math.floor((jobsFetched - job.timestamp) / 1000 / 60)}min${job.delay ? `, firstAttemptDelay=${Math.floor(job.delay / 1000 / 60)}min` : ''})` }}</span>
+				</div>
+			</details>
 			<ui-info v-if="jobs.length == jobsLimit">{{ $t('result-is-truncated', { n: jobsLimit }) }}</ui-info>
 		</section>
 	</ui-card>
@@ -111,6 +124,7 @@ import ApexCharts from 'apexcharts';
 import * as tinycolor from 'tinycolor2';
 import { faTasks, faInbox, faStopwatch, faPlayCircle as fasPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane, faStopCircle, faPlayCircle as farPlayCircle, faChartBar } from '@fortawesome/free-regular-svg-icons';
+import { groupBy } from '../../../../prelude/array';
 
 const limit = 200;
 
@@ -134,7 +148,25 @@ export default Vue.extend({
 	computed: {
 		latestStats(): any {
 			return this.stats[this.stats.length - 1];
-		}
+		},
+
+		groupSortedJobs() {
+			const grps = groupBy(this.jobs, (job: any) => {
+				if (typeof job.name === 'string' && job.name.match(/^[0-9A-Za-z.-]+$/)) return job.name;
+				try {
+					const t = job?.data?.to || job?.data?.signature?.keyId;
+					if (t == null) return '(none)';
+					const u = new URL(t);
+					if (u.hostname.match(/^[0-9A-Za-z.-]+$/)) return u.hostname;
+					return '(none)';
+				} catch {
+					return '(none)';
+				}
+			});
+
+			const h = Object.keys(grps).map(key => ({ key: key, len: grps[key].length, jobs: grps[key] }));
+			return h.sort((a, b) => b.len - a.len);
+		},
 	},
 
 	watch: {
@@ -181,6 +213,11 @@ export default Vue.extend({
 		},
 
 		state() {
+			this.jobs = [];
+			this.fetchJobs();
+		},
+
+		jobsLimit() {
 			this.jobs = [];
 			this.fetchJobs();
 		},
@@ -334,8 +371,8 @@ export default Vue.extend({
 			this.$root.api('admin/queue/jobs', {
 				domain: this.domain,
 				state: this.state,
-				limit: this.jobsLimit
-			}).then(jobs => {
+				limit: Number(this.jobsLimit)
+			}).then((jobs: Bull.Queue<any>[]) => {
 				this.jobsFetched = Date.now(),
 				this.jobs = jobs;
 			});
@@ -350,9 +387,13 @@ export default Vue.extend({
 		min-height 200px !important
 		margin 0 -8px
 
-.xvvuvgsv
-	margin-left -6px
-	> b, span
-		margin 0 6px
+details.gsjs280
+	margin 0.3em
+	> summary
+		cursor pointer
+	> .xvvuvgsv
+		margin 0.2em
+		> b, span
+			margin 0 6px
 
 </style>

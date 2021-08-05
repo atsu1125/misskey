@@ -32,7 +32,9 @@ export default define(meta, async (ps) => {
 		ps.domain === 'db' ? dbQueue :
 		null;
 
-	const jobs = await (queue as Bull.Queue<any>).getJobs([ps.state], 0, ps.limit);
+	if (queue == null) throw(`invalid domain`);
+
+	const jobs = await (queue as Bull.Queue<any>).getJobs([ps.state as any], 0, ps.limit);
 
 	return jobs.map(job => {
 		const data = job.data;

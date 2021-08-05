@@ -21,11 +21,12 @@ export const meta = {
 };
 
 export default define(meta, async (ps) => {
-
 	const queue =
 		ps.domain === 'deliver' ? deliverQueue :
 		ps.domain === 'inbox' ? inboxQueue :
 		null;
+
+		if (queue == null) throw(`invalid domain`);
 
 	const jobs = await queue.getJobs(['delayed'], 0, ps.limit);
 
