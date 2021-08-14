@@ -7,22 +7,22 @@
 		<section class="wptihjuy">
 			<header><fa :icon="faPaperPlane"/> Deliver</header>
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
-				<ui-input :value="latestStats.deliver.activeSincePrevTick | number" type="text" readonly>
+				<ui-input :value="latestStats.deliver.activeSincePrevTick" type="text" readonly>
 					<span>Process</span>
 					<template #prefix><fa :icon="fasPlayCircle"/></template>
 					<template #suffix>jobs/tick</template>
 				</ui-input>
-				<ui-input :value="latestStats.deliver.active | number" type="text" readonly>
+				<ui-input :value="latestStats.deliver.active" type="text" readonly>
 					<span>Active</span>
 					<template #prefix><fa :icon="farPlayCircle"/></template>
-					<template #suffix>{{ `/ ${latestStats.deliver.limit | number} jobs` }}</template>
+					<template #suffix>{{ `/ ${latestStats.deliver.limit} jobs` }}</template>
 				</ui-input>
-				<ui-input :value="latestStats.deliver.waiting | number" type="text" readonly>
+				<ui-input :value="latestStats.deliver.waiting" type="text" readonly>
 					<span>Waiting</span>
 					<template #prefix><fa :icon="faStopCircle"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
-				<ui-input :value="latestStats.deliver.delayed | number" type="text" readonly>
+				<ui-input :value="latestStats.deliver.delayed" type="text" readonly>
 					<span>Delayed</span>
 					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
@@ -39,22 +39,22 @@
 		<section class="wptihjuy">
 			<header><fa :icon="faInbox"/> Inbox</header>
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
-				<ui-input :value="latestStats.inbox.activeSincePrevTick | number" type="text" readonly>
+				<ui-input :value="latestStats.inbox.activeSincePrevTick" type="text" readonly>
 					<span>Process</span>
 					<template #prefix><fa :icon="fasPlayCircle"/></template>
 					<template #suffix>jobs/tick</template>
 				</ui-input>
-				<ui-input :value="latestStats.inbox.active | number" type="text" readonly>
+				<ui-input :value="latestStats.inbox.active" type="text" readonly>
 					<span>Active</span>
 					<template #prefix><fa :icon="farPlayCircle"/></template>
-					<template #suffix>{{ `/ ${latestStats.inbox.limit | number} jobs` }}</template>
+					<template #suffix>{{ `/ ${latestStats.inbox.limit} jobs` }}</template>
 				</ui-input>
-				<ui-input :value="latestStats.inbox.waiting | number" type="text" readonly>
+				<ui-input :value="latestStats.inbox.waiting" type="text" readonly>
 					<span>Waiting</span>
 					<template #prefix><fa :icon="faStopCircle"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
-				<ui-input :value="latestStats.inbox.delayed | number" type="text" readonly>
+				<ui-input :value="latestStats.inbox.delayed" type="text" readonly>
 					<span>Delayed</span>
 					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
@@ -97,19 +97,23 @@
 			<!-- jobs -->
 			<details class="gsjs280" v-for="gsj in groupSortedJobs" :key="gsj.key">
 				<summary>{{ `${gsj.key} (${gsj.len})` }}</summary>
-				<div class="xvvuvgsv" v-for="job in gsj.jobs" :key="job.id">
-					<b>{{ job.id }}</b>
-					<template v-if="domain === 'deliver'">
-						<span>{{ job.data.to }}</span>
-					</template>
-					<template v-if="domain === 'inbox'">
-						<span>{{ job.data.activity.id }}</span>
-					</template>
-					<template v-if="domain === 'db'">
-						<span>{{ job.name }}</span>
-					</template>
-					<span>{{ `(${job.attempts}/${job.maxAttempts}, age=${Math.floor((jobsFetched - job.timestamp) / 1000 / 60)}min${job.delay ? `, firstAttemptDelay=${Math.floor(job.delay / 1000 / 60)}min` : ''})` }}</span>
-				</div>
+				<details class="xvvuvgsv" v-for="job in gsj.jobs" :key="job.id" @click="() => { if (!job.logs) showLogs(job.id) }">
+					<summary>
+						<b>{{ job.id }}</b>
+						<template v-if="domain === 'deliver'">
+							<span>{{ job.data.to }}</span>
+						</template>
+						<template v-if="domain === 'inbox'">
+							<span>{{ job.data.activity.id }}</span>
+						</template>
+						<template v-if="domain === 'db'">
+							<span>{{ job.name }}</span>
+						</template>
+						<span>{{ `(${job.attempts}/${job.maxAttempts}, age=${Math.floor((jobsFetched - job.timestamp) / 1000 / 60)}min${job.delay ? `, firstAttemptDelay=${Math.floor(job.delay / 1000 / 60)}min` : ''})` }}</span>
+					</summary>
+					<pre v-if="job.logs">{{ job.logs }}</pre>
+					<pre v-if="job.logs">{{ JSON.stringify(job.data, null, 2) }}</pre>
+				</details>
 			</details>
 			<ui-info v-if="jobs.length == jobsLimit">{{ $t('result-is-truncated', { n: jobsLimit }) }}</ui-info>
 		</section>
@@ -373,9 +377,20 @@ export default Vue.extend({
 				domain: this.domain,
 				state: this.state,
 				limit: Number(this.jobsLimit)
-			}).then((jobs: Bull.Queue<any>[]) => {
+			}).then((jobs: any[]) => {
 				this.jobsFetched = Date.now(),
 				this.jobs = jobs;
+			});
+		},
+
+		showLogs(jobId: string) {
+			this.$root.api('admin/queue/job', {
+				domain: this.domain,
+				jobId
+			}).then((job: any) => {
+				this.jobs
+					.filter((j: any) => j.id == jobId)
+					.map((j: any) => Vue.set(j, 'logs', job.logs.length > 0 ? job.logs.join('\n') : '(no logs)'));
 			});
 		},
 	}
@@ -389,12 +404,20 @@ export default Vue.extend({
 		margin 0 -8px
 
 details.gsjs280
-	margin 0.3em
+	margin-left 0.3em
+	margin-top 0.3em
+	margin-bottom 0.3em
 	> summary
 		cursor pointer
-	> .xvvuvgsv
-		margin 0.2em
-		> b, span
-			margin 0 6px
+	> details.xvvuvgsv
+		margin-left 0.5em
+		margin-top 0.3em
+		margin-bottom 0.3em
+		> summary
+			cursor pointer
+			>>> b, span
+				margin 0 6px
+		> pre
+			margin 0.5em 1em
 
 </style>

@@ -15,7 +15,7 @@ export const meta = {
 		},
 
 		state: {
-			validator: $.str,
+			validator: $.str.or(['waiting', 'active', 'completed', 'failed', 'delayed'])
 		},
 
 		limit: {
