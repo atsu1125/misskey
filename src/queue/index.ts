@@ -7,7 +7,7 @@ import processDeliver from './processors/deliver';
 import processInbox from './processors/inbox';
 import processDb from './processors/db';
 import { queueLogger } from './logger';
-import { ILocalUser } from '../models/user';
+import { ILocalUser, IUser } from '../models/user';
 import { IDriveFile } from '../models/drive-file';
 import { INote } from '../models/note';
 import { IMute } from '../models/mute';
@@ -118,7 +118,7 @@ export function inbox(activity: IActivity, signature: httpSignature.IParsedSigna
 	});
 }
 
-export function createDeleteNotesJob(user: ILocalUser) {
+export function createDeleteNotesJob(user: IUser) {
 	return dbQueue.add('deleteNotes', {
 		user: user
 	}, {
@@ -128,7 +128,7 @@ export function createDeleteNotesJob(user: ILocalUser) {
 	});
 }
 
-export function createDeleteDriveFilesJob(user: ILocalUser) {
+export function createDeleteDriveFilesJob(user: IUser) {
 	return dbQueue.add('deleteDriveFiles', {
 		user: user
 	}, {

@@ -12,8 +12,8 @@ const logger = apLogger;
  * Imageを作成します。
  */
 export async function createImage(actor: IRemoteUser, value: IObject): Promise<IDriveFile> {
-	// 投稿者が凍結されていたらスキップ
-	if (actor.isSuspended) {
+	// 投稿者が凍結か削除されていたらスキップ
+	if (actor.isSuspended || actor.isDeleted) {
 		return null;
 	}
 

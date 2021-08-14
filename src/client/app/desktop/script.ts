@@ -13,16 +13,6 @@ import composeNotification from '../common/scripts/compose-notification';
 
 import MkHome from './views/home/home.vue';
 import MkDeck from '../common/views/deck/deck.vue';
-import MkSelectDrive from './views/pages/selectdrive.vue';
-import MkDrive from './views/pages/drive.vue';
-import MkMessagingRoom from './views/pages/messaging-room.vue';
-import MkReversi from './views/pages/games/reversi.vue';
-import MkShare from '../common/views/pages/share.vue';
-import MkFollow from '../common/views/pages/follow.vue';
-import MkResetPassword from '../common/views/pages/reset-password.vue';
-import MkNotFound from '../common/views/pages/not-found.vue';
-import MkSettings from './views/pages/settings.vue';
-
 import Ctx from './views/components/context-menu.vue';
 import PostFormWindow from './views/components/post-form-window.vue';
 import RenoteFormWindow from './views/components/renote-form-window.vue';
@@ -176,20 +166,20 @@ init(async (launch, os) => {
 			{ path: '/i/pages/new', component: () => import('../common/views/pages/page-editor/page-editor.vue').then(m => m.default) },
 			{ path: '/i/pages/edit/:pageId', component: () => import('../common/views/pages/page-editor/page-editor.vue').then(m => m.default), props: route => ({ initPageId: route.params.pageId }) },
 			{ path: '/@:user/pages/:pageName/view-source', component: () => import('../common/views/pages/page-editor/page-editor.vue').then(m => m.default), props: route => ({ initUser: route.params.user, initPageName: route.params.pageName }) },
-			{ path: '/i/messaging/:user', component: MkMessagingRoom },
-			{ path: '/i/drive', component: MkDrive },
-			{ path: '/i/drive/folder/:folder', component: MkDrive },
+			{ path: '/i/messaging/:user', component: () => import('./views/pages/messaging-room.vue').then(m => m.default) },
+			{ path: '/i/drive', component: () => import('./views/pages/drive.vue').then(m => m.default) },
+			{ path: '/i/drive/folder/:folder', component: () => import('./views/pages/drive.vue').then(m => m.default) },
 			{ path: '/i/settings', redirect: '/i/settings/profile' },
-			{ path: '/i/settings/:page', component: MkSettings },
-			{ path: '/selectdrive', component: MkSelectDrive },
+			{ path: '/i/settings/:page', component: () => import('./views/pages/settings.vue').then(m => m.default) },
+			{ path: '/selectdrive', component: () => import('./views/pages/selectdrive.vue').then(m => m.default) },
 			{ path: '/@:acct/room', props: true, component: () => import('../common/views/pages/room/room.vue').then(m => m.default) },
-			{ path: '/share', component: MkShare },
-			{ path: '/games/reversi/:game?', component: MkReversi },
-			{ path: '/authorize-follow', component: MkFollow },
-			{ path: '/reset-password/:token', component: MkResetPassword, props: true },
+			{ path: '/share', component: () => import('../common/views/pages/share.vue').then(m => m.default) },
+			{ path: '/games/reversi/:game?', component: () => import('./views/pages/games/reversi.vue').then(m => m.default) },
+			{ path: '/authorize-follow', component: () => import('../common/views/pages/follow.vue').then(m => m.default) },
+			{ path: '/reset-password/:token', props: true, component: () => import('../common/views/pages/reset-password.vue').then(m => m.default) },
 			{ path: '/mfm-cheat-sheet', component: () => import('../common/views/pages/mfm-cheat-sheet.vue').then(m => m.default) },
 			{ path: '/deck', redirect: '/' },
-			{ path: '*', component: MkNotFound }
+			{ path: '*', component: () => import('../common/views/pages/not-found.vue').then(m => m.default) },
 		],
 		scrollBehavior(to, from, savedPosition) {
 			return { x: 0, y: 0 };

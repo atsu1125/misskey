@@ -29,6 +29,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: node cli/diag-environment.js
     - run: yarn install
+    - run: git diff --exit-code yarn.lock
     - run: yarn build
     - run: cp test/test.yml .config/
     - run: yarn test

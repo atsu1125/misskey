@@ -234,6 +234,7 @@ common:
     d: "言いたいことは？"
     e: "ここに書いてください"
     f: "あなたが書くのを待っています..."
+    tag: "このハッシュタグで投稿"
 
   settings: "設定"
   _settings:
@@ -691,6 +692,8 @@ common/views/components/note-menu.vue:
   delete-confirm: "この投稿を削除しますか？"
   deleteAsAdmin: "管理者として削除"
   deleteAsAdmin-confirm: "管理者権限を行使してこの投稿を削除しますか？"
+  deleteDriveNo: "ドライブのファイルは削除しない"
+  deleteDriveYes: "ドライブのファイルも削除する"
   edit: "編集"
   edit-confirm: "この投稿を編集しますか？この投稿へのリアクション、Renote、返信も全て削除されます。"
   delete-and-edit: "削除して編集"
@@ -1379,6 +1382,7 @@ common/views/components/password-settings.vue:
 
 common/views/components/post-form-attaches.vue:
   attach-cancel: "添付取り消し"
+  attach-delete: "取り消しと削除"
   mark-as-sensitive: "閲覧注意に設定"
   unmark-as-sensitive: "閲覧注意を解除"
 
@@ -1668,6 +1672,9 @@ admin/views/users.vue:
   unsuspend: "凍結の解除"
   unsuspend-confirm: "凍結を解除しますか？"
   unsuspended: "凍結を解除しました"
+  delete: "削除"
+  delete-confirm: "削除しますか？"
+  deleted: "削除しました"
   make-silence: "サイレンス"
   silence-confirm: "サイレンスしますか？"
   unmake-silence: "サイレンスの解除"

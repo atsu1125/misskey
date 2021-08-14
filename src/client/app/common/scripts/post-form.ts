@@ -36,6 +36,10 @@ export default (opts) => ({
 			type: Object,
 			required: false
 		},
+		fixedTag: {
+			type: String,
+			required: false
+		},
 		instant: {
 			type: Boolean,
 			required: false,
@@ -83,6 +87,8 @@ export default (opts) => ({
 		},
 
 		placeholder(): string {
+			if (this.fixedTag) return this.$t('@.note-placeholders.tag');
+
 			const xs = [
 				this.$t('@.note-placeholders.a'),
 				this.$t('@.note-placeholders.b'),
@@ -391,12 +397,17 @@ export default (opts) => ({
 				});
 				const emojis = concat([localEmojis, remoteEmojis]);
 
+				let text = this.text == '' ? undefined : this.text.trim();
+				if (text != null && this.fixedTag) {
+					text = `${text.replace(/\s+$/, '')}\n#${this.fixedTag}`;
+				}
+
 				this.preview = {
 					id: `${Math.random()}`,
 					createdAt: new Date().toISOString(),
 					userId: this.$store.state.i.id,
 					user: this.$store.state.i,
-					text: this.text === '' ? undefined : this.text.trim(),
+					text,
 					visibility: this.visibility,
 					localOnly: this.localOnly,
 					copyOnce: this.copyOnce,
@@ -427,8 +438,13 @@ export default (opts) => ({
 
 			this.posting = true;
 
+			let text = this.text == '' ? undefined : this.text;
+			if (text != null && this.fixedTag) {
+				text = `${text.replace(/\s+$/, '')}\n#${this.fixedTag}`;
+			}
+
 			this.$root.api('notes/create', {
-				text: this.text == '' ? undefined : this.text,
+				text,
 				fileIds: this.files.length > 0 ? this.files.map(f => f.id) : undefined,
 				replyId: this.reply ? this.reply.id : undefined,
 				renoteId: this.renote ? this.renote.id : undefined,

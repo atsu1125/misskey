@@ -13,16 +13,18 @@
 				<div class="actions">
 					<ui-button @click="resetPassword"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
 					<ui-horizon-group>
-						<ui-button @click="verifyUser" :disabled="verifying"><fa :icon="faCertificate"/> {{ $t('verify') }}</ui-button>
-						<ui-button @click="unverifyUser" :disabled="unverifying">{{ $t('unverify') }}</ui-button>
+						<ui-button v-if="!user.isVerified" @click="verifyUser" :disabled="verifying"><fa :icon="faCertificate"/> {{ $t('verify') }}</ui-button>
+						<ui-button v-if="user.isVerified" @click="unverifyUser" :disabled="unverifying">{{ $t('unverify') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button @click="silenceUser"><fa :icon="faMicrophoneSlash"/> {{ $t('make-silence') }}</ui-button>
-						<ui-button @click="unsilenceUser">{{ $t('unmake-silence') }}</ui-button>
+						<ui-button v-if="!user.isSilenced" @click="silenceUser"><fa :icon="faMicrophoneSlash"/> {{ $t('make-silence') }}</ui-button>
+						<ui-button v-if="user.isSilenced" @click="unsilenceUser">{{ $t('unmake-silence') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button @click="suspendUser" :disabled="suspending"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
-						<ui-button @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
+						<!-- 複数回サスペンド/削除出来るのは仕様 -->
+						<ui-button @click="suspendUser(user.username)" :disabled="suspending"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
+						<ui-button v-if="user.isSuspended" @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
+						<ui-button @click="deleteUser(user.username)">{{ $t('delete') }}</ui-button>
 					</ui-horizon-group>
 					<ui-button v-if="user.host != null" @click="updateRemoteUser"><fa :icon="faSync"/> {{ $t('update-remote-user') }}</ui-button>
 					<ui-textarea v-if="user" :value="user | json5" readonly tall style="margin-top:16px;"></ui-textarea>
@@ -101,6 +103,7 @@ export default Vue.extend({
 			unverifying: false,
 			suspending: false,
 			unsuspending: false,
+			deleting: false,
 			sort: '+createdAt',
 			state: 'all',
 			origin: 'local',
@@ -345,6 +348,31 @@ export default Vue.extend({
 			});
 
 			this.unsuspending = false;
+
+			this.refreshUser();
+		},
+
+		async deleteUser() {
+			if (!await this.getConfirmed(this.$t('delete-confirm'))) return;
+
+			this.deleting = true;
+
+			const process = async () => {
+				await this.$root.api('admin/delete-user', { userId: this.user._id });
+				this.$root.dialog({
+					type: 'success',
+					text: this.$t('deleted')
+				});
+			};
+
+			await process().catch(e => {
+				this.$root.dialog({
+					type: 'error',
+					text: e.toString()
+				});
+			});
+
+			this.deleting = false;
 
 			this.refreshUser();
 		},

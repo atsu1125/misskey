@@ -38,7 +38,7 @@ export async function performActivity(actor: IRemoteUser, activity: IObject): Pr
 }
 
 export async function performOneActivity(actor: IRemoteUser, activity: IObject): Promise<string> {
-	if (actor.isSuspended) return 'skip: actor is suspended';
+	if (actor.isSuspended || actor.isDeleted) return 'skip: actor is suspended or deleted';
 
 	if (isCreate(activity)) {
 		return await create(actor, activity);

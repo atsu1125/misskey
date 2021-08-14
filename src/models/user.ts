@@ -47,7 +47,6 @@ type IUserBase = {
 	createdAt?: Date;
 	updatedAt?: Date;
 	lastActivityAt?: Date;
-	deletedAt?: Date;
 	followersCount: number;
 	followingCount: number;
 	name?: string;

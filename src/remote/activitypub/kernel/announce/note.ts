@@ -18,8 +18,8 @@ const logger = apLogger;
 export default async function(resolver: Resolver, actor: IRemoteUser, activity: IAnnounce, targetUri: string): Promise<string> {
 	const uri = getApId(activity);
 
-	// アナウンサーが凍結されていたらスキップ
-	if (actor.isSuspended) {
+	// アナウンサーが凍結か削除されていたらスキップ
+	if (actor.isSuspended || actor.isDeleted) {
 		return `skip: actor is suspended`;
 	}
 

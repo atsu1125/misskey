@@ -154,6 +154,7 @@ export default Vue.extend({
 			const grps = groupBy(this.jobs, (job: any) => {
 				if (typeof job.name === 'string' && job.name.match(/^[0-9A-Za-z.-]+$/)) return job.name;
 				try {
+					if (job.attempts === 0) return '(throttled)'
 					const t = job?.data?.to || job?.data?.signature?.keyId;
 					if (t == null) return '(none)';
 					const u = new URL(t);

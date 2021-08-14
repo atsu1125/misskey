@@ -289,7 +289,7 @@ async function upload(key: string, stream: fs.ReadStream | Buffer, type: string,
 		Key: key,
 		Body: stream,
 		ContentType: type,
-		CacheControl: 'max-age=31536000, immutable',
+		CacheControl: 'max-age=2592000, s-maxage=172800, immutable',
 	} as S3.PutObjectRequest;
 
 	if (filename) params.ContentDisposition = contentDisposition('inline', filename);

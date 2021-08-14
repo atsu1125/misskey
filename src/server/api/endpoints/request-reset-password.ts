@@ -46,7 +46,7 @@ export default define(meta, async (ps) => {
 	if (!isLocalUser(user)) throw new Error();
 
 	// 削除済み
-	if (user.deletedAt != null) {
+	if (user.isDeleted != null) {
 		apiLogger.warn(`Reset password requested for ${ps.username}, but deleted.`);
 		return;	// エラー内容を返してもいい
 	}

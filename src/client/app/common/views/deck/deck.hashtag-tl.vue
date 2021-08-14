@@ -60,9 +60,9 @@ export default Vue.extend({
 	},
 
 	mounted() {
-		if (this.connection) this.connection.close();
+		if (this.connection) this.connection.dispose();
 		this.connection = this.$root.stream.connectToChannel('hashtag', {
-			q: this.tagTl.query
+			q: [[this.tagTl.tag]]
 		});
 		this.connection.on('note', this.onNote);
 	},

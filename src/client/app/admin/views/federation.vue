@@ -18,16 +18,16 @@
 					</ui-input>
 				</ui-horizon-group>
 				<ui-horizon-group inputs>
-					<ui-input :value="instance.notesCount | number" type="text" readonly>
+					<ui-input :value="instance.notesCount" type="text" readonly>
 						<span>{{ $t('notes') }}</span>
 					</ui-input>
-					<ui-input :value="instance.usersCount | number" type="text" readonly>
+					<ui-input :value="instance.usersCount" type="text" readonly>
 						<span>{{ $t('users') }}</span>
 					</ui-input>
-					<ui-input :value="instance.followingCount | number" type="text" readonly>
+					<ui-input :value="instance.followingCount" type="text" readonly>
 						<span>{{ $t('following') }}</span>
 					</ui-input>
-					<ui-input :value="instance.followersCount | number" type="text" readonly>
+					<ui-input :value="instance.followersCount" type="text" readonly>
 						<span>{{ $t('followers') }}</span>
 					</ui-input>
 				</ui-horizon-group>
@@ -171,10 +171,10 @@
 						{{ `${instance.host} ${instance.name ? ` (${instance.name})` : ''}` }}
 					</a>
 					<span>{{ `${instance.softwareName || 'unknown'}` }} <small :style="{ opacity: 0.7 }">{{ `${instance.softwareVersion || ''}` }}</small></span>
-					<span>{{ instance.notesCount | number }}</span>
-					<span>{{ instance.usersCount | number }}</span>
-					<span>{{ instance.followingCount | number }}</span>
-					<span>{{ instance.followersCount | number }}</span>
+					<span>{{ instance.notesCount }}</span>
+					<span>{{ instance.usersCount }}</span>
+					<span>{{ instance.followingCount }}</span>
+					<span>{{ instance.followersCount }}</span>
 					<span>{{ instance.latestStatus }}</span>
 				</div>
 			</div>
@@ -217,7 +217,7 @@ export default Vue.extend({
 			instances: [],
 			chart: null,
 			chartSrc: 'requests',
-			chartSpan: 'hour',
+			chartSpan: 'day',
 			chartInstance: null,
 			urlQuery,
 			faGlobe, faTerminal, faSearch, faMinusCircle, faServer, faCrosshairs, faEnvelopeOpenText, faUsers, faCaretDown, faCaretUp, faPaperPlane, faTrafficLight, faInbox

@@ -176,11 +176,11 @@ async function sendRaw(ctx: Router.RouterContext, file: IDriveFile): Promise<voi
 async function sendNormal(ctx: Router.RouterContext, body: Buffer | stream.Stream, contentType: string, filename?: string): Promise<void> {
 	ctx.body = body;
 	ctx.set('Content-Type', contentType);
-	ctx.set('Cache-Control', 'public, max-age=31536000, immutable');
+	ctx.set('Cache-Control', 'max-age=2592000, s-maxage=172800, immutable');
 	if (filename) ctx.set('Content-Disposition', contentDisposition('inline', filename));
 }
 
 async function sendError(ctx: Router.RouterContext, status: number): Promise<void> {
 	ctx.status = status;
-	ctx.set('Cache-Control', 'public, max-age=3600');
+	ctx.set('Cache-Control', 'max-age=3600');
 }

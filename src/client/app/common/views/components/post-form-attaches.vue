@@ -19,7 +19,7 @@ import i18n from '../../../i18n';
 import XDraggable from 'vuedraggable';
 import XMenu from '../../../common/views/components/menu.vue';
 import { faTimesCircle, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import XFileThumbnail from './drive-file-thumbnail.vue'
 
 export default Vue.extend({
@@ -62,17 +62,32 @@ export default Vue.extend({
 		},
 		showFileMenu(file, ev: MouseEvent) {
 			this.$root.new(XMenu, {
-				items: [{
-					type: 'item',
-					text: file.isSensitive ? this.$t('unmark-as-sensitive') : this.$t('mark-as-sensitive'),
-					icon: file.isSensitive ? faEyeSlash : faEye,
-					action: () => { this.toggleSensitive(file) }
-				}, {
-					type: 'item',
-					text: this.$t('attach-cancel'),
-					icon: faTimesCircle,
-					action: () => { this.detachMedia(file.id) }
-				}],
+				items: [
+					{
+						type: 'item',
+						text: file.isSensitive ? this.$t('unmark-as-sensitive') : this.$t('mark-as-sensitive'),
+						icon: file.isSensitive ? faEyeSlash : faEye,
+						action: () => { this.toggleSensitive(file) }
+					},
+					{
+						type: 'item',
+						text: this.$t('attach-cancel'),
+						icon: faTimesCircle,
+						action: () => { this.detachMedia(file.id) }
+					},
+					{
+						type: 'item',
+						text: this.$t('attach-delete'),
+						icon: faTimes,
+						action: () => {
+							this.detachMedia(file.id);
+							this.$root.api('drive/files/delete', {
+								fileId: file.id
+							});
+						}
+					},
+
+				],
 				source: ev.currentTarget || ev.target
 			});
 		}

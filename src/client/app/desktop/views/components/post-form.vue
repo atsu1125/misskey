@@ -13,7 +13,7 @@
 				</span>
 				<a @click="addVisibleUser">{{ $t('add-visible-user') }}</a>
 			</div>
-			<div class="hashtags" v-if="recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags">
+			<div class="hashtags" v-if="recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags && fixedTag == null">
 				<a v-for="tag in recentHashtags.slice(0, 5)" @click="addTag(tag)" :key="tag" :title="$t('click-to-tagging')">#{{ tag }}</a>
 			</div>
 			<div class="local-only-remote" v-if="isUnreachable">ローカルのみでリモートリプライしてもとどきません</div>
@@ -40,24 +40,26 @@
 			<button class="kao" :title="$t('insert-a-kao')" @click="kao"><fa :icon="faFish"/></button>
 			<button class="poll" :class="{ enabled: !!poll }" :title="$t('create-poll')" @click="poll = !poll"><fa icon="chart-pie"/></button>
 			<button class="cw" :class="{ enabled: useCw }" :title="$t('hide-contents')" @click="useCw = !useCw"><fa :icon="['far', 'eye-slash']"/></button>
-			<button class="visibility" :title="$t('visibility')" @click="setVisibility" ref="visibilityButton">
-				<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
-			</button>
 			<div class="text-count" :class="{ over: trimmedLength(text) > maxNoteTextLength }">{{ maxNoteTextLength - trimmedLength(text) }}</div>
-			<ui-button v-if="tertiaryNoteVisibility != null && tertiaryNoteVisibility != 'none'" inline :wait="posting" class="tertiary" :disabled="!canPost" @click="post(tertiaryNoteVisibility)" title="Tertiary Post">
+			<ui-button v-if="tertiaryNoteVisibility != null && tertiaryNoteVisibility != 'none'" inline primary :wait="posting" class="tertiary" :disabled="!canPost" @click="post(tertiaryNoteVisibility)" title="Tertiary Post">
 				<mk-ellipsis v-if="posting"/>
 				<x-visibility-icon v-else :v="tertiaryNoteVisibility"/>
 			</ui-button>
-			<ui-button v-if="secondaryNoteVisibility != null && secondaryNoteVisibility != 'none'" inline :wait="posting" class="secondary" :disabled="!canPost" @click="post(secondaryNoteVisibility)" title="Secondary Post (Alt+Enter)">
+			<ui-button v-if="secondaryNoteVisibility != null && secondaryNoteVisibility != 'none'" inline primary :wait="posting" class="secondary" :disabled="!canPost" @click="post(secondaryNoteVisibility)" title="Secondary Post (Alt+Enter)">
 				<mk-ellipsis v-if="posting"/>
 				<x-visibility-icon v-else :v="secondaryNoteVisibility"/>
 			</ui-button>
-			<ui-button inline primary :wait="posting" class="submit" :disabled="!canPost" @click="post" title="Post (Ctrl+Enter)">
-				<div style="display: inline-flex; gap: 4px">
-					<x-visibility-icon v-if="!(this.renote && !this.text.length && !this.files.length && !this.poll)" :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
-					<div>{{ posting ? $t('posting') : submitText }}<mk-ellipsis v-if="posting"/></div>
+			<ui-buttons class="submit">
+				<ui-button class="button ok" inline primary :disabled="!canPost" :grow="1" @click="post" title="Post (Ctrl+Enter)">
+					<x-visibility-icon class="inline" :v="visibility" :localOnly="localOnly"/>
+					{{ submitText }}
+				</ui-button>
+				<div ref="visibilityButton" :title="$t('visibility')">
+					<ui-button class="button ok" inline primary :disabled="!canPost" :shrink="1" @click="setVisibility">
+						<fa icon="angle-down" fixed-width/>
+					</ui-button>
 				</div>
-			</ui-button>
+			</ui-buttons>
 		</footer>
 
 		<input ref="file" type="file" multiple="multiple" tabindex="-1" @change="onChangeFile"/>
@@ -225,10 +227,6 @@ export default Vue.extend({
 					this.localOnly = init.localOnly;
 					this.quoteId = init.renote ? init.renote.id : null;
 					if (!this.renote) this.renote = this.initialNote.renote;
-				}
-
-				if (!this.text && this.$route?.params?.tag) {
-					this.text = `#${this.$route.params.tag} `;
 				}
 
 				this.focus();
@@ -452,9 +450,11 @@ export default Vue.extend({
 		margin-top: 6px
 
 		> .submit
-			display block
+			flex 0 0 auto
 			margin 4px
-			max-width 100px
+
+			.inline
+				display inline
 
 		> .secondary, .tertiary
 			display block

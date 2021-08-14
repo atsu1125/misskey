@@ -44,7 +44,7 @@ export default async function(ctx: Router.RouterContext) {
 
 		ctx.body = fs.readFileSync(path);
 		ctx.set('Content-Type', mime);
-		ctx.set('Cache-Control', 'max-age=31536000, immutable');
+		ctx.set('Cache-Control', 'max-age=2592000, s-maxage=172800, immutable');
 	} catch (e) {
 		serverLogger.error(e);
 

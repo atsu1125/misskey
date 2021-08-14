@@ -1,7 +1,7 @@
 <template>
 <component class="dmtdnykelhudezerjlfpbhgovrgnqqgr"
 	:is="link ? 'a' : 'button'"
-	:class="{ inline, primary, wait }"
+	:class="{ inline, primary, wait, concat }"
 	:type="type"
 	@click="$emit('click')"
 	@mousedown="onMousedown"
@@ -17,6 +17,9 @@
 import Vue from 'vue';
 export default Vue.extend({
 	inject: {
+		concat: {
+			default: false
+		},
 		horizonGrouped: {
 			default: false
 		}
@@ -53,8 +56,22 @@ export default Vue.extend({
 			required: false,
 			default: false
 		},
+		grow: {
+			type: Number,
+			required: false,
+			default: 0
+		},
+		shrink: {
+			type: Number,
+			required: false,
+			default: 0
+		}
 	},
 	mounted() {
+		if (this.concat) {
+			this.$el.style.flex = `${this.grow} ${this.shrink} auto`;
+		}
+
 		if (this.autofocus) {
 			this.$nextTick(() => {
 				this.$el.focus();
@@ -160,6 +177,13 @@ export default Vue.extend({
 
 	&:not(.inline) + .dmtdnykelhudezerjlfpbhgovrgnqqgr
 		margin-top 16px
+
+	&.concat
+		&.inline
+			min-width auto
+
+		> .ripples
+			border-radius 0
 
 	&.inline
 		display inline-block

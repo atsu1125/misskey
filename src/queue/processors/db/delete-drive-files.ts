@@ -24,12 +24,12 @@ export async function deleteDriveFiles(job: Bull.Job<DbUserJobData>): Promise<st
 	let cursor: any = null;
 
 	const total = await DriveFile.count({
-		userId: user._id,
+		'metadata.userId': user._id,
 	});
 
 	while (true) {
 		const files = await DriveFile.find({
-			userId: user._id,
+			'metadata.userId': user._id,
 			...(cursor ? { _id: { $gt: cursor } } : {})
 		}, {
 			limit: 100,
@@ -47,6 +47,7 @@ export async function deleteDriveFiles(job: Bull.Job<DbUserJobData>): Promise<st
 
 		for (const file of files) {
 			await deleteFile(file);
+			logger.info(`Deleted: ${user._id}: ${file._id}`);
 			deletedCount++;
 		}
 

@@ -10,6 +10,7 @@
 		<div class="search-area">
 			<x-search-box :word="`#${$route.params.tag}`"/>
 		</div>
+		<mk-post-form class="form" :fixedTag="$route.params.tag"/>
 		<mk-notes ref="timeline" :make-promise="makePromise" @inited="inited"/>
 	</main>
 </mk-ui>
@@ -30,6 +31,7 @@ export default Vue.extend({
 	},
 	data() {
 		return {
+			connection: null,
 			makePromise: cursor => this.$root.api('notes/search_by_tag', {
 				limit: limit + 1,
 				offset: cursor ? cursor : undefined,
@@ -50,6 +52,20 @@ export default Vue.extend({
 			})
 		};
 	},
+
+	created() {
+		const prepend = note => {
+			(this.$refs.timeline as any).prepend(note);
+		};
+
+		this.connection = this.$root.stream.connectToChannel('hashtag', { q: [[this.$route.params.tag]] });
+		this.connection.on('note', prepend);
+	},
+
+	beforeDestroy() {
+		this.connection.dispose();
+	},
+
 	watch: {
 		$route() {
 			this.$refs.timeline.reload();

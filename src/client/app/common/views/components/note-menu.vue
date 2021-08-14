@@ -206,8 +206,16 @@ export default Vue.extend({
 			this.$root.dialog({
 				type: 'warning',
 				text: this.isSelf ? this.$t('delete-confirm') : this.$t('deleteAsAdmin-confirm'),
-				showCancelButton: true
-			}).then(({ canceled }) => {
+				showCancelButton: true,
+				select: this.note.fileIds?.length > 0 ?
+					{
+						items: [
+							{ value: false, text: this.$t(`deleteDriveNo`) },
+							{ value: true, text: this.$t(`deleteDriveYes`) },
+						],
+						default: false
+					} : undefined,
+			}).then(({ canceled, result }) => {
 				if (canceled) return;
 
 				this.$root.api('notes/delete', {
@@ -216,6 +224,14 @@ export default Vue.extend({
 					this.$emit('closed');
 					this.destroyDom();
 				});
+
+				if (result) {
+					for (const fileId of this.note.fileIds) {
+						this.$root.api('drive/files/delete', {
+							fileId
+						});
+					}
+				}
 			});
 		},
 

@@ -1,7 +1,7 @@
 <template>
 <div class="mk-post-form">
 	<div class="form">
-		<header v-if="!inside">
+		<header v-if="!inside && !fixedTag">
 			<button class="cancel" @click="cancel"><fa icon="times"/></button>
 			<div>
 				<span v-if="!renote || quote" class="text-count" :class="{ over: trimmedLength(text) > maxNoteTextLength }">{{ maxNoteTextLength - trimmedLength(text) }}</span>
@@ -39,7 +39,7 @@
 				<button class="drive" @click="chooseFileFromDrive"><fa icon="cloud"/></button>
 				<button class="jpeg" :class="{ enabled: useJpeg }" @click="useJpeg = !useJpeg"><fa :icon="faShareSquare"/></button>
 				<button class="kao" @click="kao"><fa :icon="faFish"/></button>
-				<button v-if="!inside" class="poll" :class="{ enabled: !!poll }" @click="poll = !poll"><fa icon="chart-pie"/></button>
+				<button v-if="!inside && fixedTag == null" class="poll" :class="{ enabled: !!poll }" @click="poll = !poll"><fa icon="chart-pie"/></button>
 				<button class="cw" :class="{ enabled: useCw }" @click="useCw = !useCw"><fa :icon="['far', 'eye-slash']"/></button>
 				<button class="visibility" @click="setVisibility" ref="visibilityButton">
 					<x-visibility-icon :v="visibility" :localOnly="localOnly" :copyOnce="copyOnce"/>
@@ -56,12 +56,12 @@
 			</footer>
 			<input ref="file" class="file" type="file" multiple="multiple" @change="onChangeFile"/>
 		</div>
-		<details v-if="!inside && preview" class="preview" ref="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
+		<details v-if="!inside && preview && fixedTag == null" class="preview" ref="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
 			<summary>{{ $t('preview') }}</summary>
 			<mk-note class="note" :note="preview" :key="preview.id" :compact="true" :preview="true" />
 		</details>
 	</div>
-	<div class="hashtags" v-if="!inside && recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags">
+	<div class="hashtags" v-if="!inside && recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags && fixedTag == null">
 		<a v-for="tag in recentHashtags.slice(0, 5)" :key="tag" @click="addTag(tag)">#{{ tag }}</a>
 	</div>
 </div>
@@ -238,10 +238,6 @@ export default Vue.extend({
 					this.localOnly = init.localOnly;
 					this.quoteId = init.renote ? init.renote.id : null;
 					if (!this.renote) this.renote = this.initialNote.renote;
-				}
-
-				if (!this.text && this.$route?.params?.tag) {
-					this.text = `#${this.$route.params.tag} `;
 				}
 
 				this.$nextTick(() => this.watch());

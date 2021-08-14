@@ -1,11 +1,8 @@
 <template>
-<div>
+<div class="tagtl513">
+	<header>{{ `#${$route.params.tag}` }}</header>
+	<mk-post-form class="form" :fixedTag="$route.params.tag"/>
 	<mk-notes ref="timeline" :make-promise="makePromise" @inited="inited">
-		<template #header>
-			<header class="wqraeznr">
-				<span><fa icon="hashtag"/> {{ $route.params.tag }}</span>
-			</header>
-		</template>
 	</mk-notes>
 </div>
 </template>
@@ -21,6 +18,7 @@ export default Vue.extend({
 	i18n: i18n('desktop/views/pages/tag.vue'),
 	data() {
 		return {
+			connection: null,
 			makePromise: cursor => this.$root.api('notes/search_by_tag', {
 				limit: limit + 1,
 				offset: cursor ? cursor : undefined,
@@ -41,6 +39,20 @@ export default Vue.extend({
 			})
 		};
 	},
+
+	created() {
+		const prepend = note => {
+			(this.$refs.timeline as any).prepend(note);
+		};
+
+		this.connection = this.$root.stream.connectToChannel('hashtag', { q: [[this.$route.params.tag]] });
+		this.connection.on('note', prepend);
+	},
+
+	beforeDestroy() {
+		this.connection.dispose();
+	},
+
 	watch: {
 		$route() {
 			this.$refs.timeline.reload();
@@ -71,15 +83,18 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-.wqraeznr
-	padding 0 8px
-	z-index 10
-	background var(--faceHeader)
-	box-shadow 0 var(--lineWidth) var(--desktopTimelineHeaderShadow)
+.tagtl513
+	header
+		background var(--face)
+		color var(--faceHeaderText)
+		border-radius 6px
+		padding 0.7em
+		margin-bottom 16px
+		font-weight bold
+		text-align center
 
-	> span
-		padding 0 8px
-		font-size 0.9em
-		line-height 42px
-		color var(--text)
+	.form
+		margin-bottom 16px
+		border-radius 6px
+		box-shadow 0 3px 8px rgba(0, 0, 0, 0.2)
 </style>
