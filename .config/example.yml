@@ -90,6 +90,10 @@ drive:
 # Disable Posts (default: false)
 #disablePosts: true
 
+# Enable instance GeoIP lookup (default: false)
+# Non-commercial use only
+#enableInstanceGeoIp: true
+
 # Sign to ActivityPub GET request (default: false)
 #signToActivityPubGet: true
 

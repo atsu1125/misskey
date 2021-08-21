@@ -5,7 +5,7 @@
 		<template v-if="type == 'signin'">
 			<mk-signin @reminder="onReminder"/>
 		</template>
-		<template v-if="type == 'reminder'">
+		<template v-else-if="type == 'reminder'">
 			<mk-reminder @done="onReminderDone"/>
 		</template>
 		<template v-else>

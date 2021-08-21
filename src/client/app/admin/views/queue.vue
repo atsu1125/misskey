@@ -419,5 +419,6 @@ details.gsjs280
 				margin 0 6px
 		> pre
 			margin 0.5em 1em
+			white-space pre-wrap
 
 </style>

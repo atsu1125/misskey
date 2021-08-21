@@ -265,7 +265,6 @@ common:
     i-like-sushi: "私は(プリンよりむしろ)寿司が好き"
     show-reversi-board-labels: "リバーシのボードの行と列のラベルを表示"
     use-avatar-reversi-stones: "リバーシの石にアバターを使う"
-    enable-decorated-mfm: "装飾系のMFM構文を有効にする"
     disable-animated-mfm: "投稿内の動きのあるテキストを無効にする"
     disable-showing-animated-images: "アニメーション画像を再生しない"
     showInstanceInfo: "インスタンス情報を表示する"

@@ -38,6 +38,8 @@ export type Source = {
 	disableUrlPreview?: boolean;
 	disablePosts?: boolean;
 
+	enableInstanceGeoIp?: boolean;
+
 	signToActivityPubGet?: boolean;
 
 	proxy?: string;

@@ -5,6 +5,7 @@ import Logger from './logger';
 import { InboxRequestData } from '../queue';
 import { geoIpLookup } from './geoip';
 import { JSDOM } from 'jsdom';
+import config from '../config';
 
 export const logger = new Logger('instanceinfo', 'cyan');
 
@@ -79,7 +80,7 @@ export async function UpdateInstanceinfo(instance: IInstance, request?: InboxReq
 	});
 
 	// GeoIP
-	const geoip = request?.ip ? await geoIpLookup(request.ip).catch(e => {
+	const geoip = (request?.ip && config.enableInstanceGeoIp) ? await geoIpLookup(request.ip).catch(e => {
 		logger.warn(`GeoIP failed for ${toApHost(instance.host!)} ${request.ip} ${e}`);
 		return { cc: '??', isp: '??', org: '??', as: '??' };
 	}) : null;

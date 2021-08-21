@@ -59,15 +59,7 @@ export default Vue.component('misskey-flavored-markdown', {
 	render(createElement) {
 		if (this.text == null || this.text == '') return;
 
-		const ast =
-			(this.plain
-				? (this.extra && this.$store.state.settings.enableDecoratedMfm)
-					? parsePlainX
-					: parsePlain
-				: (this.basic || !this.$store.state.settings.enableDecoratedMfm)
-					? parseBasic
-					: parseFull
-			)(this.text);
+		const ast = (this.basic ? parseBasic : this.plain ? this.extra ? parsePlainX : parsePlain : parseFull)(this.text);
 
 		let bigCount = 0;
 		let motionCount = 0;

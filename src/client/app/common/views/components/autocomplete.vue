@@ -334,7 +334,7 @@ export default Vue.extend({
 				}
 
 				this.emojis = matched;
-			} else if (this.type === 'mfm' && this.$store.state.settings.enableDecoratedMfm) {
+			} else if (this.type === 'mfm') {
 				if (this.q.startsWith('<')) {
 					const name = this.q.substr(1);
 					const db = angleDb.filter(x => x.name.startsWith(name));

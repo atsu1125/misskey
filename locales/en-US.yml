@@ -236,7 +236,6 @@ common:
     i-like-sushi: "I prefer sushi rather than pudding"
     show-reversi-board-labels: "Show row and column labels in Reversi"
     use-avatar-reversi-stones: "Use avatar as a stone in reversi"
-    enable-decorated-mfm: "Enable decorated MFM"
     disable-animated-mfm: "Disable animated texts in a post"
     disable-showing-animated-images: "Do not play animated images"
     showInstanceInfo: "Show instance information"

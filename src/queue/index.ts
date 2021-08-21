@@ -94,8 +94,7 @@ export function deliver(user: ILocalUser, content: any, to: string, lowSeverity 
 		attempts,
 		timeout: 1 * 60 * 1000,	// 1min
 		backoff: {
-			type: 'exponential',
-			delay: 60 * 1000
+			type: 'apBackoff'
 		},
 		removeOnComplete: true,
 		removeOnFail: true
@@ -118,8 +117,7 @@ export function inbox(activity: IActivity, signature: httpSignature.IParsedSigna
 		attempts: config.inboxJobMaxAttempts || 8,
 		timeout: 5 * 60 * 1000,	// 5min
 		backoff: {
-			type: 'exponential',
-			delay: 60 * 1000
+			type: 'apBackoff'
 		},
 		removeOnComplete: true,
 		removeOnFail: true
