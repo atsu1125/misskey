@@ -22,7 +22,6 @@ apt install -y mecab mecab-ipadic-utf8
 ```
 mecabSearch:
   mecabBin: mecab
-  mecabDic: /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd
 ```
 
 ## Dockerの場合

@@ -408,11 +408,10 @@ async function searchInternal(me: ILocalUser, query: string, limit: number | und
 			});
 		} else {
 			const ws = await getIndexer({ text: words.join(' ') });
-			if (ws.length) {
-				noteQuery.$and.push({
-					mecabWords: { $all: ws }
-				});
-			}
+			if (!ws.length) return [];
+			noteQuery.$and.push({
+				mecabWords: { $all: ws }
+			});
 		}
 	}
 
