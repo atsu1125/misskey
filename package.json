@@ -1,11 +1,11 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.504-m544",
+	"version": "10.102.504-m544+atsu1125",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mei23/misskey.git"
+		"url": "https://github.com/atsu1125/misskey.git"
 	},
 	"main": "./index.js",
 	"private": true,
