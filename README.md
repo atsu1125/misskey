@@ -1,3 +1,6 @@
+Dockerイメージはここにある（リリース時に自動ビルド）  
+https://hub.docker.com/repository/docker/atsu1125/misskey_web  
+
 # めいすきー (Meisskey)
 
 Meisskey is a decentralized microblogging platform.   
