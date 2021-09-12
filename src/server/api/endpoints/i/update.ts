@@ -362,7 +362,7 @@ export default define(meta, async (ps, user, app) => {
 	});
 
 	// Publish meUpdated event
-	publishMainStream(user._id, 'meUpdated', iObj);
+	publishMainStream(user._id, 'meUpdated', iObj!);
 
 	// 鍵垢を解除したとき、溜まっていたフォローリクエストがあるならすべて承認
 	if (user.isLocked && ps.isLocked === false) {

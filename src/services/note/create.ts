@@ -170,7 +170,7 @@ export default async (user: IUser, data: Option, silent = false) => {
 	}
 
 	// Renote/Quote対象がホームだったらホームに
-	if (data.renote && data.renote.visibility === 'home') {
+	if (data.renote && data.visibility === 'public' && data.renote.visibility === 'home') {
 		data.visibility = 'home';
 	}
 
@@ -682,7 +682,7 @@ async function createMentionedEvents(mentionedUsers: IUser[], note: INote, nm: N
 			detail: true
 		});
 
-		publishMainStream(u._id, 'mention', detailPackedNote);
+		publishMainStream(u._id, 'mention', detailPackedNote!);
 
 		// Create notification
 		nm.push(u._id, 'mention');

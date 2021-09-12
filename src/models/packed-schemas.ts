@@ -59,6 +59,7 @@ export type ThinPackedUser = {
 	isBot: boolean;
 	isCat: boolean;
 	instance: any;	// TODO
+	avoidSearchIndex?: boolean;
 	emojis: {
 		name: string;
 		url: string;
@@ -123,7 +124,6 @@ export type PackedUser = ThinPackedUser & {
 	carefulMassive?: boolean;
 	refuseFollow?: boolean;
 	autoAcceptFollowed?: boolean;
-	avoidSearchIndex?: boolean;
 	isExplorable?: boolean;
 	hideFollows?: string;
 	wallpaperId?: string | null;
@@ -197,3 +197,15 @@ export type V10Followers = {
 	next: string
 }
 //#endregion
+
+export type PackedNotification = {
+	id: string;
+	createdAt: string;
+	isRead: boolean;
+	type: 'follow' | 'mention' | 'reply' | 'renote' | 'quote' | 'reaction' | 'poll_vote' | 'poll_finished' | 'highlight';
+	user: ThinPackedUser;
+	userId: string;
+	note?: PackedNote | null;
+	reaction?: string | null;
+	choice?: number | null;
+};

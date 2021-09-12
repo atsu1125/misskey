@@ -21,6 +21,7 @@ import { LdSignature } from '../../remote/activitypub/misc/ld-signature';
 import resolveUser from '../../remote/resolve-user';
 import config from '../../config';
 import { publishInstanceModUpdated } from '../../services/server-event';
+import { StatusError } from '../../misc/fetch';
 
 const logger = new Logger('inbox');
 
@@ -66,7 +67,7 @@ export const tryProcessInbox = async (data: InboxJobData, ctx?: ApContext): Prom
 			user = await resolvePerson(getApId(activity.actor), undefined, resolver) as IRemoteUser;
 		} catch (e) {
 			// 対象が4xxならスキップ
-			if (e.statusCode >= 400 && e.statusCode < 500) {
+			if (e instanceof StatusError && e.isClientError) {
 				return `skip: Ignored actor ${activity.actor} - ${e.statusCode}`;
 			}
 			throw `Error in actor ${activity.actor} - ${e.statusCode || e}`;

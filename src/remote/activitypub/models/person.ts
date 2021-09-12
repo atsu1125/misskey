@@ -31,6 +31,7 @@ import DbResolver from '../db-resolver';
 import resolveUser from '../../resolve-user';
 import { normalizeTag } from '../../../misc/normalize-tag';
 import { substr } from 'stringz';
+import { resolveAnotherUser } from '../misc/resolve-another-user';
 const logger = apLogger;
 
 const MAX_NAME_LENGTH = 512;
@@ -131,8 +132,6 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 	const tags = extractApHashtags(person.tag).map(tag => normalizeTag(tag)).splice(0, 64);
 
 	const movedToUserId = await resolveAnotherUser(uri, person.movedTo);
-	// const alsoKnownAsUserIds = await resolveAnotherUsers(uri, person.alsoKnownAs);
-	const alsoKnownAsUserIds: mongo.ObjectID[] = [];
 
 	const bday = person['vcard:bday']?.match(/^\d{4}-\d{2}-\d{2}/);
 
@@ -165,7 +164,6 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 			endpoints: person.endpoints,
 			uri: person.id,
 			movedToUserId,
-			alsoKnownAsUserIds,
 			url: getOneApHrefNullable(person.url),
 			fields,
 			...services,
@@ -338,7 +336,6 @@ export async function updatePerson(uri: string, resolver?: Resolver, hint?: IAct
 	const tags = extractApHashtags(person.tag).map(tag => normalizeTag(tag)).splice(0, 64);
 
 	const movedToUserId = await resolveAnotherUser(uri, person.movedTo);
-	const alsoKnownAsUserIds = await resolveAnotherUsers(uri, person.alsoKnownAs);
 
 	const bday = person['vcard:bday']?.match(/^\d{4}-\d{2}-\d{2}/);
 
@@ -355,7 +352,6 @@ export async function updatePerson(uri: string, resolver?: Resolver, hint?: IAct
 		notesCount,
 		name: person.name ? truncate(person.name, MAX_NAME_LENGTH) : person.name,
 		movedToUserId,
-		alsoKnownAsUserIds,
 		url: getOneApHrefNullable(person.url),
 		endpoints: person.endpoints,
 		fields,
@@ -600,17 +596,4 @@ export async function fetchOutbox(user: IUser) {
 			// skip Announce etc
 		}
 	}
-}
-
-async function resolveAnotherUser(selfUri: string, ids: ApObject | undefined) {
-	const users = await resolveAnotherUsers(selfUri, ids);
-	return users.length > 0 ? users[0] : undefined;
-}
-
-async function resolveAnotherUsers(selfUri: string, ids: ApObject | undefined) {
-	const users = await Promise.all(
-		getApIds(ids).map(uri => resolvePerson(uri).catch(() => null))
-	) as IRemoteUser[];
-
-	return users.filter(x => x != null && x.uri != selfUri).map(x => x._id);
 }

@@ -6,6 +6,7 @@ export type Source = {
 	feedback_url?: string;
 	url: string;
 	port: number;
+	addr?: string;
 	https?: { [x: string]: string };
 	disableHsts?: boolean;
 	mongodb: {
@@ -46,6 +47,8 @@ export type Source = {
 	proxySmtp?: string;
 
 	proxyProxy?: string;
+
+	allowedPrivateNetworks?: string[];
 
 	maxFileSize?: number;
 
@@ -93,6 +96,7 @@ export type DriveConfig = {
 		accessKey: string;
 		secretKey: string;
 		region?: string;
+		useProxy? :boolean;
 		setPublicRead?: boolean;
 		s3ForcePathStyle?: boolean;
 	};
