@@ -51,6 +51,7 @@
 				<router-link class="name" :to="notification.user | userPage"><mk-user-name :user="notification.user"/></router-link>
 				<mk-time :time="notification.createdAt"/>
 			</header>
+			<a @click="followRequests">{{ $t('@.follow-requests') }}</a>
 		</div>
 	</div>
 
@@ -118,16 +119,24 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import i18n from '../../../i18n';
 import getNoteSummary from '../../../../../misc/get-note-summary';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
+	i18n: i18n(),
 	props: ['notification'],
 	data() {
 		return {
 			getNoteSummary,
 			faLightbulb,
 		};
+	},
+
+	methods: {
+		followRequests() {
+			this.$router.push('/i/received-follow-requests');
+		},
 	},
 });
 </script>

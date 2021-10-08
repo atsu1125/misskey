@@ -157,6 +157,7 @@ type IUserBase = {
 
 export interface ILocalUser extends IUserBase {
 	host: null;
+	/** privateKeyPem */
 	keypair: string;
 	email: string;
 	emailVerified?: boolean;

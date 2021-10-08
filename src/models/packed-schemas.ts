@@ -202,7 +202,7 @@ export type PackedNotification = {
 	id: string;
 	createdAt: string;
 	isRead: boolean;
-	type: 'follow' | 'mention' | 'reply' | 'renote' | 'quote' | 'reaction' | 'poll_vote' | 'poll_finished' | 'highlight';
+	type: 'follow' | 'mention' | 'reply' | 'renote' | 'quote' | 'reaction' | 'poll_vote' | 'poll_finished' | 'receiveFollowRequest' | 'highlight';
 	user: ThinPackedUser;
 	userId: string;
 	note?: PackedNote | null;

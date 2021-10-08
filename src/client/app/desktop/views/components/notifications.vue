@@ -87,6 +87,7 @@
 								</router-link>
 								<mk-time :time="notification.createdAt"/>
 							</header>
+							<a @click="followRequests">{{ $t('@.follow-requests') }}</a>
 						</div>
 					</template>
 
@@ -192,6 +193,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import getNoteSummary from '../../../../../misc/get-note-summary';
 import * as config from '../../../config';
+import MkFollowRequestsWindow from './received-follow-requests-window.vue';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
@@ -309,7 +311,11 @@ export default Vue.extend({
 				sound.volume = this.$store.state.device.soundVolume;
 				sound.play();
 			}
-		}
+		},
+
+		followRequests() {
+			this.$root.new(MkFollowRequestsWindow);
+		},
 	}
 });
 </script>
