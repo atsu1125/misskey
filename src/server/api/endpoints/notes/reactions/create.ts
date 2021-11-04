@@ -4,6 +4,7 @@ import createReaction from '../../../../../services/note/reaction/create';
 import define from '../../../define';
 import { getNote } from '../../../common/getters';
 import { ApiError } from '../../../error';
+import { pack } from '../../../../../models/note-reaction';
 
 export const meta = {
 	stability: 'stable',
@@ -70,10 +71,11 @@ export default define(meta, async (ps, user) => {
 		throw e;
 	});
 
-	await createReaction(user, note, ps.reaction, ps.dislike).catch(e => {
+	const reaction = await createReaction(user, note, ps.reaction, ps.dislike).catch(e => {
 		if (e.id === '2d8e7297-1873-4c00-8404-792c68d7bef0') throw new ApiError(meta.errors.isMyNote);
 		if (e.id === '51c42bb4-931a-456b-bff7-e5a8a70dd298') throw new ApiError(meta.errors.alreadyReacted);
 		throw e;
 	});
-	return;
+
+	return await pack(reaction);
 });

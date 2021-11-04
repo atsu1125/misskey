@@ -1785,6 +1785,8 @@ common/views/components/follow-button.vue:
   request-pending: "Pending"
   follow-processing: "Processing"
   follow-request: "Follow request"
+  remoteFollow: "Remote follow"
+  remoteFollowMessage: "Enter the following account in the search box of the instance you want to follow and follow.\n```\n{acct}\n```\n\n\nAlternatively, enter the account you want to follow below."
 mobile/views/components/note.vue:
   private: "This post is private"
   deleted: "This post has been deleted"
