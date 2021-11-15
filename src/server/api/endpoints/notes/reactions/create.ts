@@ -42,6 +42,13 @@ export const meta = {
 				'ja-JP': 'きらい'
 			}
 		},
+
+		_res: {
+			validator: $.optional.bool,
+			desc: {
+				'ja-JP': '_res'
+			}
+		},
 	},
 
 	errors: {
@@ -77,5 +84,9 @@ export default define(meta, async (ps, user) => {
 		throw e;
 	});
 
-	return await pack(reaction);
+	if (ps._res) {
+		return await pack(reaction);
+	} else {
+		return;
+	}
 });

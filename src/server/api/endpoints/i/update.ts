@@ -198,7 +198,8 @@ export const meta = {
 				reaction: $.optional.bool,
 				poll_vote: $.optional.bool,
 				poll_finished: $.optional.bool,
-				highlight: $.optional.bool
+				highlight: $.optional.bool,
+				unreadMessagingMessage: $.optional.bool
 			}),
 			desc: {
 				'ja-JP': 'オフラインプッシュ通知の対象'
