@@ -1,3 +1,4 @@
+<!-- チャット画面 Inner -->
 <template>
 <div class="mk-messaging-room"
 	@dragover.prevent.stop="onDragover"
@@ -270,7 +271,7 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .mk-messaging-room
-	background var(--messagingRoomBg)
+	background var(--face)
 
 	> .body
 		width 100%
