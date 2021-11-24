@@ -306,10 +306,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/bull@3.15.5":
-  version "3.15.5"
-  resolved "https://registry.yarnpkg.com/@types/bull/-/bull-3.15.5.tgz#a4459c127c5b10fb847531579a2cd5db35751366"
-  integrity sha512-XgJQWJ03jyKMfdoL8IAIoHIo7JkkL74kcxuujTONkSJswm0giIJ9kuVgDNHS0OvD+OiPNcFmbBl0H3scj2+A8A==
+"@types/bull@3.15.6":
+  version "3.15.6"
+  resolved "https://registry.yarnpkg.com/@types/bull/-/bull-3.15.6.tgz#55594c6965f2f37b905d644d7e00987900f5e911"
+  integrity sha512-6M8r7uT6+3w1HNwinvzM5unPYAIlVBsCG9/7HI0dKNUWj1N9dM3JY81FNTFuG6WWFeaQvLCAH3rXpOs1/YaCww==
   dependencies:
     "@types/ioredis" "*"
 
@@ -479,10 +479,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/js-yaml@4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.4.tgz#cc38781257612581a1a0eb25f1709d2b06812fce"
-  integrity sha512-AuHubXUmg0AzkXH0Mx6sIxeY/1C110mm/EkE/gB1sTRz3h2dao2W/63q42SlVST+lICxz5Oki2hzYA6+KnnieQ==
+"@types/js-yaml@4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.5.tgz#738dd390a6ecc5442f35e7f03fa1431353f7e138"
+  integrity sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==
 
 "@types/jsdom@16.2.13":
   version "16.2.13"
@@ -614,10 +614,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa__router@8.0.9":
-  version "8.0.9"
-  resolved "https://registry.yarnpkg.com/@types/koa__router/-/koa__router-8.0.9.tgz#972c17981e835eedeadacdf382cc7ddb617dc377"
-  integrity sha512-ToYa6yCySkTYBmPcFOqkX1WUfejI44Na7FiCDv9Ccu7/Psf5lLFcYNSvYehyQQXhSJUSJw2ci2kdLz1vGVg1eQ==
+"@types/koa__router@8.0.10":
+  version "8.0.10"
+  resolved "https://registry.yarnpkg.com/@types/koa__router/-/koa__router-8.0.10.tgz#c1cb8b1c16f41a9c4ae7fdafa90db5af8c20cd81"
+  integrity sha512-drOKcq4CRwxMAnenf0nC7EirmhDsGwAcVFrYu1UexnDGTO+eOxkICUxgQ7azapQglxp15iLiFFumjV7Mt6Bsjg==
   dependencies:
     "@types/koa" "*"
 
@@ -1530,10 +1530,10 @@ autwh@0.1.0:
   dependencies:
     oauth "0.9.15"
 
-aws-sdk@2.1032.0:
-  version "2.1032.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1032.0.tgz#6711efdd61e9a4d306030a69684633702cc43113"
-  integrity sha512-e3477Kka0XoIKrxTMdbBKWxizdesWpZK77FUv0FtcviZtKJd/yxymz50NREP3+88OZIj5a0WihG4YIjuZOla5Q==
+aws-sdk@2.1034.0:
+  version "2.1034.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1034.0.tgz#61b0511e712ff765da1e182ac969d5eca38ac5a5"
+  integrity sha512-yo0B9nOZAKgsQqIKXqkeOJ2Wrt8zx4wd1JmCP1XZzdz1O4b1TfZA/mTN5cMiszOaEk8EWqvPESrw8MaIHFS3wA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -5007,10 +5007,10 @@ jschardet@^3.0.0:
   resolved "https://registry.yarnpkg.com/jschardet/-/jschardet-3.0.0.tgz#898d2332e45ebabbdb6bf2feece9feea9a99e882"
   integrity sha512-lJH6tJ77V8Nzd5QWRkFYCLc13a3vADkh3r/Fi8HupZGWk2OVVDfnZP8V/VgQgZ+lzW0kG2UGb5hFgt3V3ndotQ==
 
-jsdom@18.1.0:
-  version "18.1.0"
-  resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-18.1.0.tgz#43e88a0e4d6d2aeeec0a18810c0934c02b2ae3e4"
-  integrity sha512-q6QFAfSGLEUqRJ+GCV6vn6ItZCMARWh1d33wiJZPxc+wMNw7HK71JPmQ4C2lIZAsBH8TiJu4uplach/UcrC6bQ==
+jsdom@18.1.1:
+  version "18.1.1"
+  resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-18.1.1.tgz#15ec896f5ab7df9669a62375606f47c8c09551aa"
+  integrity sha512-NmJQbjQ/gpS/1at/ce3nCx89HbXL/f5OcenBe8wU1Eik0ROhyUc3LtmG3567dEHAGXkN8rmILW/qtCOPxPHQJw==
   dependencies:
     abab "^2.0.5"
     acorn "^8.5.0"

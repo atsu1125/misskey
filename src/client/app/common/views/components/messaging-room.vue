@@ -352,7 +352,7 @@ export default Vue.extend({
 				//font-weight bold
 				line-height 32px
 				color var(--messagingRoomDateDividerText)
-				background var(--messagingRoomBg)
+				//background var(--face)
 
 	> footer
 		position -webkit-sticky
