@@ -208,6 +208,8 @@ export const pack = async (
 	_target.isSensitive = _file.metadata.isSensitive;
 
 	if (opts.detail) {
+		_target.folderId = _file.metadata.folderId;
+
 		if (_target.folderId) {
 			// Populate folder
 			_target.folder = await packFolder(_target.folderId, {
