@@ -73,7 +73,7 @@ export default Vue.component('misskey-flavored-markdown', {
 			return t.match(/^[0-9.]+s$/) ? t : null;
 		}
 
-		const genEl = (nodes: MfmNode[], inQuote?: string) => concat(nodes.map((node): VNode[] => {
+		const genEl = (nodes: MfmNode[], fixedSize = false) => concat(nodes.map((node): VNode[] => {
 			switch (node.type) {
 				case 'text': {
 					const text = node.props.text.replace(/(\r\n|\n|\r)/g, '\n');
@@ -89,11 +89,11 @@ export default Vue.component('misskey-flavored-markdown', {
 				}
 
 				case 'bold': {
-					return [createElement('b', genEl(node.children, inQuote))];
+					return [createElement('b', genEl(node.children, fixedSize))];
 				}
 
 				case 'strike': {
-					return [createElement('del', genEl(node.children, inQuote))];
+					return [createElement('del', genEl(node.children, fixedSize))];
 				}
 
 				case 'italic': {
@@ -101,7 +101,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'font-style: oblique;'
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'sup': {
@@ -131,7 +131,7 @@ export default Vue.component('misskey-flavored-markdown', {
 							name: 'animate-css',
 							value: { classes: 'tada', iteration: 'infinite' }
 						}]
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'bigger': {
@@ -145,7 +145,7 @@ export default Vue.component('misskey-flavored-markdown', {
 							name: 'animate-css',
 							value: { classes: 'wobble', iteration: 'infinite' }
 						}]
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'fn': {
@@ -205,16 +205,24 @@ export default Vue.component('misskey-flavored-markdown', {
 							style = !this.$store.state.settings.disableAnimatedMfm ? 'animation: mfm-rgbshift 2s linear infinite;' : '';
 							break;
 						}
+						case 'x1': {
+							style = `font-size: 100%;`;
+							fixedSize = true;
+							break;
+						}
 						case 'x2': {
 							style = `font-size: 200%;`;
+							fixedSize = true;
 							break;
 						}
 						case 'x3': {
-							style = `font-size: 400%;`;
+							style = `font-size: 300%;`;
+							fixedSize = true;
 							break;
 						}
 						case 'x4': {
-							style = `font-size: 600%;`;
+							style = `font-size: 400%;`;
+							fixedSize = true;
 							break;
 						}
 						case 'font': {
@@ -234,7 +242,7 @@ export default Vue.component('misskey-flavored-markdown', {
 								attrs: {
 									class: '_mfm_blur_'
 								}
-							}, genEl(node.children, inQuote))];
+							}, genEl(node.children, fixedSize))];
 						}
 					}
 
@@ -242,7 +250,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'display: inline-block;' + style
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'small': {
@@ -250,7 +258,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'opacity: 0.7;'
 						},
-					}, genEl(node.children, inQuote))];
+					}, genEl(node.children, fixedSize))];
 				}
 
 				case 'center': {
@@ -258,7 +266,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'text-align:center;'
 						}
-					}, genEl(node.children, inQuote))];
+					}, genEl(node.children, fixedSize))];
 				}
 
 				case 'motion': {
@@ -272,7 +280,7 @@ export default Vue.component('misskey-flavored-markdown', {
 							name: 'animate-css',
 							value: { classes: 'rubberBand', iteration: 'infinite' }
 						}]
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'spin': {
@@ -289,7 +297,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'display: inline-block;' + style
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'xspin': {
@@ -306,7 +314,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'display: inline-block;' + style
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'yspin': {
@@ -323,7 +331,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'display: inline-block;' + style
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'jump': {
@@ -333,7 +341,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: (this.$store.state.settings.disableAnimatedMfm || isMany) ? 'display: inline-block;' : 'display: inline-block; animation: jump 0.75s linear infinite;'
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'flip': {
@@ -341,7 +349,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'display: inline-block; transform: scaleX(-1);'
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'vflip': {
@@ -349,7 +357,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: 'display: inline-block; transform: scaleY(-1);'
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'rotate': {
@@ -359,7 +367,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: `display: inline-block; transform: rotate(${deg}deg);`
 						},
-					}, genEl(node.children, inQuote));
+					}, genEl(node.children, fixedSize));
 				}
 
 				// 装飾はここに追加
@@ -368,43 +376,49 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style: (this.$store.state.settings.disableAnimatedMfm) ? 'display: inline-block;' : 'display: inline-block; animation: blink 0.75s linear infinite;'
 						},
-					}, genEl(node.children));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'twitch': {
 					return (createElement as any)('span', {
 						style: !this.$store.state.settings.disableAnimatedMfm ? 'display: inline-block; animation: mfm-twitch 0.5s ease infinite;' : 'display: inline-block;'
-					}, genEl(node.children));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'shake': {
 					return (createElement as any)('span', {
 						style: !this.$store.state.settings.disableAnimatedMfm ? 'display: inline-block; animation: mfm-shake 0.5s ease infinite;' : 'display: inline-block;'
-					}, genEl(node.children));
+					}, genEl(node.children, fixedSize));
 				}
 
 				case 'rgbshift': {
 					return (createElement as any)('span', {
 						style: !this.$store.state.settings.disableAnimatedMfm ? 'animation: mfm-rgbshift 2s linear infinite;' : ''
-					}, genEl(node.children));
+					}, genEl(node.children, fixedSize));
+				}
+
+				case 'x1': {
+					return (createElement as any)('span', {
+						style: `font-size: 100%;`
+					}, genEl(node.children, true));
 				}
 
 				case 'x2': {
 					return (createElement as any)('span', {
 						style: `font-size: 200%;`
-					}, genEl(node.children));
+					}, genEl(node.children, true));
 				}
 
 				case 'x3': {
 					return (createElement as any)('span', {
-						style: `font-size: 400%;`
-					}, genEl(node.children));
+						style: `font-size: 300%;`
+					}, genEl(node.children, true));
 				}
 
 				case 'x4': {
 					return (createElement as any)('span', {
-						style: `font-size: 600%;`
-					}, genEl(node.children));
+						style: `font-size: 400%;`
+					}, genEl(node.children, true));
 				}
 
 				case 'url': {
@@ -449,7 +463,7 @@ export default Vue.component('misskey-flavored-markdown', {
 							title: href,
 							style: 'color:var(--mfmLink);'
 						}
-					}, genEl(node.children, inQuote))];
+					}, genEl(node.children, fixedSize))];
 				}
 
 				case 'mention': {
@@ -504,13 +518,13 @@ export default Vue.component('misskey-flavored-markdown', {
 							attrs: {
 								class: 'quote'
 							}
-						}, genEl(node.children, 'quote'))];
+						}, genEl(node.children, fixedSize))];
 					} else {
 						return [createElement('span', {
 							attrs: {
 								class: 'quote'
 							}
-						}, genEl(node.children, 'quote'))];
+						}, genEl(node.children, fixedSize))];
 					}
 				}
 
@@ -519,7 +533,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							class: 'title'
 						}
-					}, genEl(node.children, inQuote))];
+					}, genEl(node.children, fixedSize))];
 				}
 
 				case 'emoji': {
@@ -534,7 +548,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						},
 						props: {
 							customEmojis: this.customEmojis || customEmojis,
-							normal: this.plain,
+							normal: this.plain || fixedSize,
 							direction: this.direction,
 						}
 					})];
@@ -574,7 +588,7 @@ export default Vue.component('misskey-flavored-markdown', {
 
 				case 'marquee': {
 					if (this.$store.state.settings.disableAnimatedMfm) {
-						return genEl(node.children, inQuote);
+						return genEl(node.children, fixedSize);
 					}
 
 					let className = 'marquee';
@@ -593,7 +607,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							class: className
 						}
-					}, genEl(node.children, inQuote))];
+					}, genEl(node.children, fixedSize))];
 				}
 
 				case 'color': {
@@ -606,7 +620,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						attrs: {
 							style
 						}
-					}, genEl(node.children, inQuote))];
+					}, genEl(node.children, fixedSize))];
 				}
 
 				default: {
