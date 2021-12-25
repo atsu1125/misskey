@@ -6,38 +6,35 @@ services:
     image: atsu1125/misskey_web:latest
     restart: always
     links:
-#      - mongo
+      - mongo
       - redis
     ports:
-      - 3001:3000
-#      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:3000:3000"
     networks:
       - internal_network
       - external_network
     volumes:
       - ./files:/misskey/files
-      - ./.config:/misskey/.config
-    extra_hosts:
-      - "dockerhost:192.168.50.10"
+      - ./.config/docker.yml:/misskey/.config/default.yml
 
   redis:
     restart: always
-    image: redis:4.0-alpine
+    image: redis:alpine
     networks:
       - internal_network
     volumes:
       - ./redis:/data
 
-#  mongo:
-#    restart: always
-#    image: mongo:4.4
-#    networks:
-#      - internal_network
-#    environment:
-#      MONGO_INITDB_DATABASE: "misskey"
-#    volumes:
-#      - ./.config/mongo_initdb.js:/docker-entrypoint-initdb.d/mongo_initdb.js:ro
-#      - ./mongo_db:/data/db
+  mongo:
+    restart: always
+    image: mongo:latest
+    networks:
+      - internal_network
+    environment:
+      MONGO_INITDB_DATABASE: "misskey"
+    volumes:
+      - ./.config/mongo_initdb_example.js:/docker-entrypoint-initdb.d/mongo_initdb.js:ro
+      - ./mongo_db:/data/db
 
 networks:
   internal_network:

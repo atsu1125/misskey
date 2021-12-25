@@ -1,0 +1,191 @@
+# Final accessible URL seen by a user.
+url: http://localhost:3000/
+
+# Listen port
+port: 3000
+
+# Listen address (default is probably any)
+# addr: '127.0.0.0'
+
+mongodb:
+  host: mongo
+  port: 27017
+  db: misskey
+#  user: example-misskey-user
+#  pass: example-misskey-pass
+
+# Redis
+redis:
+  host: redis
+  port: 6379
+  #pass: example-pass
+
+
+### drive ###
+drive:
+  storage: 'fs'
+
+# OR
+
+#drive:
+#  storage: 'db'
+
+# OR
+
+#drive:
+#  storage: 'minio'
+#  bucket: <bucket>
+#  prefix: <prefix>
+#  config:
+#    endPoint: <endPoint>
+#    region: <region>
+#    useSSL: true
+#    accessKey: <accessKey>
+#    secretKey: <secretKey>
+#    useProxy: true
+#    setPublicRead: false
+#    s3ForcePathStyle: true
+#
+# * endPoint
+#     S3: Leave empty
+#     GCS: 'storage.googleapis.com'
+#     Minio: 'your-minio-server:port'
+#     Other cloud services: Your endpoint
+#
+# * region
+#     Specify a region such like 'xx-east-1'.
+#     If your service is region independent (eg: GCS/Minio) leave empty or specify 'us-east-1'
+#
+# * baseurl
+#     If using Proxy or CDN, its URL. (eg: https://media.example.com)
+#     S3: https://<bucket>.s3.amazonaws.com
+#     GCS: https://storage.googleapis.com/<bucket>
+#     Other services: https://s3.example.com/<bucket>
+#
+# * useProxy
+#     Use proxy
+#
+# * setPublicRead
+#     Set to true to set 'public-read' to the file (default: false)
+#
+# * s3ForcePathStyle (default: true, ただしendPointを省略した場合は常にfalse)
+
+# If defined, store remote files in another location
+# remoteDrive:
+#  storage: 'minio'
+#  bucket:
+#  prefix:
+#  config:
+#    endPoint:
+#    region
+#    useSSL: true
+#    accessKey:
+#    secretKey:
+
+# falseで未保存のリモートファイルをローカルでプロキシしない (default: true)
+#proxyRemoteFiles: false
+
+# Disable Federation: (default: false)
+#disableFederation: true
+
+# Ignore AP forwarded activities (default: false)
+#ignoreApForwarded: true
+
+# Disable URL Preview (default: false)
+#disableUrlPreview: true
+
+# Disable Posts (default: false)
+#disablePosts: true
+
+# Enable instance GeoIP lookup (default: false)
+# Non-commercial use only
+#enableInstanceGeoIp: true
+
+# Sign to ActivityPub GET request (default: false)
+#signToActivityPubGet: true
+
+# 最初に作成したユーザーを管理者にする (default: true)
+autoAdmin: true
+
+# アイコン等の設定
+# favicon.urlをpngにする場合は、favicon.typeを'image/png'にする
+icons:
+  favicon:
+    url: '/favicon.ico'
+    type: 'image/x-icon'
+  appleTouchIcon:
+    url: '/apple-touch-icon.png'
+  manifest192:
+    url: '/assets/icons/192.png'
+  manifest512:
+    url: '/assets/icons/512.png'
+
+# デフォルトのテーマカラー
+themeColor: '#fb4e4e'
+
+# MeCab検索インデックス 使用する場合は以下を指定
+# Ubuntuとかなら apt install -y mecab mecab-ipadic-utf8 して、mecabSearch.mecabBin を指定すればよい。
+#mecabSearch:
+#  # MeCabパス
+#  mecabBin: mecab
+#  # MeCab辞書 (オプション)
+#  mecabDic: /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd
+#  # MeCab辞書がmecab-ipadic-NEologdの場合は以下を指定するとよい
+#  mecabNeologd: true
+
+# Whether disable HSTS
+#disableHsts: true
+
+# 各Workerの設定
+# workerWorkerCount: server+queue両方を処理するworkerの数
+# serverWorkerCount: server処理のみをするworkerの数
+# queueWorkerCount: queue処理のみをするworkerの数
+# 稼働するのに必要な処理はserverとqueueの処理です
+# デフォルト(0:0:0)では、1つのmaster processが上がりそれに全ての処理が含まれるようになります
+# 0:1:1 にすると master(実処理は含まない), server(server処理を含む), queue(queueの処理を含む) の3つのプロセスが上がります
+# workerWorkerRestartMin: workerを自動で再起動する間隔 (分)
+# serverWorkerRestartMin: serverを自動で再起動する間隔 (分)
+# queueWorkerRestartMin: queueを自動で再起動する間隔 (分)
+
+#workerStrategies:
+#  workerWorkerCount: 0
+#  serverWorkerCount: 0
+#  queueWorkerCount: 0
+#  workerWorkerRestartMin: -1
+#  serverWorkerRestartMin: -1
+#  queueWorkerRestartMin: -1
+
+# IP address family used for outgoing request (ipv4, ipv6 or dual)
+#outgoingAddressFamily: ipv4
+
+# Job concurrency per worker
+# deliverJobConcurrency: 128
+# inboxJobConcurrency: 16
+
+# Job late limiter
+# deliverJobPerSec: 128
+# inboxJobPerSec: 16
+
+# deliverJobMaxAttempts: 12
+# inboxJobMaxAttempts: 8
+
+# Proxy for HTTP/HTTPS
+#proxy: http://127.0.0.1:3128
+
+# Proxy for SMTP/SMTPS
+#proxySmtp: http://127.0.0.1:3128   # use HTTP/1.1 CONNECT
+#proxySmtp: socks4://127.0.0.1:1080 # use SOCKS4
+#proxySmtp: socks5://127.0.0.1:1080 # use SOCKS5
+
+allowedPrivateNetworks: [
+  '127.0.0.1/32'
+]
+
+# Upload or download file size limits (bytes)
+#maxFileSize: 262144000
+
+# サーバー情報を隠す (default: false)
+#hideServerInfo: true
+
+# 設定できる最低年齢
+# minimumAge: 13
