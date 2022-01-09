@@ -7,17 +7,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
-
-    services:
-      mongo:
-        image: mongo:4.4-bionic
-        ports:
-          - 57010:27017
-      redis:
-        image: redis:4.0-alpine
-        ports:
-          - 56310:6379
+        node-version: [14.x, 15.x, 16.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -36,5 +26,3 @@ jobs:
       run: yarn build
     - name: Check webpack process
       run: ls built/meta.json
-    - name: Test
-      run: yarn test
