@@ -1547,7 +1547,7 @@ admin/views/instance.vue:
   maintainer-config: "管理者情報"
   maintainer-name: "管理者名"
   maintainer-email: "管理者の連絡先"
-  maintainer-email-desc: "URLかメールアドレスを入力できます。"
+  maintainer-email-desc: "URL(https://)かメールアドレス(mailto:)を入力できます。"
   drive-config: "ドライブの設定"
   cache-remote-files: "リモートのファイルをキャッシュする"
   cache-remote-files-desc: "この設定を無効にすると、リモートファイルをキャッシュせず直リンクするようになります。そのためサーバーのストレージを節約できますが、プライバシー設定で直リンクを無効にしているユーザーにはファイルが見えなくなったり、サムネイルが生成されないので通信量が増加します。通常はこの設定をオンにしておくことをおすすめします。"
