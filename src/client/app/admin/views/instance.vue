@@ -13,7 +13,7 @@
 		<section class="fit-bottom">
 			<header><fa :icon="faHeadset"/> {{ $t('maintainer-config') }}</header>
 			<ui-input v-model="maintainerName">{{ $t('maintainer-name') }}</ui-input>
-			<ui-input v-model="maintainerEmail" type="email"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('maintainer-email') }}</ui-input>
+			<ui-input v-model="maintainerEmail">{{ $t('maintainer-email') }}<template #desc>{{ $t('maintainer-email-desc') }}</template></ui-input>
 		</section>
 		<section class="fit-top fit-bottom">
 			<ui-input v-model="maxNoteTextLength">{{ $t('max-note-text-length') }}</ui-input>
@@ -59,7 +59,6 @@
 				<ui-input v-model="smtpPass" type="password" :withPasswordToggle="true" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-pass') }}</ui-input>
 			</ui-horizon-group>
 			<ui-switch v-model="smtpSecure" :disabled="!enableEmail">{{ $t('smtp-secure') }}<template #desc>{{ $t('smtp-secure-info') }}</template></ui-switch>
-			<ui-button @click="testEmail()">{{ $t('test-mail') }}</ui-button>
 		</section>
 		<section>
 			<header><fa :icon="faBolt"/> {{ $t('serviceworker-config') }}</header>
@@ -256,8 +255,8 @@ export default Vue.extend({
 		async testEmail() {
 			this.$root.api('admin/send-email', {
 				to: this.maintainerEmail,
-				subject: 'Test email',
-				text: 'Na'
+				subject: 'Test email from Misskey',
+				text: 'Test email from your Misskey instance.'
 			}).then(x => {
 				this.$root.dialog({
 					type: 'success',
@@ -266,7 +265,7 @@ export default Vue.extend({
 			}).catch(e => {
 				this.$root.dialog({
 					type: 'error',
-					text: e
+					text: 'Failed'
 				});
 			});
 		},
