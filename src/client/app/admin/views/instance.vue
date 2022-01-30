@@ -59,6 +59,8 @@
 				<ui-input v-model="smtpPass" type="password" :withPasswordToggle="true" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-pass') }}</ui-input>
 			</ui-horizon-group>
 			<ui-switch v-model="smtpSecure" :disabled="!enableEmail">{{ $t('smtp-secure') }}<template #desc>{{ $t('smtp-secure-info') }}</template></ui-switch>
+			<ui-input v-model="testEmailAddress" type="email"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('test-email-address') }}</ui-input>
+ 			<ui-button @click="testEmail()">{{ $t('test-mail') }}</ui-button>
 		</section>
 		<section>
 			<header><fa :icon="faBolt"/> {{ $t('serviceworker-config') }}</header>
@@ -181,6 +183,7 @@ export default Vue.extend({
 			smtpUser: null,
 			smtpPass: null,
 			smtpAuth: false,
+			testEmailAddress: null,
 			enableServiceWorker: false,
 			swPublicKey: null,
 			swPrivateKey: null,
@@ -227,6 +230,7 @@ export default Vue.extend({
 			this.smtpUser = meta.smtpUser;
 			this.smtpPass = meta.smtpPass;
 			this.smtpAuth = meta.smtpUser != null && meta.smtpUser !== '';
+			this.testEmailAddress = meta.testEmailAddress;
 			this.enableServiceWorker = meta.enableServiceWorker;
 			this.swPublicKey = meta.swPublickey;
 			this.swPrivateKey = meta.swPrivateKey;
@@ -254,7 +258,7 @@ export default Vue.extend({
 
 		async testEmail() {
 			this.$root.api('admin/send-email', {
-				to: this.maintainerEmail,
+				to: this.testEmailAddress,
 				subject: 'Test email from Misskey',
 				text: 'Test email from your Misskey instance.'
 			}).then(x => {
@@ -316,6 +320,7 @@ export default Vue.extend({
 				smtpPort: parseInt(this.smtpPort, 10),
 				smtpUser: this.smtpAuth ? this.smtpUser : '',
 				smtpPass: this.smtpAuth ? this.smtpPass : '',
+				testEmailAddress: this.testEmailAddress,
 				enableServiceWorker: this.enableServiceWorker,
 				swPublicKey: this.swPublicKey,
 				swPrivateKey: this.swPrivateKey

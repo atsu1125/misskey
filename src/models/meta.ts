@@ -235,6 +235,7 @@ export type IMeta = {
 	smtpPort?: number;
 	smtpUser?: string;
 	smtpPass?: string;
+	testEmailAddress?: string;
 
 	enableServiceWorker?: boolean;
 	swPublicKey?: string;

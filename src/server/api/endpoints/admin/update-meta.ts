@@ -288,6 +288,13 @@ export const meta = {
 			}
 		},
 
+		testEmailAddress: {
+			validator: $.optional.nullable.str,
+			desc: {
+				'ja-JP': 'テストメールの配信に使用するメールアドレス'
+			}
+		},
+
 		enableServiceWorker: {
 			validator: $.optional.bool,
 			desc: {
