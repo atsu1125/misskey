@@ -18,7 +18,7 @@ ENV NODE_ENV=production
 WORKDIR /misskey
 
 RUN apt-get update
-RUN apt-get install -y ffmpeg mecab mecab-ipadic-utf8
+RUN apt-get install -y ffmpeg mecab mecab-ipadic-utf8 wget
 
 COPY --from=builder /misskey/node_modules ./node_modules
 COPY --from=builder /misskey/built ./built
