@@ -34,6 +34,7 @@ export type ThinPackedNote = {
 
 	visibleUserIds: string[];
 	mentions: string[];
+	hasRemoteMentions: boolean;
 
 	notHaveDecorationMfm?: boolean;
 
@@ -56,6 +57,8 @@ export type ThinPackedUser = {
 	avatarUrl: string | null;
 	avatarColor: string | null;
 	isAdmin: boolean;
+	isVerified?: boolean;
+	borderColor?: string | null;
 	isBot: boolean;
 	isCat: boolean;
 	instance: any;	// TODO
@@ -96,7 +99,6 @@ export type PackedUser = ThinPackedUser & {
 	usertags?: string[];
 
 	// local
-	isVerified?: boolean;
 	isModerator?: boolean;
 	twoFactorEnabled?: boolean;
 	twitter?: {

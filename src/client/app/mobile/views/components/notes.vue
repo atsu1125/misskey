@@ -17,7 +17,7 @@
 	<!-- トランジションを有効にするとなぜかメモリリークする -->
 	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" name="mk-notes" class="transition" tag="div">
 		<template v-for="(note, i) in _notes">
-			<mk-note :note="note" :key="note.id" @update:note="onNoteUpdated(i, $event)"/>
+			<mk-note :note="note" :next="_notes[i + 1]" :prev="_notes[i - 1]" :key="note.id" @update:note="onNoteUpdated(i, $event)"/>
 		</template>
 	</component>
 
@@ -160,7 +160,7 @@ export default Vue.extend({
 
 			// 既存をRenoteされたらそこを置き換える
 			if (note.renoteId && !note.text && !note.poll && (!note.fileIds || !note.fileIds.length)) {
-				for (let i = 0; i < 10; i++) {
+				for (let i = 0; i < 100; i++) {
 					if (!this.notes[i]) break;
 
 					// 引用投稿はスキップ

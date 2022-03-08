@@ -29,6 +29,7 @@ export default class extends Channel {
 		if (note.visibility !== 'public') return;
 		if (note.user!.host != null) return;
 		if (!this.showReplayInPublicTimeline && note.replyId) return;
+		if (note.hasRemoteMentions) return;
 
 		// Renoteなら再pack
 		if (note.renoteId != null) {
@@ -36,6 +37,8 @@ export default class extends Channel {
 				detail: true
 			});
 		}
+
+		if (note.renote?.user?.host) return;
 
 		// 流れてきたNoteがミュートしているユーザーが関わるものだったら無視する
 		if (shouldMuteThisNote(note, this.mutedUserIds)) return;

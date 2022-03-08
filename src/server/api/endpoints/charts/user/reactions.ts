@@ -7,10 +7,13 @@ export const meta = {
 	stability: 'stable',
 
 	desc: {
-		'ja-JP': 'ユーザーごとの被リアクション数のチャートを取得します。'
+		'ja-JP': 'ユーザーごとの被リアクション数のチャートを取得します。動きません。'
 	},
 
 	tags: ['charts', 'users', 'reactions'],
+
+	allowGet: true,
+	cacheSec: 600,
 
 	params: {
 		span: {

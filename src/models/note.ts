@@ -120,9 +120,15 @@ export type INote = {
 	// 非正規化
 	_reply?: {
 		userId: mongo.ObjectID;
+		user: {
+			host: string;
+		};
 	};
 	_renote?: {
 		userId: mongo.ObjectID;
+		user: {
+			host: string;
+		};
 	};
 	_user: {
 		host: string;
@@ -405,6 +411,7 @@ export const pack = async (
 
 		visibleUserIds: db.visibleUserIds?.length > 0 ? db.visibleUserIds.map(toOidString) : [],
 		mentions: db.mentions?.length > 0 ? db.mentions.map(toOidString) : [],
+		hasRemoteMentions: db.mentionedRemoteUsers?.length > 0,
 
 		...(opts.detail ? {
 			reply: (opts.detail && db.replyId) ? pack(db.replyId, meId, {

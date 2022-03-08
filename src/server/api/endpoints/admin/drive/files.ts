@@ -1,7 +1,8 @@
 import $ from 'cafy';
+import { toDbHost } from '../../../../../misc/convert-host';
 import File, { packMany } from '../../../../../models/drive-file';
+import { getSystem1 } from '../../../../../services/emoji-store';
 import define from '../../../define';
-import { fallback } from '../../../../../prelude/symbol';
 
 export const meta = {
 	tags: ['admin'],
@@ -20,32 +21,21 @@ export const meta = {
 			default: 0
 		},
 
-		sort: {
-			validator: $.optional.str.or([
-				'+createdAt',
-				'-createdAt',
-				'+size',
-				'-size',
-			]),
-		},
-
 		origin: {
 			validator: $.optional.str.or([
 				'combined',
 				'local',
 				'remote',
+				'system',
 			]),
 			default: 'local'
-		}
-	}
-};
+		},
 
-const sort: any = { // < https://github.com/Microsoft/TypeScript/issues/1863
-	'+createdAt': { uploadDate: -1 },
-	'-createdAt': { uploadDate: 1 },
-	'+size': { length: -1 },
-	'-size': { length: 1 },
-	[fallback]: { _id: -1 }
+		hostname: {
+			validator: $.optional.nullable.str,
+			default: null,
+		},
+	}
 };
 
 export default define(meta, async (ps, me) => {
@@ -53,13 +43,26 @@ export default define(meta, async (ps, me) => {
 		'metadata.deletedAt': { $exists: false },
 	} as any;
 
-	if (ps.origin == 'local') q['metadata._user.host'] = null;
-	if (ps.origin == 'remote') q['metadata._user.host'] = { $ne: null };
+	if (ps.hostname != null && ps.hostname.length > 0) {
+		q['metadata._user.host'] = toDbHost(ps.hostname);
+	} else {
+		if (ps.origin === 'system') {
+			q['metadata._user.host'] = null;
+			const s = await getSystem1();
+			q['metadata.userId'] = s._id;
+		} else if (ps.origin === 'local') {
+			q['metadata._user.host'] = null;
+			const s = await getSystem1();
+			q['metadata.userId'] = { $ne: s._id };
+		} else if (ps.origin === 'remote') {
+			q['metadata._user.host'] = { $ne: null };
+		}
+	}
 
 	const files = await File
 		.find(q, {
 			limit: ps.limit,
-			sort: sort[ps.sort] || sort[fallback],
+			sort: { _id: -1 },
 			skip: ps.offset
 		});
 

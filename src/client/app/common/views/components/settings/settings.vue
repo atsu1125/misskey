@@ -154,7 +154,7 @@
 				<ui-switch v-if="isAdvanced" v-model="showMyRenotes">{{ $t('@._settings.show-my-renotes') }}</ui-switch>
 				<ui-switch v-if="isAdvanced"  v-model="showRenotedMyNotes">{{ $t('@._settings.show-renoted-my-notes') }}</ui-switch>
 				<ui-switch v-if="isAdvanced"  v-model="showLocalRenotes">{{ $t('@._settings.show-local-renotes') }}</ui-switch>
-				<ui-switch v-model="excludeForeignReply">{{ $t('@._settings.excludeForeignReply') }}</ui-switch>
+				<ui-switch v-model="includeForeignReply">{{ $t('@._settings.includeForeignReply') }}</ui-switch>
 			</section>
 
 			<section>
@@ -266,10 +266,6 @@
 		<x-notification/>
 	</template>
 
-	<template v-if="page == null || page == 'drive'">
-		<x-drive/>
-	</template>
-
 	<template v-if="page == null || page == 'hashtags'">
 		<ui-card>
 			<template #title><fa icon="hashtag"/> {{ $t('@._settings.tags') }}</template>
@@ -367,7 +363,6 @@ import XSignins from './signins.vue';
 import XTags from './tags.vue';
 import XIntegration from './integration.vue';
 import XTheme from './theme.vue';
-import XDrive from './drive.vue';
 import XMuteAndBlock from './mute-and-block.vue';
 import XExtendedNotification from './extended-notification.vue';
 import XPassword from './password.vue';
@@ -393,7 +388,6 @@ export default Vue.extend({
 		XTags,
 		XIntegration,
 		XTheme,
-		XDrive,
 		XMuteAndBlock,
 		XExtendedNotification,
 		XPassword,
@@ -564,9 +558,9 @@ export default Vue.extend({
 			set(value) { this.$store.dispatch('settings/set', { key: 'showLocalRenotes', value }); }
 		},
 
-		excludeForeignReply: {
-			get() { return this.$store.state.settings.excludeForeignReply; },
-			set(value) { this.$store.dispatch('settings/set', { key: 'excludeForeignReply', value }); }
+		includeForeignReply: {
+			get() { return this.$store.state.settings.includeForeignReply; },
+			set(value) { this.$store.dispatch('settings/set', { key: 'includeForeignReply', value }); }
 		},
 
 		showPostFormOnTopOfTl: {

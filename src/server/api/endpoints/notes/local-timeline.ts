@@ -115,6 +115,8 @@ export default define(meta, async (ps, user) => {
 
 		deletedAt: null,
 
+		'mentionedRemoteUsers.0': { $exists: false },
+
 		$and: [ {} ]
 	} as any;
 
@@ -138,6 +140,8 @@ export default define(meta, async (ps, user) => {
 			$nin: hideUserIds
 		};
 	}
+
+	query['_renote.user.host'] = null;
 
 	const withFiles = ps.withFiles != null ? ps.withFiles : ps.mediaOnly;
 
