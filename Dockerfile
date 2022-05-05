@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt-get install -y build-essential
 
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --network-timeout 100000
 COPY . ./
 RUN yarn build
 
