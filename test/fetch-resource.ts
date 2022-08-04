@@ -32,6 +32,7 @@ describe('Fetch resource', () => {
 	let p: childProcess.ChildProcess;
 
 	let admin: any;
+	let instanceBanner: any;
 	let instance: any;
 
 	let alice: any;
@@ -52,10 +53,15 @@ describe('Fetch resource', () => {
 		// admin
 		admin = await signup({ username: 'admin' });
 
+		// upload instance banner
+		instanceBanner = await uploadFile(admin);
+		//console.log('instanceBanner', instanceBanner);
+
 		// update instance
 		await api('admin/update-meta', {
 			name: 'Instance Name',
 			description: 'Instance Desc',
+			bannerUrl: instanceBanner.url,
 		}, admin);
 
 		instance = (await api('meta', {})).body;
@@ -282,7 +288,7 @@ describe('Fetch resource', () => {
 				// Generic - og
 				'og:url': doc.querySelector('meta[property="og:url"]')?.getAttribute('content'),
 				'og:image': doc.querySelector('meta[property="og:image"]')?.getAttribute('content'),
-				//og:published_time': doc.querySelector('meta[property="og:published_time"]')?.getAttribute('content'),
+				'og:published_time': doc.querySelector('meta[property="og:published_time"]')?.getAttribute('content'),
 
 				// Player - Twitter
 				'twitter:player': doc.querySelector('meta[name="twitter:player"]')?.getAttribute('content'),
@@ -313,8 +319,8 @@ describe('Fetch resource', () => {
 				'misskey:user-username': undefined,
 				'misskey:user-id': undefined,
 				'og:url': undefined,
-				'og:image': undefined,
-				//'og:published_time': undefined,
+				'og:image': instanceBanner.url,
+				'og:published_time': undefined,
 				'twitter:player': undefined,
 				'twitter:player:width': undefined,
 				'twitter:player:height': undefined,
@@ -334,7 +340,7 @@ describe('Fetch resource', () => {
 			assert.deepStrictEqual(parsed, {
 				'title': `${alice.name} (@${alice.username}) | ${instance.name}`,
 				'og:title': `${alice.name} (@${alice.username})`,
-				'og:site_name': undefined,
+				'og:site_name': instance.name,
 				'description': alice.description,
 				'og:description': alice.description,
 				'twitter:card': 'summary',
@@ -342,7 +348,7 @@ describe('Fetch resource', () => {
 				'misskey:user-id': alice.id,
 				'og:url': `http://misskey.local/@${alice.username}`,
 				'og:image': alice.avatarUrl,
-				//'og:published_time': undefined,
+				'og:published_time': undefined,
 				'twitter:player': undefined,
 				'twitter:player:width': undefined,
 				'twitter:player:height': undefined,
@@ -362,7 +368,7 @@ describe('Fetch resource', () => {
 			assert.deepStrictEqual(parsed, {
 				'title': `${alice.name} (@${alice.username}) | ${instance.name}`,
 				'og:title': `${alice.name} (@${alice.username})`,
-				'og:site_name': undefined,
+				'og:site_name': instance.name,
 				'description': alicesPost.text,
 				'og:description': alicesPost.text,
 				'twitter:card': 'summary',
@@ -370,7 +376,7 @@ describe('Fetch resource', () => {
 				'misskey:user-id': alice.id,
 				'og:url': `http://misskey.local/notes/${alicesPost.id}`,
 				'og:image': alice.avatarUrl,
-				//'og:published_time': alicesPost.createtAt,
+				'og:published_time': alicesPost.createdAt,
 				'twitter:player': undefined,
 				'twitter:player:width': undefined,
 				'twitter:player:height': undefined,
@@ -390,15 +396,15 @@ describe('Fetch resource', () => {
 			assert.deepStrictEqual(parsed, {
 				'title': `${alice.name} (@${alice.username}) | ${instance.name}`,
 				'og:title': `${alice.name} (@${alice.username})`,
-				'og:site_name': undefined,
-				'description': `${alicesPostImage.text} (1つのファイル)`,
-				'og:description': `${alicesPostImage.text} (1つのファイル)`,
+				'og:site_name': instance.name,
+				'description': `${alicesPostImage.text} (📎1)`,
+				'og:description': `${alicesPostImage.text} (📎1)`,
 				'twitter:card': 'summary',
 				'misskey:user-username': alice.username,
 				'misskey:user-id': alice.id,
 				'og:url': `http://misskey.local/notes/${alicesPostImage.id}`,
 				'og:image': alicesPostImage.files[0].thumbnailUrl,
-				//'og:published_time': alicesPostImage.createtAt,
+				'og:published_time': alicesPostImage.createdAt,
 				'twitter:player': undefined,
 				'twitter:player:width': undefined,
 				'twitter:player:height': undefined,
@@ -418,15 +424,15 @@ describe('Fetch resource', () => {
 			assert.deepStrictEqual(parsed, {
 				'title': `${alice.name} (@${alice.username}) | ${instance.name}`,
 				'og:title': `${alice.name} (@${alice.username})`,
-				'og:site_name': undefined,
-				'description': `${alicesPostVideo.text} (1つのファイル)`,
-				'og:description': `${alicesPostVideo.text} (1つのファイル)`,
+				'og:site_name': instance.name,
+				'description': `${alicesPostVideo.text} (📎1)`,
+				'og:description': `${alicesPostVideo.text} (📎1)`,
 				'twitter:card': 'player',
 				'misskey:user-username': alice.username,
 				'misskey:user-id': alice.id,
 				'og:url': `http://misskey.local/notes/${alicesPostVideo.id}`,
 				'og:image': alicesPostVideo.files[0].thumbnailUrl,
-				//'og:published_time': alicesPostVideo.createtAt,
+				'og:published_time': alicesPostVideo.createdAt,
 				'twitter:player':  `http://misskey.local/notes/${alicesPostVideo.id}/embed`,
 				'twitter:player:width': '530',
 				'twitter:player:height': '255',
