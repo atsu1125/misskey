@@ -38,6 +38,7 @@ drive:
 #  storage: 'minio'
 #  bucket: <bucket>
 #  prefix: <prefix>
+#  baseUrl: <baseUrl>
 #  config:
 #    endPoint: <endPoint>
 #    region: <region>
