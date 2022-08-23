@@ -1,6 +1,9 @@
 Dockerイメージはここにある（リリース時に自動ビルド）  
 https://hub.docker.com/repository/docker/atsu1125/misskey_web  
 
+オブジェクトストレージの利用方法
+https://github.com/atsu1125/atsuchanpage/blob/main/misskeyobjectstorage.md
+
 # めいすきー (Meisskey)
 
 Meisskey is a decentralized microblogging platform.   
