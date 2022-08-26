@@ -1,8 +1,10 @@
-Dockerイメージはここにある（リリース時に自動ビルド）  
-https://hub.docker.com/repository/docker/atsu1125/misskey_web  
+### Dockerイメージはここにある  
+https://hub.docker.com/r/atsu1125/misskey_web  
+https://github.com/atsu1125/misskey/pkgs/container/misskey  
+コミット時にdevelopタグ、リリース時にlatestタグで自動作成されます
 
-オブジェクトストレージの利用方法
-https://github.com/atsu1125/atsuchanpage/blob/main/misskeyobjectstorage.md
+### オブジェクトストレージの設定方法はこちら  
+https://github.com/atsu1125/atsuchanpage/blob/main/misskeyobjectstorage.md  
 
 # めいすきー (Meisskey)
 
