@@ -6,6 +6,12 @@ https://github.com/atsu1125/misskey/pkgs/container/misskey
 ### オブジェクトストレージの設定方法はこちら  
 https://github.com/atsu1125/atsuchanpage/blob/main/misskeyobjectstorage.md  
 
+### バックアップの設定方法はこちら、必ずバックアップはしましょう
+https://github.com/atsu1125/atsuchanpage/blob/main/mongodbbackup.md
+
+### データベースのレプリケーション設定方法はこちら、可用性を高めることができます
+https://github.com/atsu1125/atsuchanpage/blob/main/mongodbreplication.md
+
 # めいすきー (Meisskey)
 
 Meisskey is a decentralized microblogging platform.   
