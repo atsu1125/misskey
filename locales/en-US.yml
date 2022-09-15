@@ -423,6 +423,7 @@ common:
     hashtags: "Hashtags"
     words: "Trend words"
     queue: "Queue"
+    sunmoon: "Moon age and sunrise/sunset"
   dev: "Failed to create the application. Please try again."
   ai-chan-kawaii: "Ai-chan kawaii!"
   you: "You"
@@ -998,6 +999,10 @@ common/views/widgets/tips.vue:
   tips-line23: "Ai-chan kawaii!"
   tips-line24: "Misskey has been running since 2014."
   tips-line25: "In a browser compatible with notification features, you can receive notifications in case Misskey is not open"
+common/views/widgets/sunmoon.vue:
+  title: "Moon age and sunrise/sunset"
+  sunRise: "Sunrise"
+  sunSet: "Sunset"
 common/views/pages/not-found.vue:
   page-not-found: "The page has not been found"
 common/views/pages/follow.vue:

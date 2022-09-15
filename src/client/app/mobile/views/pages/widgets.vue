@@ -23,6 +23,7 @@
 					<option value="memo">{{ $t('@.widgets.memo') }}</option>
 					<option value="nav">{{ $t('@.widgets.nav') }}</option>
 					<option value="tips">{{ $t('@.widgets.tips') }}</option>
+					<option value="sunmoon">{{ $t('@.widgets.sunmoon') }}</option>
 				</select>
 				<button @click="addWidget">{{ $t('add-widget') }}</button>
 				<p><a @click="hint">{{ $t('customization-tips') }}</a></p>

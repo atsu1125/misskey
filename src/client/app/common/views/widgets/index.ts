@@ -15,6 +15,7 @@ import wHashtags from './hashtags.vue';
 import wWords from './words.vue';
 import wInstance from './instance.vue';
 import wPostForm from './post-form.vue';
+import wSunmoon from './sunmoon.vue'
 
 Vue.component('mkw-analog-clock', wAnalogClock);
 Vue.component('mkw-nav', wNav);
@@ -32,3 +33,4 @@ Vue.component('mkw-words', wWords);
 Vue.component('mkw-instance', wInstance);
 Vue.component('mkw-post-form', wPostForm);
 Vue.component('mkw-queue', () => import('./queue.vue').then(m => m.default));
+Vue.component('mkw-sunmoon', wSunmoon);

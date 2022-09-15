@@ -29,6 +29,7 @@
 						<option value="queue">{{ $t('@.widgets.queue') }}</option>
 						<option value="nav">{{ $t('@.widgets.nav') }}</option>
 						<option value="tips">{{ $t('@.widgets.tips') }}</option>
+						<option value="sunmoon">{{ $t('@.widgets.sunmoon') }}</option>
 					</select>
 					<button @click="addWidget">{{ $t('add') }}</button>
 					<button @click="restoreDefault">{{ $t('restore-default') }}</button>
