@@ -164,17 +164,16 @@ export default Vue.extend({
 				left: [
 					'profile',
 					'calendar',
-					'hashtags',
-					'words',
+					'sunmoon',
+					'server',
+					'queue',
 					'version'
 				],
 				right: [
 					'customize',
 					'broadcast',
 					'notifications',
-					'polls',
 					'nav',
-					'tips'
 				]
 			};
 
