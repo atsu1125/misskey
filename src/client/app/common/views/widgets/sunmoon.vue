@@ -61,7 +61,7 @@ export default define({
 			this.$root.dialog({
 				title: 'Longitude',
 				input: {
-					type: 'longitude',
+					type: 'number',
 					default: this.props.longitude
 				}
 			}).then(({ canceled, result: longitude }) => {
