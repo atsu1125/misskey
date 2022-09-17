@@ -79,7 +79,7 @@ export default define({
 			this.year = ny;
 			this.month = nm + 1;
 			this.day = nd;
-			let hour12 = now;
+			const hour12 = new Date(now);
 			hour12.setHours(12);
 			hour12.setMinutes(0);
 			hour12.setSeconds(0);
