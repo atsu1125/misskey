@@ -4,7 +4,7 @@
 		<template #header>{{ $t('title') }}</template>
 		<template #func><button title="設定" @click="setting"><fa icon="cog"/></button></template>
 
-		<div class="mkw-sunmoon--body">
+		<div class="mkw-sunmoon--body" :data-mobile="platform == 'mobile'">
 			<div class="lunar-calendar">
 				<p class="moonface"><img :src="moonFace" height="64"></p>
 				<p class="moonage">{{ moonAge }}</p>
