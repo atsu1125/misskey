@@ -13,7 +13,7 @@
 		<section class="fit-bottom">
 			<header><fa :icon="faHeadset"/> {{ $t('maintainer-config') }}</header>
 			<ui-input v-model="maintainerName">{{ $t('maintainer-name') }}</ui-input>
-			<ui-input v-model="maintainerEmail">{{ $t('maintainer-email') }}<template #desc>{{ $t('maintainer-email-desc') }}</template></ui-input>
+			<ui-input v-model="maintainerEmail" type="email"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('maintainer-email') }}</ui-input>
 		</section>
 		<section class="fit-top fit-bottom">
 			<ui-input v-model="maxNoteTextLength">{{ $t('max-note-text-length') }}</ui-input>
