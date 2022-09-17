@@ -477,6 +477,10 @@ export default define(meta, async (ps) => {
 		set.smtpPass = ps.smtpPass;
 	}
 
+	if (ps.testEmailAddress !== undefined) {
+		set.testEmailAddress = ps.testEmailAddress;
+	}
+
 	if (ps.enableServiceWorker !== undefined) {
 		set.enableServiceWorker = ps.enableServiceWorker;
 	}

@@ -59,7 +59,7 @@
 				<ui-input v-model="smtpPass" type="password" :withPasswordToggle="true" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-pass') }}</ui-input>
 			</ui-horizon-group>
 			<ui-switch v-model="smtpSecure" :disabled="!enableEmail">{{ $t('smtp-secure') }}<template #desc>{{ $t('smtp-secure-info') }}</template></ui-switch>
-			<ui-input v-model="testEmailAddress" type="email"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('test-email-address') }}</ui-input>
+			<ui-input v-model="testEmailAddress" type="email" :disabled="!enableEmail"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('test-email-address') }}</ui-input>
  			<ui-button @click="testEmail()">{{ $t('test-mail') }}</ui-button>
 		</section>
 		<section>

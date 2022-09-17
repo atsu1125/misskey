@@ -146,6 +146,7 @@ export default define(meta, async (ps, me) => {
 		response.smtpUser = instance.smtpUser;
 		response.smtpPass = instance.smtpPass;
 		response.swPrivateKey = instance.swPrivateKey;
+		response.testEmailAddress = instance.testEmailAddress;
 	}
 
 	return response;

@@ -86,7 +86,6 @@
 					<div>
 						<div v-if="meta" class="body">
 							<p>Version: <b>{{ meta.version }}</b></p>
-							<p>Maintainer: <b><a :href="meta.maintainer.email" target="_blank">{{ meta.maintainer.name }}</a></b></p>
 						</div>
 					</div>
 				</div>
