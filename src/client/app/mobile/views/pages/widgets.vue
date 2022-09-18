@@ -7,6 +7,7 @@
 	<main>
 		<template v-if="customizing">
 			<header>
+				<!-- widget/adder/mobile -->
 				<select v-model="widgetAdderSelected">
 					<option value="profile">{{ $t('@.widgets.profile') }}</option>
 					<option value="analog-clock">{{ $t('@.widgets.analog-clock') }}</option>
