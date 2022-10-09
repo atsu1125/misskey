@@ -380,6 +380,7 @@ common:
         low: "低"
         cheep: "最低"
       useOrthographicCamera: "平行投影カメラを使用"
+    nitter: "Twitterの代替ドメイン"
 
   search: "検索"
   delete: "削除"
@@ -518,6 +519,7 @@ common/views/components/url-preview.vue:
   disable-player: "プレイヤーを閉じる"
   expandTweet: "ツイートを展開する"
   collapseTweet: "ツイートを閉じる"
+  alternativeLink: "代替リンク"
 
 common/views/components/user-list.vue:
   no-users: "ユーザーがいません"

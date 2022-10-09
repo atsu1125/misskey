@@ -127,14 +127,14 @@ async function save(path: string, name: string, info: FileInfo, metadata: IMetad
 		let thumbnailKey: string | null = null;
 
 		if (alts.webpublic) {
-			InternalStorage.saveFromBuffer(key, alts.webpublic.data);
+			await InternalStorage.saveFromBufferAsync(key, alts.webpublic.data);
 		} else {
-			InternalStorage.saveFromPath(key, path);
+			await InternalStorage.saveFromPathAsync(key, path);
 		}
 
 		if (alts.thumbnail) {
 			thumbnailKey = `${genFid()}`;
-			InternalStorage.saveFromBuffer(thumbnailKey, alts.thumbnail.data);
+			await InternalStorage.saveFromBufferAsync(thumbnailKey, alts.thumbnail.data);
 		}
 
 		//#region DB

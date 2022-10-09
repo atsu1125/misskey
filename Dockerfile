@@ -1,10 +1,10 @@
-FROM node:16.16.0-bullseye AS builder
+FROM node:16.17.1-bullseye AS builder
 
 ENV NODE_ENV=production
 WORKDIR /misskey
 
-RUN apt-get update
-RUN apt-get install -y build-essential
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential
 
 RUN git init
 RUN git submodule update --init
@@ -14,12 +14,14 @@ COPY . ./
 RUN yarn build
 
 
-FROM node:16.16.0-bullseye-slim AS runner
+FROM node:16.17.1-bullseye-slim AS runner
 
 WORKDIR /misskey
 
-RUN apt-get update
-RUN apt-get install -y ffmpeg mecab mecab-ipadic-utf8 tini wget
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ffmpeg mecab mecab-ipadic-utf8 tini wget\
+ && apt-get -y clean \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /misskey/node_modules ./node_modules
 COPY --from=builder /misskey/built ./built
