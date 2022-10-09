@@ -146,6 +146,13 @@ export const meta = {
 			}
 		},
 
+		disableblock: {
+			validator: $.optional.bool,
+			desc: {
+				'ja-JP': 'disableblock'
+			}
+		},
+
 		hideFollows: {
 			validator: $.optional.nullable.str.or(['', 'follower', 'always']),
 			desc: {
@@ -283,6 +290,7 @@ export default define(meta, async (ps, user, app) => {
 	if (typeof ps.autoAcceptFollowed == 'boolean') updates.autoAcceptFollowed = ps.autoAcceptFollowed;
 	if (typeof ps.avoidSearchIndex == 'boolean') updates.avoidSearchIndex = ps.avoidSearchIndex;
 	if (typeof ps.isExplorable == 'boolean') updates.isExplorable = ps.isExplorable;
+	if (typeof ps.disableblock == 'boolean') updates.disableblock = ps.disableblock;
 	if (ps.hideFollows !== undefined) updates.hideFollows = ps.hideFollows;
 	if (typeof ps.noFederation == 'boolean') updates.noFederation = ps.noFederation;
 	if (typeof ps.isCat == 'boolean') updates.isCat = ps.isCat;

@@ -1,7 +1,7 @@
 import $ from 'cafy';
 import ID, { transform } from '../../../../misc/cafy-id';
 import * as ms from 'ms';
-import { pack } from '../../../../models/user';
+import { pack, isRemoteUser } from '../../../../models/user';
 import Blocking from '../../../../models/blocking';
 import create from '../../../../services/blocking/create';
 import define from '../../define';
@@ -72,6 +72,16 @@ export default define(meta, async (ps, user) => {
 		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
 		throw e;
 	});
+
+	const accessDenied = {
+		message: 'Access denied.',
+		code: 'ACCESS_DENIED',
+		id: '56f35758-7dd5-468b-8439-5d6fb8ec9b8e'
+	};
+
+	if (blocker.disableblock && !isRemoteUser(blocker)) {
+		throw new ApiError(accessDenied, { reason: 'Block is disabled.' });
+	}
 
 	// Check if already blocking
 	const exist = await Blocking.findOne({
