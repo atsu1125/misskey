@@ -178,11 +178,13 @@ export default async function(follower: IUser, followee: IUser, requestId?: stri
 	// フォロワーがBotであり、フォロー対象がBotからのフォローに慎重である or
 	// フォロワーがローカルユーザーであり、フォロー対象がリモートユーザーである
 	// 大量フォロワーであり、フォロー対象が大量フォロワーに慎重である
+	// フォロワーがサイレンスされている
 	// 上記のいずれかに当てはまる場合はすぐフォローせずにフォローリクエストを発行しておく
 	if (followee.isLocked
 		|| (followee.carefulBot && follower.isBot)
 		|| (followee.carefulRemote && isRemoteUser(follower))
 		|| (followee.carefulMassive && follower.followingCount > 5000 && (follower.followingCount / follower.followersCount) > 10)
+		|| (follower.isSilenced)
 		|| (isLocalUser(follower) && isRemoteUser(followee))) {
 		let autoAccept = false;
 
