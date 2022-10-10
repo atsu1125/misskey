@@ -7,7 +7,6 @@ export type Source = {
 	url: string;
 	port: number;
 	addr?: string;
-	https?: { [x: string]: string };
 	disableHsts?: boolean;
 	disableApiCors?: boolean;
 	mongodb: {
