@@ -71,6 +71,7 @@ const nodeinfo2 = async () => {
 			relayActor: relayActor ? `${config.url}/users/${relayActor._id}` : null,
 			relays: relayedHosts,
 			disableRegistration: meta.disableRegistration,
+			disableDeletion: meta.disableDeletion,
 			disableLocalTimeline: meta.disableLocalTimeline,
 			disableGlobalTimeline: meta.disableGlobalTimeline,
 			enableRecaptcha: meta.enableRecaptcha,

@@ -8,6 +8,7 @@ import Signin from '../../../../models/signin';
 import { doPostSuspend } from '../../../../services/suspend-user';
 import { publishTerminate } from '../../../../services/server-event';
 import { ApiError } from '../../error';
+import fetchMeta from '../../../../misc/fetch-meta';
 
 export const meta = {
 	requireCredential: true,
@@ -32,6 +33,18 @@ export const meta = {
 export default define(meta, async (ps, user) => {
 	// Compare password
 	const same = await bcrypt.compare(ps.password, user.password);
+
+	const instance = await fetchMeta();
+
+	const accessDenied = {
+		message: 'Access denied.',
+		code: 'ACCESS_DENIED',
+		id: '56f35758-7dd5-468b-8439-5d6fb8ec9b8e'
+	};
+
+	if (instance && instance.disableDeletion) {
+		throw new ApiError(accessDenied, { reason: 'Account Deletion is disabled.' });
+	}
 
 	if (!same) {
 		throw new ApiError(meta.errors.incorrectPassword);

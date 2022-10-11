@@ -33,6 +33,7 @@ export async function buildMeta(instance: IMeta, detail = true) {
 
 		announcements: instance.announcements || [],
 		disableRegistration: instance.disableRegistration,
+		disableDeletion: instance.disableDeletion,
 		disableLocalTimeline: instance.disableLocalTimeline,
 		disableGlobalTimeline: instance.disableGlobalTimeline,
 		showReplayInPublicTimeline: instance.showReplayInPublicTimeline,
@@ -78,6 +79,7 @@ export async function buildMeta(instance: IMeta, detail = true) {
 	if (detail) {
 		response.features = {
 			registration: !instance.disableRegistration,
+			deletion: !instance.disableDeletion,
 			localTimeLine: !instance.disableLocalTimeline,
 			globalTimeLine: !instance.disableGlobalTimeline,
 			elasticsearch: false,

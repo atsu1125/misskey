@@ -181,6 +181,7 @@ export type IMeta = {
 	};
 
 	disableRegistration?: boolean;
+	disableDeletion?: boolean;
 	disableLocalTimeline?: boolean;
 	disableGlobalTimeline?: boolean;
 	showReplayInPublicTimeline?: boolean;

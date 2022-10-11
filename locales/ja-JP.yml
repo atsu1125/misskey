@@ -1590,6 +1590,7 @@ admin/views/instance.vue:
   proxy-account-warn: "アカウントは自動で作られないため、そのユーザー名のアカウントを予め作成しておく必要があります。"
   max-note-text-length: "投稿の最大文字数"
   disable-registration: "ユーザー登録の受付を停止する"
+  disable-deletion: "アカウント削除を無効にする"
   disable-local-timeline: "ローカルタイムラインを無効にする"
   disable-global-timeline: "グローバルタイムラインを無効にする"
   showReplayInPublicTimeline: "公開タイムラインにリプライを表示する"

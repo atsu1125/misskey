@@ -27,6 +27,13 @@ export const meta = {
 			}
 		},
 
+		disableDeletion: {
+			validator: $.optional.nullable.bool,
+			desc: {
+				'ja-JP': 'アカウント削除を無効にするか否か'
+			}
+		},
+
 		disableLocalTimeline: {
 			validator: $.optional.nullable.bool,
 			desc: {
@@ -327,6 +334,10 @@ export default define(meta, async (ps) => {
 
 	if (typeof ps.disableRegistration === 'boolean') {
 		set.disableRegistration = ps.disableRegistration;
+	}
+
+	if (typeof ps.disableDeletion === 'boolean') {
+		set.disableDeletion = ps.disableDeletion;
 	}
 
 	if (typeof ps.disableLocalTimeline === 'boolean') {

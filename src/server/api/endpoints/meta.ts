@@ -63,6 +63,10 @@ export const meta = {
 				type: 'boolean',
 				description: 'Whether disabled open registration.',
 			},
+			disableDeletion: {
+				type: 'boolean',
+				description: 'Whether disabled account deletion.',
+			},
 			disableLocalTimeline: {
 				type: 'boolean',
 				description: 'Whether disabled LTL and STL.',

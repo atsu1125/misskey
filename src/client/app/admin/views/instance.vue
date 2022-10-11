@@ -20,6 +20,7 @@
 		</section>
 		<section>
 			<ui-switch v-model="disableRegistration">{{ $t('disable-registration') }}</ui-switch>
+			<ui-switch v-model="disableDeletion">{{ $t('disable-deletion') }}</ui-switch>
 			<ui-switch v-model="disableLocalTimeline">{{ $t('disable-local-timeline') }}</ui-switch>
 			<ui-switch v-model="disableGlobalTimeline">{{ $t('disable-global-timeline') }}</ui-switch>
 			<ui-switch v-model="showReplayInPublicTimeline">{{ $t('showReplayInPublicTimeline') }}</ui-switch>
@@ -148,6 +149,7 @@ export default Vue.extend({
 			maintainerName: null,
 			maintainerEmail: null,
 			disableRegistration: false,
+			disableDeletion: false,
 			disableLocalTimeline: false,
 			disableGlobalTimeline: false,
 			showReplayInPublicTimeline: false,
@@ -196,6 +198,7 @@ export default Vue.extend({
 			this.maintainerName = meta.maintainer.name;
 			this.maintainerEmail = meta.maintainer.email;
 			this.disableRegistration = meta.disableRegistration;
+			this.disableDeletion = meta.disableDeletion;
 			this.disableLocalTimeline = meta.disableLocalTimeline;
 			this.disableGlobalTimeline = meta.disableGlobalTimeline;
 			this.showReplayInPublicTimeline = meta.showReplayInPublicTimeline;
@@ -287,6 +290,7 @@ export default Vue.extend({
 				maintainerName: this.maintainerName,
 				maintainerEmail: this.maintainerEmail,
 				disableRegistration: this.disableRegistration,
+				disableDeletion: this.disableDeletion,
 				disableLocalTimeline: this.disableLocalTimeline,
 				disableGlobalTimeline: this.disableGlobalTimeline,
 				showReplayInPublicTimeline: this.showReplayInPublicTimeline,
