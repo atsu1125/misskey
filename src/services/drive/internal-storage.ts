@@ -24,6 +24,7 @@ export class InternalStorage {
 	}
 
 	public static del(key: string) {
+		// eslint-disable-next-line node/prefer-promises/fs
 		fs.unlink(InternalStorage.resolvePath(key), () => {});
 	}
 }
