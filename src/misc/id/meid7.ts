@@ -1,21 +1,31 @@
-import * as crypto from 'crypto';
 import { parseInt } from 'lodash';
 
 //  4bit Fixed hex value '7'
 // 44bit UNIX Time ms in Hex
 // 48bit Random value in Hex
 
+/**
+ * タイムスタンプ文字列を返します
+ * @param time タイムスタンプ
+ * @param radix 進数
+ * @param length 文字数
+ */
 function getTime(time: number, radix: number, length: number) {
 	if (time < 0) time = 0;
-
 	return time.toString(radix).padStart(length, '0').slice(length * -1);
 }
 
-function getRandomHex(bytes: number) {
+/**
+ * ランダム文字列を返します
+ * @param radix 進数
+ * @param length 文字数
+ * @returns 
+ */
+function getRandom(radix: number, length: number) {
 	let str = '';
 
-	for (let i = 0; i < bytes; i++) {
-		str += crypto.randomBytes(1).readUInt8().toString(16).padStart(2, '0');
+	for (let i = 0; i < length; i++) {
+		str += Math.floor(Math.random() * radix).toString(radix).slice(-1);
 	}
 
 	return str;
@@ -23,7 +33,7 @@ function getRandomHex(bytes: number) {
 
 export function genMeid7(date: Date): string {
 	if (date.toString() === 'Invalid Date') throw 'Invalid Date';
-	return '7' + getTime(date.getTime(), 16, 11) + getRandomHex(6);
+	return '7' + getTime(date.getTime(), 16, 11) + getRandom(16, 12);
 }
 
 export function meid7ToDate(id?: string): Date | null {

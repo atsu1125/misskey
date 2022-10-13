@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.594-m544",
+	"version": "10.102.595-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -62,7 +62,7 @@
 		"@types/lodash": "4.14.186",
 		"@types/mocha": "10.0.0",
 		"@types/mongodb": "3.6.20",
-		"@types/node": "18.8.3",
+		"@types/node": "18.8.4",
 		"@types/nodemailer": "6.4.6",
 		"@types/nprogress": "0.2.0",
 		"@types/oauth": "0.9.1",
@@ -95,7 +95,7 @@
 		"autobind-decorator": "2.4.0",
 		"autosize": "4.0.2",
 		"autwh": "0.1.0",
-		"aws-sdk": "2.1230.0",
+		"aws-sdk": "2.1231.0",
 		"bcryptjs": "2.4.3",
 		"bootstrap-vue": "2.22.0",
 		"browser-image-resizer": "2.4.1",
@@ -229,9 +229,9 @@
 		"xmlbuilder": "15.1.1"
 	},
 	"devDependencies": {
-		"@redocly/openapi-core": "1.0.0-beta.110",
-		"@typescript-eslint/eslint-plugin": "5.39.0",
-		"@typescript-eslint/parser": "5.39.0",
+		"@redocly/openapi-core": "1.0.0-beta.111",
+		"@typescript-eslint/eslint-plugin": "5.40.0",
+		"@typescript-eslint/parser": "5.40.0",
 		"cross-env": "7.0.3",
 		"eslint": "8.25.0",
 		"eslint-plugin-node": "11.1.0",
