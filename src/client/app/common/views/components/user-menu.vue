@@ -25,7 +25,7 @@ export default Vue.extend({
 				this.$post({ mention: this.user });
 			}
 		}] as any;
-		
+
 		// ログインユーザー
 		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id) {
 			menu = menu.concat([
@@ -50,18 +50,31 @@ export default Vue.extend({
 					text: this.user.isMuted ? this.$t('unmute') : this.$t('mute'),
 					action: this.toggleMute
 				},
-				{
-					icon: 'ban',
-					text: this.user.isBlocking ? this.$t('unblock') : this.$t('block'),
-					action: this.toggleBlock
-				},
-				null,
-				{
-					icon: faExclamationCircle,
-					text: this.$t('report-abuse'),
-					action: this.reportAbuse
-				}
 			]);
+		}
+
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id && this.user.isBlocking) {
+			menu = menu.concat([null, {
+				icon: 'ban',
+				text: this.$t('unblock'),
+				action: this.toggleBlock
+			}]);
+		}
+
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id && !this.$store.state.i.disableblock && !this.user.isBlocking) {
+			menu = menu.concat([null, {
+				icon: 'ban',
+				text: this.$t('block'),
+				action: this.toggleBlock
+			}]);
+		}
+
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id) {
+			menu = menu.concat([{
+				icon: faExclamationCircle,
+				text: this.$t('report-abuse'),
+				action: this.reportAbuse
+			}]);
 		}
 
 		// Admin or Moderator
@@ -91,7 +104,7 @@ export default Vue.extend({
 
 		startTalk() {
 			if (this.$root.isMobile) {
-				this.$router.push(`/i/messaging/${getAcct(this.user)}`); 
+				this.$router.push(`/i/messaging/${getAcct(this.user)}`);
 			} else {
 				import('../../../desktop/views/components/messaging-room-window.vue').then(m => this.$root.new(m.default, {
 					user: this.user
