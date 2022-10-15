@@ -137,7 +137,7 @@
 		<section>
 			<details>
 				<summary>{{ $t('danger-zone') }}</summary>
-				<ui-button @click="deleteAccount()">{{ $t('delete-account') }}</ui-button>
+				<ui-button v-if="!disableDeletion" @click="deleteAccount()">{{ $t('delete-account') }}</ui-button>
 				<ui-button v-if="!noFederation" @click="disableFederation()">{{ $t('disable-federation') }}</ui-button>
 				<ui-button v-if="noFederation" @click="enableFederation()">{{ $t('enable-federation') }}</ui-button>
 			</details>
@@ -221,6 +221,7 @@ export default Vue.extend({
 	created() {
 		this.$root.getMeta().then(meta => {
 			this.enableEmail = meta.enableEmail;
+			this.disableDeletion = meta.disableDeletion;
 		});
 		this.email = this.$store.state.i.email;
 		this.name = this.$store.state.i.name;
