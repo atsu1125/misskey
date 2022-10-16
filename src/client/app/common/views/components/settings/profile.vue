@@ -137,7 +137,7 @@
 		<section>
 			<details>
 				<summary>{{ $t('danger-zone') }}</summary>
-				<ui-button v-if="!disableDeletion" @click="deleteAccount()">{{ $t('delete-account') }}</ui-button>
+				<ui-button @click="deleteAccount()" :disabled="disableDeletion">{{ $t('delete-account') }}</ui-button>
 				<ui-button v-if="!noFederation" @click="disableFederation()">{{ $t('disable-federation') }}</ui-button>
 				<ui-button v-if="noFederation" @click="enableFederation()">{{ $t('enable-federation') }}</ui-button>
 			</details>
