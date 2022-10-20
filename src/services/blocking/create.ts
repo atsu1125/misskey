@@ -27,10 +27,10 @@ export default async function(blocker: IUser, blockee: IUser) {
 		blockeeId: blockee._id,
 	});
 
-	if (isLocalUser(blocker) && isRemoteUser(blockee)) {
-		const content = renderActivity(renderBlock(blocker, blockee));
-		deliver(blocker, content, blockee.inbox);
-	}
+//	if (isLocalUser(blocker) && isRemoteUser(blockee)) {
+//		const content = renderActivity(renderBlock(blocker, blockee));
+//		deliver(blocker, content, blockee.inbox);
+//	}
 
 	if (isLocalUser(blocker)) {
 		publishMutingChanged(blocker._id);
