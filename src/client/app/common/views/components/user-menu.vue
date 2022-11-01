@@ -69,6 +69,14 @@ export default Vue.extend({
 			}]);
 		}
 
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id && this.user.isFollowed) {
+			menu = menu.concat([null, {
+				icon: 'ban',
+				text: this.$t('breakfollow'),
+				action: this.invalidateFollow
+			}]);
+		}
+
 		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id) {
 			menu = menu.concat([{
 				icon: faExclamationCircle,
@@ -254,6 +262,23 @@ export default Vue.extend({
 					});
 				});
 			}
+		},
+
+		async invalidateFollow() {
+			if (!await this.getConfirmed(this.$t('breakfollow-confirm'))) return;
+			this.$root.api('following/invalidate', {
+				userId: this.user.id
+			}).then(() => {
+				this.$root.dialog({
+					type: 'success',
+					splash: true
+				});
+			}, () => {
+				this.$root.dialog({
+					type: 'error',
+					text: e
+				});
+			});
 		},
 
 		async reportAbuse() {

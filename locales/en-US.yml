@@ -680,6 +680,8 @@ common/views/components/user-menu.vue:
   unblock: "Unblock"
   block-confirm: "Are you sure you want to block this user?"
   unblock-confirm: "Are you certain that you want to unblock this user?"
+  breakfollow: "Remove Follower"
+  breakfollow-confirm: "Are you sure you want to remove follower?"
   push-to-list: "Add to list"
   select-list: "Select a list"
   report-abuse: "Report"
