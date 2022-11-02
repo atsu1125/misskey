@@ -726,6 +726,8 @@ common/views/components/user-menu.vue:
   unblock: "ブロック解除"
   block-confirm: "このユーザーをブロックしますか？"
   unblock-confirm: "このユーザーをブロック解除しますか？"
+  breakfollow: "フォロワーを解除"
+  breakfollow-confirm: "このフォロワーを解除しますか？"
   push-to-list: "リストに追加"
   select-list: "リストを選択してください"
   report-abuse: "通報"
