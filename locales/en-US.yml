@@ -569,6 +569,8 @@ common/views/components/connect-failed.troubleshooter.vue:
   success-desc: "Looks like we have a connection. Please reload the page."
   flush: "Clean cache"
   set-version: "Specify version"
+common/views/components/instance.vue:
+  start: "Start"
 common/views/components/media-banner.vue:
   sensitive: "NSFW"
   click-to-show: "Click to show"
@@ -1146,6 +1148,7 @@ desktop/views/components/note-detail.vue:
   private: "Post is private"
   deleted: "Post has been removed"
   location: "Location"
+  reply: "Reply"
   renote: "Renote"
   add-reaction: "Add a reaction"
   undo-reaction: "Reverse reaction"

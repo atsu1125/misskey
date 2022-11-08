@@ -605,6 +605,9 @@ common/views/components/connect-failed.troubleshooter.vue:
   flush: "キャッシュの削除"
   set-version: "バージョン指定"
 
+common/views/components/instance.vue:
+  start: "はじめる"
+
 common/views/components/media-banner.vue:
   sensitive: "閲覧注意"
   click-to-show: "クリックして表示"
@@ -1251,6 +1254,7 @@ desktop/views/components/note-detail.vue:
   private: "この投稿は非公開です"
   deleted: "この投稿は削除されました"
   location: "位置情報"
+  reply: "返信"
   renote: "Renote"
   add-reaction: "リアクション"
   undo-reaction: "リアクション解除"
