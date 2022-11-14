@@ -274,11 +274,7 @@ export async function getBlocks(userId: mongo.ObjectId | string, otherId: mongo.
 			{
 				blockerId: transform(userId),
 				blockeeId: transform(otherId)
-			},
-			{
-				blockerId: transform(otherId),
-				blockeeId: transform(userId)
-			},
+			}
 		]
 	});
 }
