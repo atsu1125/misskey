@@ -3,8 +3,7 @@
 	<mk-avatar class="avatar" :user="note.user" v-if="$store.state.device.postStyle == 'smart'"/>
 	<router-link v-if="userUrl.startsWith('/')" class="name" :to="userUrl" v-user-preview="note.user.id"><mk-user-name :user="note.user"/></router-link>
 	<a v-else class="name" :href="userUrl" v-user-preview="note.user.id"><mk-user-name :user="note.user"/></a>
-	<span class="is-bot" v-if="note.user.isBot">bot</span>
-	<span class="is-cat" v-if="note.user.isCat">cat</span>
+	<span class="is-bot" v-if="note.user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 	<span class="username"><mk-acct :user="note.user"/></span>
 	<span class="is-verified" v-if="note.user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
 	<div class="info" v-if="!noInfo">
@@ -87,18 +86,6 @@ export default Vue.extend({
 
 		&:hover
 			text-decoration underline
-
-	> .is-bot
-	> .is-cat
-		flex-shrink 0
-		align-self center
-		margin 0 .5em 0 0
-		padding 1px 6px
-		font-size 80%
-		color var(--noteHeaderBadgeFg)
-		background var(--noteHeaderBadgeBg)
-		border-radius 3px
-
 
 	> .username
 		margin 0 .5em 0 0

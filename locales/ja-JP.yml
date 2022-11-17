@@ -397,6 +397,7 @@ common:
   update-available-title: "更新があります"
   update-available: "Misskeyの新しいバージョンがあります({newer}。現在{current}を利用中)。ページを再度読み込みすると更新が適用されます。"
   my-token-regenerated: "あなたのトークンが更新されたのでサインアウトします。"
+  admin-user: "管理者アカウント"
   verified-user: "公式アカウント"
   silenced-user: "Silenced user"
   suspended-user: "Suspended user"
