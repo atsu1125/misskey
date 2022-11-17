@@ -8,12 +8,12 @@
 			<small>{{ host }}</small>
 			<p v-html="description || this.$t('@.about')"></p>
 			<router-link class="signup" to="/signup">{{ $t('@.signup') }}</router-link>
-		</div>
-		<div class="signin">
-			<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
-		</div>
-		<div class="explore">
-			<router-link class="explore" to="/explore">Explore</router-link>
+			<div class="signin">
+				<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
+			</div>
+			<div class="explore">
+				<router-link class="explore" to="/explore">Explore</router-link>
+			</div>
 		</div>
 		<div class="tl">
 			<mk-welcome-timeline/>
