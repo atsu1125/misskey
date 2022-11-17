@@ -32,14 +32,6 @@ import { toUnicode } from 'punycode/';
 export default Vue.extend({
 	i18n: i18n('common/views/components/signin.vue'),
 
-	props: {
-		withAvatar: {
-			type: Boolean,
-			required: false,
-			default: true
-		}
-	},
-
 	data() {
 		return {
 			signing: false,
