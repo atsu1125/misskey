@@ -94,6 +94,10 @@ export default Vue.extend({
 		color var(--noteHeaderAcct)
 		flex-shrink 2147483647
 
+	> .is-bot
+		margin 0 .5em 0 0
+		color var(--noteHeaderBadgeFg)
+
 	> .is-verified
 		margin 0 .5em 0 0
 		color #4dabf7

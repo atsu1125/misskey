@@ -98,7 +98,7 @@ import XListMenu from '../../../../common/views/components/list-menu.vue';
 import XHome from './home.vue';
 import { getStaticImageUrl } from '../../../../common/scripts/get-static-image-url';
 import XIntegrations from '../../../../common/views/components/integrations.vue';
-import { faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag, faCrown } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/pages/user.vue'),
@@ -111,7 +111,7 @@ export default Vue.extend({
 			fetching: true,
 			user: null,
 			page: this.$route.name == 'user' ? 'home' : null,
-			faUserTag
+			faUserTag, faCrown
 		};
 	},
 	computed: {

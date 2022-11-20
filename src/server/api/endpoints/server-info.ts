@@ -5,6 +5,7 @@ import config from '../../../config';
 
 export const meta = {
 	requireCredential: false,
+	allowGet: true,
 
 	desc: {
 	},

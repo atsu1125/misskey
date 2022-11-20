@@ -79,7 +79,7 @@ export default Vue.extend({
 			this.stats = stats;
 		});
 
-		const image = ['image/jpeg','image/png','image/apng','image/gif','image/webp'];
+		const image = ['image/jpeg','image/png','image/apng','image/gif','image/webp', 'image/avif'];
 
 		this.$root.api('notes/featured', {
 			fileType: image,

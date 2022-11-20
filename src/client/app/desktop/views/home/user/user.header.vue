@@ -67,7 +67,7 @@ import XUserMenu from '../../../../common/views/components/user-menu.vue';
 import XListMenu from '../../../../common/views/components/list-menu.vue';
 import XIntegrations from '../../../../common/views/components/integrations.vue';
 import ImageViewer from '../../../../common/views/components/image-viewer.vue';
-import { faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag, faCrown } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('desktop/views/pages/user/user.header.vue'),
@@ -77,7 +77,7 @@ export default Vue.extend({
 	props: ['user'],
 	data() {
 		return {
-			faUserTag
+			faUserTag, faCrown
 		}
 	},
 	computed: {

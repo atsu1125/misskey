@@ -124,6 +124,7 @@ common:
   noteReactions: "リアクションした投稿"
   poll_finished: "アンケートが完了しました"
   flush: "キャッシュをクリア"
+  signinOrUsePostUrl: "それをするにはサインインするかURLをあなたのインスタンスの検索ボックスに入れてやっていってください。"
 
   permissions:
     "read:account": "アカウントの情報を見る"
@@ -2022,7 +2023,7 @@ common/views/components/follow-button.vue:
   follow-processing: "フォロー処理中"
   follow-request: "フォロー申請"
   remoteFollow: "リモートフォロー"
-  remoteFollowMessage: "以下のアカウントをフォローしたいインスタンスの検索ボックスに入れてフォローして下さい。\n```\n{acct}\n```\n\n\nまたは、以下にフォローしたいアカウントを入力して下さい。"
+  remoteFollowMessage: "以下のURLをあなたのインスタンスの検索ボックスに入れてフォローして下さい。\n{acct}"
 
 mobile/views/components/note.vue:
   private: "この投稿は非公開です"
