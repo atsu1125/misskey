@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-split
+    restart: always
+    links:
+      - mongo
+      - redis
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - internal_network
+      - external_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:3000/api/meta || exit 1"]
+    volumes:
+      - ./files:/misskey/files
+      - ./.config/docker.yml:/misskey/.config/default.yml
+      - .:/misskey
+
+  redis:
+    restart: always
+    image: redis:alpine
+    networks:
+      - internal_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+    volumes:
+      - ./redis:/data
+
+  mongo:
+    restart: always
+    image: mongo:5.0.5
+    networks:
+      - internal_network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo 127.0.0.1:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+    environment:
+      MONGO_INITDB_DATABASE: "misskey"
+    volumes:
+      - ./.config/mongo_initdb_example.js:/docker-entrypoint-initdb.d/mongo_initdb.js:ro
+      - ./mongo_db:/data/db
+
+networks:
+  internal_network:
+    internal: true
+  external_network:
