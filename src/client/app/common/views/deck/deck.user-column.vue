@@ -20,10 +20,10 @@
 				<router-link class="name" :to="user | userPage()">
 					<mk-user-name :user="user" :key="user.id" :nowrap="false"/>
 				</router-link>
-				<span class="acct">@{{ user | acct }} 
+				<span class="acct">@{{ user | acct }}
 					<fa v-if="user.isLocked == true" class="locked" icon="lock" fixed-width/>
 					<fa v-if="user.refuseFollow == true" class="refuseFollow" icon="ban" fixed-width/>
-					<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa :icon="faCrown"/></span>
+					<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
 					<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
 					<span class="is-bot" v-if="user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 					<span class="is-cat" v-if="user.isCat" :title="$t('@.cat-user')"><fa :icon="faPaw"/></span>
