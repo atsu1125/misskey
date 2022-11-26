@@ -106,6 +106,11 @@ type IUserBase = {
 	carefulBot: boolean;
 
 	/**
+	* Catからのフォローを承認制にするか
+	*/
+ 	carefulCat: boolean;
+
+ 	/**
 	 * リモートからのフォローを承認制にするか
 	 */
 	carefulRemote: boolean;
@@ -536,6 +541,7 @@ export async function pack(
 			bannerId: toOidStringOrNull(db.bannerId),
 			alwaysMarkNsfw: !!db.settings?.alwaysMarkNsfw,
 			carefulBot: !!db.carefulBot,
+			carefulCat: !!db.carefulCat,
 			carefulRemote: !!db.carefulRemote,
 			carefulMassive: !!db.carefulMassive,
 			refuseFollow: !!db.refuseFollow,

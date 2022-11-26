@@ -104,6 +104,13 @@ export const meta = {
 			}
 		},
 
+		carefulCat: {
+			validator: $.optional.bool,
+			desc: {
+				'ja-JP': 'Catからのフォローを承認制にするか'
+			}
+		},
+
 		carefulRemote: {
 			validator: $.optional.bool,
 			desc: {
@@ -284,6 +291,7 @@ export default define(meta, async (ps, user, app) => {
 	if (typeof ps.isLocked == 'boolean') updates.isLocked = ps.isLocked;
 	if (typeof ps.isBot == 'boolean') updates.isBot = ps.isBot;
 	if (typeof ps.carefulBot == 'boolean') updates.carefulBot = ps.carefulBot;
+	if (typeof ps.carefulCat == 'boolean') updates.carefulCat = ps.carefulCat;
 	if (typeof ps.carefulRemote == 'boolean') updates.carefulRemote = ps.carefulRemote;
 	if (typeof ps.carefulMassive == 'boolean') updates.carefulMassive = ps.carefulMassive;
 	if (typeof ps.refuseFollow == 'boolean') updates.refuseFollow = ps.refuseFollow;

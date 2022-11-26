@@ -910,6 +910,7 @@ common/views/components/profile-editor.vue:
   is-locked: "Follower requests require approval"
   refuseFollow: "Do not allow follow"
   careful-bot: "Follower requests from bots require approval"
+  careful-cat: "Follower requests from cats require approval"
   careful-remote: "Follower requests from remote require approval"
   careful-massive: "Massive follow requests pending approval"
   auto-accept-followed: "Automatically approve follows from the people you follow"

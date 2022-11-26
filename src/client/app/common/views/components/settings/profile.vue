@@ -89,9 +89,10 @@
 				<ui-switch v-model="isLocked" @change="save(false)">{{ $t('is-locked') }}</ui-switch>
 				<ui-switch v-model="refuseFollow" @change="save(false)">{{ $t('refuseFollow') }}</ui-switch>
 				<ui-switch v-model="carefulBot" :disabled="isLocked || refuseFollow" @change="save(false)">{{ $t('careful-bot') }}</ui-switch>
+				<ui-switch v-model="carefulCat" :disabled="isLocked || refuseFollow" @change="save(false)">{{ $t('careful-cat') }}</ui-switch>
 				<ui-switch v-model="carefulRemote" :disabled="isLocked || refuseFollow" @change="save(false)">{{ $t('careful-remote') }}</ui-switch>
 				<ui-switch v-model="carefulMassive" :disabled="isLocked || refuseFollow" @change="save(false)">{{ $t('careful-massive') }}</ui-switch>
-				<ui-switch v-model="autoAcceptFollowed" :disabled="!isLocked && !refuseFollow && !carefulBot && !carefulRemote && !carefulMassive" @change="save(false)">{{ $t('auto-accept-followed') }}</ui-switch>
+				<ui-switch v-model="autoAcceptFollowed" :disabled="!isLocked && !refuseFollow && !carefulBot && !carefulCat && !carefulRemote && !carefulMassive" @change="save(false)">{{ $t('auto-accept-followed') }}</ui-switch>
 				<ui-switch v-model="avoidSearchIndex" @change="save(false)">{{ $t('avoid-search-index') }}</ui-switch>
 				<ui-switch v-model="isExplorable" @change="save(false)">{{ $t('isExplorable') }}</ui-switch>
 				<ui-switch v-model="disableblock" @change="save(false)">{{ $t('disableblock') }}</ui-switch>
@@ -179,6 +180,7 @@ export default Vue.extend({
 			isLocked: false,
 			refuseFollow: false,
 			carefulBot: false,
+			carefulCat: false,
 			carefulRemote: false,
 			carefulMassive: true,
 			autoAcceptFollowed: false,
@@ -235,6 +237,7 @@ export default Vue.extend({
 		this.isLocked = this.$store.state.i.isLocked;
 		this.refuseFollow = this.$store.state.i.refuseFollow;
 		this.carefulBot = this.$store.state.i.carefulBot;
+		this.carefulCat = this.$store.state.i.carefulCat;
 		this.carefulRemote = this.$store.state.i.carefulRemote;
 		this.carefulMassive = this.$store.state.i.carefulMassive;
 		this.autoAcceptFollowed = this.$store.state.i.autoAcceptFollowed;
@@ -337,6 +340,7 @@ export default Vue.extend({
 				isLocked: !!this.isLocked,
 				refuseFollow: !!this.refuseFollow,
 				carefulBot: !!this.carefulBot,
+				carefulCat: !!this.carefulCat,
 				carefulRemote: !!this.carefulRemote,
 				carefulMassive: !!this.carefulMassive,
 				autoAcceptFollowed: !!this.autoAcceptFollowed,

@@ -120,6 +120,7 @@ export type PackedUser = ThinPackedUser & {
 	bannerId?: string | null;
 	alwaysMarkNsfw?: boolean;
 	carefulBot?: boolean;
+	carefulCat?: boolean;
 	carefulRemote?: boolean;
 	carefulMassive?: boolean;
 	refuseFollow?: boolean;
