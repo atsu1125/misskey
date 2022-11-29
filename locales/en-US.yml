@@ -2005,6 +2005,7 @@ deck:
   disabled-timeline:
     title: "The timeline has been disabled"
     description: "This timeline has been disabled by the server's administrator."
+  enter-hashtag-tl-title: "Enter the title of Hashtag Timeline on your setting"
 deck/deck.tl-column.vue:
   is-media-only: "Only media posts"
   is-sfw-media-only: "Only SFW media posts"

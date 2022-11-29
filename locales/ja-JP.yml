@@ -2224,6 +2224,7 @@ deck:
   disabled-timeline:
     title: "無効化されたタイムライン"
     description: "サーバーの運営者により、このタイムラインは使用できない状態に設定されています。"
+  enter-hashtag-tl-title: "あなたが設定したハッシュタグタイムラインのタイトルを入力してください"
 
 deck/deck.tl-column.vue:
   is-media-only: "メディア投稿のみ"
