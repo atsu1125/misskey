@@ -174,6 +174,7 @@ export default Vue.extend({
 			unique,
 			host: toUnicode(host),
 			enableEmail: false,
+			disableDeletion: false,
 			email: null,
 			name: null,
 			username: null,
