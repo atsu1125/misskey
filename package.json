@@ -17,6 +17,9 @@
 		"debug": "DEBUG=misskey:* node ./index.js",
 		"build": "webpack && gulp build",
 		"webpack": "webpack",
+		"dev": "run-p watch gulpstart",
+		"gulpstart": "run-s gulp start",
+		"watch": "webpack --watch",
 		"gulp": "gulp build",
 		"clean": "gulp clean",
 		"cleanall": "gulp cleanall",
@@ -123,6 +126,7 @@
 		"gulp-stylus": "2.7.1",
 		"gulp-terser": "2.1.0",
 		"gulp-typescript": "5.0.1",
+		"gulp-util": "3.0.8",
 		"highlight.js": "10.6.0",
 		"html-entities": "2.3.3",
 		"htmlescape": "1.1.1",
@@ -234,6 +238,7 @@
 		"cross-env": "7.0.3",
 		"eslint": "8.28.0",
 		"eslint-plugin-node": "11.1.0",
-		"mocha": "10.1.0"
+		"mocha": "10.1.0",
+		"npm-run-all": "4.1.5"
 	}
 }
