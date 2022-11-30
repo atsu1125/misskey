@@ -49,6 +49,9 @@
 					<p class="birthday" v-if="user.profile && user.profile.birthday">
 						<fa icon="birthday-cake"/>{{ user.profile.birthday.replace('-', '年').replace('-', '月') + '日' }} ({{ $t('years-old', { age }) }})
 					</p>
+					<p class="sex" v-if="user.host === null && user.profile.sex && user.profile.sex !== 'not-known'">
+						<fa :icon="sexIcon"/> {{ $t(user.profile.sex) }}
+					</p>
 				</div>
 				<div class="status">
 					<router-link :to="user | userPage()">
@@ -118,6 +121,9 @@ export default Vue.extend({
 	computed: {
 		age(): number {
 			return calcAge(this.user.profile.birthday);
+		},
+		sexIcon() {
+			return this.user.profile.sex === 'male' ? 'mars' : this.user.profile.sex === 'female' ? 'venus' : this.user.profile.sex === 'not-applicable' ? 'genderless' : null;
 		},
 		avator(): string {
 			return this.$store.state.device.disableShowingAnimatedImages

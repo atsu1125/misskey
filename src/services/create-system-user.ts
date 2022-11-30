@@ -41,7 +41,8 @@ export async function createSystemUser(username: string) {
 		profile: {
 			bio: null,
 			birthday: null,
-			location: null
+			location: null,
+			sex: 'not-known',
 		},
 		settings: {
 			autoWatch: false

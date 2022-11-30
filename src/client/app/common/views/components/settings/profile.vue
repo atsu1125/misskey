@@ -28,6 +28,14 @@
 					<template #prefix><fa icon="birthday-cake"/></template>
 				</ui-input>
 
+				<ui-select v-model="sex">
+					<template #label>{{ $t('sex') }}</template>
+					<option value="not-known" >{{ $t("not-known") }}</option>
+					<option value="male" >{{ $t("male") }}</option>
+					<option value="female" >{{ $t("female") }}</option>
+					<option value="not-applicable" >{{ $t("not-applicable") }}</option>
+				</ui-select>
+
 				<ui-horizon-group inputsx>
 					<ui-input type="file" @change="onAvatarChange">
 						<span>{{ $t('avatar') }}</span>
@@ -171,6 +179,7 @@ export default Vue.extend({
 			username: null,
 			location: null,
 			description: null,
+			sex: 'not-known',
 			birthday: null,
 			borderColor: null,
 			avatarId: null,
@@ -230,6 +239,7 @@ export default Vue.extend({
 		this.username = this.$store.state.i.username;
 		this.location = this.$store.state.i.profile.location;
 		this.description = this.$store.state.i.description;
+		this.sex = this.$store.state.i.profile.sex;
 		this.birthday = this.$store.state.i.profile.birthday;
 		this.borderColor = this.$store.state.i.borderColor;
 		this.isCat = this.$store.state.i.isCat;
@@ -331,6 +341,7 @@ export default Vue.extend({
 				name: this.name || null,
 				location: this.location || null,
 				description: this.description || null,
+				sex: this.sex || 'not-known',
 				birthday: this.birthday || null,
 				borderColor: this.borderColor || null,
 				avatarId: this.avatarId || undefined,

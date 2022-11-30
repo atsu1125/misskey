@@ -109,7 +109,8 @@ export default async (ctx: Router.RouterContext) => {
 		profile: {
 			bio: null,
 			birthday: null,
-			location: null
+			location: null,
+			sex: 'not-known',
 		},
 		settings: {
 			autoWatch: false

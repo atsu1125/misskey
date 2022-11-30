@@ -132,7 +132,10 @@ import {
 	faUserPlus,
 	faUsers,
 	faVolumeUp,
-	faWrench
+	faWrench,
+	faMars,
+	faVenus,
+	faGenderless,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Imports for Font Awesome regular
@@ -292,7 +295,10 @@ library.add(
 	farWindowRestore,
 	fabDiscord,
 	fabGithub,
-	fabTwitter
+	fabTwitter,
+	faMars,
+	faVenus,
+	faGenderless,
 );
 //#endregion
 

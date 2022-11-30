@@ -69,6 +69,7 @@ type IUserBase = {
 	profile?: {
 		location?: string | null;
 		birthday?: string | null; // 'YYYY-MM-DD'
+		sex?: string | 'not-known';
 		tags?: string[];
 	};
 	borderColor?: string;
@@ -502,6 +503,7 @@ export async function pack(
 			profile: {
 				birthday: db.profile?.birthday || null,
 				location: db.profile?.location || null,
+				sex: db.profile?.sex || 'not-known',
 			},
 			fields: db.fields || [],
 			followersCount: (visibleFollowers && isLocalUser(db)) ? db.followersCount : null,

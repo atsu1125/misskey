@@ -59,6 +59,13 @@ export const meta = {
 			}
 		},
 
+		sex: {
+			validator: $.optional.str.or(['not-known', 'male', 'female', 'not-applicable']),
+			desc: {
+				'ja-JP': '性別'
+			}
+		},
+
 		borderColor: {
 			validator: $.optional.nullable.str,
 			desc: {
@@ -276,6 +283,8 @@ export default define(meta, async (ps, user, app) => {
 
 		updates['profile.birthday'] = ps.birthday;
 	}
+
+	if (ps.sex !== undefined) updates['profile.sex'] = ps.sex as any;
 
 	if (ps.borderColor !== undefined) {
 		if (typeof ps.borderColor === 'string' && user.isVerified && ps.borderColor.match(/^#[0-9A-Fa-f]{6,8}$/)) {
