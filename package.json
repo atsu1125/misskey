@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.603-m544",
+	"version": "10.102.604-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -87,7 +87,7 @@
 		"@types/suncalc": "1.9.0",
 		"@types/tinycolor2": "1.4.3",
 		"@types/tmp": "0.2.3",
-		"@types/uuid": "8.3.4",
+		"@types/uuid": "9.0.0",
 		"@types/web-push": "3.3.2",
 		"@types/webpack": "5.28.0",
 		"@types/websocket": "1.0.5",
