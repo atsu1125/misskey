@@ -33,6 +33,8 @@ import { normalizeTag } from '../../../misc/normalize-tag';
 import { substr } from 'stringz';
 import { resolveAnotherUser } from '../resolve-another-user';
 import { StatusError } from '../../../misc/fetch';
+import { gpSexMap } from '../../../misc/vcard-sex-map';
+import { parseGender } from './gender';
 const logger = apLogger;
 
 const MAX_NAME_LENGTH = 512;
@@ -146,6 +148,8 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 
 	const bday = person['vcard:bday']?.match(/^[0-9]{4,8}-\d{2}-\d{2}/);
 
+	const { sex } = parseGender(person['vcard:gender']);
+
 	// Create user
 	let user: IRemoteUser | undefined;
 	try {
@@ -182,6 +186,7 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 			profile: {
 				birthday: bday ? bday[0] : undefined,
 				location: person['vcard:Address'] || undefined,
+				sex: gpSexMap[sex],
 			},
 			isBot: getApType(object) === 'Service',
 			isGroup: getApType(object) === 'Group',

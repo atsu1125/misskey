@@ -9,6 +9,7 @@ import { getEmojis } from './note';
 import renderEmoji from './emoji';
 import { IIdentifier } from '../models/identifier';
 import renderHashtag from './hashtag';
+import { vCardSexMap } from '../../../misc/vcard-sex-map';
 
 export default async (user: ILocalUser) => {
 	const isSystem = !!user.username.match(/\./);
@@ -118,6 +119,10 @@ export default async (user: ILocalUser) => {
 
 	if (user.profile?.location) {
 		person['vcard:Address'] = user.profile.location;
+	}
+
+	if (user.profile?.gender) {
+		person['vcard:gender'] = vCardSexMap[user.profile.sex];
 	}
 
 	return person;

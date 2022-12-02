@@ -49,7 +49,7 @@
 					<p class="birthday" v-if="user.profile && user.profile.birthday">
 						<fa icon="birthday-cake"/>{{ user.profile.birthday.replace('-', '年').replace('-', '月') + '日' }} ({{ $t('years-old', { age }) }})
 					</p>
-					<p class="sex" v-if="user.host === null && user.profile.sex && user.profile.sex !== 'not-known'">
+					<p class="sex" v-if="user.profile && user.profile.sex && user.profile.sex !== 'not-known'">
 						<fa :icon="sexIcon"/> {{ $t(user.profile.sex) }}
 					</p>
 				</div>

@@ -50,7 +50,7 @@
 		<div class="info">
 			<div class="location" v-if="user.profile && user.profile.location"><fa icon="map-marker"/> {{ user.profile.location }}</div>
 			<div class="birthday" v-if="user.profile && user.profile.birthday"><fa icon="birthday-cake"/> {{ user.profile.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</div>
-			<div class="sex" v-if="user.host === null && user.profile.sex && user.profile.sex !== 'not-known'"><fa :icon="sexIcon"/> {{ $t(user.profile.sex) }}</div>
+			<div class="sex" v-if="user.profile && user.profile.sex && user.profile.sex !== 'not-known'"><fa :icon="sexIcon"/> {{ $t(user.profile.sex) }}</div>
 		</div>
 			<div class="counts">
 				<div v-if="isPostsPage">
