@@ -2262,6 +2262,9 @@ deck/deck.user-column.vue:
   year: "年"
   month: "月"
   day: "日"
+  male: "男"
+  female: "女"
+  not-applicable: "その他"
 
 docs:
   edit-this-page-on-github: "間違いや改善点を見つけましたか？"
