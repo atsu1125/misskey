@@ -2,7 +2,7 @@ import User from '../models/user';
 
 export const vCardSexes = [ 'M', 'F', 'O', 'N', 'U' ] as const;
 
-type GroundpolisSex = User['sex'];
+type GroundpolisSex = User['profile.sex'];
 export type VCardSex = typeof vCardSexes[number];
 
 const vCardMap: Record<GroundpolisSex, VCardSex> = {

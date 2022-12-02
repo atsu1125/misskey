@@ -69,6 +69,7 @@ type IUserBase = {
 	profile?: {
 		location?: string | null;
 		birthday?: string | null; // 'YYYY-MM-DD'
+		sex?: string | 'not-known';
 		tags?: string[];
 	};
 	borderColor?: string;
@@ -193,9 +194,6 @@ export interface ILocalUser extends IUserBase {
 		id: string;
 		username: string;
 		discriminator: string;
-	};
-	profile?: {
-		sex?: string | 'not-known';
 	};
 	isAdmin?: boolean;
 	isModerator?: boolean;
