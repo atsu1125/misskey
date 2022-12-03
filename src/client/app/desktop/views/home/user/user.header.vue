@@ -46,7 +46,7 @@
 		<div class="info">
 			<span class="location" v-if="user.profile && user.profile.location"><fa icon="map-marker"/> {{ user.profile.location }}</span>
 			<span class="birthday" v-if="user.profile && user.profile.birthday"><fa icon="birthday-cake"/> {{ user.profile.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
-			<span class="sex" v-if="user.profile && user.profile.sex && user.profile.sex !== 'not-known'"><fa :icon="sexIcon"/> {{ $t(user.profile.sex) }}</span>
+			<span class="sex" v-if="user.host === null && user.profile.sex && user.profile.sex !== 'not-known'"><fa :icon="sexIcon"/> {{ $t(user.profile.sex) }}</span>
 		</div>
 		<div class="status">
 			<a v-if="isPostsPage" class="notes-count" @click="scrollToTL()"><b>{{ user.notesCount | number }}</b>{{ $t('posts') }}</a>
