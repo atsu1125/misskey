@@ -85,7 +85,6 @@ export type PackedUser = ThinPackedUser & {
 	profile?: {
 		birthday?: string | null;
 		location?: string | null;
-		sex?: string | 'not-known';
 	};
 	fields?: {
 		name: string;
@@ -114,6 +113,9 @@ export type PackedUser = ThinPackedUser & {
 		id: string;
 		username: string;
 		discriminator: string;
+	};
+	profile?: {
+		sex?: string | 'not-known';
 	};
 
 	// my
