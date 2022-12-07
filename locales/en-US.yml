@@ -1391,6 +1391,7 @@ admin/views/index.vue:
   abuse: "Abuse"
   queue: "Job Queue"
   logs: "Logs"
+  instanceblocks: "Instance blocks"
   back-to-misskey: "Back to Misskey"
 admin/views/dashboard.vue:
   dashboard: "Dashboard"
@@ -1717,6 +1718,10 @@ admin/views/federation.vue:
   chart-spans:
     hour: "Hourly"
     day: "Daily"
+
+admin/views/instanceblocks.vue:
+  instanceblocks: "Instance block"
+  blockedInstances-info: "One host per line. You can use /RegExp/."
 
 admin/views/relay.vue:
   add-relay: "Add relay"
