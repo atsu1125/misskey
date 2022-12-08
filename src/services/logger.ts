@@ -4,7 +4,10 @@ import * as chalk from 'chalk';
 import { format } from 'date-fns';
 import { envOption } from '../env';
 import Log from '../models/log';
+import config from '../config';
 //import { processLabel } from '..';
+
+const SyslogPro = require('syslog-pro');
 
 type Domain = {
 	name: string;
@@ -17,6 +20,7 @@ export default class Logger {
 	private domain: Domain;
 	private parentLogger: Logger | null = null;
 	private store: boolean;
+	private syslogClient: any | null = null;
 
 	constructor(domain: string, color?: string, store = false) {
 		this.domain = {
@@ -24,6 +28,20 @@ export default class Logger {
 			color: color,
 		};
 		this.store = store;
+
+		if (config.syslog) {
+			this.syslogClient = new SyslogPro.RFC5424({
+				applacationName: 'Misskey',
+				timestamp: true,
+				encludeStructuredData: true,
+				color: true,
+				extendedColor: true,
+				server: {
+					target: config.syslog.host,
+					port: config.syslog.port,
+				}
+			});
+		}
 	}
 
 	public createSubLogger(domain: string, color?: string, store = false): Logger {
@@ -67,6 +85,18 @@ export default class Logger {
 		console.log(important ? chalk.bold(log) : log);
 
 		if (store) {
+			if (this.syslogClient) {
+				const send =
+					level === 'error' ? this.syslogClient.error :
+					level === 'warning' ? this.syslogClient.warning :
+					level === 'success' ? this.syslogClient.info :
+					level === 'debug' ? this.syslogClient.info :
+					level === 'info' ? this.syslogClient.info :
+					null as never;
+
+				send.bind(this.syslogClient)(message).catch(() => {});
+			}
+
 			Log.insert({
 				createdAt: new Date(),
 				machine: os.hostname(),

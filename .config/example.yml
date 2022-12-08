@@ -198,3 +198,8 @@ themeColor: '#fb4e4e'
 
 # ホーム/ハイブリッドタイムラインでこの日数以内に投稿していない場合はAPI pullではクエリ対象にしない
 #homeTlActiveLimitDays: 3
+
+# Syslog option
+#syslog:
+#  host: localhost
+#  port: 514

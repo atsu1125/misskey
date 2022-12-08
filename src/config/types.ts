@@ -82,6 +82,11 @@ export type Source = {
 	minimumAge?: number;
 	homeTlActiveLimitDays?: number;
 	denyStatsPost?: boolean;
+
+	syslog: {
+		host: string;
+		port: number;
+	};
 };
 
 export type DriveConfig = {
