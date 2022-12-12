@@ -752,6 +752,8 @@ common/views/components/user-menu.vue:
   unhide-renote: "Renoteを隠すを解除"
   hide-renote-confirm: "このユーザーのRenoteを隠しますか？"
   unhide-renote-confirm: "このユーザーのRenoteを隠してるのを解除しますか？"
+  update-remote-user: "リモートユーザー情報の更新"
+  remote-user-updated: "リモートユーザー情報を更新しました"
   confirm: "確認"
   timeSpans:
     0: "無期限"

@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
-import { faExclamationCircle, faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faMicrophoneSlash, faSync } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake } from '@fortawesome/free-regular-svg-icons';
 import { faUserTag } from '@fortawesome/free-solid-svg-icons';
 import getAcct from '../../../../../misc/acct/render';
@@ -87,7 +87,16 @@ export default Vue.extend({
 
 		// Admin or Moderator
 		if (this.$store.getters.isSignedIn && (this.$store.state.i.isAdmin || this.$store.state.i.isModerator)) {
-			menu = menu.concat([null, {
+			menu = menu.concat(null);
+
+			if (this.user.host != null) {
+				menu = menu.concat({
+					icon: faSync,
+					text: this.$t("update-remote-user"),
+					action: this.updateRemoteUser,
+				});
+				}
+			menu = menu.concat([{
 				icon: faMicrophoneSlash,
 				text: this.user.isSilenced ? this.$t('unsilence') : this.$t('silence'),
 				action: this.toggleSilence
@@ -351,6 +360,15 @@ export default Vue.extend({
 			});
 
 			return !confirm.canceled;
+		},
+
+		async updateRemoteUser() {
+			const updated = this.$t('remote-user-updated'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
+			await this.$root.api('admin/update-remote-user', { userId: this.user.id });
+			this.$root.dialog({
+				type: 'success',
+				text: updated
+			});
 		},
 	}
 });
