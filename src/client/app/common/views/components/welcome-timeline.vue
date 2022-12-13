@@ -9,6 +9,9 @@
 						<mk-user-name :user="note.user"/>
 					</router-link>
 					<span class="username">@{{ note.user | acct }}</span>
+					<span class="is-bot" v-if="note.user.isBot"><fa icon="robot"/></span>
+					<span class="is-cat" v-if="note.user.isCat"><fa :icon="faPaw"/></span>
+					<span class="is-verified" v-if="note.user.isVerified"><fa icon="star"/></span>
 					<div class="info">
 						<router-link class="created-at" :to="note | notePage">
 							<mk-time :time="note.createdAt"/>
@@ -27,6 +30,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	props: {
@@ -41,6 +45,7 @@ export default Vue.extend({
 		return {
 			fetching: true,
 			notes: [],
+			faPaw,
 		};
 	},
 
@@ -127,6 +132,15 @@ export default Vue.extend({
 						margin 0 .5em 0 0
 						color var(--noteHeaderAcct)
 
+					> .is-bot
+					> .is-cat
+						margin 0 .5em 0 0
+						color var(--noteHeaderBadgeFg)
+
+					> .is-verified
+						margin 0 .5em 0 0
+						color #4dabf7
+
 					> .info
 						margin-left auto
 						font-size 0.9em
@@ -139,7 +153,7 @@ export default Vue.extend({
 					max-height 120px
 					overflow auto
 					margin-left 0.2em
-				
+
 				> .reactions
 					pointer-events none
 </style>
