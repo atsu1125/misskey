@@ -122,7 +122,6 @@ common:
   noteReactions: "Reacted notes"
   poll_finished: "Poll finished"
   flush: "Clear cache"
-  signinOrUsePostUrl: "To do so, either signin or put the URL into your instance's search box and do it."
   permissions:
     "read:account": "View your account information"
     "write:account": "Edit your account information"
@@ -1853,7 +1852,7 @@ common/views/components/follow-button.vue:
   follow-processing: "Processing"
   follow-request: "Follow request"
   remoteFollow: "Remote follow"
-  remoteFollowMessage: "Enter the following URL in the search box of the instance you want to follow and follow.\n{acct}"
+  remoteFollowMessage: "Enter the following account in the search box of the instance you want to follow and follow.\n```\n{acct}\n```\n\n\nAlternatively, enter the account you want to follow below."
 mobile/views/components/note.vue:
   private: "This post is private"
   deleted: "This post has been deleted"
