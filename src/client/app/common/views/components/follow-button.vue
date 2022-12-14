@@ -100,7 +100,7 @@ export default Vue.extend({
 					const uri = `${url}/@${this.user.username}`;
 					await this.$root.dialog({
 						type: 'info',
-						text: this.$t('remoteFollowMessage', { acct: `[${uri}](${uri})` }),
+						text: this.$t('message', { acct: `[${uri}](${uri})` }),
 					});
 
 					return;
