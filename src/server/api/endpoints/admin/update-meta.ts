@@ -64,6 +64,13 @@ export const meta = {
 			}
 		},
 
+		disableUserPreview: {
+			validator: $.optional.nullable.bool,
+			desc: {
+				'ja-JP': 'ユーザープレビューを無効にするか否か'
+			}
+		},
+
 		hidedTags: {
 			validator: $.optional.nullable.arr($.str),
 			desc: {
@@ -370,6 +377,10 @@ export default define(meta, async (ps) => {
 
 	if (typeof ps.disableTimelinePreview === 'boolean') {
 		set.disableTimelinePreview = ps.disableTimelinePreview;
+	}
+
+	if (typeof ps.disableUserPreview === 'boolean') {
+		set.disableUserPreview = ps.disableUserPreview;
 	}
 
 	if (Array.isArray(ps.hidedTags)) {
