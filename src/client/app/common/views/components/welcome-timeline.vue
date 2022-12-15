@@ -1,7 +1,7 @@
 <template>
 <div class="mk-welcome-timeline">
 	<transition-group name="ldzpakcixzickvggyixyrhqwjaefknon" tag="div">
-		<div v-for="note in notes" :key="note.id">
+		<div v-if="!disableTimelinePreview" v-for="note in notes" :key="note.id">
 			<mk-avatar class="avatar" :user="note.user" target="_blank"/>
 			<div class="body">
 				<header>
@@ -46,7 +46,14 @@ export default Vue.extend({
 			fetching: true,
 			notes: [],
 			faPaw,
+			disableTimelinePreview: false,
 		};
+	},
+
+	created() {
+		this.$root.getMeta().then(meta => {
+			this.disableTimelinePreview = meta.disableTimelinePreview;
+		});
 	},
 
 	mounted() {
