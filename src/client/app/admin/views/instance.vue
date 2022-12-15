@@ -25,7 +25,7 @@
 			<ui-switch v-model="disableGlobalTimeline">{{ $t('disable-global-timeline') }}</ui-switch>
 			<ui-switch v-model="showReplayInPublicTimeline">{{ $t('showReplayInPublicTimeline') }}</ui-switch>
 			<ui-switch v-model="disableTimelinePreview">{{ $t('disableTimelinePreview') }}</ui-switch>
-			<ui-switch v-model="disableUserPreview">{{ $t('disableUserPreview') }}</ui-switch>
+			<ui-switch v-model="disableProfileDirectory">{{ $t('disableProfileDirectory') }}</ui-switch>
 		</section>
 		<section class="fit-bottom">
 			<header><fa icon="cloud"/> {{ $t('drive-config') }}</header>
@@ -156,7 +156,7 @@ export default Vue.extend({
 			disableGlobalTimeline: false,
 			showReplayInPublicTimeline: false,
 			disableTimelinePreview: false,
-			disableUserPreview: false,
+			disableProfileDirectory: false,
 			mascotImageUrl: null,
 			bannerUrl: null,
 			name: null,
@@ -207,7 +207,7 @@ export default Vue.extend({
 			this.disableGlobalTimeline = meta.disableGlobalTimeline;
 			this.showReplayInPublicTimeline = meta.showReplayInPublicTimeline;
 			this.disableTimelinePreview = meta.disableTimelinePreview;
-			this.disableUserPreview = meta.disableUserPreview;
+			this.disableProfileDirectory = meta.disableProfileDirectory;
 			this.mascotImageUrl = meta.mascotImageUrl;
 			this.bannerUrl = meta.bannerUrl;
 			this.name = meta.name;
@@ -301,7 +301,7 @@ export default Vue.extend({
 				disableGlobalTimeline: this.disableGlobalTimeline,
 				showReplayInPublicTimeline: this.showReplayInPublicTimeline,
 				disableTimelinePreview: this.disableTimelinePreview,
-				disableUserPreview: this.disableUserPreview
+				disableProfileDirectory: this.disableProfileDirectory,
 				mascotImageUrl: this.mascotImageUrl,
 				bannerUrl: this.bannerUrl,
 				name: this.name,

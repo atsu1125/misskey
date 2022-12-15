@@ -64,10 +64,10 @@ export const meta = {
 			}
 		},
 
-		disableUserPreview: {
+		disableProfileDirectory: {
 			validator: $.optional.nullable.bool,
 			desc: {
-				'ja-JP': 'ユーザープレビューを無効にするか否か'
+				'ja-JP': 'プロファイルディレクトリを無効にするか否か'
 			}
 		},
 
@@ -379,8 +379,8 @@ export default define(meta, async (ps) => {
 		set.disableTimelinePreview = ps.disableTimelinePreview;
 	}
 
-	if (typeof ps.disableUserPreview === 'boolean') {
-		set.disableUserPreview = ps.disableUserPreview;
+	if (typeof ps.disableProfileDirectory === 'boolean') {
+		set.disableProfileDirectory = ps.disableProfileDirectory;
 	}
 
 	if (Array.isArray(ps.hidedTags)) {
