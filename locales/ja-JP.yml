@@ -1619,6 +1619,7 @@ admin/views/instance.vue:
   disable-deletion: "アカウント削除を無効にする"
   disable-local-timeline: "ローカルタイムラインを無効にする"
   disable-global-timeline: "グローバルタイムラインを無効にする"
+  admin-access-timeline: "管理者が無効化されたタイムラインにアクセスできる"
   showReplayInPublicTimeline: "公開タイムラインにリプライを表示する"
   disableTimelinePreview: "タイムラインプレビューを無効にする"
   disableProfileDirectory: "プロファイルディレクトリを無効にする"

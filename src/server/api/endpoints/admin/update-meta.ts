@@ -50,6 +50,13 @@ export const meta = {
 			}
 		},
 
+		adminAccessTimeline: {
+			validator: $.optional.nullable.bool,
+			desc: {
+				'ja-JP': '管理者が無効化されたタイムラインにアクセスできるか否か'
+			}
+		},
+
 		showReplayInPublicTimeline: {
 			validator: $.optional.nullable.bool,
 			desc: {
@@ -369,6 +376,10 @@ export default define(meta, async (ps) => {
 
 	if (typeof ps.disableGlobalTimeline === 'boolean') {
 		set.disableGlobalTimeline = ps.disableGlobalTimeline;
+	}
+
+	if (typeof ps.adminAccessTimeline === 'boolean') {
+		set.adminAccessTimeline = ps.adminAccessTimeline;
 	}
 
 	if (typeof ps.showReplayInPublicTimeline === 'boolean') {

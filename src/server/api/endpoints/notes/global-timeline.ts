@@ -99,6 +99,12 @@ export const meta = {
 export default define(meta, async (ps, user) => {
 	const m = await fetchMeta();
 	if (m.disableGlobalTimeline) {
+		if (user == null || (!user.isAdmin && !user.isModerator)) {
+			throw new ApiError(meta.errors.gtlDisabled);
+		}
+	}
+
+	if (m.disableGlobalTimeline && !m.adminAccessTimeline) {
 		throw new ApiError(meta.errors.gtlDisabled);
 	}
 

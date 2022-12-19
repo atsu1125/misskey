@@ -15,11 +15,17 @@ export default class extends Channel {
 	public async init(params: any) {
 		const meta = await fetchMeta();
 		if (meta.disableGlobalTimeline) {
+			if (this.user == null || (!this.user.isAdmin && !this.user.isModerator)) return;
+		}
+
+		if (meta.disableGlobalTimeline && !meta.adminAccessTimeline) {
 			return;
 		}
+
 		if (!this.user && meta.disableTimelinePreview) {
 			return;
 		}
+
 		this.showReplayInPublicTimeline = meta.showReplayInPublicTimeline;
 
 		// Subscribe events

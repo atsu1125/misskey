@@ -145,7 +145,7 @@ export default Vue.extend({
 		}
 
 		this.$root.getMeta().then(meta => {
-			this.disabled = (
+			this.disabled = (!this.$store.state.i.isModerator && !this.$store.state.i.isAdmin) || !meta.adminAccessTimeline && (
 				meta.disableLocalTimeline && ['local', 'locao', 'hybrid'].includes(this.src) ||
 				meta.disableGlobalTimeline && ['global'].includes(this.src));
 		});
@@ -161,7 +161,7 @@ export default Vue.extend({
 			if (this.sfwMediaOnly && (note.files.length == 0 || note.files.some((x: any) => x.isSensitive))) return;
 			if (this.nsfwMediaOnly && (note.files.length == 0 || note.files.every((x: any) => !x.isSensitive))) return;
 			if (this.excludeRenote && note.text == null && note.files.length === 0 && note.poll == null) return;
-			
+
 			(this.$refs.timeline as any).prepend(note);
 
 			// サウンドを再生する

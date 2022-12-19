@@ -184,6 +184,7 @@ export type IMeta = {
 	disableDeletion?: boolean;
 	disableLocalTimeline?: boolean;
 	disableGlobalTimeline?: boolean;
+	adminAccessTimeline?: boolean;
 	showReplayInPublicTimeline?: boolean;
 	disableTimelinePreview?: boolean;
 	disableProfileDirectory?: boolean;

@@ -23,7 +23,13 @@ export default class extends Channel {
 	@autobind
 	public async init(params: any) {
 		const meta = await fetchMeta();
-		if (meta.disableLocalTimeline) return;
+		if (meta.disableLocalTimeline) {
+			if (this.user == null || (!this.user.isAdmin && !this.user.isModerator)) return;
+		}
+
+		if (meta.disableLocalTimeline && !meta.adminAccessTimeline) {
+			return;
+		}
 
 		await this.updateFollowing();
 		await this.updateFilter();

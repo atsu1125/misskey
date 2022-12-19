@@ -1466,6 +1466,7 @@ admin/views/instance.vue:
   disable-deletion: "Disable account deletion"
   disable-local-timeline: "Disable the Local Timeline"
   disable-global-timeline: "Disable global timeline"
+  admin-access-timeline: "The administrators have access disabled timelines"
   showReplayInPublicTimeline: "Show replay in public timelines"
   disableTimelinePreview: "Disable Timeline Preview"
   disableProfileDirectory: "Disable Profile Directory"

@@ -36,6 +36,7 @@ export async function buildMeta(instance: IMeta, detail = true) {
 		disableDeletion: instance.disableDeletion,
 		disableLocalTimeline: instance.disableLocalTimeline,
 		disableGlobalTimeline: instance.disableGlobalTimeline,
+		adminAccessTimeline: instance.adminAccessTimeline,
 		showReplayInPublicTimeline: instance.showReplayInPublicTimeline,
 		disableTimelinePreview: instance.disableTimelinePreview,
 		disableProfileDirectory: instance.disableProfileDirectory,

@@ -11,6 +11,7 @@
 		<section>
 			<ui-switch v-model="disableLocalTimeline">{{ $t('disable-local-timeline') }}</ui-switch>
 			<ui-switch v-model="disableGlobalTimeline">{{ $t('disable-global-timeline') }}</ui-switch>
+			<ui-switch v-model="adminAccessTimeline">{{ $t('admin-access-timeline') }}</ui-switch>
 			<ui-switch v-model="showReplayInPublicTimeline">{{ $t('showReplayInPublicTimeline') }}</ui-switch>
 			<ui-switch v-model="disableTimelinePreview">{{ $t('disableTimelinePreview') }}</ui-switch>
 			<ui-switch v-model="disableProfileDirectory">{{ $t('disableProfileDirectory') }}</ui-switch>
@@ -47,6 +48,7 @@ export default defineComponent({
 			maxNoteTextLength: '',
 			disableLocalTimeline: false,
 			disableGlobalTimeline: false,
+			adminAccessTimeline: false,
 			showReplayInPublicTimeline: false,
 			disableTimelinePreview: false,
 			disableProfileDirectory: false,
@@ -69,6 +71,7 @@ export default defineComponent({
 				this.maxNoteTextLength = meta.maxNoteTextLength;
 				this.disableLocalTimeline = meta.disableLocalTimeline;
 				this.disableGlobalTimeline = meta.disableGlobalTimeline;
+				this.adminAccessTimeline = meta.adminAccessTimeline;
 				this.showReplayInPublicTimeline = meta.showReplayInPublicTimeline;
 				this.disableTimelinePreview = meta.disableTimelinePreview;
 				this.disableProfileDirectory = meta.disableProfileDirectory;
@@ -89,6 +92,7 @@ export default defineComponent({
 				maxNoteTextLength: parseInt(this.maxNoteTextLength, 10),
 				disableLocalTimeline: this.disableLocalTimeline,
 				disableGlobalTimeline: this.disableGlobalTimeline,
+				adminAccessTimeline: this.adminAccessTimeline,
 				showReplayInPublicTimeline: this.showReplayInPublicTimeline,
 				disableTimelinePreview: this.disableTimelinePreview,
 				disableProfileDirectory: this.disableProfileDirectory,

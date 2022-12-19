@@ -64,6 +64,10 @@ export const meta = {
 				type: 'boolean',
 				description: 'Whether disabled GTL.',
 			},
+			adminAccessTimeline: {
+				type: 'boolean',
+				description: 'Whether admin is able to access disable timelines.',
+			},
 			enableEmojiReaction: {
 				type: 'boolean',
 				description: 'Whether enabled emoji reaction.',
@@ -118,6 +122,7 @@ export default define(meta, async (ps, me) => {
 		disableDeletion: instance.disableDeletion,
 		disableLocalTimeline: instance.disableLocalTimeline,
 		disableGlobalTimeline: instance.disableGlobalTimeline,
+		adminAccessTimeline: instance.adminAccessTimeline,
 		showReplayInPublicTimeline: instance.showReplayInPublicTimeline,
 		disableTimelinePreview: instance.disableTimelinePreview,
 		disableProfileDirectory: instance.disableProfileDirectory,
