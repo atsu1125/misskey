@@ -152,10 +152,6 @@ export default async (user: IUser, data: Option, silent = false) => {
 		throw 'poll limit exceeded';
 	}
 
-	if (data.copyOnce && data.visibility === 'specified') {
-		throw 'Deny remote follower only';
-	}
-
 	// リプライ対象が削除された投稿だったらreject
 	if (data.reply && data.reply.deletedAt != null) {
 		throw 'Reply target has been deleted';
