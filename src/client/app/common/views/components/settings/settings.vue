@@ -171,7 +171,6 @@
 						<option value="local-home">{{ $t('@.note-visibility.local-home') }}</option>
 						<option value="local-followers">{{ $t('@.note-visibility.local-followers') }}</option>
 						<option value="once-public">{{ $t('@.note-visibility.once-public') }}</option>
-						<option value="once-specified">{{ $t('@.note-visibility.once-specified') }}</option>
 					</ui-select>
 				</section>
 				<section>
@@ -186,7 +185,6 @@
 						<option value="local-home">{{ $t('@.note-visibility.local-home') }}</option>
 						<option value="local-followers">{{ $t('@.note-visibility.local-followers') }}</option>
 						<option value="once-public">{{ $t('@.note-visibility.once-public') }}</option>
-						<option value="once-specified">{{ $t('@.note-visibility.once-specified') }}</option>
 					</ui-select>
 				</section>
 				<section>
@@ -201,7 +199,6 @@
 						<option value="local-home">{{ $t('@.note-visibility.local-home') }}</option>
 						<option value="local-followers">{{ $t('@.note-visibility.local-followers') }}</option>
 						<option value="once-public">{{ $t('@.note-visibility.once-public') }}</option>
-						<option value="once-specified">{{ $t('@.note-visibility.once-specified') }}</option>
 					</ui-select>
 				</section>
 			</section>

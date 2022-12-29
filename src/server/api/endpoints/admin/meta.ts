@@ -74,11 +74,11 @@ export const meta = {
 			},
 			disableTimelinePreview: {
 				type: 'boolean',
-				description: 'Whether disabled Timeline Preview.',
+				description: 'Whether disabled unauthenticated Timeline.',
 			},
 			disableProfileDirectory: {
 				type: 'boolean',
-				description: 'Whether disabled Profile Directory.',
+				description: 'Whether disabled unauthenticated Explore.',
 			},
 		}
 	}

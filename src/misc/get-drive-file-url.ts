@@ -33,8 +33,8 @@ export default function(file: IDriveFile | null | undefined, thumbnail = false):
 function generateFilename(file: IDriveFile, thumbnail = false) {
 	let ext = '';
 
-	if (thumbnail && file.contentType !== 'image/png') {
-		ext = '.jpg';
+	if (thumbnail) {
+		ext = '.webp';
 	} else {
 		if (file.filename) {
 			[ext] = (file.filename.match(/\.(\w+)$/) || ['']);

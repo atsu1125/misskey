@@ -33,7 +33,7 @@ export interface IRoomData {
 	carpetColor: string;
 }
 
-export async function packRoom(room: IRoom) {
+export async function packRoom(room: IRoom | undefined) {
 	const data = (room && room.data) ? deepcopy(room.data) : {} as IRoomData;
 
 	if (!data.furnitures) data.furnitures = [];

@@ -35,6 +35,8 @@ export type Source = {
 	disableUrlPreview?: boolean;
 	disablePosts?: boolean;
 
+	proxyIpHeader?: string;
+
 	enableInstanceGeoIp?: boolean;
 
 	signToActivityPubGet?: boolean;

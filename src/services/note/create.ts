@@ -121,6 +121,7 @@ type Option = {
 	url?: string;
 	app?: IApp;
 	preview?: boolean;
+	references?: INote[];
 };
 
 export default async (user: IUser, data: Option, silent = false) => {
@@ -149,6 +150,10 @@ export default async (user: IUser, data: Option, silent = false) => {
 	}
 	if (data.poll && JSON.stringify(data.poll).length > 16384) {
 		throw 'poll limit exceeded';
+	}
+
+	if (data.copyOnce && data.visibility === 'specified') {
+		throw 'Deny remote follower only';
 	}
 
 	// リプライ対象が削除された投稿だったらreject
@@ -495,6 +500,7 @@ async function insertNote(user: IUser, data: Option, tags: string[], emojis: str
 				? data.visibleUsers.map(u => u._id)
 				: []
 			: [],
+		referenceIds: data.references?.map(x => x._id) || [],
 
 		// 以下非正規化データ
 		_reply: data.reply ? {
@@ -595,7 +601,7 @@ async function notifyExtended(note: INote, nm: NotificationManager) {
 		}
 
 		try {
-			const words: string[] = u.clientSettings.highlightedWords.filter((q: string) => q != null && q.length > 0);
+			const words: string[] = u.clientSettings.highlightedWords.filter((q: string) => q != null && q.length > 0).slice(0, 5);
 
 			const match = words.some(word => text.toLowerCase().includes(word.toLowerCase()));
 

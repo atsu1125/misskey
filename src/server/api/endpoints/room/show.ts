@@ -48,10 +48,10 @@ export default define(meta, async (ps, me) => {
 		floor: ps.floor,
 	});
 
-	if (room == null) throw new ApiError(meta.errors.noSuchRoom);
-
-	const u = await getUser(room.userId);
-	if (u.isDeleted || u.isSuspended) throw new ApiError(meta.errors.noSuchRoom);
+	if (room) {
+		const u = await getUser(room.userId);
+		if (u.isDeleted || u.isSuspended) throw new ApiError(meta.errors.noSuchRoom);
+	}
 
 	return await packRoom(room);
 });

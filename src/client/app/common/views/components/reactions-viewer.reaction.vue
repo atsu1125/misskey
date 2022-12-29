@@ -59,6 +59,8 @@ export default Vue.extend({
 						this.$root.api('notes/reactions/create', {
 							noteId: this.note.id,
 							reaction: this.reaction,
+						}).then(() => {
+							this.addRecent(this.reaction);
 						});
 					} else {
 						this.isHovering = false;
@@ -70,8 +72,17 @@ export default Vue.extend({
 				this.$root.api('notes/reactions/create', {
 					noteId: this.note.id,
 					reaction: this.reaction,
+				}).then(() => {
+					this.addRecent(this.reaction);
 				});
 			}
+		},
+		addRecent(reaction: any) {
+			// add history
+			let recents = this.$store.state.device.recentReactions || [];
+			recents = recents.filter((x: string) => x !== reaction);
+			recents.unshift(reaction.replace('@.', ''));
+			this.$store.commit('device/set', { key: 'recentReactions', value: recents.splice(0, this.$store.state.device.recentReactionsCount) });
 		},
 		onMouseover() {
 			this.isHovering = true;

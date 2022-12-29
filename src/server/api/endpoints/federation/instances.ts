@@ -25,6 +25,10 @@ export const meta = {
 			validator: $.optional.str,
 		},
 
+		softwareVersion: {
+			validator: $.optional.str,
+		},
+
 		cc: {
 			validator: $.optional.str,
 		},
@@ -122,7 +126,8 @@ export default define(meta, async (ps, me) => {
 
 	const q = {} as any;
 
-	if (ps.softwareName) q.softwareName = new RegExp('^' + escapeRegexp(ps.softwareName).toLowerCase());
+	if (ps.softwareName) q.softwareName = new RegExp(escapeRegexp(ps.softwareName).toLowerCase());
+	if (ps.softwareVersion) q.softwareVersion = new RegExp(escapeRegexp(ps.softwareVersion).toLowerCase());
 	if (ps.cc) q.cc = ps.cc.toUpperCase();
 	if (typeof ps.blocked === 'boolean') q.isBlocked = ps.blocked;
 	if (typeof ps.notResponding === 'boolean') q.isNotResponding = ps.notResponding;

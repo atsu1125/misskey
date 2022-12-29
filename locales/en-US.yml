@@ -1289,7 +1289,7 @@ common/views/components/mute-and-block.vue:
 common/views/components/settings/extended-notification.vue:
   extended-notification: "Extra notification"
   highlighted-words: "Hightlighted words"
-  highlighted-words-description: "Enter the words you want to notify, one per line"
+  highlighted-words-description: "Enter the words you want to notify, one per line. You can specify up to 5."
   save: "Save"
 common/views/components/password-settings.vue:
   reset: "Change password"
@@ -1468,8 +1468,8 @@ admin/views/instance.vue:
   disable-global-timeline: "Disable global timeline"
   admin-access-timeline: "The administrators have access disabled timelines"
   showReplayInPublicTimeline: "Show replay in public timelines"
-  disableTimelinePreview: "Disable Timeline Preview"
-  disableProfileDirectory: "Disable Profile Directory"
+  disableTimelinePreview: "Disable Timeline when unauthenticated"
+  disableProfileDirectory: "Disable Explore when unauthenticated"
   invite: "Invite"
   save: "Save"
   saved: "Saved"
@@ -1668,6 +1668,7 @@ admin/views/federation.vue:
   users: "Users"
   system: "System"
   softwareName: "Software"
+  softwareVersion: "Version"
   following: "Following"
   followers: "Followers"
   caught-at: "Created at"

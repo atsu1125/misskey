@@ -150,6 +150,9 @@
 				<ui-input v-model="softwareName" type="text" spellcheck="false" @input="fetchInstances()">
 					<span>{{ $t('softwareName') }}</span>
 				</ui-input>
+				<ui-input v-model="softwareVersion" type="text" spellcheck="false" @input="fetchInstances()">
+					<span>{{ $t('softwareVersion') }}</span>
+				</ui-input>
 				<ui-input v-model="cc" type="text" spellcheck="false" @input="fetchInstances()">
 					<span>CC</span>
 				</ui-input>
@@ -212,6 +215,7 @@ export default Vue.extend({
 			sort: '+lastCommunicatedAt',
 			state: 'all',
 			softwareName: '',
+			softwareVersion: '',
 			cc: '',
 			limit: 200,
 			instances: [],
@@ -317,6 +321,7 @@ export default Vue.extend({
 			this.instances = [];
 			this.$root.api('federation/instances', {
 				softwareName: this.softwareName,
+				softwareVersion: this.softwareVersion,
 				cc: this.cc,
 				blocked: this.state === 'blocked' ? true : null,
 				notResponding: this.state === 'notResponding' ? true : null,

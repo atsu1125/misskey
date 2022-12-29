@@ -84,8 +84,8 @@ export function setResponseType(ctx: Router.RouterContext) {
 }
 
 // inbox
-router.post('/inbox', json() as any, inbox);
-router.post('/users/:user/inbox', json() as any, inbox);
+router.post('/inbox', json({ limit: '64kb' }) as any, inbox);
+router.post('/users/:user/inbox', json({ limit: '64kb' }) as any, inbox);
 
 const isNoteUserAvailable = async (note: INote) => {
 	const user = await User.findOne({

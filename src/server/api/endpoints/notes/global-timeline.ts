@@ -112,6 +112,10 @@ export default define(meta, async (ps, user) => {
 		throw new ApiError(meta.errors.gtlDisabled);
 	}
 
+	if (!user && m.disableTimelinePreview) {
+		throw new ApiError(meta.errors.gtlDisabled);
+	}
+
 	// 隠すユーザーを取得
 	const hideUserIds = await getHideUserIds(user);
 

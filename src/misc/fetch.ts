@@ -18,7 +18,9 @@ export async function getJson(url: string, accept = 'application/json, */*', tim
 		timeout
 	});
 
-	return await JSON.parse(res.body);
+	if (res.body.length > 65536) throw new Error('too large JSON');
+
+	return await JSON.parse(res.body); 
 }
 
 export async function getHtml(url: string, accept = 'text/html, */*', timeout = 10000, headers?: Record<string, string>): Promise<string> {

@@ -1409,7 +1409,7 @@ common/views/components/mute-and-block.vue:
 common/views/components/settings/extended-notification.vue:
   extended-notification: "拡張通知"
   highlighted-words: "ハイライトワード"
-  highlighted-words-description: "通知したいワードを1行に1つずつ入力します"
+  highlighted-words-description: "通知したいワードを1行に1つずつ入力します。5つまで指定できます。"
   save: "保存"
 
 common/views/components/password-settings.vue:
@@ -1621,8 +1621,8 @@ admin/views/instance.vue:
   disable-global-timeline: "グローバルタイムラインを無効にする"
   admin-access-timeline: "管理者が無効化されたタイムラインにアクセスできる"
   showReplayInPublicTimeline: "公開タイムラインにリプライを表示する"
-  disableTimelinePreview: "タイムラインプレビューを無効にする"
-  disableProfileDirectory: "プロファイルディレクトリを無効にする"
+  disableTimelinePreview: "未認証時のタイムラインを無効にする"
+  disableProfileDirectory: "未認証時のみつけるを無効にする"
   invite: "招待"
   save: "保存"
   saved: "保存しました"
@@ -1832,6 +1832,7 @@ admin/views/federation.vue:
   users: "ユーザー"
   system: "システム"
   softwareName: "ソフトウェア"
+  softwareVersion: "バージョン"
   following: "フォロー中"
   followers: "フォロワー"
   caught-at: "登録日時"

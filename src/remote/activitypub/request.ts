@@ -53,5 +53,7 @@ export async function signedGet(url: string, user: ILocalUser) {
 		headers: req.request.headers
 	});
 
+	if (res.body.length > 65536) throw new Error('too large JSON');
+
 	return await JSON.parse(res.body);
 }

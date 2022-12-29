@@ -67,14 +67,14 @@ export const meta = {
 		disableTimelinePreview: {
 			validator: $.optional.nullable.bool,
 			desc: {
-				'ja-JP': 'タイムラインプレビューを無効にするか否か'
+				'ja-JP': '未認証時のタイムラインを無効にするか否か'
 			}
 		},
 
 		disableProfileDirectory: {
 			validator: $.optional.nullable.bool,
 			desc: {
-				'ja-JP': 'プロファイルディレクトリを無効にするか否か'
+				'ja-JP': '未認証時のみつけるを無効にするか否か'
 			}
 		},
 

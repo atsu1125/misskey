@@ -7,10 +7,9 @@
 		<mfm v-if="note.text" :text="note.text" :author="note.user" :i="$store.state.i" :custom-emojis="note.emojis" :hashtags="note.tags" :basic="!!note.notHaveDecorationMfm"/>
 		<router-link class="rp" v-if="note.renoteId" :to="`/notes/${note.renoteId}`">RN: ...</router-link>
 	</div>
-	<details v-if="note.files.length > 0" :open="note.cw != null">
-		<summary>({{ $t('media-count').replace('{}', note.files.length) }})</summary>
+	<div v-if="note.files.length > 0" :open="note.cw != null">
 		<mk-media-list :media-list="note.files" :hide="!$store.state.device.alwaysShowNsfw && note.cw == null"/>
-	</details>
+	</div>
 	<details v-if="note.poll">
 		<summary>{{ $t('poll') }}</summary>
 		<mk-poll :note="note"/>
@@ -32,6 +31,10 @@ export default Vue.extend({
 	overflow-wrap break-word
 
 	> .body
+		max-height 180px
+		overflow hidden auto
+		padding-left 0.2em
+
 		> .reply
 			margin-right 6px
 			color #717171

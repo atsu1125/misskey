@@ -12,7 +12,7 @@ export default class Resolver {
 	private user?: ILocalUser;
 	private recursionLimit?: number;
 
-	constructor(recursionLimit = 100) {
+	constructor(recursionLimit = 200) {
 		this.history = new Set();
 		this.recursionLimit = recursionLimit;
 	}
@@ -62,7 +62,7 @@ export default class Resolver {
 			throw new StatusError('Blocked instance', 451, 'Blocked instance');
 		}
 
-		if (config.signToActivityPubGet && !this.user) {
+		if (config.signToActivityPubGet !== false && !this.user) {
 			this.user = await getInstanceActor();
 		}
 

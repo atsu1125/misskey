@@ -1,5 +1,5 @@
 import * as tmp from 'tmp';
-import { IImage, convertToJpeg } from './image-processor';
+import { IImage, convertToWebp } from './image-processor';
 import * as FFmpeg from 'fluent-ffmpeg';
 
 export async function generateVideoThumbnail(path: string): Promise<IImage> {
@@ -28,7 +28,7 @@ export async function generateVideoThumbnail(path: string): Promise<IImage> {
 
 		const outPath = `${outDir}/output.png`;
 
-		const thumbnail = await convertToJpeg(outPath, 530, 255);
+		const thumbnail = await convertToWebp(outPath, 530, 255);
 
 		return thumbnail;
 	} finally {
