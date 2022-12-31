@@ -13,7 +13,7 @@ export const meta = {
 	tags: ['admin', 'meta'],
 
 	requireCredential: true,
-	requireModerator: true,
+	requireAdmin: true,
 
 	res: {
 		type: 'object',
