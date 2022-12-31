@@ -959,6 +959,10 @@ common/views/components/profile-editor.vue:
   disable-federation: "Disable federation"
   enable-federation: "Enable federation"
   disable-federation-confirm: "Do you want to disable federation? Follow relationship is also removed."
+  suspend-account: "Suspend the account"
+  account-suspended: "The account has been suspended. It may take some time until all of the data disappears."
+  suspend-info: "Currently Account Deletion is disabled, However you can suspend your account yourself. This can be undone."
+  delete-info: "Currently Account Deletion is enabled, So you can delete your account completely. This can not be undone."
 
 common/views/components/user-list-editor.vue:
   users: "User"
@@ -1464,6 +1468,7 @@ admin/views/instance.vue:
   max-note-text-length: "Maximum numbers of post characters"
   disable-registration: "Disable new user registration"
   disable-deletion: "Disable account deletion"
+  disable-deletion-info: "Disable Users delete their account, Users will still be able to suspend their accounts."
   disable-local-timeline: "Disable the Local Timeline"
   disable-global-timeline: "Disable global timeline"
   admin-access-timeline: "The administrators have access disabled timelines"

@@ -1026,6 +1026,10 @@ common/views/components/profile-editor.vue:
   disable-federation: "連合を無効にする"
   enable-federation: "連合を有効にする"
   disable-federation-confirm: "連合を無効にしますか？フォロー関係も解除されます"
+  suspend-account: "アカウントを凍結"
+  account-suspended: "アカウントが凍結されました。データが見えなくなるまで時間がかかる場合があります。"
+  suspend-info: "現在アカウント削除は無効化されています。その代わりにあなたのアカウントを自分自身で凍結することができます。この操作は取り消すことができます。"
+  delete-info: "現在アカウント削除は有効化されています。そのためあなたのアカウントを完全に削除することができます。この操作は取り消すことができません。"
 
 common/views/components/user-list-editor.vue:
   users: "ユーザー"
@@ -1617,6 +1621,7 @@ admin/views/instance.vue:
   max-note-text-length: "投稿の最大文字数"
   disable-registration: "ユーザー登録の受付を停止する"
   disable-deletion: "アカウント削除を無効にする"
+  disable-deletion-info: "ユーザーのアカウントを削除を無効化します。ユーザーは引き続きアカウントを凍結することができます。"
   disable-local-timeline: "ローカルタイムラインを無効にする"
   disable-global-timeline: "グローバルタイムラインを無効にする"
   admin-access-timeline: "管理者が無効化されたタイムラインにアクセスできる"

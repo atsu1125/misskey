@@ -23,6 +23,7 @@
 		<section>
 			<ui-switch v-model="disableRegistration">{{ $t('disable-registration') }}</ui-switch>
 			<ui-switch v-model="disableDeletion">{{ $t('disable-deletion') }}</ui-switch>
+			<ui-info>{{ $t('disable-deletion-info') }}</ui-info>
 		</section>
 		<section>
 			<header>{{ $t('invite') }}</header>
