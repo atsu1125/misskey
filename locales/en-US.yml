@@ -380,6 +380,7 @@ common:
   update-available: "A new version of Misskey is now available({newer}, the current version is {current}). Reload the page to apply updates."
   my-token-regenerated: "Your token has been regenerated, so you will be signed out."
   admin-user: "Administrator account"
+  moderator: "Moderator"
   bot-user: "Bot account"
   cat-user: "Cat account"
   verified-user: "Verified account"

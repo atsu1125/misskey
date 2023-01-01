@@ -24,6 +24,7 @@
 					<fa v-if="user.isLocked == true" class="locked" icon="lock" fixed-width/>
 					<fa v-if="user.refuseFollow == true" class="refuseFollow" icon="ban" fixed-width/>
 					<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
+					<span class="is-moderator" v-if="user.isModerator" :title="$t('@.moderator')"><fa :icon="faUserShield"/></span>
 					<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
 					<span class="is-bot" v-if="user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 					<span class="is-cat" v-if="user.isCat" :title="$t('@.cat-user')"><fa :icon="faPaw"/></span>
@@ -96,7 +97,7 @@ import XUserMenu from '../../../common/views/components/user-menu.vue';
 import XListMenu from '../../../common/views/components/list-menu.vue';
 import XIntegrations from '../../../common/views/components/integrations.vue';
 import ImageViewer from '../../../common/views/components/image-viewer.vue';
-import { faUserTag, faCrown, faPaw } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag, faCrown, faPaw, faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { calcAge } from '../../../../../misc/calc-age';
 
 export default Vue.extend({
@@ -109,7 +110,7 @@ export default Vue.extend({
 		return {
 			user: null,
 			fetching: true,
-			faUserTag, faCrown, faPaw
+			faUserTag, faCrown, faPaw, faUserShield
 		};
 	},
 
@@ -289,6 +290,10 @@ export default Vue.extend({
 
 				> .is-admin
 					color var(--noteHeaderAdminFg)
+					margin-left .3em
+
+				> .is-moderator
+					color #ff9e3d
 					margin-left .3em
 
 				> .is-verified
