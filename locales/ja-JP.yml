@@ -1630,6 +1630,7 @@ admin/views/instance.vue:
   disableTimelinePreview: "未認証時のタイムラインを無効にする"
   disableProfileDirectory: "未認証時のみつけるを無効にする"
   invite: "招待"
+  invite-revoke: "全ての招待コードを失効する"
   save: "保存"
   saved: "保存しました"
   user-recommendation-config: "おすすめユーザー"

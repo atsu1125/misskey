@@ -29,6 +29,7 @@
 			<header>{{ $t('invite') }}</header>
 			<ui-button @click="invite" :disabled="!$store.getters.isAdmin">{{ $t('invite') }}</ui-button>
 			<p v-if="inviteCode">Code: <code>{{ inviteCode }}</code></p>
+			<ui-button @click="inviteRevoke" :disabled="!$store.getters.isAdmin">{{ $t('invite-revoke') }}</ui-button>
 		</section>
 		<!-- save -->
 		<section>
@@ -136,6 +137,19 @@ export default defineComponent({
 		invite() {
 			this.$root.api('admin/invite').then((x: any) => {
 				this.inviteCode = x.code;
+			}).catch((e: Error) => {
+				this.$root.dialog({
+					type: 'error',
+					text: e
+				});
+			});
+		},
+
+		inviteRevoke() {
+			this.$root.api('admin/invite-revoke').then((x: any) => {
+				this.$root.dialog({
+					type: 'success'
+				});
 			}).catch((e: Error) => {
 				this.$root.dialog({
 					type: 'error',

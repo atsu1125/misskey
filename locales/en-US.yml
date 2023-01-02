@@ -1477,6 +1477,7 @@ admin/views/instance.vue:
   disableTimelinePreview: "Disable Timeline when unauthenticated"
   disableProfileDirectory: "Disable Explore when unauthenticated"
   invite: "Invite"
+  invite-revoke: "Revoke all invitation codes"
   save: "Save"
   saved: "Saved"
   user-recommendation-config: "Recommended users"
