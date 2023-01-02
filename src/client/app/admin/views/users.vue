@@ -6,7 +6,7 @@
 			<ui-input class="target" v-model="target" type="text" @enter="showUser">
 				<span>{{ $t('username-or-userid') }}</span>
 			</ui-input>
-			<ui-button @click="showUser"><fa :icon="faSearch"/> {{ $t('lookup') }}</ui-button>
+			<ui-button @click="showUser" :disabled="!$store.getters.isAdminOrModerator"><fa :icon="faSearch"/> {{ $t('lookup') }}</ui-button>
 
 			<div ref="user" class="user" v-if="user" :key="user.id">
 				<x-user :user="user"/>
@@ -74,7 +74,7 @@
 				<ui-input v-model="searchDescription" type="text" spellcheck="false" @input="fetchUsers(true)">
 					<span>{{ $t('description') }}</span>
 				</ui-input>
-				<ui-button @click="fetchUsers(true)"><fa :icon="faSync"/></ui-button>
+				<ui-button @click="fetchUsers(true)" :disabled="!$store.getters.isAdminOrModerator"><fa :icon="faSync"/></ui-button>
 			</ui-horizon-group>
 			<sequential-entrance animation="entranceFromTop" delay="25">
 				<x-user v-for="user in users" :key="user.id" :user='user' :click="showUserOnClick"/>

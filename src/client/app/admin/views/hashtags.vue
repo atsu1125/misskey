@@ -5,7 +5,7 @@
 		<section class="fit-top">
 			<ui-textarea v-model="hidedTags">
 			</ui-textarea>
-			<ui-button @click="save">{{ $t('@._settings.save') }}</ui-button>
+			<ui-button @click="save" :disabled="!$store.getters.isAdmin">{{ $t('@._settings.save') }}</ui-button>
 		</section>
 	</ui-card>
 </div>

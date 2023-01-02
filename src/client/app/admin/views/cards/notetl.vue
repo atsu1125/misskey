@@ -9,16 +9,16 @@
 		</section>
 		<!-- extra -->
 		<section>
-			<ui-switch v-model="disableLocalTimeline">{{ $t('disable-local-timeline') }}</ui-switch>
-			<ui-switch v-model="disableGlobalTimeline">{{ $t('disable-global-timeline') }}</ui-switch>
-			<ui-switch v-model="adminAccessTimeline">{{ $t('admin-access-timeline') }}</ui-switch>
-			<ui-switch v-model="showReplayInPublicTimeline">{{ $t('showReplayInPublicTimeline') }}</ui-switch>
-			<ui-switch v-model="disableTimelinePreview">{{ $t('disableTimelinePreview') }}</ui-switch>
-			<ui-switch v-model="disableProfileDirectory">{{ $t('disableProfileDirectory') }}</ui-switch>
+			<ui-switch v-model="disableLocalTimeline" :disabled="!$store.getters.isAdmin">{{ $t('disable-local-timeline') }}</ui-switch>
+			<ui-switch v-model="disableGlobalTimeline" :disabled="!$store.getters.isAdmin">{{ $t('disable-global-timeline') }}</ui-switch>
+			<ui-switch v-model="adminAccessTimeline" :disabled="!$store.getters.isAdmin">{{ $t('admin-access-timeline') }}</ui-switch>
+			<ui-switch v-model="showReplayInPublicTimeline" :disabled="!$store.getters.isAdmin">{{ $t('showReplayInPublicTimeline') }}</ui-switch>
+			<ui-switch v-model="disableTimelinePreview" :disabled="!$store.getters.isAdmin">{{ $t('disableTimelinePreview') }}</ui-switch>
+			<ui-switch v-model="disableProfileDirectory" :disabled="!$store.getters.isAdmin">{{ $t('disableProfileDirectory') }}</ui-switch>
 		</section>
 		<!-- save -->
 		<section>
-			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
+			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
 		</section>
 	</template>
 	<template v-else>

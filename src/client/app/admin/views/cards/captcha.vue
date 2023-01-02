@@ -4,7 +4,7 @@
 	<template #title><fa :icon="faShieldAlt"/> {{ $t('captcha-config') }}</template>
 	<template v-if="fetched">
 		<section class="fit-bottom">
-			<ui-switch v-model="enableRecaptcha">{{ $t('enable-recaptcha') }}</ui-switch>
+			<ui-switch v-model="enableRecaptcha" :disabled="!$store.getters.isAdmin">{{ $t('enable-recaptcha') }}</ui-switch>
 			<ui-info>{{ $t('recaptcha-info') }}</ui-info>
 			<ui-horizon-group inputs>
 				<ui-input v-model="recaptchaSiteKey" :disabled="!enableRecaptcha"><template #icon><fa icon="key"/></template>{{ $t('recaptcha-site-key') }}</ui-input>
@@ -13,7 +13,7 @@
 		</section>
 		<!-- save -->
 		<section>
-			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
+			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
 		</section>
 	</template>
 	<template v-else>

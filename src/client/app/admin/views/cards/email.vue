@@ -5,20 +5,20 @@
 	<template v-if="fetched">
 		<section>
 			<header></header>
-			<ui-switch v-model="enableEmail">{{ $t('enable-email') }}<template #desc>{{ $t('email-config-info') }}</template></ui-switch>
+			<ui-switch v-model="enableEmail" :disabled="!$store.getters.isAdmin">{{ $t('enable-email') }}<template #desc>{{ $t('email-config-info') }}</template></ui-switch>
 			<ui-input v-model="email" type="email" :disabled="!enableEmail">{{ $t('email') }}</ui-input>
 			<ui-horizon-group inputs>
 				<ui-input v-model="smtpHost" :disabled="!enableEmail">{{ $t('smtp-host') }}</ui-input>
 				<ui-input v-model="smtpPort" type="number" :disabled="!enableEmail">{{ $t('smtp-port') }}</ui-input>
 			</ui-horizon-group>
-			<ui-switch v-model="smtpAuth">{{ $t('smtp-auth') }}</ui-switch>
+			<ui-switch v-model="smtpAuth" :disabled="!$store.getters.isAdmin">{{ $t('smtp-auth') }}</ui-switch>
 			<ui-horizon-group inputs>
 				<ui-input v-model="smtpUser" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-user') }}</ui-input>
 				<ui-input v-model="smtpPass" type="password" :withPasswordToggle="true" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-pass') }}</ui-input>
 			</ui-horizon-group>
-			<ui-switch v-model="smtpSecure" :disabled="!enableEmail">{{ $t('smtp-secure') }}<template #desc>{{ $t('smtp-secure-info') }}</template></ui-switch>
+			<ui-switch v-model="smtpSecure" :disabled="!enableEmail || !$store.getters.isAdmin">{{ $t('smtp-secure') }}<template #desc>{{ $t('smtp-secure-info') }}</template></ui-switch>
 			<ui-input v-model="testEmailAddress" type="email" :disabled="!enableEmail"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('test-email-address') }}</ui-input>
-			<ui-button @click="testEmail()">{{ $t('test-mail') }}</ui-button>
+			<ui-button @click="testEmail()" :disabled="!$store.getters.isAdmin">{{ $t('test-mail') }}</ui-button>
 		</section>
 		<!-- save -->
 		<section>

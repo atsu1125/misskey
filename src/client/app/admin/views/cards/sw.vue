@@ -4,7 +4,7 @@
 	<template #title><fa :icon="faBolt"/> {{ $t('serviceworker-config') }}</template>
 	<template v-if="fetched">
 		<section>
-			<ui-switch v-model="enableServiceWorker">{{ $t('enable-serviceworker') }}<template #desc>{{ $t('serviceworker-info') }}</template></ui-switch>
+			<ui-switch v-model="enableServiceWorker" :disabled="!$store.getters.isAdmin">{{ $t('enable-serviceworker') }}<template #desc>{{ $t('serviceworker-info') }}</template></ui-switch>
 			<ui-info>{{ $t('vapid-info') }}<br><code>npx web-push generate-vapid-keys<br>OR<br>docker-compose run --rm web npx web-push generate-vapid-keys # Docker</code></ui-info>
 			<ui-horizon-group inputs class="fit-bottom">
 				<ui-input v-model="swPublicKey" :disabled="!enableServiceWorker"><template #icon><fa icon="key"/></template>{{ $t('vapid-publickey') }}</ui-input>
@@ -13,7 +13,7 @@
 		</section>
 		<!-- save -->
 		<section>
-			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
+			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
 		</section>
 	</template>
 	<template v-else>

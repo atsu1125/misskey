@@ -4,7 +4,7 @@
 	<template #title><fa icon="cloud"/> {{ $t('drive-config') }}</template>
 	<template v-if="fetched">
 		<section>
-			<ui-switch v-model="cacheRemoteFiles">{{ $t('cache-remote-files') }}</ui-switch>
+			<ui-switch v-model="cacheRemoteFiles" :disabled="!$store.getters.isAdmin">{{ $t('cache-remote-files') }}</ui-switch>
 		</section>
 		<section class="fit-top fit-bottom">
 			<!--
@@ -14,7 +14,7 @@
 		</section>
 		<!-- save -->
 		<section>
-			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
+			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
 		</section>
 	</template>
 	<template v-else>

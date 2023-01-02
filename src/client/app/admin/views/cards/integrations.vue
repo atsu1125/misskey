@@ -4,7 +4,7 @@
 	<template #title><fa :icon="faArrowsAltH"/> {{ $t('external-service-integration-config') }}</template>
 	<template v-if="fetched">
 		<section>
-			<ui-switch v-model="enableTwitterIntegration">{{ $t('enable-twitter-integration') }}</ui-switch>
+			<ui-switch v-model="enableTwitterIntegration" :disabled="!$store.getters.isAdmin">{{ $t('enable-twitter-integration') }}</ui-switch>
 			<ui-horizon-group>
 				<ui-input v-model="twitterConsumerKey" :disabled="!enableTwitterIntegration"><template #icon><fa icon="key"/></template>{{ $t('twitter-integration-consumer-key') }}</ui-input>
 				<ui-input v-model="twitterConsumerSecret" :disabled="!enableTwitterIntegration"><template #icon><fa icon="key"/></template>{{ $t('twitter-integration-consumer-secret') }}</ui-input>
@@ -12,7 +12,7 @@
 			<ui-info>{{ $t('twitter-integration-info', { url: `${url}/api/tw/cb` }) }}</ui-info>
 		</section>
 		<section>
-			<ui-switch v-model="enableGithubIntegration">{{ $t('enable-github-integration') }}</ui-switch>
+			<ui-switch v-model="enableGithubIntegration" :disabled="!$store.getters.isAdmin">{{ $t('enable-github-integration') }}</ui-switch>
 			<ui-horizon-group>
 				<ui-input v-model="githubClientId" :disabled="!enableGithubIntegration"><template #icon><fa icon="key"/></template>{{ $t('github-integration-client-id') }}</ui-input>
 				<ui-input v-model="githubClientSecret" :disabled="!enableGithubIntegration"><template #icon><fa icon="key"/></template>{{ $t('github-integration-client-secret') }}</ui-input>
@@ -20,7 +20,7 @@
 			<ui-info>{{ $t('github-integration-info', { url: `${url}/api/gh/cb` }) }}</ui-info>
 		</section>
 		<section>
-			<ui-switch v-model="enableDiscordIntegration">{{ $t('enable-discord-integration') }}</ui-switch>
+			<ui-switch v-model="enableDiscordIntegration" :disabled="!$store.getters.isAdmin">{{ $t('enable-discord-integration') }}</ui-switch>
 			<ui-horizon-group>
 				<ui-input v-model="discordClientId" :disabled="!enableDiscordIntegration"><template #icon><fa icon="key"/></template>{{ $t('discord-integration-client-id') }}</ui-input>
 				<ui-input v-model="discordClientSecret" :disabled="!enableDiscordIntegration"><template #icon><fa icon="key"/></template>{{ $t('discord-integration-client-secret') }}</ui-input>
@@ -29,7 +29,7 @@
 		</section>
 		<!-- save -->
 		<section>
-			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
+			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
 		</section>
 	</template>
 	<template v-else>

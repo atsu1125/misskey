@@ -22,7 +22,7 @@
 				<span>{{ $t('add-emoji.url') }}</span>
 			</ui-input>
 			<ui-info>{{ $t('add-emoji.info') }}</ui-info>
-			<ui-button @click="add">{{ $t('add-emoji.add') }}</ui-button>
+			<ui-button @click="add" :disabled="!$store.getters.isAdminOrModerator">{{ $t('add-emoji.add') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -72,8 +72,8 @@
 			</div>
 		</section>
 		<section style="padding: 16px 32px">
-			<ui-button v-if="existMore" @click="fetchEmojis('local')">{{ $t('loadNext') }}</ui-button>
-			<ui-button v-else @click="fetchEmojis('local', true)">{{ $t('loadFirst') }}</ui-button>
+			<ui-button v-if="existMore" @click="fetchEmojis('local')" :disabled="!$store.getters.isAdminOrModerator">{{ $t('loadNext') }}</ui-button>
+			<ui-button v-else @click="fetchEmojis('local', true)" :disabled="!$store.getters.isAdminOrModerator">{{ $t('loadFirst') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -107,8 +107,8 @@
 		</section>
 
 		<section style="padding: 16px 32px">
-			<ui-button v-if="remoteExistMore" @click="fetchEmojis('remote')">{{ $t('loadNext') }}</ui-button>
-			<ui-button v-else @click="fetchEmojis('remote', true)">{{ $t('loadFirst') }}</ui-button>
+			<ui-button v-if="remoteExistMore" @click="fetchEmojis('remote')" :disabled="!$store.getters.isAdminOrModerator">{{ $t('loadNext') }}</ui-button>
+			<ui-button v-else @click="fetchEmojis('remote', true)" :disabled="!$store.getters.isAdminOrModerator">{{ $t('loadFirst') }}</ui-button>
 		</section>
 	</ui-card>
 

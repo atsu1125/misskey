@@ -21,18 +21,18 @@
 		</section>
 		<!-- extra -->
 		<section>
-			<ui-switch v-model="disableRegistration">{{ $t('disable-registration') }}</ui-switch>
-			<ui-switch v-model="disableDeletion">{{ $t('disable-deletion') }}</ui-switch>
+			<ui-switch v-model="disableRegistration" :disabled="!$store.getters.isAdmin">{{ $t('disable-registration') }}</ui-switch>
+			<ui-switch v-model="disableDeletion" :disabled="!$store.getters.isAdmin">{{ $t('disable-deletion') }}</ui-switch>
 			<ui-info>{{ $t('disable-deletion-info') }}</ui-info>
 		</section>
 		<section>
 			<header>{{ $t('invite') }}</header>
-			<ui-button @click="invite">{{ $t('invite') }}</ui-button>
+			<ui-button @click="invite" :disabled="!$store.getters.isAdmin">{{ $t('invite') }}</ui-button>
 			<p v-if="inviteCode">Code: <code>{{ inviteCode }}</code></p>
 		</section>
 		<!-- save -->
 		<section>
-			<ui-button @click="updateMeta">{{ $t('save') }}</ui-button>
+			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
 		</section>
 	</template>
 	<template v-else>
