@@ -95,16 +95,19 @@ export default Vue.extend({
 					text: this.$t("update-remote-user"),
 					action: this.updateRemoteUser,
 				});
-				}
-			menu = menu.concat([{
+			}
+			menu = menu.concat({
 				icon: faMicrophoneSlash,
 				text: this.user.isSilenced ? this.$t('unsilence') : this.$t('silence'),
 				action: this.toggleSilence
-			}, {
-				icon: faSnowflake,
-				text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
-				action: this.toggleSuspend
-			}]);
+			});
+			if ((!this.user.isAdmin && !this.user.isModerator) || (this.user.isAdmin && this.user.isModerator && this.user.isSuspended)) {
+				menu = menu.concat({
+					icon: faSnowflake,
+					text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
+					action: this.toggleSuspend
+				});
+			}
 		}
 
 		return {
