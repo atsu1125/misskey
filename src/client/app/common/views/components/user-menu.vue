@@ -101,7 +101,7 @@ export default Vue.extend({
 				text: this.user.isSilenced ? this.$t('unsilence') : this.$t('silence'),
 				action: this.toggleSilence
 			});
-			if ((!this.user.isAdmin && !this.user.isModerator) || (this.user.isAdmin && this.user.isModerator && this.user.isSuspended)) {
+			if ((!this.user.isAdmin && !this.user.isModerator) || ((this.user.isAdmin || this.user.isModerator) && this.user.isSuspended)) {
 				menu = menu.concat({
 					icon: faSnowflake,
 					text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
