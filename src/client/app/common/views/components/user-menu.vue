@@ -77,7 +77,7 @@ export default Vue.extend({
 			}]);
 		}
 
-		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id) {
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id && !this.user.isAdmin) {
 			menu = menu.concat([{
 				icon: faExclamationCircle,
 				text: this.$t('report-abuse'),
