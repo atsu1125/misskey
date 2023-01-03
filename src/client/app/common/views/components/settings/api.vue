@@ -3,9 +3,12 @@
 	<template #title><fa icon="key"/> API</template>
 
 	<section class="fit-top">
-		<ui-input :value="$store.state.i.token" readonly>
-			<span>{{ $t('token') }}</span>
-		</ui-input>
+		<details>
+			<summary>{{ $t('show-token') }}</summary>
+			<ui-input :value="$store.state.i.token" readonly>
+				<span>{{ $t('token') }}</span>
+			</ui-input>
+		</details>
 		<p>{{ $t('intro') }}</p>
 		<ui-info warn>{{ $t('caution') }}</ui-info>
 		<p>{{ $t('regeneration-of-token') }}</p>
@@ -122,4 +125,3 @@ code.hljs
 	overflow-y auto
 	max-height 320px
 </style>
-

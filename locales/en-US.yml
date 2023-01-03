@@ -1255,6 +1255,7 @@ common/views/components/media-image.vue:
   sensitive: "NSFW"
   click-to-show: "Click to show"
 common/views/components/api-settings.vue:
+  show-token: "Show API Token"
   intro: "To access the API, set this token as the key 'i' of request parameters."
   caution: "Do not enter this token to any apps nor tell this token to others otherwise your account may get compromised."
   regeneration-of-token: "If your token gets leaked, you can regenerate it."
