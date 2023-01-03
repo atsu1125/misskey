@@ -21,7 +21,7 @@
 		<div class="actions" v-if="$store.getters.isSignedIn">
 			<button @click="menu" class="menu" ref="menu"><fa icon="ellipsis-h"/></button>
 			<button @click="listMenu" class="listMenu" ref="listMenu"><fa :icon="['fas', 'list']"/></button>
-			<mk-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
+			<mk-follow-button v-if="$store.state.i.id != user.id && !user.isBlocking" :user="user" :inline="true" :transparent="false" class="follow"/>
 		</div>
 		<div class="actions" v-else>
 			<mk-follow-button :user="user" :inline="true" :transparent="false" class="follow"/>

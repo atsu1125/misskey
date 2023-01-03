@@ -15,7 +15,7 @@
 			<div>
 				<button class="menu" @click="menu" ref="menu"><fa icon="ellipsis-h"/></button>
 				<button class="listMenu" @click="listMenu" ref="listMenu"><fa :icon="['fas', 'list']"/></button>
-				<mk-follow-button v-if="$store.getters.isSignedIn && user.id != $store.state.i.id" :user="user" :key="`${user.id}-follow`" class="follow" mini/>
+				<mk-follow-button v-if="$store.getters.isSignedIn && user.id != $store.state.i.id && !user.isBlocking" :user="user" :key="`${user.id}-follow`" class="follow" mini/>
 				<mk-avatar class="avatar" :user="user" :disable-preview="true" :disable-link="true" :key="`${user.id}-avatar`" @click="onAvatarClick()" style="cursor: pointer"/>
 				<router-link class="name" :to="user | userPage()">
 					<mk-user-name :user="user" :key="user.id" :nowrap="false"/>
