@@ -7,7 +7,7 @@
 			<h2>{{ name }}</h2>
 			<small>{{ host }}</small>
 			<p v-html="description || this.$t('@.about')"></p>
-			<router-link class="signup" to="/signup">{{ $t('@.signup') }}</router-link>
+			<router-link class="signup" to="/signup" v-if="meta && !(meta.disableRegistration && meta.disableInvitation)">{{ $t('@.signup') }}</router-link>
 			<div class="signin">
 				<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
 			</div>

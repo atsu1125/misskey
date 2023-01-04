@@ -27,9 +27,10 @@
 		</section>
 		<section>
 			<header>{{ $t('invite') }}</header>
-			<ui-button @click="invite" :disabled="!$store.getters.isAdmin">{{ $t('invite') }}</ui-button>
+			<ui-switch v-model="disableInvitation" :disabled="!$store.getters.isAdmin">{{ $t('disable-invitation') }}</ui-switch>
+			<ui-button @click="invite" :disabled="!$store.getters.isAdmin || disableInvitation">{{ $t('invite') }}</ui-button>
 			<p v-if="inviteCode">Code: <code>{{ inviteCode }}</code></p>
-			<ui-button @click="inviteRevoke" :disabled="!$store.getters.isAdmin">{{ $t('invite-revoke') }}</ui-button>
+			<ui-button @click="inviteRevoke" :disabled="!$store.getters.isAdmin || disableInvitation">{{ $t('invite-revoke') }}</ui-button>
 		</section>
 		<!-- save -->
 		<section>
@@ -70,6 +71,7 @@ export default defineComponent({
 			maintainerEmail: null,
 			disableRegistration: false,
 			disableDeletion: false,
+			disableInvitation: false,
 
 			inviteCode: null,
 
@@ -97,6 +99,7 @@ export default defineComponent({
 				this.maintainerEmail = meta.maintainer.email;
 				this.disableRegistration = meta.disableRegistration;
 				this.disableDeletion = meta.disableDeletion;
+				this.disableInvitation = meta.disableInvitation;
 			});
 		},
 
@@ -120,6 +123,7 @@ export default defineComponent({
 				maintainerEmail: this.maintainerEmail,
 				disableRegistration: this.disableRegistration,
 				disableDeletion: this.disableDeletion,
+				disableInvitation: this.disableInvitation,
 			}).then(() => {
 				this.fetchMeta();
 				this.$root.dialog({

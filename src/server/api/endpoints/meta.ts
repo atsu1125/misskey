@@ -63,6 +63,10 @@ export const meta = {
 				type: 'boolean',
 				description: 'Whether disabled open registration.',
 			},
+			disableInvitation: {
+				type: 'boolean',
+				description: 'Whether disabled invitation.',
+			},
 			disableDeletion: {
 				type: 'boolean',
 				description: 'Whether disabled account deletion.',

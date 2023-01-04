@@ -27,8 +27,8 @@
 					</div>
 
 					<p class="sign">
-						<span class="signup" @click="signup">{{ $t('@.signup') }}</span>
-						<span class="divider">|</span>
+						<span class="signup" @click="signup" v-if="meta && !(meta.disableRegistration && meta.disableInvitation)">{{ $t('@.signup') }}</span>
+						<span class="divider" v-if="meta && !(meta.disableRegistration && meta.disableInvitation)">|</span>
 						<span class="signin" @click="signin">{{ $t('@.signin') }}</span>
 						<span class="divider">|</span>
 						<span class="explore" onclick="window.location.href='/explore'">{{ $t('@.explore') }}</span>
