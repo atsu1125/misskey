@@ -56,6 +56,7 @@
 					<option value="verified">{{ $t('users.state.verified') }}</option>
 					<option value="silenced">{{ $t('users.state.silenced') }}</option>
 					<option value="suspended">{{ $t('users.state.suspended') }}</option>
+					<option value="deleted">{{ $t('users.state.deleted') }}</option>
 				</ui-select>
 				<ui-select v-model="origin">
 					<template #label>{{ $t('users.origin.title') }}</template>

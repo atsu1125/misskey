@@ -15,7 +15,14 @@
 		</div>
 		<div class="me" v-if="$store.state.i != null">
 			<img class="avatar" :src="$store.state.i.avatarUrl" alt="avatar"/>
-			<p class="name"><mk-user-name :user="$store.state.i"/></p>
+			<div class="info">
+				<div class="name"><mk-user-name :user="$store.state.i"/></div>
+				<div class="roles">
+					<span class="role" v-for="role in $store.getters.roles" :key="role" :title="role">
+						{{ $t(`@.roles.${role}`) }}
+					</span>
+				</div>
+			</div>
 		</div>
 		<ul>
 			<li><router-link to="/dashboard" active-class="active"><fa icon="home" fixed-width/>{{ $t('dashboard') }}</router-link></li>
@@ -200,14 +207,30 @@ export default Vue.extend({
 				border-radius 100%
 				vertical-align middle
 
-			> .name
-				margin 0 16px
-				padding 0
-				color #fff
-				overflow hidden
-				text-overflow ellipsis
-				white-space nowrap
-				font-size 15px
+			> .info
+				margin-left 16px
+
+				> .name
+					color #fff
+					overflow hidden
+					text-overflow ellipsis
+					white-space nowrap
+					font-size 15px
+
+				> .roles
+					margin 3px 0
+
+					> .role
+						display inline-block
+						margin-right 3px
+						padding 3px
+						border-radius 3px
+						font-size 12px
+						color #fff
+						background-color rgba(255, 255, 255, 0.1)
+						overflow hidden
+						text-overflow ellipsis
+						white-space nowrap
 
 		> .back-to-misskey
 			margin 16px 16px 0 16px

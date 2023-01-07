@@ -2,31 +2,29 @@
  * Gulp tasks
  */
 
-import * as gulp from 'gulp';
-import * as ts from 'gulp-typescript';
+const gulp = require('gulp');
+const fs = require('fs');
+const swc = require('gulp-swc');
 const sourcemaps = require('gulp-sourcemaps');
 const stylus = require('gulp-stylus');
-import * as rimraf from 'rimraf';
-import * as rename from 'gulp-rename';
+const rimraf = require('rimraf');
+const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const terser = require('gulp-terser');
 const cleanCSS = require('gulp-clean-css');
 
 const locales = require('./locales');
+const swcOptions = JSON.parse(fs.readFileSync('.swcrc', 'utf-8'));
 
 const env = process.env.NODE_ENV || 'development';
 
-gulp.task('build:ts', () => {
-	const tsProject = ts.createProject('./tsconfig.json');
-
-	return tsProject
-		.src()
+gulp.task('build:ts', () =>
+	gulp.src('src/**/*.ts')
 		.pipe(sourcemaps.init())
-		.pipe(tsProject())
-		.on('error', () => {})
+		.pipe(swc(swcOptions))
 		.pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: '../built' }))
-		.pipe(gulp.dest('./built/'));
-});
+		.pipe(gulp.dest('built'))
+);
 
 gulp.task('build:copy:views', () =>
 	gulp.src('./src/server/web/views/**/*').pipe(gulp.dest('./built/server/web/views'))
@@ -84,7 +82,7 @@ gulp.task('copy:client', () =>
 			'./src/client/app/*/assets/**/*'
 		])
 			.pipe(rename(path => {
-				path.dirname = path.dirname!.replace('assets', '.');
+				path.dirname = path.dirname.replace('assets', '.');
 			}))
 			.pipe(gulp.dest('./built/client/assets/'))
 );
@@ -109,4 +107,4 @@ gulp.task('build', gulp.parallel(
 	'doc'
 ));
 
-gulp.task('default', gulp.task('build')!);
+gulp.task('default', gulp.task('build'));

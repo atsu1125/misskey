@@ -12,25 +12,71 @@
 			</ui-horizon-group>
 		</section>
 	</ui-card>
+	<ui-card>
+		<template #title><fa :icon="faHeadset"/> {{ $t('moderators.title') }}</template>
+		<section class="fit-top">
+			<div>
+				<x-user v-for="moderator in moderators" :key="moderator.id" :user='moderator'/>
+			</div>
+			<ui-button v-if="existMore" @click="fetchModerators">{{ $t('@.load-more') }}</ui-button>
+		</section>
+	</ui-card>
 </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent, getCurrentInstance } from 'vue';
 import i18n from '../../i18n';
 import parseAcct from "../../../../misc/acct/parse";
+import { PackedUser } from '../../../../models/packed-schemas';
+import XUser from './users.user.vue';
+import { faHeadset } from '@fortawesome/free-solid-svg-icons';
 
-export default Vue.extend({
+
+export default defineComponent({
 	i18n: i18n('admin/views/moderators.vue'),
+
+	components: {
+		XUser,
+	},
 
 	data() {
 		return {
+			$root: getCurrentInstance() as any,
 			username: '',
-			changing: false
+			changing: false,
+			moderators: [] as PackedUser[],
+			existMore: false,
+			limit: 10,
+			offset: 0,
+			faHeadset,
 		};
 	},
 
+	mounted() {
+		this.fetchModerators();
+	},
+
 	methods: {
+		fetchModerators(refresh?: boolean) {
+			if (refresh) this.offset = 0;
+			this.$root.api('admin/show-users', {
+				state: 'moderator',
+				origin: 'local',
+				offset: this.offset,
+				limit: this.limit + 1,
+			}).then((moderators: PackedUser[]) => {
+				if (moderators.length == this.limit + 1) {
+					moderators.pop();
+					this.existMore = true;
+				} else {
+					this.existMore = false;
+				}
+				this.moderators = refresh ? moderators : this.moderators.concat(moderators);
+				this.offset += this.limit;
+			});
+		},
+
 		async add() {
 			this.changing = true;
 
@@ -51,6 +97,7 @@ export default Vue.extend({
 			});
 
 			this.changing = false;
+			this.fetchModerators(true);
 		},
 
 		async remove() {
@@ -73,6 +120,7 @@ export default Vue.extend({
 			});
 
 			this.changing = false;
+			this.fetchModerators(true);
 		},
 	}
 });

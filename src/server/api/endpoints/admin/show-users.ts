@@ -43,6 +43,7 @@ export const meta = {
 				'verified',
 				'silenced',
 				'suspended',
+				'deleted',
 			]),
 			default: 'all'
 		},
@@ -87,7 +88,10 @@ export default define(meta, async (ps, me) => {
 
 	// state
 	q.$and.push(
-		ps.state == 'available' ? { isSuspended: { $ne: true } } :
+		ps.state == 'available' ? { $and: [
+			{ isSuspended: { $ne: true } },
+			{ isDeleted: { $ne: true } },
+		]} :
 		ps.state == 'admin' ? { isAdmin: true } :
 		ps.state == 'moderator' ? { isModerator: true } :
 		ps.state == 'adminOrModerator' ? {
@@ -100,6 +104,7 @@ export default define(meta, async (ps, me) => {
 		ps.state == 'verified' ? { isVerified: true } :
 		ps.state == 'silenced' ? { isSilenced: true } :
 		ps.state == 'suspended' ? { isSuspended: true } :
+		ps.state == 'deleted' ? { isDeleted: true } :
 		{}
 	);
 

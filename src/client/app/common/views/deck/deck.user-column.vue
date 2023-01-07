@@ -23,11 +23,7 @@
 				<span class="acct">@{{ user | acct }}
 					<fa v-if="user.isLocked == true" class="locked" icon="lock" fixed-width/>
 					<fa v-if="user.refuseFollow == true" class="refuseFollow" icon="ban" fixed-width/>
-					<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
-					<span class="is-moderator" v-if="user.isModerator" :title="$t('@.moderator')"><fa :icon="faUserShield"/></span>
-					<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
-					<span class="is-bot" v-if="user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
-					<span class="is-cat" v-if="user.isCat" :title="$t('@.cat-user')"><fa :icon="faPaw"/></span>
+					<x-user-badges :user="user" :with-roles="true" :key="user.id"/>
 				</span>
 				<span class="moved" v-if="user.movedToUser != null">Moved to <router-link :to="user.movedToUser | userPage()"><mk-acct :user="user.movedToUser" :detail="true"/></router-link></span>
 				<span class="followed" v-if="user.isFollowed">{{ $t('follows-you') }}</span>
@@ -96,21 +92,22 @@ import XColumn from './deck.column.vue';
 import XUserMenu from '../../../common/views/components/user-menu.vue';
 import XListMenu from '../../../common/views/components/list-menu.vue';
 import XIntegrations from '../../../common/views/components/integrations.vue';
+import XUserBadges from '../../../common/views/components/user-badges.vue';
 import ImageViewer from '../../../common/views/components/image-viewer.vue';
-import { faUserTag, faCrown, faPaw, faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag } from '@fortawesome/free-solid-svg-icons';
 import { calcAge } from '../../../../../misc/calc-age';
 
 export default Vue.extend({
 	i18n: i18n('deck/deck.user-column.vue'),
 	components: {
-		XColumn, XIntegrations
+		XColumn, XIntegrations, XUserBadges,
 	},
 
 	data() {
 		return {
 			user: null,
 			fetching: true,
-			faUserTag, faCrown, faPaw, faUserShield
+			faUserTag,
 		};
 	},
 
@@ -287,23 +284,6 @@ export default Vue.extend({
 
 				> .locked
 					opacity 0.8
-
-				> .is-admin
-					color var(--noteHeaderAdminFg)
-					margin-left .3em
-
-				> .is-moderator
-					color #ff9e3d
-					margin-left .3em
-
-				> .is-verified
-					color #4dabf7
-					margin-left .3em
-
-				> .is-bot
-				> .is-cat
-					color var(--noteHeaderBadgeFg)
-					margin-left .3em
 
 			> .followed
 				display inline-block

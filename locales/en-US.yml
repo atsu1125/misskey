@@ -170,6 +170,16 @@ common:
     "account/write": "Work with Muted"
     "note-read": "note-read (Unused)"
     "vote-read": "vote-read (Unused)"
+
+  roles:
+    admin: Admin
+    moderator: Moderator
+
+  userStatuses:
+    silenced: Silenced
+    suspended: Suspended
+    deleted: Deleted
+
   empty-timeline-info:
     follow-users-to-make-your-timeline: "Following users will show their posts in your timeline."
     explore: "Find users"
@@ -1608,6 +1618,7 @@ admin/views/users.vue:
       verified: "Verified account"
       silenced: "Already silenced"
       suspended: "Suspended"
+      deleted: "Deleted"
     origin:
       title: "Origin"
       combined: "Local + Remote"
@@ -1622,6 +1633,8 @@ admin/views/moderators.vue:
     added: "Registered a Moderator."
     remove: "Discharge"
     removed: "The moderator has been discharged"
+  moderators:
+    title: "Moderators"
 admin/views/emoji.vue:
   add-emoji:
     title: "Add emoji"

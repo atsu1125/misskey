@@ -9,12 +9,13 @@
 		<header>
 			<b><mk-user-name :key="Math.random()" :user="user"/></b>
 			<span class="username">@{{ user | acct }}</span>
-			<span class="is-admin" v-if="user.isAdmin">admin</span>
-			<span class="is-moderator" v-if="user.isModerator">moderator</span>
+			<span class="roles">
+				<span class="role" v-for="role in roles" :key="role" :title="role">{{ $t(`@.roles.${role}`) }}</span>
+			</span>
+			<span class="statuses">
+				<span class="status" v-for="status in statuses" :key="status" :title="status">{{ $t(`@.userStatuses.${status}`) }}</span>
+			</span>
 			<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
-			<span class="is-silenced" v-if="user.isSilenced" :title="$t('@.silenced-user')"><fa :icon="faMicrophoneSlash"/></span>
-			<span class="is-suspended" v-if="user.isSuspended" :title="$t('@.suspended-user')"><fa :icon="faSnowflake"/></span>
-			<span class="is-deleted" v-if="user.isDeleted" :title="$t('@.deleted-user')"><fa :icon="faArrowDown"/></span>
 		</header>
 		<div>
 			<span>{{ $t('users.updatedAt') }}: <mk-time :time="user.updatedAt" mode="detail"/></span>
@@ -29,17 +30,24 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../i18n';
-import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
-import { faSnowflake } from '@fortawesome/free-regular-svg-icons';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { getUserRoles } from '../../common/scripts/get-user-roles'
+import { getUserStatuses } from '../../common/scripts/get-user-statuses'
 
 export default Vue.extend({
 	i18n: i18n('admin/views/users.vue'),
 	props: ['user', 'click'],
 	data() {
 		return {
-			faSnowflake, faMicrophoneSlash, faArrowDown
 		};
+	},
+
+	computed: {
+		roles(): any {
+			return getUserRoles(this.user);
+		},
+		statuses(): any {
+			return getUserStatuses(this.user);
+		},
 	},
 });
 </script>
@@ -69,21 +77,29 @@ export default Vue.extend({
 				margin-left 8px
 				opacity 0.7
 
-			> .is-admin
-			> .is-moderator
-				flex-shrink 0
-				align-self center
-				margin 0 0 0 .5em
-				padding 1px 6px
-				font-size 80%
-				border-radius 3px
-				background var(--noteHeaderAdminBg)
-				color var(--noteHeaderAdminFg)
+			>.roles
+				> .role
+					flex-shrink 0
+					align-self center
+					margin 0 0 0 .5em
+					padding 1px 6px
+					font-size 80%
+					border-radius 3px
+					background var(--noteHeaderAdminBg)
+					color var(--noteHeaderAdminFg)
+
+			>.statuses
+				> .status
+					flex-shrink 0
+					align-self center
+					margin 0 0 0 .5em
+					padding 1px 6px
+					font-size 80%
+					border-radius 3px
+					background var(--face)
+					color var(--faceText)
 
 			> .is-verified
-			> .is-silenced
-			> .is-suspended
-			> .is-deleted
 				margin 0 0 0 .5em
 				color #4dabf7
 

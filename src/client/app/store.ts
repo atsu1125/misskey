@@ -7,6 +7,7 @@ import { erase } from '../../prelude/array';
 import getNoteSummary from '../../misc/get-note-summary';
 import getNotificationSummary from '../../misc/get-notification-summary';
 import { mods } from './config';
+import { getUserRoles } from './common/scripts/get-user-roles';
 
 const defaultSettings = {
 	home: null,
@@ -113,6 +114,7 @@ export default (os: MiOS) => new Vuex.Store({
 		isSignedIn: state => state.i != null,
 		isAdminOrModerator: state => state.i && (state.i.isAdmin || state.i.isModerator),
 		isAdmin: state => state.i && state.i.isAdmin,
+		roles: state => state.i ? getUserRoles(state.i) : [],
 	},
 
 	mutations: {

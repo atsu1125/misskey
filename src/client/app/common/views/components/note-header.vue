@@ -3,10 +3,8 @@
 	<mk-avatar class="avatar" :user="note.user" v-if="$store.state.device.postStyle == 'smart'"/>
 	<router-link v-if="userUrl.startsWith('/')" class="name" :to="userUrl" v-user-preview="note.user.id"><mk-user-name :user="note.user"/></router-link>
 	<a v-else class="name" :href="userUrl" v-user-preview="note.user.id"><mk-user-name :user="note.user"/></a>
-	<span class="is-bot" v-if="note.user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
-	<span class="is-cat" v-if="note.user.isCat" :title="$t('@.cat-user')"><fa :icon="faPaw"/></span>
+	<x-user-badges :user="note.user" :key="note.user.id"/>
 	<span class="username"><mk-acct :user="note.user"/></span>
-	<span class="is-verified" v-if="note.user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
 	<div class="info" v-if="!noInfo">
 		<span class="mobile" v-if="note.viaMobile"><fa icon="mobile-alt"/></span>
 		<router-link v-if="noteUrl.startsWith('/')" class="created-at" :to="noteUrl"><mk-time :time="note.createdAt"/></router-link>
@@ -20,18 +18,20 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
-import { faGlobeAmericas, faPaw } from '@fortawesome/free-solid-svg-icons';
+import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import XVisibilityIcon from '../../../common/views/components/visibility-icon.vue';
+import XUserBadges from '../../../common/views/components/user-badges.vue';
 import getAcct from '../../../../../misc/acct/render';
 
 export default Vue.extend({
 	i18n: i18n(),
 	components: {
 		XVisibilityIcon,
+		XUserBadges,
 	},
 	data() {
 		return {
-			faGlobeAmericas, faPaw
+			faGlobeAmericas,
 		}
 	},
 	props: {
@@ -94,15 +94,6 @@ export default Vue.extend({
 		text-overflow ellipsis
 		color var(--noteHeaderAcct)
 		flex-shrink 2147483647
-
-	> .is-bot
-	> .is-cat
-		margin 0 .5em 0 0
-		color var(--noteHeaderBadgeFg)
-
-	> .is-verified
-		margin 0 .5em 0 0
-		color #4dabf7
 
 	> .info
 		margin-left auto
