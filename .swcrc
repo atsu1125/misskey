@@ -17,11 +17,8 @@
 		},
 		"transform": {
 			"legacyDecorator": true,
-			"decoratorMetadata": false
+			"decoratorMetadata": true
 		},
 		"keepClassNames": true
-	},
-	"exclude": [
-		"^src/client/app/"
-	]
+	}
 }

@@ -10,6 +10,12 @@ import { StatusError } from '../../misc/fetch';
 export async function proxyMedia(ctx: Router.RouterContext) {
 	const url = 'url' in ctx.query ? ctx.query.url : 'https://' + ctx.params.url;
 
+	if (typeof url !== 'string') {
+		ctx.status = 400;
+		ctx.set('Cache-Control', 'max-age=86400');
+		return;
+	}
+
 	// Create temp file
 	const [path, cleanup] = await createTemp();
 
@@ -39,7 +45,7 @@ export async function proxyMedia(ctx: Router.RouterContext) {
 		ctx.body = image.data;
 		ctx.set('Content-Type', image.type);
 		ctx.set('Cache-Control', 'max-age=604800, immutable');
-	} catch (e) {
+	} catch (e: any) {
 		serverLogger.error(e);
 
 		if (e instanceof StatusError && e.isClientError) {

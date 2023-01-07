@@ -409,7 +409,7 @@ export default Vue.extend({
 
 		createFolder() {
 			this.$root.dialog({
-				title: this.$t('folder-name')
+				title: this.$t('folder-name'),
 				input: {
 					default: ''
 				}
@@ -439,7 +439,7 @@ export default Vue.extend({
 				return;
 			}
 			this.$root.dialog({
-				title: this.$t('folder-name')
+				title: this.$t('folder-name'),
 				input: {
 					default: this.folder.name
 				}

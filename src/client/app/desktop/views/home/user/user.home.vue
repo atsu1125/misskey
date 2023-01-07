@@ -52,7 +52,7 @@ export default Vue.extend({
 				userId: this.user.id
 			}).then(res => res.map(x => x.user)),
 		};
-	}
+	},
 	methods: {
 		warp(date) {
 			(this.$refs.tl as any).warp(date);
