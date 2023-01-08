@@ -64,6 +64,7 @@
 					<option value="image/*">{{ $t('@.image') }}</option>
 					<option value="video/*">{{ $t('@.video') }}</option>
 					<option value="audio/*">{{ $t('@.audio') }}</option>
+					<option value="application/*">{{ $t('@.application') }}</option>
 				</ui-select>
 			</ui-horizon-group>
 			<div class="kidvdlkg" v-for="file in files" :key="file.id">

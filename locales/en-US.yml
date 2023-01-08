@@ -108,6 +108,7 @@ common:
   image: "Image"
   video: "Video"
   audio: "Audio"
+  application: "Application"
   desktop-mode: 'Desktop mode'
   mobile-mode: 'Mobile mode'
   empty: 'Empty'

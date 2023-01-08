@@ -110,6 +110,7 @@ common:
   image: "画像"
   video: "動画"
   audio: "音声"
+  application: "アプリケーション"
   desktop-mode: 'デスクトップ版'
   mobile-mode: 'モバイル版'
   empty: 'ありません！'
