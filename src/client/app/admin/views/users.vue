@@ -11,7 +11,7 @@
 			<div ref="user" class="user" v-if="user" :key="user.id">
 				<x-user :user="user"/>
 				<div class="actions">
-					<ui-button @click="resetPassword"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
+					<ui-button @click="resetPassword" :disabled="user.isAdmin"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
 					<ui-horizon-group>
 						<ui-button v-if="!user.isVerified" @click="verifyUser" :disabled="verifying"><fa :icon="faCertificate"/> {{ $t('verify') }}</ui-button>
 						<ui-button v-if="user.isVerified" @click="unverifyUser" :disabled="unverifying">{{ $t('unverify') }}</ui-button>
