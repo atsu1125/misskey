@@ -23,7 +23,7 @@ services:
 
   redis:
     restart: always
-    image: redis:alpine
+    image: redis:bullseye
     networks:
       - internal_network
     healthcheck:
@@ -33,7 +33,7 @@ services:
 
   mongo:
     restart: always
-    image: mongo:5.0.5
+    image: mongo:5-focal
     networks:
       - internal_network
     healthcheck:
