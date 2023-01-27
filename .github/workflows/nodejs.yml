@@ -13,11 +13,11 @@ jobs:
 
     services:
       mongo:
-        image: mongo:4.4-bionic
+        image: mongo:5-focal
         ports:
           - 57010:27017
       redis:
-        image: redis:4.0-alpine
+        image: redis:bullseye
         ports:
           - 56310:6379
 
