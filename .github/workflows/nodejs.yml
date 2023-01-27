@@ -13,7 +13,7 @@ jobs:
 
     services:
       mongo:
-        image: mongo:5-focal
+        image: mongo:6-focal
         ports:
           - 57010:27017
       redis:
