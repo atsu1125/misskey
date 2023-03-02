@@ -79,6 +79,7 @@ export default Vue.extend({
 				case 'hot': return this.$root.stream.useSharedConnection('hotTimeline');
 				case 'global': return this.$root.stream.useSharedConnection('globalTimeline');
 				case 'another': return this.$root.stream.useSharedConnection('anotherTimeline');
+				case 'limited': return this.$root.stream.useSharedConnection('limitedTimeline');
 			}
 		},
 
@@ -92,6 +93,7 @@ export default Vue.extend({
 				case 'global': return 'notes/global-timeline';
 				case 'another': return 'notes/another-timeline';
 				case 'another': return 'notes/another-timeline';
+				case 'limited': return 'notes/limited-timeline';
 			}
 		},
 	},

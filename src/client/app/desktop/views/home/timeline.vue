@@ -5,6 +5,7 @@
 		<component :is="src == 'list' ? 'mk-user-list-timeline' : 'x-core'" ref="tl" v-bind="options">
 			<header class="zahtxcqi">
 				<div :data-active="src == 'home'" @click="src = 'home'"><fa icon="home"/> {{ $t('home') }}</div>
+				<div :data-active="src == 'limited'" @click="src = 'limited'"><fa :icon="faUnlock"/> {{ $t('limited') }}</div>
 				<div :data-active="src == 'local'" @click="src = 'local'" v-if="enableLocalTimeline"><fa :icon="['far', 'comments']"/> {{ $t('local') }}</div>
 				<div :data-active="src == 'hybrid'" @click="src = 'hybrid'" v-if="enableLocalTimeline" :title="$t('hybrid-desc')"><fa icon="share-alt"/> {{ $t('hybrid') }}</div>
 				<div :data-active="src == 'global'" @click="src = 'global'" v-if="enableGlobalTimeline"><fa icon="globe"/> {{ $t('global') }}</div>
@@ -30,7 +31,7 @@ import { defineComponent, getCurrentInstance } from 'vue';
 import i18n from '../../../i18n';
 import XCore from './timeline.core.vue';
 import Menu from '../../../common/views/components/menu.vue';
-import { faThumbsUp, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faQuestion, faUnlock } from '@fortawesome/free-solid-svg-icons';
 
 export default defineComponent({
 	i18n: i18n('desktop/views/components/timeline.vue'),
@@ -46,7 +47,7 @@ export default defineComponent({
 			tagTl: null as any,
 			enableLocalTimeline: false,
 			enableGlobalTimeline: false,
-			faThumbsUp, faQuestion,
+			faThumbsUp, faQuestion, faUnlock,
 		};
 	},
 

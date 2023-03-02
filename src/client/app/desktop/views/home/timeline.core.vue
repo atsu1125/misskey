@@ -98,6 +98,10 @@ export default Vue.extend({
 			this.endpoint = 'notes/another-timeline';
 			this.connection = this.$root.stream.useSharedConnection('anotherTimeline');
 			this.connection.on('note', prepend);
+		} else if (this.src == 'limited') {
+			this.endpoint = 'notes/limited-timeline';
+			this.connection = this.$root.stream.useSharedConnection('limitedTimeline');
+			this.connection.on('note', prepend);
 		} else if (this.src == 'mentions') {
 			this.endpoint = 'notes/mentions';
 			this.connection = this.$root.stream.useSharedConnection('main');

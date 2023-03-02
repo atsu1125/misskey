@@ -6,6 +6,7 @@ import hybridTimeline from './hybrid-timeline';
 import hotTimeline from './hot-timeline';
 import globalTimeline from './global-timeline';
 import anotherTimeline from './another-timeline';
+import limitedTimeline from './limited-timeline';
 import notesStats from './notes-stats';
 import serverStats from './server-stats';
 import queueStats from './queue-stats';
@@ -27,6 +28,7 @@ export default {
 	hotTimeline,
 	globalTimeline,
 	anotherTimeline,
+	limitedTimeline,
 	notesStats,
 	serverStats,
 	queueStats,

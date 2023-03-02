@@ -7,6 +7,7 @@
 		<fa v-if="column.type == 'hybrid'" icon="share-alt"/>
 		<fa v-if="column.type == 'global'" icon="globe"/>
 		<fa v-if="column.type == 'another'" :icon="faQuestion"/>
+		<fa v-if="column.type == 'limited'" :icon="faUnlock"/>
 		<fa v-if="column.type == 'hot'" :icon="faThumbsUp"/>
 		<fa v-if="column.type == 'list'" icon="list"/>
 		<fa v-if="column.type == 'hashtag'" icon="hashtag"/>
@@ -55,7 +56,7 @@ import XColumn from './deck.column.vue';
 import XTl from './deck.tl.vue';
 import XListTl from './deck.list-tl.vue';
 import XHashtagTl from './deck.hashtag-tl.vue';
-import { faThumbsUp, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faQuestion, faUnlock } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('deck/deck.tl-column.vue'),
@@ -92,7 +93,7 @@ export default Vue.extend({
 					this.edit = !this.edit;
 				}
 			}],
-			faThumbsUp, faQuestion,
+			faThumbsUp, faQuestion, faUnlock,
 		}
 	},
 
@@ -107,6 +108,7 @@ export default Vue.extend({
 				case 'hybrid': return this.$t('@deck.hybrid');
 				case 'global': return this.$t('@deck.global');
 				case 'another': return this.$t('@deck.another');
+				case 'limited': return this.$t('@deck.limited');
 				case 'hot': return this.$t('@deck.reacted');
 				case 'list': return this.column.list.title;
 				case 'hashtag': return this.$store.state.settings.tagTimelines.find(x => x.id == this.column.tagTlId).title;

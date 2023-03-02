@@ -55,7 +55,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import XColumnCore from './deck.column-core.vue';
 import Menu from '../../../common/views/components/menu.vue';
-import { faThumbsUp, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faQuestion, faUnlock } from '@fortawesome/free-solid-svg-icons';
 
 import { v4 as uuid } from 'uuid';
 
@@ -252,6 +252,15 @@ export default Vue.extend({
 						});
 					}
 				}, {
+					icon: faUnlock,
+					text: this.$t('@deck.limited'),
+					action: () => {
+						this.$store.commit('device/addDeckColumn', {
+							id: uuid(),
+							type: 'limited'
+						});
+					}
+				}, {
 					icon: 'at',
 					text: this.$t('@deck.mentions'),
 					action: () => {
@@ -399,7 +408,7 @@ export default Vue.extend({
 
 		isTlColumn(id) {
 			const column = this.columns.find(c => c.id === id);
-			return ['home', 'local', 'locao', 'hybrid', 'hot', 'global', 'another', 'list', 'hashtag', 'mentions', 'direct'].includes(column.type);
+			return ['home', 'local', 'locao', 'hybrid', 'hot', 'global', 'another', 'limited', 'list', 'hashtag', 'mentions', 'direct'].includes(column.type);
 		}
 	}
 });

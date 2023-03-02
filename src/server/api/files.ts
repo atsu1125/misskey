@@ -168,6 +168,7 @@ export default [
   "notes/global-timeline",
   "notes/hot-timeline",
   "notes/hybrid-timeline",
+  "notes/limited-timeline",
   "notes/local-timeline",
   "notes/locao-timeline",
   "notes/mentions",
