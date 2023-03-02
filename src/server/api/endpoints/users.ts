@@ -75,9 +75,9 @@ const state: any = { // < https://github.com/Microsoft/TypeScript/issues/1863
 			{ isModerator: true }
 		]
 	},
-	'verified': { isVerified: true },
-	'bot': { isBot: true },
-	'cat': { isCat: true },
+	'verified': { $and: [ { isVerified: true }, { isExplorable: true } ] },
+	'bot': { $and: [ { isBot: true }, { isExplorable: true } ] },
+	'cat': { $and: [ { isCat: true }, { isExplorable: true } ] },
 	'alive': { $and: [
 		{ updatedAt: { $gt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5) } },
 		{ isExplorable: true }
