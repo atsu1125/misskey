@@ -1798,6 +1798,8 @@ desktop/views/pages/welcome.vue:
   photos: "Recent Images"
   powered-by-misskey: "Powered by <b>Misskey</b>."
   info: "Information"
+  invitation-required-to-register: "This server is currently invitation only. Only those with an invitation code can register."
+  unavailable-registration: "This server is not currently registration."
 desktop/views/pages/drive.vue:
   title: "Misskey storage"
 desktop/views/pages/note.vue:

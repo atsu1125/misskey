@@ -1959,6 +1959,8 @@ desktop/views/pages/welcome.vue:
   photos: "最近の画像"
   powered-by-misskey: "Powered by <b>Misskey</b>."
   info: "情報"
+  invitation-required-to-register: "現在このサーバーは招待制です。招待コードをお持ちの方のみ登録できます。"
+  unavailable-registration: "現在このサーバーは登録を受け付けておりません。"
 
 desktop/views/pages/drive.vue:
   title: "Misskey Drive"
