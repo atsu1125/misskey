@@ -1,7 +1,9 @@
+import * as mongo from 'mongodb';
 import Note, { INote, packMany } from '../../../models/note';
 import { ILocalUser } from '../../../models/user';
 import { apiLogger } from '../logger';
 import { performance } from 'perf_hooks';
+import { genMeid7 } from '../../../misc/id/meid7';
 
 function getStages(query: any, sort: Record<string, number>, limit: number) {
 	return [
@@ -52,6 +54,20 @@ function getStages(query: any, sort: Record<string, number>, limit: number) {
 }
 
 export async function getPackedTimeline(me: ILocalUser | null, query: any, sort: Record<string, number>, limit: number, hint: string | undefined = undefined) {
+	if (query.createdAt?.$gt) {
+		const id = new mongo.ObjectID(genMeid7(query.createdAt.$gt));
+		delete query.createdAt.$gt;
+		delete query.createdAt;
+		query._id = { $gt: id };
+	}
+
+	if (query.createdAt?.$lt) {
+		const id = new mongo.ObjectID(genMeid7(query.createdAt.$lt));
+		delete query.createdAt.$lt;
+		delete query.createdAt;
+		query._id = { $lt: id };
+	}
+
 	const begin = performance.now();
 
 	// Query

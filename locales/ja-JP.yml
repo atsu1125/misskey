@@ -76,10 +76,26 @@ common:
     seconds_ago: "{}秒前"
     minutes_ago: "{}分前"
     hours_ago: "{}時間前"
+    day_ago: "1日前"
     days_ago: "{}日前"
+    week_ago: "1週間前"
     weeks_ago: "{}週間前"
+    month_ago: "1ヶ月前"
     months_ago: "{}ヶ月前"
+    year_ago: "1年前"
     years_ago: "{}年前"
+    seconds_after: "{}秒後"
+    minutes_after: "{}分後"
+    hours_after: "{}時間後"
+    day_after: "1日後"
+    days_after: "{}日後"
+    week_after: "1週間後"
+    weeks_after: "{}週間後"
+    month_after: "1ヶ月後"
+    months_after: "{}ヶ月後"
+    year_after: "1年後"
+    years_after: "{}年後"
+
   month-and-day: "{month}月 {day}日"
 
   trash: "ゴミ箱"
@@ -125,6 +141,9 @@ common:
   noteReactions: "リアクションした投稿"
   poll_finished: "アンケートが完了しました"
   flush: "キャッシュをクリア"
+  signinOrUsePostUrl: "それをするにはサインインするかURLをあなたのインスタンスの検索ボックスに入れてやっていってください。"
+  renoted: "Renoteしました"
+  timemachine: "タイムマシン"
 
   permissions:
     "read:account": "アカウントの情報を見る"
@@ -533,6 +552,7 @@ common/views/pages/about.vue:
   popularReactions: "人気のリアクション"
   localActive: "今のユーザー数"
   globalActive: "今のユーザー数 (グローバル)"
+  relays: "参加中のリレー"
   reacters: "よくリアクションするユーザー"
 
 common/views/components/url-preview.vue:
@@ -598,26 +618,6 @@ common/views/components/connect-failed.vue:
   description: "インターネット回線に問題があるか、サーバーがダウンまたはメンテナンスしている可能性があります。しばらくしてから{再度お試し}ください。"
   thanks: "いつもMisskeyをご利用いただきありがとうございます。"
   troubleshoot: "トラブルシュート"
-
-common/views/components/connect-failed.troubleshooter.vue:
-  title: "トラブルシューティング"
-  network: "ネットワーク接続"
-  checking-network: "ネットワーク接続を確認中"
-  internet: "インターネット接続"
-  checking-internet: "インターネット接続を確認中"
-  server: "サーバー接続"
-  checking-server: "サーバー接続を確認中"
-  finding: "問題を調べています"
-  no-network: "ネットワークに接続されていません"
-  no-network-desc: "お使いのPCのネットワーク接続が正常か確認してください。"
-  no-internet: "インターネットに接続されていません"
-  no-internet-desc: "ネットワークには接続されていますが、インターネットには接続されていないようです。お使いのPCのインターネット接続が正常か確認してください。"
-  no-server: "Misskeyのサーバーに接続できません"
-  no-server-desc: "お使いのPCのインターネット接続は正常ですが、Misskeyのサーバーには接続できませんでした。サーバーがダウンまたはメンテナンスしている可能性があるので、しばらくしてから再度御アクセスください。"
-  success: "Misskeyのサーバーに接続できました"
-  success-desc: "正常に接続できるようです。ページを再度読み込みしてください。"
-  flush: "キャッシュの削除"
-  set-version: "バージョン指定"
 
 common/views/components/instance.vue:
   start: "はじめる"
@@ -1283,12 +1283,14 @@ desktop/views/components/note-detail.vue:
   location: "位置情報"
   reply: "返信"
   renote: "Renote"
+  quote: "引用"
   add-reaction: "リアクション"
   undo-reaction: "リアクション解除"
 
 desktop/views/components/note.vue:
   reply: "返信"
   renote: "Renote"
+  quote: "引用"
   add-reaction: "リアクション"
   undo-reaction: "リアクション解除"
   detail: "詳細"
@@ -1462,6 +1464,7 @@ desktop/views/components/timeline.vue:
   hybrid: "ソーシャル"
   hybrid-desc: "ホーム+ローカル"
   global: "グローバル"
+  another: "アナザー"
   reacted: "リアクション"
   mentions: "あなた宛て"
   messages: "ダイレクト投稿"
@@ -1531,10 +1534,7 @@ desktop/views/home/featured.vue:
   all: "すべて"
   excludeNsfw: "閲覧注意を除く"
   excludeSfw: "閲覧注意のみ"
-  days: "集計期間"
-  hour: "時間"
-  day: "日間"
-  years: "年間"
+  minScore: "最低スコア"
 
 admin/views/index.vue:
   dashboard: "ダッシュボード"
@@ -1544,13 +1544,32 @@ admin/views/index.vue:
   users: "ユーザー"
   federation: "連合"
   relays: "リレー"
+  invitations: "招待"
   announcements: "お知らせ"
   hashtags: "ハッシュタグ"
   abuse: "スパム報告"
   queue: "ジョブキュー"
   logs: "ログ"
-  instanceblocks: "インスタンスブロック"
+  instancemoderation: "インスタンスモデレーション"
   back-to-misskey: "Misskeyに戻る"
+
+admin/views/invitations.vue:
+  addTitle: 招待コードの発行
+  addCount: 使用可能回数
+  addExpireSec: 有効期限
+  infinite: 無期限
+  day: 日
+  add: 発行
+  invitations: 発行済みの招待
+  code: コード
+  inviter: 招待者
+  createdAt: 作成
+  expiredAt: 期限
+  restCount: 残り回数
+  invitees: invitees
+  unknown: 不明
+  delete: 削除
+  more: もっと
 
 admin/views/dashboard.vue:
   dashboard: "ダッシュボード"
@@ -1863,8 +1882,9 @@ admin/views/federation.vue:
   latest-request-received-at: "直近のリクエスト受信"
   remove-all-following: "フォローを全解除"
   remove-all-following-info: "{host}からのフォローをすべて解除します。そのインスタンスがもう存在しなくなった場合などに実行してください。"
-  block: "ブロック"
+  ignore: "インスタンスを無視"
   marked-as-closed: "閉鎖されているとマーク"
+  flag-info: "無視はそのインスタンスとの送受信と取得を停止します。閉鎖は送信のみを停止します。フラグは疎通状況によって自動更新されます。"
   lookup: "照会"
   instances: "連合"
   instance-not-registered: "そのインスタンスは登録されていません"
@@ -1889,7 +1909,7 @@ admin/views/federation.vue:
   state: "状態"
   states:
     all: "すべて"
-    blocked: "ブロック"
+    ignored: "無視済み"
     not-responding: "応答なし"
     marked-as-closed: "閉鎖とマーク済み"
   result-is-truncated: "上位{n}件を表示しています。"
@@ -1911,8 +1931,13 @@ admin/views/federation.vue:
     day: "1日ごと"
 
 admin/views/instanceblocks.vue:
-  instanceblocks: "インスタンスブロック"
-  blockedInstances-info: "1行に1ホスト記述します。/正規表現/ が使えます。"
+  instancemoderation: インスタンスモデレーション
+  ignoredInstances: "インスタンスの無視"
+  ignoredInstances-info: "送受信と取得を行わないインスタンス。1行に1ホスト記述します。/正規表現/ が使えます。"
+  selfSilencedInstances: "セルフサイレンスするインスタンス"
+  selfSilencedInstances-info: "最大公開範囲ホームで配信するインスタンス。1行に1ホスト記述します。/正規表現/ が使えます。"
+  exposeHome: 取得されるときの最大公開範囲はホームにする
+  exposeHome-info: "フォロワーのいないインスタンスなどから投稿を取得されるときの最大公開範囲をホームにします。"
 
 admin/views/relay.vue:
   add-relay: "リレーの追加"
@@ -2156,10 +2181,7 @@ mobile/views/pages/featured.vue:
   all: "すべて"
   excludeNsfw: "閲覧注意を除く"
   excludeSfw: "閲覧注意のみ"
-  days: "集計期間"
-  hour: "時間"
-  day: "日間"
-  years: "年間"
+  minScore: "最低スコア"
 
 mobile/views/pages/followers.vue:
   followers-of: "{name}のフォロワー"
@@ -2173,6 +2195,7 @@ mobile/views/pages/home.vue:
   locao: "ローカオ"
   hybrid: "ソーシャル"
   global: "グローバル"
+  another: "アナザー"
   reacted: "リアクション"
   mentions: "あなた宛て"
   messages: "ダイレクト投稿"
@@ -2252,6 +2275,7 @@ deck:
   hybrid: "ソーシャル"
   hashtag: "ハッシュタグ"
   global: "グローバル"
+  another: "アナザー"
   reacted: "リアクション"
   mentions: "あなた宛て"
   direct: "ダイレクト投稿"

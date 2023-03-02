@@ -5,6 +5,7 @@ import locaoTimeline from './locao-timeline';
 import hybridTimeline from './hybrid-timeline';
 import hotTimeline from './hot-timeline';
 import globalTimeline from './global-timeline';
+import anotherTimeline from './another-timeline';
 import notesStats from './notes-stats';
 import serverStats from './server-stats';
 import queueStats from './queue-stats';
@@ -25,6 +26,7 @@ export default {
 	hybridTimeline,
 	hotTimeline,
 	globalTimeline,
+	anotherTimeline,
 	notesStats,
 	serverStats,
 	queueStats,

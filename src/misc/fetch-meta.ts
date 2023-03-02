@@ -9,6 +9,8 @@ const defaultMeta: any = {
 	remoteDriveCapacityMb: 8,
 	hidedTags: [],
 	blockedInstances: [],
+	selfSilencedInstances: [],
+	exposeHome: false,
 	stats: {
 		// Object.assignじゃマージされない
 	},

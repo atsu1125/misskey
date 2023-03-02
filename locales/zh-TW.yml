@@ -22,6 +22,26 @@ common:
   time:
     future: "未來"
     just_now: "剛剛"
+    day_ago: "1天前"
+    days_ago: "{}天前"
+    week_ago: "1周前"
+    weeks_ago: "{}周前"
+    month_ago: "1月前"
+    months_ago: "{}月前"
+    year_ago: "1年前"
+    years_ago: "{}年前"
+    seconds_after: "{}秒後"
+    minutes_after: "{}分後"
+    hours_after: "{}小时後"
+    day_after: "1天後"
+    days_after: "{}天後"
+    week_after: "1周後"
+    weeks_after: "{}周後"
+    month_after: "1月後"
+    months_after: "{}月後"
+    year_after: "1年後"
+    years_after: "{}年後"
+
   drive: "雲端硬碟"
   weekday:
     sunday: "週日"
@@ -41,8 +61,6 @@ common:
     font-size-x-small: "小"
     font-size-small: "較小"
     timeline: "時間軸"
-common/views/components/connect-failed.troubleshooter.vue:
-  flush: "清除快取"
 common/views/components/theme.vue:
   light-themes: "淺色主題"
   dark-themes: "深色主題"

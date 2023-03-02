@@ -1,25 +1,44 @@
 <template>
 <div>
 	<ui-card>
-		<template #title>{{ $t('instanceblocks') }}</template>
-		<section class="fit-top">
+		<template #title>{{ $t('instancemoderation') }}</template>
+
+		<section>
+			<header>{{ $t('ignoredInstances') }}</header>
 			<ui-textarea v-model="blockedInstances"></ui-textarea>
-			<ui-info>{{ $t('blockedInstances-info') }}</ui-info>
-			<ui-button @click="save" :disabled="!$store.getters.isAdmin">{{ $t('@._settings.save') }}</ui-button>
+			<ui-info>{{ $t('ignoredInstances-info') }}</ui-info>
+		</section>
+
+		<section>
+			<header>{{ $t('selfSilencedInstances') }}</header>
+			<ui-textarea v-model="selfSilencedInstances"></ui-textarea>
+			<ui-info>{{ $t('selfSilencedInstances-info') }}</ui-info>
+		</section>
+
+		<section>
+			<ui-switch v-model="exposeHome">{{ $t('exposeHome') }}</ui-switch>
+			<ui-info>{{ $t('exposeHome-info') }}</ui-info>
+		</section>
+
+		<section>
+			<ui-button :disabled="!$store.getters.isAdmin"　@click="save">{{ $t('@._settings.save') }}</ui-button>
 		</section>
 	</ui-card>
 </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent, getCurrentInstance } from 'vue';
 import i18n from '../../i18n';
 
-export default Vue.extend({
+export default defineComponent({
 	i18n: i18n('admin/views/instanceblocks.vue'),
 	data() {
 		return {
+			$root: getCurrentInstance() as any,
 			blockedInstances: '',
+			selfSilencedInstances: '',
+			exposeHome: false,
 		};
 	},
 	created() {
@@ -29,11 +48,15 @@ export default Vue.extend({
 		fetch() {
 			this.$root.api('admin/meta').then((meta: any) => {
 				this.blockedInstances = meta.blockedInstances.join('\n');
+				this.selfSilencedInstances = meta.selfSilencedInstances.join('\n');
+				this.exposeHome = meta.exposeHome;
 			});
 		},
 		save() {
 			this.$root.api('admin/update-meta', {
 				blockedInstances: this.blockedInstances ? this.blockedInstances.split('\n') : [],
+				selfSilencedInstances: this.selfSilencedInstances ? this.selfSilencedInstances.split('\n') : [],
+				exposeHome: !!this.exposeHome,
 			}).then(() => {
 				this.$root.dialog({
 					type: 'success',

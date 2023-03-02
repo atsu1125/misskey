@@ -317,15 +317,6 @@ common/views/components/connect-failed.vue:
   title: "Nelze se připojit k serveru"
   description: "Nastal problém s Vaším připojením k internetu, nebo server není dostupný nebo zrovna probíhá údržba. Prosím {zkuste to znova} za pár minut."
   thanks: "Děkujeme že jste použili Misskey."
-common/views/components/connect-failed.troubleshooter.vue:
-  network: "Síťové připojení"
-  checking-network: "Prověřit síťové připojení"
-  internet: "Připojení k internetu"
-  checking-internet: "Ověřuji připojení k internetu."
-  server: "Připojení k serveru"
-  no-network-desc: "Ujistěte se že jste připojeni k Internetu."
-  no-internet: "Nejste připojeni k internetu"
-  no-internet-desc: "Jste připojen k síti, ale zdá se že stále chybí připojení k Internetu. Prosím zkontrolujte Vaše připojení k Internetu."
 common/views/components/media-banner.vue:
   click-to-show: "Klikněte pro zobrazení"
 common/views/components/theme.vue:

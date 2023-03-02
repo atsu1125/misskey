@@ -53,7 +53,6 @@ export const meta = {
 
 export default define(meta, async (ps, me) => {
 	const q = {
-		'metadata.deletedAt': { $exists: false },
 		$and: [ {} ],
 	} as any;
 

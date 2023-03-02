@@ -15,6 +15,7 @@ export type Source = {
 		db: string;
 		user: string;
 		pass: string;
+		options: Record<string, unknown>
 	};
 	redis: {
 		host: string;

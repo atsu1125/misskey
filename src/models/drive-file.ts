@@ -6,6 +6,7 @@ import db, { nativeDbConn } from '../db/mongodb';
 import isObjectId from '../misc/is-objectid';
 import getDriveFileUrl, { getOriginalUrl } from '../misc/get-drive-file-url';
 import { dbLogger } from '../db/logger';
+import { sanitizeUrl } from '../misc/sanitize-url';
 
 const DriveFile = db.get<IDriveFile>('driveFiles.files');
 DriveFile.createIndex('md5');
@@ -204,8 +205,8 @@ export const pack = async (
 	_target.size = _file.length;
 	_target.md5 = _file.md5;
 
-	_target.url = getDriveFileUrl(_file);
-	_target.thumbnailUrl = getDriveFileUrl(_file, true);
+	_target.url = sanitizeUrl(getDriveFileUrl(_file));
+	_target.thumbnailUrl = sanitizeUrl(getDriveFileUrl(_file, true));
 
 	_target.properties = _file.metadata.properties || {};
 	_target.comment = _file.metadata.comment;
@@ -240,7 +241,7 @@ export const pack = async (
 
 	if (opts.self) {
 		_target.webpublicUrl = _target.url;
-		_target.url = getOriginalUrl(_file);
+		_target.url = sanitizeUrl(getOriginalUrl(_file));
 		_target.attachedNoteIds = _file.metadata.attachedNoteIds;
 		_target.attachedMessageIds = _file.metadata.attachedMessageIds;
 	}

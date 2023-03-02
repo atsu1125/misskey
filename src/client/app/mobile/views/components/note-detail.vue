@@ -66,15 +66,20 @@
 				<fa icon="reply"/>
 				<p class="count" v-if="appearNote.repliesCount + appearNote.quoteCount > 0">{{ appearNote.repliesCount + appearNote.quoteCount }}</p>
 			</button>
+
+			<!-- Renote -->
 			<button v-if="appearNote.myRenoteId != null" @click="undoRenote()" title="Undo" class="renoted">
 				<fa icon="retweet"/><p class="count" v-if="appearNote.renoteCount - appearNote.quoteCount > 0">{{ appearNote.renoteCount - appearNote.quoteCount }}</p>
 			</button>
-			<button v-else-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Renote">
+			<button v-else-if="['public', 'home'].includes(appearNote.visibility)" @click="directRenote()" title="Renote">
 				<fa icon="retweet"/><p class="count" v-if="appearNote.renoteCount - appearNote.quoteCount > 0">{{ appearNote.renoteCount - appearNote.quoteCount }}</p>
 			</button>
-			<button v-else>
-				<fa icon="ban"/>
+
+			<!-- Quote -->
+			<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Quote">
+				<fa icon="quote-right"/><p class="count" v-if="appearNote.quoteCount > 0">{{ appearNote.quoteCount }}</p>
 			</button>
+
 			<button v-if="appearNote.myReaction == null" class="reactionButton" @click="react()" ref="reactButton">
 				<fa-layers>
 					<fa :icon="faLaugh"/>

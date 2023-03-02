@@ -13,6 +13,7 @@
 				<div class="buttons">
 					<button :data-active="src == 'hot'" @click="src = 'hot'" :title="$t('reacted')"><fa :icon="faThumbsUp"/></button>
 					<button :data-active="src == 'locao'" @click="src = 'locao'" :title="$t('locao')" v-if="enableLocalTimeline"><fa icon="heart"/></button>
+					<button :data-active="src == 'another'" @click="src = 'another'" :title="$t('another')" v-if="enableLocalTimeline"><fa :icon="faQuestion"/></button>
 					<button :data-active="src == 'mentions'" @click="src = 'mentions'" :title="$t('mentions')"><fa icon="at"/><i class="indicator" v-if="$store.state.i.hasUnreadMentions"><fa icon="circle"/></i></button>
 					<button :data-active="src == 'messages'" @click="src = 'messages'" :title="$t('messages')"><fa :icon="['far', 'envelope']"/><i class="indicator" v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa icon="circle"/></i></button>
 					<button @click="chooseTag" :title="$t('hashtag')" ref="tagButton"><fa icon="hashtag"/></button>
@@ -29,7 +30,7 @@ import { defineComponent, getCurrentInstance } from 'vue';
 import i18n from '../../../i18n';
 import XCore from './timeline.core.vue';
 import Menu from '../../../common/views/components/menu.vue';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 export default defineComponent({
 	i18n: i18n('desktop/views/components/timeline.vue'),
@@ -45,7 +46,7 @@ export default defineComponent({
 			tagTl: null as any,
 			enableLocalTimeline: false,
 			enableGlobalTimeline: false,
-			faThumbsUp
+			faThumbsUp, faQuestion,
 		};
 	},
 

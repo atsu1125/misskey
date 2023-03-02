@@ -6,6 +6,7 @@
 		<fa v-if="column.type == 'locao'" icon="heart"/>
 		<fa v-if="column.type == 'hybrid'" icon="share-alt"/>
 		<fa v-if="column.type == 'global'" icon="globe"/>
+		<fa v-if="column.type == 'another'" :icon="faQuestion"/>
 		<fa v-if="column.type == 'hot'" :icon="faThumbsUp"/>
 		<fa v-if="column.type == 'list'" icon="list"/>
 		<fa v-if="column.type == 'hashtag'" icon="hashtag"/>
@@ -18,6 +19,7 @@
 		<ui-switch v-model="column.nsfwMediaOnly" @change="onChangeSettings">{{ $t('is-nsfw-media-only') }}</ui-switch>
 		<ui-switch v-if="column.type === 'home' || column.type === 'hybrid' || column.type === 'list'" v-model="column.excludeRenote" @change="onChangeSettings">{{ $t('excludeRenote') }}</ui-switch>
 		<ui-switch v-model="column.enableSound" @change="onChangeSettings">{{ $t('enableSound') }}</ui-switch>
+		<mk-calendar @chosen="warp"/>
 	</div>
 
 	<x-list-tl v-if="column.type == 'list'"
@@ -53,7 +55,7 @@ import XColumn from './deck.column.vue';
 import XTl from './deck.tl.vue';
 import XListTl from './deck.list-tl.vue';
 import XHashtagTl from './deck.hashtag-tl.vue';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('deck/deck.tl-column.vue'),
@@ -90,7 +92,7 @@ export default Vue.extend({
 					this.edit = !this.edit;
 				}
 			}],
-			faThumbsUp
+			faThumbsUp, faQuestion,
 		}
 	},
 
@@ -104,6 +106,7 @@ export default Vue.extend({
 				case 'locao': return this.$t('@deck.locao');
 				case 'hybrid': return this.$t('@deck.hybrid');
 				case 'global': return this.$t('@deck.global');
+				case 'another': return this.$t('@deck.another');
 				case 'hot': return this.$t('@deck.reacted');
 				case 'list': return this.column.list.title;
 				case 'hashtag': return this.$store.state.settings.tagTimelines.find(x => x.id == this.column.tagTlId).title;
@@ -118,7 +121,11 @@ export default Vue.extend({
 
 		focus() {
 			this.$refs.tl.focus();
-		}
+		},
+
+		warp(date: Date) {
+			(this.$refs.tl as any).warp(date);
+		},
 	}
 });
 </script>

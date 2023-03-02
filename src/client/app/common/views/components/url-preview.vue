@@ -1,10 +1,14 @@
 <template>
 <div v-if="playerEnabled" class="player" :style="`padding: ${(player.height || 0) / (player.width || 1) * 100}% 0 0`">
 	<button class="disablePlayer" @click="playerEnabled = false" :title="$t('disable-player')"><fa icon="times"/></button>
-	<iframe :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1')" :width="player.width || '100%'" :heigth="player.height || 250" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen />
+	<iframe :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1')" :width="player.width || '100%'" :heigth="player.height || 250" frameborder="0"
+		:allow="`autoplay; encrypted-media ${ allowFullscreen ? '; fullscreen' : ''}`" referrerpolicy="no-referrer"
+	/>
 </div>
 <div v-else-if="tweetId && tweetExpanded" class="twitter" ref="twitter">
-	<iframe ref="tweet" scrolling="no" frameborder="no" :style="{ 'margin-top': '8px', left: `${tweetLeft}px`, width: `${tweetLeft < 0 ? 'auto' : '100%'}`, height: `${tweetHeight}px` }" :src="`https://platform.twitter.com/embed/index.html?embedId=${embedId}&amp;hideCard=false&amp;hideThread=false&amp;lang=en&amp;theme=${$store.state.device.darkmode ? 'dark' : 'light'}&amp;id=${tweetId}`"></iframe>
+	<iframe ref="tweet" scrolling="no" frameborder="no" :style="{ 'margin-top': '8px', left: `${tweetLeft}px`, width: `${tweetLeft < 0 ? 'auto' : '100%'}`, height: `${tweetHeight}px` }" :src="`https://platform.twitter.com/embed/index.html?embedId=${embedId}&amp;hideCard=false&amp;hideThread=false&amp;lang=en&amp;theme=${$store.state.device.darkmode ? 'dark' : 'light'}&amp;id=${tweetId}`"
+		referrerpolicy="no-referrer"
+	></iframe>
 	<div class="expandTweet">
 		<a @click.prevent="tweetExpanded = false">
 			{{ $t('collapseTweet') }}
@@ -12,7 +16,9 @@
 	</div>
 </div>
 <div v-else-if="steamId && !narrow">
-	<iframe :src="`https://store.steampowered.com/widget/${steamId}/`" frameborder="0" width="100%" height="190"></iframe>
+	<iframe :src="`https://store.steampowered.com/widget/${steamId}/`" frameborder="0" width="100%" height="190"
+		referrerpolicy="no-referrer"
+	></iframe>
 </div>
 <div v-else class="mk-url-preview">
 	<a :class="{ mini: narrow, compact }" :href="landingUrl" rel="nofollow noopener" target="_blank" :title="landingUrl" v-if="!fetching">
@@ -21,7 +27,7 @@
 		</div>
 		<article>
 			<header>
-				<h1 :title="title">{{ title }}</h1>
+				<h1 :title="title">{{ title.length > 50 ? title.slice(0, 50) + '…' : title }}</h1>
 			</header>
 			<p v-if="description" :title="description">{{ description.length > 85 ? description.slice(0, 85) + '…' : description }}</p>
 			<footer>
@@ -163,6 +169,12 @@ export default Vue.extend({
 		// 300pxないと絶対右にはみ出るので左に移動してしまう
 		const areaWidth = (this.$el as HTMLElement)?.clientWidth;
 		if (areaWidth && areaWidth < 300) this.tweetLeft = areaWidth - 290;
+	},
+
+	computed: {
+		allowFullscreen() {
+			return false;	// TODO: 困ったら設定とか出来るようにする
+		},
 	},
 
 	methods: {
@@ -388,7 +400,7 @@ export default Vue.extend({
 
 		&.compact
 			> article
-				> header h1, p, footer
+				> p, footer
 					overflow hidden
 					white-space nowrap
 					text-overflow ellipsis

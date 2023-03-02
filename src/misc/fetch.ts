@@ -42,6 +42,11 @@ const OPERATION_TIMEOUT = 60 * 1000;
 const MAX_RESPONSE_SIZE = 10 * 1024 * 1024;
 
 export async function getResponse(args: { url: string, method: 'GET' | 'POST', body?: string, headers: Record<string, string>, timeout?: number, size?: number }) {
+	const u = new URL(args.url);
+	if (!u.protocol.match(/^https?:$/) || u.hostname === 'unix') {
+		throw new StatusError('Invalid protocol', 400);
+	}
+
 	const timeout = args.timeout || RESPONSE_TIMEOUT;
 	const operationTimeout = args.timeout ? args.timeout * 6 : OPERATION_TIMEOUT;
 

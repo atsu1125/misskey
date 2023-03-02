@@ -94,6 +94,10 @@ export default Vue.extend({
 			this.endpoint = 'notes/global-timeline';
 			this.connection = this.$root.stream.useSharedConnection('globalTimeline');
 			this.connection.on('note', prepend);
+		} else if (this.src == 'another') {
+			this.endpoint = 'notes/another-timeline';
+			this.connection = this.$root.stream.useSharedConnection('anotherTimeline');
+			this.connection.on('note', prepend);
 		} else if (this.src == 'mentions') {
 			this.endpoint = 'notes/mentions';
 			this.connection = this.$root.stream.useSharedConnection('main');

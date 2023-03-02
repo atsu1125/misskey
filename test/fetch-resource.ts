@@ -14,6 +14,8 @@ import * as assert from 'assert';
 import * as childProcess from 'child_process';
 import { async, startServer, signup, post, api, simpleGet, port, shutdownServer, getDocument, uploadFile } from './utils';
 import * as openapi from '@redocly/openapi-core';
+import rndstr from 'rndstr';
+import { randomUUID } from 'crypto';
 
 const db = require('../built/db/mongodb').default;
 
@@ -27,6 +29,8 @@ const UNSPECIFIED = '*/*';
 const AP = 'application/activity+json; charset=utf-8';
 const JSON = 'application/json; charset=utf-8';
 const HTML = 'text/html; charset=utf-8';
+
+const CSP_STRICT = `base-uri 'none'; default-src 'none'; script-src 'nonce-X 'strict-dynamic' https:; img-src 'self' https: data: blob:; media-src 'self' https:; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'self' https:; manifest-src 'self'; connect-src 'self' data: blob: ws://misskey.local https://api.rss2json.com; frame-ancestors 'none'`;
 
 describe('Fetch resource', () => {
 	let p: childProcess.ChildProcess;
@@ -42,6 +46,7 @@ describe('Fetch resource', () => {
 	let alicesPostImage: any;
 	let video: any;
 	let alicesPostVideo: any;
+	let page: any;
 
 	before(async () => {
 		p = await startServer();
@@ -115,6 +120,21 @@ describe('Fetch resource', () => {
 			fileIds: [ video.id ],
 		});
 		//console.log('alicesPostVideo', alicesPostVideo);
+
+		const pageRes = await api('pages/create', {
+			title: '',
+			name: rndstr(),
+			summary: null,
+			font: 'sans-serif',
+			hideTitleWhenPinned: false,
+			sensitive: false,
+			alignCenter: false,
+			content: [ { id: randomUUID(), type: 'text', text: 'Hello World!' } ],
+			variables: [],
+			eyeCatchingImageId :null,
+		}, alice);
+		page = pageRes.body;
+		//console.log('page', page);
 	});
 
 	after(async () => {
@@ -133,18 +153,21 @@ describe('Fetch resource', () => {
 			const res = await simpleGet('/');
 			assert.strictEqual(res.status, 200);
 			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
 		}));
 
 		it('GET docs', async(async () => {
 			const res = await simpleGet('/docs/ja-JP/about');
 			assert.strictEqual(res.status, 200);
 			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
 		}));
 
 		it('GET api-doc', async(async () => {
 			const res = await simpleGet('/api-doc');
 			assert.strictEqual(res.status, 200);
 			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
 		}));
 
 		it('GET api.json', async(async () => {
@@ -166,6 +189,41 @@ describe('Fetch resource', () => {
 
 			assert.strictEqual(result.problems.length, 0);
 		}));
+
+		it('GET info', async(async () => {
+			const res = await simpleGet('/info');
+			assert.strictEqual(res.status, 200);
+			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
+		}));
+
+		it('GET flush', async(async () => {
+			const res = await simpleGet('/flush');
+			assert.strictEqual(res.status, 200);
+			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
+		}));
+
+		it('GET page', (async () => {
+			const res = await simpleGet(`/@alice/pages/${page.name}`);
+			assert.strictEqual(res.status, 200);
+			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
+		}));
+
+		it('GET embed', (async () => {
+			const res = await simpleGet(`/notes/${alicesPostVideo.id}/embed`);
+			assert.strictEqual(res.status, 200);
+			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
+		}));
+
+		it('GET image', (async () => {
+			const res = await simpleGet(`/files/${image.id}/x.jpg?web`);
+			assert.strictEqual(res.status, 200);
+			assert.strictEqual(res.type, 'image/jpeg');
+			assert.strictEqual(res.cspx, `default-src 'none'; img-src 'self'; media-src 'self'; style-src 'unsafe-inline'`);
+		}));
 	});
 
 	describe('/@:username', () => {
@@ -185,12 +243,14 @@ describe('Fetch resource', () => {
 			const res = await simpleGet(`/@${alice.username}`, PREFER_HTML);
 			assert.strictEqual(res.status, 200);
 			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
 		}));
 
 		it('Unspecified => HTML', async(async () => {
 			const res = await simpleGet(`/@${alice.username}`, UNSPECIFIED);
 			assert.strictEqual(res.status, 200);
 			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
 		}));
 	});
 
@@ -237,12 +297,14 @@ describe('Fetch resource', () => {
 			const res = await simpleGet(`/notes/${alicesPost.id}`, PREFER_HTML);
 			assert.strictEqual(res.status, 200);
 			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
 		}));
 
 		it('Unspecified => HTML', async(async () => {
 			const res = await simpleGet(`/notes/${alicesPost.id}`, UNSPECIFIED);
 			assert.strictEqual(res.status, 200);
 			assert.strictEqual(res.type, HTML);
+			assert.strictEqual(res.cspx, CSP_STRICT);
 		}));
 	});
 

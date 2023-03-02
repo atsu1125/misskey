@@ -1,6 +1,6 @@
 <template>
 <div class="mkw-aichan">
-  <iframe class="dedjhjmo" ref="live2d" src="https://misskey-dev.github.io/mascot-web/?scale=1.5&y=1.1&eyeY=100"></iframe>
+  <iframe class="dedjhjmo" ref="live2d" src="https://misskey-dev.github.io/mascot-web/?scale=1.5&y=1.1&eyeY=100" referrerpolicy="no-referrer"></iframe>
 </div>
 </template>
 

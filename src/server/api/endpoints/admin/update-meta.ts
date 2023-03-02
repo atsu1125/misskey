@@ -99,6 +99,20 @@ export const meta = {
 			}
 		},
 
+		selfSilencedInstances: {
+			validator: $.optional.nullable.arr($.str),
+			desc: {
+				'ja-JP': 'selfSilencedInstances'
+			}
+		},
+
+		exposeHome: {
+			validator: $.optional.boolean,
+			desc: {
+				'ja-JP': 'exposeHome'
+			}
+		},
+
 		mascotImageUrl: {
 			validator: $.optional.nullable.str,
 			desc: {
@@ -413,6 +427,14 @@ export default define(meta, async (ps) => {
 		set.blockedInstances = ps.blockedInstances.map(x => x.trim()).filter(x => x !== '').map(x => toApHost(x));
 	}
 
+	if (Array.isArray(ps.selfSilencedInstances)) {
+		set.selfSilencedInstances = ps.selfSilencedInstances.map(x => x.trim()).filter(x => x !== '').map(x => toApHost(x));
+	}
+
+	if (typeof ps.exposeHome === 'boolean') {
+		set.exposeHome = ps.exposeHome;
+	}
+
 	if (ps.mascotImageUrl !== undefined) {
 		set.mascotImageUrl = ps.mascotImageUrl;
 	}
@@ -565,7 +587,7 @@ export default define(meta, async (ps) => {
 		$set: set
 	}, { upsert: true });
 
-	if (set.blockedInstances) {
+	if (set.blockedInstances || set.selfSilencedInstances) {
 		publishInstanceModUpdated();
 	}
 

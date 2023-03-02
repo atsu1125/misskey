@@ -2,13 +2,13 @@
 <div class="glowckho">
 	<details>
 		<summary>{{ $t('options') }}</summary>
-		<ui-select v-model="days" :disabled="fetching">
-			<template #label>{{ $t('days') }}</template>
-			<option value="0.5">12 {{ $t('hour') }}</option>
-			<option value="1">1 {{ $t('day') }}</option>
-			<option value="2">2 {{ $t('day') }}</option>
-			<option value="7">7 {{ $t('day') }}</option>
-			<option value="30">30 {{ $t('day') }}</option>
+		<ui-select v-model="minScore" :disabled="fetching">
+			<template #label>{{ $t('minScore') }}</template>
+			<option value="1">1</option>
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
 		</ui-select>
 		<ui-select v-model="filter" :disabled="fetching">
 			<template #label>{{ $t('filter') }}</template>
@@ -42,7 +42,7 @@ export default Vue.extend({
 			includeGlobal: false,
 			mediaOnly: false,
 			filter: 'all',
-			days: 2,
+			minScore: 5,
 			fetching: true,
 			notes: [],
 		};
@@ -57,7 +57,7 @@ export default Vue.extend({
 		filter() {
 			this.fetch();
 		},
-		days() {
+		minScore() {
 			this.fetch();
 		},
 	},
@@ -74,13 +74,12 @@ export default Vue.extend({
 
 			this.$root.api('notes/featured', {
 				limit: 30,
-				days: Number(this.days),
+				minScore: Number(this.minScore),
 				includeGlobal: this.includeGlobal,
 				fileType: this.mediaOnly ? ['image/jpeg', 'image/png', 'image/apng', 'image/gif', 'image/webp', 'image/avif', 'video/mp4', 'video/webm'] : undefined,
 				excludeNsfw: this.filter === 'excludeNsfw',
 				excludeSfw: this.filter === 'excludeSfw',
 			}, false, false).then((notes: any[]) => {
-				notes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 				this.notes = notes;
 				this.fetching = false;
 

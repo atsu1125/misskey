@@ -220,7 +220,7 @@ export async function calcHash(path: string): Promise<string> {
 /**
  * Detect dimensions of image
  */
-async function detectImageSize(path: string) {
+export async function detectImageSize(path: string) {
 	const readable = fs.createReadStream(path);
 	const probed = await probeImageSize(readable).catch(() => undefined);
 	readable.destroy();

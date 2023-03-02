@@ -46,6 +46,13 @@ server {
     # Change to your upload limit
     client_max_body_size 80m;
 
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml image/x-icon application/activity+json;
+
     # Proxy to Node
     location / {
         proxy_pass http://127.0.0.1:3000;

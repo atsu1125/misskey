@@ -23,14 +23,8 @@
 		<section>
 			<ui-switch v-model="disableRegistration" :disabled="!$store.getters.isAdmin">{{ $t('disable-registration') }}</ui-switch>
 			<ui-switch v-model="disableDeletion" :disabled="!$store.getters.isAdmin">{{ $t('disable-deletion') }}</ui-switch>
-			<ui-info>{{ $t('disable-deletion-info') }}</ui-info>
-		</section>
-		<section>
-			<header>{{ $t('invite') }}</header>
 			<ui-switch v-model="disableInvitation" :disabled="!$store.getters.isAdmin">{{ $t('disable-invitation') }}</ui-switch>
-			<ui-button @click="invite" :disabled="!$store.getters.isAdmin || disableInvitation">{{ $t('invite') }}</ui-button>
-			<p v-if="inviteCode">Code: <code>{{ inviteCode }}</code></p>
-			<ui-button @click="inviteRevoke" :disabled="!$store.getters.isAdmin || disableInvitation">{{ $t('invite-revoke') }}</ui-button>
+			<ui-info>{{ $t('disable-deletion-info') }}</ui-info>
 		</section>
 		<!-- save -->
 		<section>
@@ -72,8 +66,6 @@ export default defineComponent({
 			disableRegistration: false,
 			disableDeletion: false,
 			disableInvitation: false,
-
-			inviteCode: null,
 
 			// icons アイコンを追加したらここをいじる 2/2
 			faHeadset, farEnvelope,
@@ -129,30 +121,6 @@ export default defineComponent({
 				this.$root.dialog({
 					type: 'success',
 					text: this.$t('saved')
-				});
-			}).catch((e: Error) => {
-				this.$root.dialog({
-					type: 'error',
-					text: e
-				});
-			});
-		},
-
-		invite() {
-			this.$root.api('admin/invite').then((x: any) => {
-				this.inviteCode = x.code;
-			}).catch((e: Error) => {
-				this.$root.dialog({
-					type: 'error',
-					text: e
-				});
-			});
-		},
-
-		inviteRevoke() {
-			this.$root.api('admin/invite-revoke').then((x: any) => {
-				this.$root.dialog({
-					type: 'success'
 				});
 			}).catch((e: Error) => {
 				this.$root.dialog({

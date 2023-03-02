@@ -28,7 +28,7 @@ export async function proxyMedia(ctx: Router.RouterContext) {
 
 		if ('static' in ctx.query && ['image/png', 'image/apng', 'image/gif', 'image/webp', 'image/avif', 'image/svg+xml'].includes(mime)) {
 			image = await convertToWebp(path, 530, 255);
-		} else if ('preview' in ctx.query && ['image/jpeg', 'image/png', 'image/apng', 'image/gif', 'image/webp', 'image/avif', 'image/svg+xml'].includes(mime)) {
+		} else if ('preview' in ctx.query && ['image/jpeg', 'image/png', 'image/apng', 'image/gif', 'image/webp', 'image/avif', 'image/svg+xml'].includes(mime)) {	// TODO: 廃止する
 			image = await convertToWebp(path, 200, 200);
 		}	else if (['image/svg+xml'].includes(mime)) {
 			image = await convertToWebp(path, 2048, 2048);

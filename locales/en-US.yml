@@ -75,10 +75,26 @@ common:
     seconds_ago: "{}s ago"
     minutes_ago: "{}m ago"
     hours_ago: "{}h ago"
+    day_ago: "1d ago"
     days_ago: "{}d ago"
-    weeks_ago: "{}week(s) ago"
-    months_ago: "{}month(s) ago"
-    years_ago: "{}year(s) ago"
+    week_ago: "1 week ago"
+    weeks_ago: "{} weeks ago"
+    month_ago: "1 month ago"
+    months_ago: "{} months ago"
+    year_ago: "1 year ago"
+    years_ago: "{} years ago"
+    seconds_after: "{}s after"
+    minutes_after: "{}m after"
+    hours_after: "{}h after"
+    day_after: "1d after"
+    days_after: "{}d after"
+    week_after: "1 week after"
+    weeks_after: "{} weeks after"
+    month_after: "1 month after"
+    months_after: "{} months after"
+    year_after: "1 year after"
+    years_after: "{} years after"
+
   month-and-day: "{month}/{day}"
   trash: "Trash"
   drive: "Drive"
@@ -123,6 +139,10 @@ common:
   noteReactions: "Reacted notes"
   poll_finished: "Poll finished"
   flush: "Clear cache"
+  signinOrUsePostUrl: "To do so, either signin or put the URL into your instance's search box and do it."
+  renoted: "Renoted"
+  timemachine: "Timemachine"
+
   permissions:
     "read:account": "View your account information"
     "write:account": "Edit your account information"
@@ -505,6 +525,7 @@ common/views/pages/about.vue:
   popularReactions: "Popular reactions"
   localActive: "Current users"
   globalActive: "Current users (global)"
+  relays: "Relays"
   reacters: "Reacters"
 
 common/views/components/url-preview.vue:
@@ -565,25 +586,6 @@ common/views/components/connect-failed.vue:
   description: "There is a problem with your Internet connection, or the server may be down or under maintenance. Please {try again} later."
   thanks: "Thank you for using Misskey."
   troubleshoot: "Troubleshoot"
-common/views/components/connect-failed.troubleshooter.vue:
-  title: "Troubleshooting"
-  network: "Network connection"
-  checking-network: "Checking network connection"
-  internet: "Internet connection"
-  checking-internet: "Checking Internet connection"
-  server: "Server connection"
-  checking-server: "Checking server connection"
-  finding: "Searching for issues"
-  no-network: "No connection"
-  no-network-desc: "Please make sure that you have a network connection."
-  no-internet: "There is no Internet connection"
-  no-internet-desc: "Please make sure you are connected to the Internet."
-  no-server: "Unable to connect to the Misskey server"
-  no-server-desc: "The network connection of your device is normal, but you could not connect to the Misskey server. There is a possibility that the server is either down, or under maintenance, please try again later."
-  success: "Successfully connected to the Misskey server"
-  success-desc: "Looks like we have a connection. Please reload the page."
-  flush: "Clean cache"
-  set-version: "Specify version"
 common/views/components/instance.vue:
   start: "Start"
 common/views/components/media-banner.vue:
@@ -1178,11 +1180,13 @@ desktop/views/components/note-detail.vue:
   location: "Location"
   reply: "Reply"
   renote: "Renote"
+  quote: "Quote"
   add-reaction: "Add a reaction"
   undo-reaction: "Reverse reaction"
 desktop/views/components/note.vue:
   reply: "Reply"
   renote: "Renote"
+  quote: "Quote"
   add-reaction: "Add a reaction"
   undo-reaction: "Reverse reaction"
   detail: "Details"
@@ -1338,6 +1342,7 @@ desktop/views/components/timeline.vue:
   hybrid: "Social"
   hybrid-desc: "Home+Local"
   global: "Global"
+  another: "Another"
   reacted: "Reacted"
   mentions: "Mentions"
   messages: "Direct posts"
@@ -1392,10 +1397,8 @@ desktop/views/home/featured.vue:
   all: "All"
   excludeNsfw: "Exclude NSFW"
   excludeSfw: "NSFW only"
-  days: "Duration"
-  hour: "hours"
-  day: "days"
-  years: "years"
+  minScore: "Min score"
+
 admin/views/index.vue:
   dashboard: "Dashboard"
   instance: "Instance"
@@ -1404,13 +1407,31 @@ admin/views/index.vue:
   users: "Users"
   federation: "Federation"
   relays: "Relays"
+  invitations: "Invitations"
   announcements: "Announcements"
   hashtags: "Hashtags"
   abuse: "Abuse"
   queue: "Job Queue"
   logs: "Logs"
-  instanceblocks: "Instance blocks"
+  instancemoderation: "Instance moderation"
   back-to-misskey: "Back to Misskey"
+admin/views/invitations.vue:
+  addTitle: "New invitation"
+  addCount: "Usable count"
+  addExpireSec: "Expires after"
+  infinite: Infinite
+  day: Days
+  add: Issue
+  invitations: Invitations
+  code: Code
+  inviter: Inviter
+  createdAt: Created At
+  expiredAt: Expires At
+  restCount: Rest count
+  invitees: invitees
+  unknown: Unknown
+  delete: Delete
+  more: More
 admin/views/dashboard.vue:
   dashboard: "Dashboard"
   accounts: "Accounts"
@@ -1700,8 +1721,9 @@ admin/views/federation.vue:
   latest-request-received-at: "Last request received at"
   remove-all-following: "Withold all followers"
   remove-all-following-info: "Unfollow all accounts from {host}. Please run this if the instance no longer exists."
-  block: "Block"
+  ignore: "Ignore instance"
   marked-as-closed: "Marked as closed"
+  flag-info: "Ignore stops sending, receiving, and fetching. Close only stops sending. The flag is automatically updated according to the communication status."
   lookup: "Look up"
   instances: "Federated"
   instance-not-registered: "The instance has not been discovered"
@@ -1726,7 +1748,7 @@ admin/views/federation.vue:
   state: "Sort"
   states:
     all: "All"
-    blocked: "Blocked"
+    ignored: "Ignored"
     not-responding: "Without response"
     marked-as-closed: "Marked as closed"
   result-is-truncated: "Displaying the top {n} items."
@@ -1748,8 +1770,13 @@ admin/views/federation.vue:
     day: "Daily"
 
 admin/views/instanceblocks.vue:
-  instanceblocks: "Instance block"
-  blockedInstances-info: "One host per line. You can use /RegExp/."
+  instancemoderation: "Instance moderation"
+  ignoredInstances: "Ignored instances"
+  ignoredInstances-info: "Instances that don't send/receive and fetch. One host per line. You can use /RegExp/."
+  selfSilencedInstances: "Self-silenced instances"
+  selfSilencedInstances-info: "Instances to deliver with maximum visibility home. One host per line. You can use /RegExp/."
+  exposeHome: "If fetched from remote, max visibility to home."
+  exposeHome-info: "If posts are retrieved from instances with no followers, etc., set the maximum visibility to Home."
 
 admin/views/relay.vue:
   add-relay: "Add relay"
@@ -1955,10 +1982,7 @@ mobile/views/pages/featured.vue:
   all: "All"
   excludeNsfw: "Exclude NSFW"
   excludeSfw: "NSFW only"
-  days: "Duration"
-  hour: "hours"
-  day: "days"
-  years: "years"
+  minScore: "Min score"
 mobile/views/pages/followers.vue:
   followers-of: "{name}'s followers"
 mobile/views/pages/following.vue:
@@ -1969,6 +1993,7 @@ mobile/views/pages/home.vue:
   locao: "Locao"
   hybrid: "Social"
   global: "Global"
+  another: "Another"
   reacted: "Reacted"
   mentions: "Mentions"
   messages: "Direct posts"
@@ -2034,6 +2059,7 @@ deck:
   hybrid: "Social"
   hashtag: "Hashtag"
   global: "Global"
+  another: "Another"
   reacted: "Reacted"
   mentions: "Mentions"
   direct: "Direct posts"

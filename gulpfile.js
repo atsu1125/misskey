@@ -11,7 +11,8 @@ const rimraf = require('rimraf');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const terser = require('gulp-terser');
-const cleanCSS = require('gulp-clean-css');
+const postcss = require('gulp-postcss');
+const cssnano = require('cssnano');
 
 const locales = require('./locales');
 const swcOptions = JSON.parse(fs.readFileSync('.swcrc', 'utf-8'));
@@ -62,7 +63,7 @@ gulp.task('cleanall', gulp.parallel('clean', cb =>
 gulp.task('build:client:script', () => {
 	// eslint-disable-next-line node/no-unpublished-require
 	const client = require('./built/meta.json');
-	return gulp.src(['./src/client/app/boot.js', './src/client/app/safe.js'])
+	return gulp.src(['./src/client/app/boot.js', './src/client/app/flush.js'])
 		.pipe(replace('VERSION', JSON.stringify(client.version)))
 		.pipe(replace('ENV', JSON.stringify(env)))
 		.pipe(replace('LANGS', JSON.stringify(Object.keys(locales))))
@@ -74,7 +75,7 @@ gulp.task('build:client:script', () => {
 
 gulp.task('build:client:styles', () =>
 	gulp.src('./src/client/app/init.css')
-		.pipe(cleanCSS())
+		.pipe(postcss([cssnano()]))
 		.pipe(gulp.dest('./built/client/assets/'))
 );
 
@@ -93,7 +94,7 @@ gulp.task('copy:client', () =>
 gulp.task('doc', () =>
 	gulp.src('./src/docs/**/*.styl')
 		.pipe(stylus())
-		.pipe(cleanCSS())
+		.pipe(postcss([cssnano()]))
 		.pipe(gulp.dest('./built/docs/assets/'))
 );
 

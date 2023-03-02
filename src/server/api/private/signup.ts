@@ -4,7 +4,7 @@ import User, { IUser, validateUsername, validatePassword, pack } from '../../../
 import generateUserToken from '../common/generate-native-user-token';
 import config from '../../../config';
 import Meta from '../../../models/meta';
-import RegistrationTicket from '../../../models/registration-tickets';
+import RegistrationTicket, { IRegistrationTicket } from '../../../models/registration-tickets';
 import usersChart from '../../../services/chart/users';
 import fetchMeta from '../../../misc/fetch-meta';
 import { verifyRecaptcha } from '../../../misc/captcha';
@@ -27,25 +27,49 @@ export default async (ctx: Router.RouterContext) => {
 	const password = body['password'];
 	const invitationCode = body['invitationCode'];
 
-	if (instance && instance.disableRegistration) {
-		if (instance.disableInvitation || invitationCode == null || typeof invitationCode != 'string') {
+	//#region Validate invitation code
+	let ticket: IRegistrationTicket | undefined;
+	let lastTicket = false;
+
+	if (instance?.disableRegistration) {
+		if (instance.disableInvitation || invitationCode == null || typeof invitationCode !== 'string') {
 			ctx.status = 400;
+			ctx.body = 'invalid code format';
 			return;
 		}
 
-		const ticket = await RegistrationTicket.findOne({
+		ticket = await RegistrationTicket.findOne({
 			code: invitationCode
 		});
 
 		if (ticket == null) {
-			ctx.status = 400;
+			// invalid code
+			ctx.status = 401;
+			ctx.body = 'invalid code';
 			return;
 		}
 
-		RegistrationTicket.remove({
-			_id: ticket._id
-		});
+		// Check expire
+		if (ticket.expiresAt) {
+			if (ticket.expiresAt < new Date()) {
+				ctx.status = 403;
+				ctx.body = 'expired';
+				return;
+			}
+		}
+
+		// Check count
+		const restCount = ticket.restCount ?? 1;
+		const invitedCount = ticket.inviteeIds ? ticket.inviteeIds.length : 0;
+		if (restCount <= invitedCount) {
+			ctx.body = 'limit exceeded';
+			ctx.status = 403;
+			return;
+		}
+
+		if (restCount === 1) lastTicket = true;
 	}
+	//#endregion
 
 	// Validate username
 	if (!validateUsername(username)) {
@@ -116,6 +140,21 @@ export default async (ctx: Router.RouterContext) => {
 			autoWatch: false
 		}
 	});
+
+	if (ticket) {
+		if (lastTicket) {
+			RegistrationTicket.remove({ _id: ticket._id });
+		} else {
+			RegistrationTicket.update({ _id: ticket._id }, {
+				$push: {
+					inviteeIds: account._id
+				},
+				$inc: {
+					restCount: -1
+				},
+			});
+		}
+	}
 
 	//#region Increment users count
 	Meta.update({}, {

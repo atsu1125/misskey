@@ -85,7 +85,8 @@ export default class extends Channel {
 		if (!(
 			(note.user.host == null && note.visibility === 'public') || // local public
 			oidEquals(note.userId, this.user!._id) ||	// myself
-			oidIncludes(this.followingIds, note.userId)	// from followers
+			oidIncludes(this.followingIds, note.userId)	|| // from followers
+			oidIncludes(note.mentions, this.user!._id)	// mentions
 		)) return;
 
 		// フォロワー限定以下なら現在のユーザー情報で再度除外

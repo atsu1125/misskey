@@ -261,7 +261,8 @@ export default Vue.extend({
 			}).then(() => {
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					splash: true,
+					text: favorite ? this.$t('@.favorited') : null,
 				});
 				this.$emit('closed');
 				this.destroyDom();

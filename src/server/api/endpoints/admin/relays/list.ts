@@ -8,8 +8,8 @@ export const meta = {
 
 	tags: ['admin'],
 
-	requireCredential: false as const,
-	requireModerator: false as const,
+	requireCredential: true as const,
+	requireModerator: true as const,
 
 	params: {
 	},

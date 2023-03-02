@@ -81,6 +81,7 @@
 						<div>
 							<div>
 								<span style="margin-right:16px;">{{ file.type }}</span>
+								<span style="margin-right:16px;" v-if="file.deletedAt != null">Deleted</span>
 								<!-- Attaches -->
 								<span>
 									<span><fa :icon="faPaperclip"/> {{ file.attachedNoteIds ? file.attachedNoteIds.length : 0 }} Notes

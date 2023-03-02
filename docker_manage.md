@@ -35,8 +35,8 @@ cp .config/docker.yml .config/default.yml
 ## Misskeyのビルド
 
 ```bash
-./dockermanage.sh yarn install
-./dockermanage.sh yarn build
+./dockermanage.sh pnpm i
+./dockermanage.sh pnpm build
 ```
 
 Misskey本体をビルドします。変更を加えるたびに必要です。

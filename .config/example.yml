@@ -13,6 +13,8 @@ mongodb:
   db: misskey
   user: example-misskey-user
   pass: example-misskey-pass
+  #options:
+  #  poolSize: 10
 
 # Redis
 redis:

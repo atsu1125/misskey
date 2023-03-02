@@ -3,8 +3,8 @@
 	<mk-avatar class="avatar" :user="note.user" v-if="$store.state.device.postStyle == 'smart'"/>
 	<router-link v-if="userUrl.startsWith('/')" class="name" :to="userUrl" v-user-preview="note.user.id"><mk-user-name :user="note.user"/></router-link>
 	<a v-else class="name" :href="userUrl" v-user-preview="note.user.id"><mk-user-name :user="note.user"/></a>
-	<x-user-badges :user="note.user" :key="note.user.id"/>
 	<span class="username"><mk-acct :user="note.user"/></span>
+	<x-user-badges :user="note.user" :key="note.user.id"/>
 	<div class="info" v-if="!noInfo">
 		<span class="mobile" v-if="note.viaMobile"><fa icon="mobile-alt"/></span>
 		<router-link v-if="noteUrl.startsWith('/')" class="created-at" :to="noteUrl"><mk-time :time="note.createdAt"/></router-link>

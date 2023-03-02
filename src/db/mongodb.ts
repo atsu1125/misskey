@@ -18,7 +18,7 @@ const logger: TMiddleware = context => next => (args, method) => {
  */
 import mongo, { TMiddleware } from 'monk';
 
-const db = mongo(uri);
+const db = mongo(uri, config.mongodb.options || {});
 
 //db.addMiddleware(logger);
 

@@ -13,6 +13,7 @@ import NoteWatching from '../../../../models/note-watching';
 import config from '../../../../config';
 import { getIndexer } from '../../../../misc/mecab';
 import { genMeid7 } from '../../../../misc/id/meid7';
+import * as mongo from 'mongodb';
 
 export const meta = {
 	desc: {
@@ -316,11 +317,11 @@ async function searchInternal(me: ILocalUser, query: string, limit: number | und
 
 	// Date
 	if (since) {
-		noteQuery.$and.push({ _id: { $gt: genMeid7(since) } });
+		noteQuery.$and.push({ _id: { $gt: new mongo.ObjectID(genMeid7(since)) } });
 	}
 
 	if (until) {
-		noteQuery.$and.push({ _id: { $lt: genMeid7(until) } });
+		noteQuery.$and.push({ _id: { $lt: new mongo.ObjectID(genMeid7(until)) } });
 	}
 
 	// note - files / medias

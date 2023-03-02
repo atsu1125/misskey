@@ -11,7 +11,6 @@
 						<option value="profile">{{ $t('@.widgets.profile') }}</option>
 						<option value="analog-clock">{{ $t('@.widgets.analog-clock') }}</option>
 						<option value="calendar">{{ $t('@.widgets.calendar') }}</option>
-						<option value="timemachine">{{ $t('@.widgets.timemachine') }}</option>
 						<option value="activity">{{ $t('@.widgets.activity') }}</option>
 						<option value="rss">{{ $t('@.widgets.rss') }}</option>
 						<option value="trends">{{ $t('@.widgets.trends') }}</option>
