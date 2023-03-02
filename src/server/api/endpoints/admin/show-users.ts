@@ -44,6 +44,8 @@ export const meta = {
 				'silenced',
 				'suspended',
 				'deleted',
+				'bot',
+				'cat',
 			]),
 			default: 'all'
 		},
@@ -105,6 +107,8 @@ export default define(meta, async (ps, me) => {
 		ps.state == 'silenced' ? { isSilenced: true } :
 		ps.state == 'suspended' ? { isSuspended: true } :
 		ps.state == 'deleted' ? { isDeleted: true } :
+		ps.state == 'bot' ? { isBot: true } :
+		ps.state == 'cat' ? { isCat: true } :
 		{}
 	);
 
