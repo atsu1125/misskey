@@ -1800,6 +1800,7 @@ desktop/views/pages/welcome.vue:
   info: "Information"
   invitation-required-to-register: "This server is currently invitation only. Only those with an invitation code can register."
   unavailable-registration: "This server is not currently registration."
+  available-registration: "This server is currently accepting registration!"
 desktop/views/pages/drive.vue:
   title: "Misskey storage"
 desktop/views/pages/note.vue:

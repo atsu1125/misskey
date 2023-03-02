@@ -26,6 +26,7 @@
 						<span class="desc" v-html="description || $t('@.about')"></span>
 						<ui-info warn v-if="meta && (meta.disableRegistration && meta.disableInvitation)">{{ $t('unavailable-registration') }}</ui-info>
 						<ui-info warn v-if="meta && (meta.disableRegistration && !meta.disableInvitation)">{{ $t('invitation-required-to-register') }}</ui-info>
+						<ui-info v-if="meta && (!meta.disableRegistration && !meta.disableInvitation)">{{ $t('available-registration') }}</ui-info>
 					</div>
 
 					<p class="sign">
