@@ -28,6 +28,12 @@
 		<mk-user-list :make-promise="popularUsers" :expanded="false">
 			<fa :icon="faChartLine" fixed-width/>{{ $t('popular-users') }}
 		</mk-user-list>
+		<mk-user-list :make-promise="popularCats" :expanded="false">
+			<fa :icon="faPaw" fixed-width/>{{ $t('popular-cats') }}
+		</mk-user-list>
+		<mk-user-list :make-promise="popularBots" :expanded="false">
+			<fa :icon="faRobot" fixed-width/>{{ $t('popular-bots') }}
+		</mk-user-list>
 		<mk-user-list :make-promise="recommendedUsers" :expanded="false">
 			<fa icon="users" fixed-width/>{{ $t('recommended-users') }}
 		</mk-user-list>
@@ -61,7 +67,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
-import { faChartLine, faPlus, faHashtag, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faPlus, faHashtag, faSearch, faPaw, faRobot } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark, faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 
 const limit = 10;
@@ -131,6 +137,40 @@ export default Vue.extend({
 				return {
 						users: x.splice(0, limit),
 						cursor: this.cursors.popularUsers
+				};
+			}),
+			popularCats: (offset: number) => this.$root.api('users', {
+				state: 'cat',
+				origin: 'local',
+				sort: '+follower',
+				offset,
+				limit: limit + 1
+			}).then((x: any[]) => {
+				if (x.length === limit + 1) {
+					this.cursors.popularCats += limit;
+				} else {
+					this.cursors.popularCats = undefined;
+				}
+				return {
+						users: x.splice(0, limit),
+						cursor: this.cursors.popularCats
+				};
+			}),
+			popularBots: (offset: number) => this.$root.api('users', {
+				state: 'bot',
+				origin: 'local',
+				sort: '+follower',
+				offset,
+				limit: limit + 1
+			}).then((x: any[]) => {
+				if (x.length === limit + 1) {
+					this.cursors.popularBots += limit;
+				} else {
+					this.cursors.popularBots = undefined;
+				}
+				return {
+						users: x.splice(0, limit),
+						cursor: this.cursors.popularBots
 				};
 			}),
 			recentlyUpdatedUsers: (offset: number) => this.$root.api('users', {
@@ -214,7 +254,7 @@ export default Vue.extend({
 			query: null,
 			meta: null,
 			num: Vue.filter('number'),
-			faBookmark, faChartLine, faCommentAlt, faPlus, faHashtag, faSearch
+			faBookmark, faChartLine, faCommentAlt, faPlus, faHashtag, faSearch, faPaw, faRobot
 		};
 	},
 

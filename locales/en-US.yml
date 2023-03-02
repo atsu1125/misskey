@@ -504,6 +504,8 @@ common/views/pages/explore.vue:
   verified-users: "Official accounts"
   recommended-users: "Recommended users"
   popular-users: "Popular users"
+  popular-cats: "Popular Cats"
+  popular-bots: "Popular Bots"
   recently-updated-users: "Recently active users"
   recently-registered-users: "Recently registed users"
   recently-found-users: "Recently found users"

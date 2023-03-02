@@ -41,7 +41,9 @@ export const meta = {
 				'moderator',
 				'adminOrModerator',
 				'verified',
-				'alive'
+				'alive',
+				'bot',
+				'cat',
 			]),
 			default: 'all'
 		},
@@ -74,6 +76,8 @@ const state: any = { // < https://github.com/Microsoft/TypeScript/issues/1863
 		]
 	},
 	'verified': { isVerified: true },
+	'bot': { isBot: true },
+	'cat': { isCat: true },
 	'alive': { $and: [
 		{ updatedAt: { $gt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5) } },
 		{ isExplorable: true }
