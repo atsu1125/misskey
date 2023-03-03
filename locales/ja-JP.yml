@@ -1961,7 +1961,7 @@ desktop/views/pages/welcome.vue:
   powered-by-misskey: "Powered by <b>Misskey</b>."
   info: "情報"
   invitation-required-to-register: "現在このサーバーは招待制です。招待コードをお持ちの方のみ登録できます。"
-  unavailable-registration: "現在このサーバーは登録を受け付けておりません。"
+  unavailable-registration: "申し訳ございません。現在このサーバーは登録を受け付けておりません。"
   available-registration: "現在このサーバーは登録受付中です！"
 
 desktop/views/pages/drive.vue:
@@ -2273,6 +2273,11 @@ mobile/views/pages/user/home.vue:
 
 mobile/views/pages/user/home.photos.vue:
   no-photos: "写真はありません"
+
+mobile/views/pages/welcome.vue:
+  invitation-required-to-register: "現在このサーバーは招待制です。招待コードをお持ちの方のみ登録できます。"
+  unavailable-registration: "申し訳ございません。現在このサーバーは登録を受け付けておりません。"
+  available-registration: "現在このサーバーは登録受付中です！"
 
 deck:
   widgets: "ウィジェット"

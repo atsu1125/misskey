@@ -7,6 +7,9 @@
 			<h2>{{ name }}</h2>
 			<small>{{ host }}</small>
 			<p v-html="description || this.$t('@.about')"></p>
+			<ui-info warn v-if="meta && (meta.disableRegistration && meta.disableInvitation)">{{ $t('unavailable-registration') }}</ui-info>
+			<ui-info warn v-if="meta && (meta.disableRegistration && !meta.disableInvitation)">{{ $t('invitation-required-to-register') }}</ui-info>
+			<ui-info v-if="meta && !meta.disableRegistration">{{ $t('available-registration') }}</ui-info>
 			<router-link class="signup" to="/signup" v-if="meta && !(meta.disableRegistration && meta.disableInvitation)">{{ $t('@.signup') }}</router-link>
 			<div class="signin">
 				<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
