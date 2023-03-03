@@ -24,9 +24,6 @@
 		<div class="hashtags">
 			<mk-tag-cloud/>
 		</div>
-		<div class="photos">
-			<div v-for="photo in photos" :style="`background-image: url(${photo.thumbnailUrl})`"></div>
-		</div>
 		<div class="stats" v-if="stats">
 			<span><fa icon="user"/> {{ stats.originalUsersCount | number }}</span>
 			<span><fa icon="pencil-alt"/> {{ stats.originalNotesCount | number }}</span>
@@ -166,19 +163,6 @@ export default Vue.extend({
 		> .hashtags
 			padding 0 8px
 			height 200px
-
-		> .photos
-			display grid
-			grid-template-rows 1fr 1fr 1fr
-			grid-template-columns 1fr 1fr
-			gap 8px
-			height 300px
-			margin-top 16px
-
-			> div
-				border-radius 4px
-				background-position center center
-				background-size cover
 
 		> .stats
 			margin 16px 0

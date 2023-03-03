@@ -51,13 +51,6 @@
 				</div>
 			</div>
 
-			<div class="photos block">
-				<header><fa :icon="['far', 'images']"/> {{ $t('photos') }}</header>
-				<div>
-					<div v-for="(photo, i) in photos" :key="i" :style="`background-image: url(${photo.thumbnailUrl})`"></div>
-				</div>
-			</div>
-
 			<div class="tag-cloud block">
 				<div>
 					<mk-tag-cloud/>
@@ -434,7 +427,7 @@ export default Vue.extend({
 
 			> .announcements
 				grid-row 2
-				grid-column 1
+				grid-column 1 / 3
 				border-radius 6px
 
 				> div
@@ -448,24 +441,6 @@ export default Vue.extend({
 						> h1
 							margin 0
 							font-size 1.25em
-
-			> .photos
-				grid-row 2
-				grid-column 2
-				border-radius 6px
-
-				> div
-					display grid
-					grid-template-rows 1fr 1fr 1fr
-					grid-template-columns 1fr 1fr
-					gap 8px
-					height 100%
-					padding 16px
-
-					> div
-						//border-radius 4px
-						background-position center center
-						background-size cover
 
 			> .tag-cloud
 				grid-row 3
