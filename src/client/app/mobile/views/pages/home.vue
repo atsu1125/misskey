@@ -9,6 +9,7 @@
 				<span v-if="src == 'hybrid'"><fa icon="share-alt"/>{{ $t('hybrid') }}</span>
 				<span v-if="src == 'global'"><fa icon="globe"/>{{ $t('global') }}</span>
 				<span v-if="src == 'another'"><fa :icon="faQuestion"/>{{ $t('another') }}</span>
+				<span v-if="src == 'limited'"><fa :icon="faUnlock"/>{{ $t('limited') }}</span>
 				<span v-if="src == 'hot'"><fa :icon="faThumbsUp"/>{{ $t('reacted') }}</span>
 				<span v-if="src == 'mentions'"><fa icon="at"/>{{ $t('mentions') }}</span>
 				<span v-if="src == 'messages'"><fa :icon="['far', 'envelope']"/>{{ $t('messages') }}</span>
@@ -34,6 +35,7 @@
 			<div class="body">
 				<div>
 					<span :data-active="src == 'home'" @click="src = 'home'"><fa icon="home"/> {{ $t('home') }}</span>
+					<span :data-active="src == 'limited'" @click="src = 'limited'"><fa :icon="faUnlock"/> {{ $t('limited') }}</span>
 					<span :data-active="src == 'local'" @click="src = 'local'" v-if="enableLocalTimeline"><fa :icon="['far', 'comments']"/> {{ $t('local') }}</span>
 					<span :data-active="src == 'hybrid'" @click="src = 'hybrid'" v-if="enableLocalTimeline"><fa icon="share-alt"/> {{ $t('hybrid') }}</span>
 					<span :data-active="src == 'global'" @click="src = 'global'" v-if="enableGlobalTimeline"><fa icon="globe"/> {{ $t('global') }}</span>
@@ -62,6 +64,7 @@
 			<x-tl v-if="src == 'hybrid'" ref="tl" key="hybrid" src="hybrid"/>
 			<x-tl v-if="src == 'global'" ref="tl" key="global" src="global"/>
 			<x-tl v-if="src == 'another'" ref="tl" key="another" src="another"/>
+			<x-tl v-if="src == 'limited'" ref="tl" key="limited" src="limited"/>
 			<x-tl v-if="src == 'hot'" ref="tl" key="hot" src="hot"/>
 			<x-tl v-if="src == 'mentions'" ref="tl" key="mentions" src="mentions"/>
 			<x-tl v-if="src == 'messages'" ref="tl" key="messages" src="messages"/>
@@ -77,7 +80,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import Progress from '../../../common/scripts/loading';
 import XTl from './home.timeline.vue';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faQuestion, faUnlock } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/pages/home.vue'),
@@ -95,7 +98,7 @@ export default Vue.extend({
 			showNav: false,
 			enableLocalTimeline: false,
 			enableGlobalTimeline: false,
-			faThumbsUp
+			faThumbsUp, faQuestion, faUnlock
 		};
 	},
 
