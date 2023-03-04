@@ -50,7 +50,7 @@ export const tryProcessInbox = async (data: InboxJobData, ctx?: ApContext): Prom
 	/** peer host (リレーから来たらリレー) */
 	const host = toUnicode(new URL(signature.keyId).hostname.toLowerCase());
 
-	// ブロックしてたら中断
+	// ブロックしてたら中断  TODO: routeでもチェックしているので消す
 	if (await isBlockedHost(host)) {
 		return `skip: Blocked instance: ${host}`;
 	}

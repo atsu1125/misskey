@@ -93,8 +93,14 @@ drive:
 # Disable Federation: (default: false)
 #disableFederation: true
 
-# Ignore AP forwarded activities (default: false)
+# 自インスタンスが関係してないActivityを無視する (default: false, リレー使用時には有効にしてはいけない)
 #ignoreApForwarded: true
+
+# 自インスタンスが関係してないLike (リアクション) を無視する (default: false)
+#ignoreForeignLike: true
+
+# Like (リアクション) を直接した相手のインスタンス以外に配信しない (default: false)
+#disableLikeBroadcast: true
 
 # Disable URL Preview (default: false)
 #disableUrlPreview: true

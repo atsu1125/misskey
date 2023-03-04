@@ -22,6 +22,11 @@ import { renderLike } from '../remote/activitypub/renderer/like';
 import { inspect } from 'util';
 import config from '../config';
 import fetchMeta from '../misc/fetch-meta';
+import { isBlockedHost } from '../services/instance-moderation';
+import { toUnicode } from 'punycode/';
+import Logger from '../services/logger';
+
+const logger = new Logger('activitypub');
 
 // Init router
 const router = new Router();
@@ -36,8 +41,24 @@ async function inbox(ctx: Router.RouterContext) {
 	try {
 		signature = httpSignature.parseRequest(ctx.req, { 'headers': [] });
 	} catch (e) {
-		console.log(`signature parse error: ${inspect(e)}`);
+		logger.warn(`inbox: signature parse error: ${inspect(e)}`);
 		ctx.status = 401;
+		return;
+	}
+
+	try {
+		/** peer host (リレーから来たらリレー) */
+		const host = toUnicode(new URL(signature.keyId).hostname.toLowerCase());
+
+		// ブロックしてたら中断
+		if (await isBlockedHost(host)) {
+			logger.info(`inbox: blocked instance ${host}`);
+			ctx.status = 403;
+			return;
+		}
+	} catch (e) {
+		logger.warn(`inbox: error ${e}`);
+		ctx.status = 400;
 		return;
 	}
 
