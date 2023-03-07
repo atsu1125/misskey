@@ -70,6 +70,22 @@ export default define(meta, async (ps, me) => {
 			sort = {
 				usersCount: 1
 			};
+		} else if (ps.sort == '+activeHalfyear') {
+			sort = {
+				activeHalfyear: -1
+			};
+		} else if (ps.sort == '-activeHalfyear') {
+			sort = {
+				activeHalfyear: 1
+			};
+		} else if (ps.sort == '+activeMonth') {
+			sort = {
+				activeMonth: -1
+			};
+		} else if (ps.sort == '-activeMonth') {
+			sort = {
+				activeMonth: 1
+			};
 		} else if (ps.sort == '+following') {
 			sort = {
 				followingCount: -1

@@ -29,9 +29,12 @@ export interface IInstance {
 	usersCount: number;
 
 	/**
-	 * このインスタンスから受け取った投稿数
+	 * このインスタンスの投稿数
 	 */
 	notesCount: number;
+
+	activeHalfyear?: number;
+	activeMonth?: number;
 
 	/**
 	 * このインスタンスのユーザーからフォローされている、自インスタンスのユーザーの数

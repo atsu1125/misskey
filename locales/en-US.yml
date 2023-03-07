@@ -1748,6 +1748,10 @@ admin/views/federation.vue:
     driveUsageDesc: "Most storage used"
     driveFilesAsc: "Least files stored on Drive"
     driveFilesDesc: "The largest number of files stored on Drive"
+    activeHalfyearAsc: "Least active users 6m"
+    activeHalfyearDesc: "Most active users 6m"
+    activeMonthAsc: "Least active users 1m"
+    activeMonthDesc: "Most active users 1m"
   state: "Sort"
   states:
     all: "All"

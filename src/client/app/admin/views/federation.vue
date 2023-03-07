@@ -24,6 +24,12 @@
 					<ui-input :value="instance.usersCount" type="text" readonly>
 						<span>{{ $t('users') }}</span>
 					</ui-input>
+					<ui-input :value="instance.activeHalfyear" type="text" readonly>
+						<span>{{ $t('activeHalfyear') }}</span>
+					</ui-input>
+					<ui-input :value="instance.activeMonth" type="text" readonly>
+						<span>{{ $t('activeMonth') }}</span>
+					</ui-input>
 					<ui-input :value="instance.followingCount" type="text" readonly>
 						<span>{{ $t('following') }}</span>
 					</ui-input>
@@ -136,6 +142,10 @@
 					<option value="+following">{{ $t('sorts.followingDesc') }}</option>
 					<option value="-followers">{{ $t('sorts.followersAsc') }}</option>
 					<option value="+followers">{{ $t('sorts.followersDesc') }}</option>
+					<option value="-activeHalfyear">{{ $t('sorts.activeHalfyearAsc') }}</option>
+					<option value="+activeHalfyear">{{ $t('sorts.activeHalfyearDesc') }}</option>
+					<option value="-activeMonth">{{ $t('sorts.activeMonthAsc') }}</option>
+					<option value="+activeMonth">{{ $t('sorts.activeMonthDesc') }}</option>
 					<option value="-driveUsage">{{ $t('sorts.driveUsageAsc') }}</option>
 					<option value="+driveUsage">{{ $t('sorts.driveUsageDesc') }}</option>
 					<option value="-driveFiles">{{ $t('sorts.driveFilesAsc') }}</option>
@@ -167,8 +177,8 @@
 					<span>{{ $t('system') }}</span>
 					<span>{{ $t('notes') }}</span>
 					<span>{{ $t('users') }}</span>
-					<span>{{ $t('following') }}</span>
-					<span>{{ $t('followers') }}</span>
+					<span>{{ $t('activeHalfyear') }}</span>
+					<span>{{ $t('activeMonth') }}</span>
 					<span>{{ $t('status') }}</span>
 				</header>
 				<div v-for="instance in instances" :key="instance.host" :style="{ opacity: instance.isNotResponding ? 0.5 : 1 }">
@@ -179,8 +189,8 @@
 					<span>{{ `${instance.softwareName || 'unknown'}` }} <small :style="{ opacity: 0.7 }">{{ `${instance.softwareVersion || ''}` }}</small></span>
 					<span>{{ instance.notesCount }}</span>
 					<span>{{ instance.usersCount }}</span>
-					<span>{{ instance.followingCount }}</span>
-					<span>{{ instance.followersCount }}</span>
+					<span>{{ instance.activeHalfyear }}</span>
+					<span>{{ instance.activeMonth }}</span>
 					<span>{{ instance.latestStatus }}</span>
 				</div>
 			</div>

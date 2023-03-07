@@ -2,7 +2,7 @@ import { getJson, getHtml } from '../misc/fetch';
 import Instance, { IInstance } from '../models/instance';
 import { toApHost } from '../misc/convert-host';
 import Logger from './logger';
-import { InboxRequestData } from '../queue';
+import { InboxRequestData } from '../queue/types';
 import { geoIpLookup } from './geoip';
 import { JSDOM } from 'jsdom';
 import config from '../config';
@@ -47,7 +47,7 @@ export async function UpdateInstanceinfo(instance: IInstance, request?: InboxReq
 		if (!_instance.infoUpdatedAt) return true;
 
 		const now = Date.now();
-		if (now - _instance.infoUpdatedAt.getTime() > 1000 * 60 * 60 * 24) return true;
+		if (now - _instance.infoUpdatedAt.getTime() > 1000 * 60 * 60 * 24) return true; 
 
 		if (request?.ip && !_instance.isp && (now - _instance.infoUpdatedAt.getTime() > 1000 * 60 * 60 * 1)) return true;
 
@@ -66,17 +66,24 @@ export async function UpdateInstanceinfo(instance: IInstance, request?: InboxReq
 	const info = await fetchInstanceinfo(toApHost(instance.host));
 	logger.info(JSON.stringify(info, null, 2));
 
+	const set = {
+		infoUpdatedAt: new Date(),
+		softwareName: info.softwareName,
+		softwareVersion: info.softwareVersion,
+		openRegistrations: info.openRegistrations,
+		name: info.name,
+		description: info.description,
+		maintainerName: info.maintainerName,
+		maintainerEmail: info.maintainerEmail,
+		activeHalfyear: info.activeHalfyear,
+		activeMonth: info.activeMonth,
+	} as IInstance;
+
+	if (info.notesCount) set.notesCount = info.notesCount;
+	if (info.usersCount) set.usersCount = info.usersCount;
+
 	await Instance.update({ _id: instance._id }, {
-		$set: {
-			infoUpdatedAt: new Date(),
-			softwareName: info.softwareName,
-			softwareVersion: info.softwareVersion,
-			openRegistrations: info.openRegistrations,
-			name: info.name,
-			description: info.description,
-			maintainerName: info.maintainerName,
-			maintainerEmail: info.maintainerEmail
-		}
+		$set: set
 	});
 
 	// GeoIP
@@ -159,6 +166,10 @@ export async function fetchInstanceinfo(host: string) {
 		description,
 		maintainerName,
 		maintainerEmail,
+		activeHalfyear: info?.usage?.users?.activeHalfyear ?? null,
+		activeMonth: info?.usage?.users?.activeMonth ?? null,
+		usersCount: info?.usage?.users?.total ?? null,
+		notesCount: info?.usage?.localPosts ?? null,
 	};
 }
 

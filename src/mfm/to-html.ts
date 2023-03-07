@@ -77,6 +77,12 @@ export function toHtml(nodes: MfmNode[] | null, mentionedRemoteUsers: INote['men
 			return a;
 		}
 
+		if (node.type === 'quote') {
+			const el = doc.createElement('blockquote');
+			appendChildren(node.children, el);
+			return el;
+		}
+
 		if (node.type === 'blockCode') {
 			const pre = doc.createElement('pre');
 			const inner = doc.createElement('code');
@@ -88,6 +94,42 @@ export function toHtml(nodes: MfmNode[] | null, mentionedRemoteUsers: INote['men
 		if (node.type === 'inlineCode') {
 			const el = doc.createElement('code');
 			el.textContent = node.props.code;
+			return el;
+		}
+
+		if (node.type === 'title') {
+			const el = doc.createElement('h1');
+			appendChildren(node.children, el);
+			return el;
+		}
+
+		if (node.type === 'bold') {
+			const el = doc.createElement('b');
+			appendChildren(node.children, el);
+			return el;
+		}
+
+		if (node.type === 'big') {
+			const el = doc.createElement('span');
+			appendChildren(node.children, el);
+			return el;
+		}
+
+		if (node.type === 'small') {
+			const el = doc.createElement('small');
+			appendChildren(node.children, el);
+			return el;
+		}
+
+		if (node.type === 'strike') {
+			const el = doc.createElement('del');
+			appendChildren(node.children, el);
+			return el;
+		}
+
+		if (node.type === 'italic') {
+			const el = doc.createElement('i');
+			appendChildren(node.children, el);
 			return el;
 		}
 

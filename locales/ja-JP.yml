@@ -1881,6 +1881,8 @@ admin/views/federation.vue:
   followers: "フォロワー"
   caught-at: "登録日時"
   status: "ステータス"
+  activeHalfyear: "Users 6m"
+  activeMonth: "Users 1m"
   latest-request-sent-at: "直近のリクエスト送信"
   latest-request-received-at: "直近のリクエスト受信"
   remove-all-following: "フォローを全解除"
@@ -1909,6 +1911,10 @@ admin/views/federation.vue:
     driveUsageDesc: "ドライブ使用量が多い順"
     driveFilesAsc: "ドライブのファイル数が少ない順"
     driveFilesDesc: "ドライブのファイル数が多い順"
+    activeHalfyearAsc: 半年アクティブユーザーが少ない順
+    activeHalfyearDesc: 半年アクティブユーザーが多い順
+    activeMonthAsc: 月間アクティブユーザーが少ない順
+    activeMonthDesc: 月間アクティブユーザーが多い順
   state: "状態"
   states:
     all: "すべて"
