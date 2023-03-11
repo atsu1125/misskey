@@ -199,6 +199,7 @@ common:
   userStatuses:
     silenced: Silenced
     suspended: Suspended
+    disabled: Disabled
     deleted: Deleted
 
   empty-timeline-info:
@@ -1611,6 +1612,12 @@ admin/views/users.vue:
   unsuspend: "Unsuspend"
   unsuspend-confirm: "Are you sure you want to unsuspend this account?"
   unsuspended: "The user has successfully unsuspended."
+  disableLogin: "Disable Login"
+  enableLogin: "Enable Login"
+  disablelogin-confirm: "Are you sure that you want to disable Login this user?"
+  enablelogin-confirm: "Are you sure that you want to enable Login this user?"
+  disabledlogin: "Successfully disabled Login."
+  enabledlogin: "The user has successfully enabled Login."
   delete: "Delete"
   delete-confirm: "Do you want to delete this account?"
   deleted: "Deleted"
@@ -1637,12 +1644,14 @@ admin/views/users.vue:
     state:
       title: "Sort"
       all: "All"
+      available: "Operational"
       admin: "Administrator"
       moderator: "Moderator"
       adminOrModerator: "Admin/Moderator"
       verified: "Verified account"
       silenced: "Already silenced"
       suspended: "Suspended"
+      disabled: "Disabled Login"
       deleted: "Deleted"
     origin:
       title: "Origin"

@@ -92,6 +92,7 @@ export default define(meta, async (ps, me) => {
 	q.$and.push(
 		ps.state == 'available' ? { $and: [
 			{ isSuspended: { $ne: true } },
+			{ isDisabledLogin: { $ne: true } },
 			{ isDeleted: { $ne: true } },
 		]} :
 		ps.state == 'admin' ? { isAdmin: true } :
@@ -106,6 +107,7 @@ export default define(meta, async (ps, me) => {
 		ps.state == 'verified' ? { isVerified: true } :
 		ps.state == 'silenced' ? { isSilenced: true } :
 		ps.state == 'suspended' ? { isSuspended: true } :
+		ps.state == 'disabled' ? { isDisabledLogin: true } :
 		ps.state == 'deleted' ? { isDeleted: true } :
 		ps.state == 'bot' ? { isBot: true } :
 		ps.state == 'cat' ? { isCat: true } :

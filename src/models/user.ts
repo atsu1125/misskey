@@ -82,6 +82,11 @@ type IUserBase = {
 	isSuspended: boolean;
 
 	/**
+	 * ログイン無効化されているか否か
+	 */
+	isDisabledLogin: boolean;
+
+	/**
 	 * サイレンスされているか否か
 	 */
 	isSilenced: boolean;
@@ -501,6 +506,7 @@ export async function pack(
 
 			isSilenced: !!db.isSilenced,
 			isSuspended: !!db.isSuspended,
+			isDisabledLogin: !!db.isDisabledLogin,
 			isDeleted: !!db.isDeleted,
 			description: db.description || null,
 			profile: {

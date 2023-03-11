@@ -26,7 +26,7 @@ module.exports = (server: http.Server) => {
 		const q = request.resourceURL.query as ParsedUrlQuery;
 		const [user, app] = await authenticate(q.i as string);
 
-		if (user?.isSuspended || user?.isDeleted) {
+		if (user?.isSuspended || user?.isDeleted || user?.isDisabledLogin) {
 			request.reject(400);
 			return;
 		}

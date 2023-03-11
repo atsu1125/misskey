@@ -59,6 +59,12 @@ export default define(meta, async (ps) => {
 		return;	// エラー内容を返してもいい
 	}
 
+	// ログイン無効化されている
+	if (user.isDisabledLogin) {
+		apiLogger.warn(`Reset password requested for ${ps.username}, but disabled.`);
+		return;	// エラー内容を返してもいい
+	}
+
 	// 合致するメアドが登録されていなかったら無視
 	if (user.email !== ps.email) {
 		try {

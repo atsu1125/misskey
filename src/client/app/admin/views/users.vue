@@ -24,6 +24,8 @@
 						<!-- 複数回サスペンド/削除出来るのは仕様 -->
 						<ui-button @click="suspendUser(user.username)" :disabled="suspending || user.isModerator || user.isAdmin"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
 						<ui-button v-if="user.isSuspended" @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
+						<ui-button v-if="!user.isDisabledLogin" @click="disableLoginUser(user.username)" :disabled="disablingLogin || user.isModerator || user.isAdmin"><fa :icon="faFlag"/> {{ $t('disableLogin') }}</ui-button>
+						<ui-button v-if="user.isDisabledLogin" @click="enableLoginUser" :disabled="enablingLogin">{{ $t('enableLogin') }}</ui-button>
 						<ui-button @click="deleteUser(user.username)" :disabled="deleting || user.isModerator || user.isAdmin">{{ $t('delete') }}</ui-button>
 					</ui-horizon-group>
 					<ui-button v-if="user.host != null" @click="updateRemoteUser"><fa :icon="faSync"/> {{ $t('update-remote-user') }}</ui-button>
@@ -50,11 +52,12 @@
 				<ui-select v-model="state">
 					<template #label>{{ $t('users.state.title') }}</template>
 					<option value="all">{{ $t('users.state.all') }}</option>
-					<option value="available">Available</option>
+					<option value="available">{{ $t('users.state.available') }}</option>
 					<option value="admin">{{ $t('users.state.admin') }}</option>
 					<option value="moderator">{{ $t('users.state.moderator') }}</option>
 					<option value="verified">{{ $t('users.state.verified') }}</option>
 					<option value="silenced">{{ $t('users.state.silenced') }}</option>
+					<option value="disabled">{{ $t('users.state.disabled') }}</option>
 					<option value="suspended">{{ $t('users.state.suspended') }}</option>
 					<option value="deleted">{{ $t('users.state.deleted') }}</option>
 					<option value="bot">Bot</option>
@@ -93,7 +96,7 @@ import Vue from 'vue';
 import i18n from '../../i18n';
 import parseAcct from "../../../../misc/acct/parse";
 import { faCertificate, faUsers, faTerminal, faSearch, faKey, faSync, faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
-import { faSnowflake } from '@fortawesome/free-regular-svg-icons';
+import { faSnowflake, faFlag } from '@fortawesome/free-regular-svg-icons';
 import XUser from './users.user.vue';
 
 export default Vue.extend({
@@ -110,6 +113,8 @@ export default Vue.extend({
 			unverifying: false,
 			suspending: false,
 			unsuspending: false,
+			disablingLogin: false,
+			enablingLogin: false,
 			deleting: false,
 			sort: '+createdAt',
 			state: 'all',
@@ -121,7 +126,7 @@ export default Vue.extend({
 			offset: 0,
 			users: [],
 			existMore: false,
-			faTerminal, faCertificate, faUsers, faSnowflake, faSearch, faKey, faSync, faMicrophoneSlash
+			faTerminal, faCertificate, faUsers, faSnowflake, faSearch, faKey, faSync, faMicrophoneSlash, faFlag
 		};
 	},
 
@@ -375,6 +380,56 @@ export default Vue.extend({
 			});
 
 			this.unsuspending = false;
+
+			this.refreshUser();
+		},
+
+		async disableLoginUser() {
+			if (!await this.getConfirmed(this.$t('disablelogin-confirm'))) return;
+
+			this.disablingLogin = true;
+
+			const process = async () => {
+				await this.$root.api('admin/disablelogin-user', { userId: this.user._id });
+				this.$root.dialog({
+					type: 'success',
+					text: this.$t('disabledlogin')
+				});
+			};
+
+			await process().catch(e => {
+				this.$root.dialog({
+					type: 'error',
+					text: e.toString()
+				});
+			});
+
+			this.disablingLogin = false;
+
+			this.refreshUser();
+		},
+
+		async enableLoginUser() {
+			if (!await this.getConfirmed(this.$t('enablelogin-confirm'))) return;
+
+			this.enablingLogin = true;
+
+			const process = async () => {
+				await this.$root.api('admin/enablelogin-user', { userId: this.user._id });
+				this.$root.dialog({
+					type: 'success',
+					text: this.$t('enabledlogin')
+				});
+			};
+
+			await process().catch(e => {
+				this.$root.dialog({
+					type: 'error',
+					text: e.toString()
+				});
+			});
+
+			this.enablingLogin = false;
 
 			this.refreshUser();
 		},

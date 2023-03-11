@@ -205,6 +205,7 @@ common:
   userStatuses:
     silenced: サイレンス済み
     suspended: 凍結済み
+    disabled: 無効化済み
     deleted: 削除済み
 
   empty-timeline-info:
@@ -1764,6 +1765,12 @@ admin/views/users.vue:
   unsuspend: "凍結の解除"
   unsuspend-confirm: "凍結を解除しますか？"
   unsuspended: "凍結を解除しました"
+  disableLogin: "ログイン無効化"
+  disablelogin-confirm: "ログイン無効化しますか？"
+  disabledlogin: "ログイン無効化しました"
+  enableLogin: "ログイン有効化"
+  enablelogin-confirm: "ログイン有効化しますか？"
+  enabledlogin: "ログイン有効化しました"
   delete: "削除"
   delete-confirm: "削除しますか？"
   deleted: "削除しました"
@@ -1794,12 +1801,14 @@ admin/views/users.vue:
     state:
       title: "状態"
       all: "すべて"
+      available: "使用可能"
       admin: "管理者"
       moderator: "モデレーター"
       adminOrModerator: "管理者+モデレーター"
       verified: "公式アカウント"
       silenced: "サイレンス済み"
       suspended: "凍結済み"
+      disabled: "ログイン無効化済み"
       deleted: "削除済み"
     origin:
       title: "オリジン"

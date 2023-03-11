@@ -51,6 +51,11 @@ export default async (endpoint: string, user: IUser | null | undefined, app: IAp
 		throw new ApiError(accessDenied, { reason: 'Your account has been suspended.' });
 	}
 
+	if (ep.meta.requireCredential && user!.isDisabledLogin) {
+		throw new ApiError(accessDenied, { reason: 'Your account has been disabled.' });
+	}
+
+
 	if (ep.meta.requireAdmin && !user!.isAdmin) {
 		throw new ApiError(accessDenied, { reason: 'You are not the admin.' });
 	}
