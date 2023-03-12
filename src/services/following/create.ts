@@ -17,6 +17,7 @@ import Logger from '../logger';
 import FollowRequest from '../../models/follow-request';
 import { IdentifiableError } from '../../misc/identifiable-error';
 import { publishFollowingChanged } from '../server-event';
+import { isSilencedHost } from '../../services/instance-moderation';
 
 const logger = new Logger('following/create');
 
@@ -187,6 +188,7 @@ export default async function(follower: IUser, followee: IUser, requestId?: stri
 		|| (followee.carefulRemote && isRemoteUser(follower))
 		|| (followee.carefulMassive && follower.followingCount > 5000 && (follower.followingCount / follower.followersCount) > 10)
 		|| (follower.isSilenced)
+		|| (await isSilencedHost(follower.host))
 		|| (isLocalUser(follower) && isRemoteUser(followee))) {
 		let autoAccept = false;
 

@@ -155,6 +155,7 @@ export default define(meta, async (ps, me) => {
 	if (me && (me.isAdmin || me.isModerator)) {
 		response.hidedTags = instance.hidedTags;
 		response.blockedInstances = instance.blockedInstances;
+		response.silencedInstances = instance.silencedInstances;
 		response.selfSilencedInstances = instance.selfSilencedInstances;
 		response.exposeHome = instance.exposeHome;
 		response.recaptchaSecretKey = instance.recaptchaSecretKey;

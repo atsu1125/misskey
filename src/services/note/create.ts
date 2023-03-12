@@ -34,6 +34,7 @@ import Following from '../../models/following';
 import { IActivity } from '../../remote/activitypub/type';
 import { normalizeTag } from '../../misc/normalize-tag';
 import * as ms from 'ms';
+import { isSilencedHost } from '../../services/instance-moderation'
 
 type NotificationType = 'reply' | 'renote' | 'quote' | 'mention' | 'highlight';
 
@@ -150,6 +151,13 @@ export default async (user: IUser, data: Option, silent = false) => {
 	}
 	if (data.poll && JSON.stringify(data.poll).length > 16384) {
 		throw 'poll limit exceeded';
+	}
+
+	// インスタンスサイレンス
+	if (await isSilencedHost(user.host)) {
+		if (data.visibility === 'public') {
+			data.visibility = 'home';
+		}
 	}
 
 	// リプライ対象が削除された投稿だったらreject

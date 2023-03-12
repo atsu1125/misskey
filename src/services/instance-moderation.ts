@@ -5,6 +5,8 @@ import fetchMeta from '../misc/fetch-meta';
 
 let blockedHosts: Set<string>;
 let blockedHostsRegExp: Set<RegExp>;
+let silencedHosts: Set<string>;
+let silencedHostsRegExp: Set<RegExp>;
 let selfSilencedHosts: Set<string>;
 let selfSilencedHostsRegExp: Set<RegExp>;
 let closedHosts: Set<string>;
@@ -16,6 +18,17 @@ export async function isBlockedHost(host: string | null) {
 	if (blockedHosts?.has(toApHost(host))) return true;
 
 	if (blockedHostsRegExp && Array.from(blockedHostsRegExp).some(x => x.test(toApHost(host)))) return true;
+
+	return false;
+}
+
+export async function isSilencedHost(host: string | null) {
+	if (host == null) return false;
+	if (!silencedHosts) await Update();
+
+	if (silencedHosts?.has(toApHost(host))) return true;
+
+	if (silencedHostsRegExp && Array.from(silencedHostsRegExp).some(x => x.test(toApHost(host)))) return true;
 
 	return false;
 }
@@ -60,6 +73,24 @@ async function Update() {
 
 		blockedHosts = literals;
 		blockedHostsRegExp = regExps;
+	}
+
+	// silence from meta
+	{
+		const literals = new Set<string>();
+		const regExps = new Set<RegExp>();
+
+		for (const b of (meta.silencedInstances || [])) {
+			const m = b.match(/^[/](.*)[/]$/);
+			if (m) {
+				regExps.add(new RegExp(m[1]));
+			} else {
+				literals.add(b);
+			}
+		}
+
+		silencedHosts = literals;
+		silencedHostsRegExp = regExps;
 	}
 
 	// self-silence from meta

@@ -99,6 +99,13 @@ export const meta = {
 			}
 		},
 
+		silencedInstances: {
+			validator: $.optional.nullable.arr($.str),
+			desc: {
+				'ja-JP': 'silencedInstances'
+			}
+		},
+
 		selfSilencedInstances: {
 			validator: $.optional.nullable.arr($.str),
 			desc: {
@@ -427,6 +434,10 @@ export default define(meta, async (ps) => {
 		set.blockedInstances = ps.blockedInstances.map(x => x.trim()).filter(x => x !== '').map(x => toApHost(x));
 	}
 
+	if (Array.isArray(ps.silencedInstances)) {
+		set.silencedInstances = ps.silencedInstances.map(x => x.trim()).filter(x => x !== '').map(x => toApHost(x));
+	}
+
 	if (Array.isArray(ps.selfSilencedInstances)) {
 		set.selfSilencedInstances = ps.selfSilencedInstances.map(x => x.trim()).filter(x => x !== '').map(x => toApHost(x));
 	}
@@ -587,7 +598,7 @@ export default define(meta, async (ps) => {
 		$set: set
 	}, { upsert: true });
 
-	if (set.blockedInstances || set.selfSilencedInstances) {
+	if (set.blockedInstances || set.silencedInstances || set.selfSilencedInstances) {
 		publishInstanceModUpdated();
 	}
 

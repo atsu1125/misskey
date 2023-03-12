@@ -10,6 +10,12 @@
 		</section>
 
 		<section>
+			<header>{{ $t('silencedInstances') }}</header>
+			<ui-textarea v-model="silencedInstances"></ui-textarea>
+			<ui-info>{{ $t('silencedInstances-info') }}</ui-info>
+		</section>
+
+		<section>
 			<header>{{ $t('selfSilencedInstances') }}</header>
 			<ui-textarea v-model="selfSilencedInstances"></ui-textarea>
 			<ui-info>{{ $t('selfSilencedInstances-info') }}</ui-info>
@@ -37,6 +43,7 @@ export default defineComponent({
 		return {
 			$root: getCurrentInstance() as any,
 			blockedInstances: '',
+			silencedInstances: '',
 			selfSilencedInstances: '',
 			exposeHome: false,
 		};
@@ -48,6 +55,7 @@ export default defineComponent({
 		fetch() {
 			this.$root.api('admin/meta').then((meta: any) => {
 				this.blockedInstances = meta.blockedInstances.join('\n');
+				this.silencedInstances = meta.silencedInstances.join('\n');
 				this.selfSilencedInstances = meta.selfSilencedInstances.join('\n');
 				this.exposeHome = meta.exposeHome;
 			});
@@ -55,6 +63,7 @@ export default defineComponent({
 		save() {
 			this.$root.api('admin/update-meta', {
 				blockedInstances: this.blockedInstances ? this.blockedInstances.split('\n') : [],
+				silencedInstances: this.silencedInstances ? this.silencedInstances.split('\n') : [],
 				selfSilencedInstances: this.selfSilencedInstances ? this.selfSilencedInstances.split('\n') : [],
 				exposeHome: !!this.exposeHome,
 			}).then(() => {

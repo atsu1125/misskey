@@ -193,6 +193,7 @@ export type IMeta = {
 	useStarForReactionFallback?: boolean;
 	hidedTags?: string[];
 	blockedInstances?: string[];
+	silencedInstances?: string[];
 	selfSilencedInstances?: string[];
 	exposeHome?: boolean;
 	mascotImageUrl?: string;

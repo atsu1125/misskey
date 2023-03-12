@@ -9,6 +9,7 @@ const defaultMeta: any = {
 	remoteDriveCapacityMb: 8,
 	hidedTags: [],
 	blockedInstances: [],
+	silencedInstances: [],
 	selfSilencedInstances: [],
 	exposeHome: false,
 	stats: {
