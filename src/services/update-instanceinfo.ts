@@ -166,10 +166,10 @@ export async function fetchInstanceinfo(host: string) {
 		description,
 		maintainerName,
 		maintainerEmail,
-		activeHalfyear: info?.usage?.users?.activeHalfyear ?? null,
-		activeMonth: info?.usage?.users?.activeMonth ?? null,
-		usersCount: info?.usage?.users?.total ?? null,
-		notesCount: info?.usage?.localPosts ?? null,
+		activeHalfyear: expectNumber(info?.usage?.users?.activeHalfyear),
+		activeMonth: expectNumber(info?.usage?.users?.activeMonth),
+		usersCount: expectNumber(info?.usage?.users.total),
+		notesCount: expectNumber(info?.usage?.localPosts),
 	};
 }
 
@@ -244,4 +244,9 @@ async function fetchManifest(url: string) {
 	};
 
 	return json;
+}
+
+function expectNumber(x: unknown) {
+	if (typeof x === 'number') return x;
+	return null;
 }

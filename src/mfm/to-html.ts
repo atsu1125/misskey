@@ -20,6 +20,19 @@ export function toHtml(nodes: MfmNode[] | null, mentionedRemoteUsers: INote['men
 	}
 
 	function nodeToElement(node: MfmNode): HTMLElement | Text {
+		/*
+		function nodeToData(node: MfmNode, baseElement: 'i' | 'b' = 'i' ): HTMLElement {
+			const el = doc.createElement(baseElement);
+			el.setAttribute('data-mfm', node.props.name ?? node.type)
+			for (const key of Object.keys(node.props.args || {})) {
+				const val = node.props.args[key];
+				el.setAttribute(`data-mfm-${key}`, typeof val === 'boolean' ? '1' : val);
+			}
+			appendChildren(node.children, el);
+			return el;
+		}
+		*/
+
 		if (node.type === 'text') {
 			const el = doc.createElement('span');
 			const nodes = (node.props.text as string).split(/\r\n|\r|\n/).map(x => doc.createTextNode(x) as Node);
@@ -87,6 +100,7 @@ export function toHtml(nodes: MfmNode[] | null, mentionedRemoteUsers: INote['men
 			const pre = doc.createElement('pre');
 			const inner = doc.createElement('code');
 			inner.textContent = node.props.code;
+			if (node.props.lang) inner.setAttribute('data-lang', node.props.lang)
 			pre.appendChild(inner);
 			return pre;
 		}
@@ -109,12 +123,6 @@ export function toHtml(nodes: MfmNode[] | null, mentionedRemoteUsers: INote['men
 			return el;
 		}
 
-		if (node.type === 'big') {
-			const el = doc.createElement('span');
-			appendChildren(node.children, el);
-			return el;
-		}
-
 		if (node.type === 'small') {
 			const el = doc.createElement('small');
 			appendChildren(node.children, el);
@@ -133,7 +141,19 @@ export function toHtml(nodes: MfmNode[] | null, mentionedRemoteUsers: INote['men
 			return el;
 		}
 
-		const el = doc.createElement('span');
+		/*
+		if (['sub', 'sup'].includes(node.type)) {
+			const el = doc.createElement(node.type);
+			appendChildren(node.children, el);
+			return el;
+		}
+
+		if (['fn'].includes(node.type)) {
+			return nodeToData(node, 'i');
+		}
+		*/
+
+		const el = doc.createElement('i');
 		if (node.children) appendChildren(node.children, el);
 		return el;
 	}

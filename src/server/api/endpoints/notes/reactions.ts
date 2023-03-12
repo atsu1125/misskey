@@ -5,6 +5,7 @@ import define from '../../define';
 import { getNote } from '../../common/getters';
 import { ApiError } from '../../error';
 import { toDbReaction, toDbReactionNoResolve } from '../../../../misc/reaction-lib';
+import { getHideUserIdsById } from '../../common/get-hide-users';
 
 export const meta = {
 	desc: {
@@ -100,6 +101,11 @@ export default define(meta, async (ps, user) => {
 		if (query.reaction === '🍮' || query.reaction === 'pudding') {
 			query.reaction = { $in: [ '🍮', 'pudding' ] };
 		}
+	}
+
+	if (user) {
+		const hideUserIds = await getHideUserIdsById(user._id, true, true);
+		query.userId = { $nin: hideUserIds };
 	}
 
 	const reactions = await NoteReaction.find(query, {

@@ -1,18 +1,30 @@
-import { IUser, isLocalUser, isRemoteUser } from '../../../models/user';
+import User, { IUser, isLocalUser, isRemoteUser, IRemoteUser } from '../../../models/user';
 import Note, { INote, pack } from '../../../models/note';
 import NoteReaction, { INoteReaction } from '../../../models/note-reaction';
 import { publishNoteStream, publishHotStream } from '../../stream';
 import { createNotification } from '../../create-notification';
 import { renderLike } from '../../../remote/activitypub/renderer/like';
-import { deliverToUser, deliverToFollowers } from '../../../remote/activitypub/deliver-manager';
+import DeliverManager from '../../../remote/activitypub/deliver-manager';
 import { renderActivity } from '../../../remote/activitypub/renderer';
 import { toDbReaction, decodeReaction } from '../../../misc/reaction-lib';
 import { packEmojis } from '../../../misc/pack-emojis';
 import Meta from '../../../models/meta';
 import { IdentifiableError } from '../../../misc/identifiable-error';
 import config from '../../../config';
+import Blocking from '../../../models/blocking';
 
 export default async (user: IUser, note: INote, reaction?: string, dislike = false): Promise<INoteReaction> => {
+	if (note.userId !== user._id) {
+		const blocked = await Blocking.findOne({
+			blockeeId: user._id,
+			blockerId: note.userId,
+		});
+
+		if (blocked) {
+			throw new IdentifiableError('e70412a4-7197-4726-8e74-f3e0deb92aa7');
+		}
+	}
+
 	reaction = await toDbReaction(reaction, true, user.host);
 
 	const inserted = await NoteReaction.insert({
@@ -66,9 +78,19 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 	//#region 配信
 	if (isLocalUser(user) && !note.localOnly && !user.noFederation) {
 		const content = renderActivity(await renderLike(inserted, note), user);
-		if (isRemoteUser(note._user)) deliverToUser(user, content, note._user);
-		if (!config.disableLikeBroadcast) deliverToFollowers(user, content, true);
-		//deliverToRelays(user, content);
+
+		const dm = new DeliverManager(user, content)
+
+		if (isRemoteUser(note._user)) {
+			const reactee = await User.findOne({ _id: note.userId });
+			if (isRemoteUser(reactee)) dm.addDirectRecipe(reactee);
+		}
+
+		if (!config.disableLikeBroadcast) {
+			dm.addFollowersRecipe();
+		}
+
+		dm.execute(true);
 	}
 	//#endregion
 
