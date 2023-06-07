@@ -83,6 +83,10 @@ const nodeinfo2 = async () => {
 			enableServiceWorker: meta.enableServiceWorker,
 			proxyAccountName: meta.proxyAccount || null,
 			themeColor: meta.themeColor || '#86b300',
+			upstream: {
+				name: 'misskey',
+				version: '10.102.1',
+			},
 		}
 	};
 };
