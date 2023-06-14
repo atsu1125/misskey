@@ -63,6 +63,16 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 				}
 			});
 
+			// 一定期間配送エラーなら配送を停止する
+			const faildays = 1000 * 60 * 60 * 24 * 7; // 7日前まで許容
+			if (i.lastCommunicatedAt.getTime() && (i.lastCommunicatedAt.getTime() < (Date.now() - faildays))) {
+				Instance.update({ _id: i._id }, {
+					$set: {
+						isMarkedAsClosed: true
+					}
+				});
+			}
+
 			instanceChart.requestSent(i.host, false);
 		});
 
