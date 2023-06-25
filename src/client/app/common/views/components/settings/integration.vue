@@ -72,7 +72,7 @@ export default Vue.extend({
 
 	computed: {
 		discordName(): string {
-			return this.$store.state.i.discord.global_name
+			return this.$store.state.i.discord.discriminator === '0'
 				? `${this.$store.state.i.discord.username}`
 				: `${this.$store.state.i.discord.username}#${this.$store.state.i.discord.discriminator}`;
 		},

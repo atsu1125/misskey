@@ -17,7 +17,7 @@ export default Vue.extend({
 	props: ['user'],
 	computed: {
 		discordName(): string {
-			return this.user.discord.global_name
+			return this.user.discord.discriminator === '0'
 				? `${this.user.discord.username}`
 				: `${this.user.discord.username}#${this.user.discord.discriminator}`;
 		},
