@@ -168,7 +168,7 @@ specifiers:
   stringz: 2.1.0
   stylus: 0.59.0
   stylus-loader: 7.1.0
-  summaly: mei23/summaly#3.5.0
+  summaly: mei23/summaly#3.6.0
   suncalc: 1.9.0
   systeminformation: 5.17.12
   syuilo-password-strength: 0.0.1
@@ -318,7 +318,7 @@ dependencies:
   stringz: 2.1.0
   stylus: 0.59.0
   stylus-loader: 7.1.0_nekjw7fijtqu3qyocafh57c5qi
-  summaly: github.com/mei23/summaly/7f0e56a625e0af1142a3a805fcf5ff4338a9e9c9
+  summaly: github.com/mei23/summaly/206c16cec38f9553990bf09cbbb0c89244ae76a3
   suncalc: 1.9.0
   systeminformation: 5.17.12
   syuilo-password-strength: 0.0.1
@@ -11562,10 +11562,10 @@ packages:
       sshpk: 1.17.0
     dev: false
 
-  github.com/mei23/summaly/7f0e56a625e0af1142a3a805fcf5ff4338a9e9c9:
-    resolution: {tarball: https://codeload.github.com/mei23/summaly/tar.gz/7f0e56a625e0af1142a3a805fcf5ff4338a9e9c9}
+  github.com/mei23/summaly/206c16cec38f9553990bf09cbbb0c89244ae76a3:
+    resolution: {tarball: https://codeload.github.com/mei23/summaly/tar.gz/206c16cec38f9553990bf09cbbb0c89244ae76a3}
     name: summaly
-    version: 3.5.0
+    version: 3.6.0
     dependencies:
       cheerio: 1.0.0-rc.12
       escape-regexp: 0.0.1
