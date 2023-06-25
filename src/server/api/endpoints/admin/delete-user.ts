@@ -73,5 +73,5 @@ export default define(meta, async (ps) => {
 	Message.remove({ userId: user._id });
 	createDeleteNotesJob(user);
 	createDeleteDriveFilesJob(user);
-	doPostSuspend(user);
+	doPostSuspend(user, true);
 });

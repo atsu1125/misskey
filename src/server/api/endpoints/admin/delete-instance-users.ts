@@ -67,6 +67,6 @@ export default define(meta, async (ps) => {
 		await Message.remove({ userId: user._id });
 		await createDeleteNotesJob(user);
 		await createDeleteDriveFilesJob(user);
-		await doPostSuspend(user);
+		await doPostSuspend(user, true);
 	}
 });

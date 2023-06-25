@@ -3,6 +3,7 @@ import db from '../db/mongodb';
 import isObjectId from '../misc/is-objectid';
 import * as deepcopy from 'deepcopy';
 import { pack as packUser, IUser } from './user';
+import { dbLogger } from '../db/logger';
 
 const Mute = db.get<IMute>('mute');
 Mute.createIndex('muterId');
@@ -52,6 +53,13 @@ export const pack = async (
 	_mute.mutee = await packUser(_mute.muteeId, me, {
 		detail: true
 	});
+
+	if (_mute.mutee == null) {
+		dbLogger.warn(`[DAMAGED DB] (missing) pkg: mute -> mutee :: ${_mute.muteeId}`);
+		_mute.mutee = {
+			// deleted
+		};
+	}
 
 	return _mute;
 };

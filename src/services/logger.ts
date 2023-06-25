@@ -1,6 +1,6 @@
 import * as cluster from 'cluster';
 import * as os from 'os';
-import * as chalk from 'chalk';
+import * as Chalk from 'chalk';
 import { format } from 'date-fns';
 import { envOption } from '../env';
 import Log from '../models/log';
@@ -8,6 +8,7 @@ import config from '../config';
 //import { processLabel } from '..';
 
 const SyslogPro = require('syslog-pro');
+const chalk = new Chalk.Instance(process.env.NODE_ENV === 'production' ? { level: 0 } : {});
 
 type Domain = {
 	name: string;

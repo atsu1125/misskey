@@ -73,7 +73,7 @@ export default define(meta, async (ps, user) => {
 	createDeleteSigninsJob(user, 30 * 86400 * 1000);
 	createDeleteNotesJob(user);
 	createDeleteDriveFilesJob(user);
-	doPostSuspend(user);
+	doPostSuspend(user, true);
 
 	return;
 });

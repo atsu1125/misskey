@@ -3,6 +3,7 @@ import db from '../db/mongodb';
 import isObjectId from '../misc/is-objectid';
 import * as deepcopy from 'deepcopy';
 import { pack as packUser, IUser } from './user';
+import { dbLogger } from '../db/logger';
 
 const Blocking = db.get<IBlocking>('blocking');
 Blocking.createIndex('blockerId');
@@ -51,6 +52,13 @@ export const pack = async (
 	_blocking.blockee = await packUser(_blocking.blockeeId, me, {
 		detail: true
 	});
+
+	if (_blocking.blockee == null) {
+		dbLogger.warn(`[DAMAGED DB] (missing) pkg: blocking -> blockee :: ${_blocking.blockeeId}`);
+		_blocking.blockee = {
+			// deleted
+		};
+	}
 
 	return _blocking;
 };

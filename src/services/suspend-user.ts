@@ -10,13 +10,23 @@ import FollowRequest from '../models/follow-request';
 import Notification from '../models/notification';
 import NoteReaction from '../models/note-reaction';
 import UserList from '../models/user-list';
+import Blocking from '../models/blocking';
+import Mute from '../models/mute';
 
-export async function doPostSuspend(user: IUser) {
+export async function doPostSuspend(user: IUser, isDelete = false) {
 	await unFollowAll(user).catch(() => {});
 	await rejectFollowAll(user).catch(() => {});
 	await removeFollowingRequestAll(user).catch(() => {});
 	await removeFollowedRequestAll(user).catch(() => {});
 	await sendDeleteActivity(user).catch(() => {});
+
+	// Delete block/mute
+	if (isDelete) {
+		await Blocking.remove({ blockerId: user._id }).catch(() => {});
+		await Blocking.remove({ blockeeId: user._id }).catch(() => {});
+		await Mute.remove({ muterId: user._id }).catch(() => {});
+		await Mute.remove({ muteeId: user._id }).catch(() => {});
+	}
 
 	// アカウント削除時に送受信したNotificationを削除するように
 	await Notification.remove({
