@@ -151,6 +151,8 @@ type IUserBase = {
 	 */
 	isExplorable?: boolean;
 
+	searchableBy?: 'public' | 'none' | null;
+
 	/**
 	 * ブロックボタンを有効化するか
 	 */
@@ -559,6 +561,7 @@ export async function pack(
 			autoAcceptFollowed: !!db.autoAcceptFollowed,
 			isExplorable: !!db.isExplorable,
 			disableblock: !!db.disableblock,
+			searchableBy: db.searchableBy || 'public',
 			hideFollows: db.hideFollows || '',
 
 			wallpaperId: toOidStringOrNull(db.wallpaperId),

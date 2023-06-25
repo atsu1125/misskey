@@ -5,11 +5,15 @@
 	],
 	"packageRules": [
 		{
+			"matchPackageNames": ["@fortawesome/fontawesome-svg-core", "@fortawesome/free-brands-svg-icons", "@fortawesome/free-regular-svg-icons", "@fortawesome/free-solid-svg-icons"],
+			"allowedVersions": "< 6"
+		},
+		{
 			"matchPackageNames": ["chalk"],
 			"allowedVersions": "< 5"
 		},
 		{
-			"matchPackageNames": ["deepcopy "],
+			"matchPackageNames": ["deepcopy"],
 			"allowedVersions": "< 2"
 		},
 		{

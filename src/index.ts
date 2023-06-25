@@ -5,7 +5,14 @@
 Error.stackTraceLimit = Infinity;
 
 require('events').EventEmitter.defaultMaxListeners = 128;
-process.env.UV_THREADPOOL_SIZE = process.env.UV_THREADPOOL_SIZE || `${Math.min(Math.max(4, require('os').cpus().length), 1024)}`;
+
+if (process.env.UV_THREADPOOL_SIZE == null) {
+	let uvThreadpoolSize = 4;
+	const cpus = require('os').cpus().length;	// some environments returns 0
+	if (cpus > uvThreadpoolSize) uvThreadpoolSize = cpus;
+	if (uvThreadpoolSize > 1024) uvThreadpoolSize = 1024;
+	process.env.UV_THREADPOOL_SIZE = uvThreadpoolSize.toString();
+}
 
 import * as os from 'os';
 import * as cluster from 'cluster';

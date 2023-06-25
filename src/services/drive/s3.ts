@@ -6,6 +6,10 @@ import { getAgentByUrl } from '../../misc/fetch';
 export function getS3Client(drive: DriveConfig) {
 	if (drive.config == null) throw 'drive.config is null';
 
+	// dummy for selecting agent
+	const h = drive.config.endPoint || 'example.net';
+	const bypassProxy = drive.config.useProxy === undefined ? false : !drive.config.useProxy;
+
 	const config = {
 		endpoint: drive.config.endPoint ? `${drive.config.useSSL ? 'https://' : 'http://'}${drive.config.endPoint}` : undefined,
 		credentials: {
@@ -18,8 +22,8 @@ export function getS3Client(drive: DriveConfig) {
 			? false
 			: drive.config.s3ForcePathStyle == null ? true : !!drive.config.s3ForcePathStyle,
 		requestHandler: new NodeHttpHandler({
-			httpAgent: getAgentByUrl(new URL('http://example.net'), drive.config.useProxy === undefined ? false : !drive.config.useProxy) as any,
-			httpsAgent: getAgentByUrl(new URL('https://example.net'), drive.config.useProxy === undefined ? false : !drive.config.useProxy) as any,
+			httpAgent: getAgentByUrl(new URL(`http://${h}`), bypassProxy) as any,
+			httpsAgent: getAgentByUrl(new URL(`https://${h}`), bypassProxy) as any,
 			connectionTimeout: 10 * 1000,
 			socketTimeout: 30 * 1000,
 		}),
