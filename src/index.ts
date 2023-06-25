@@ -320,10 +320,10 @@ cluster.on('online', worker => {
 cluster.on('exit', worker => {
 	// Replace the dead worker,
 	// we're not sentimental
-	clusterLogger.error(chalk.red(`[${worker.id}:${worker.process.pid}] died :(`));
 	const type = workerIndex[worker.id] || 'worker';
 	const w = cluster.fork({ WORKER_TYPE: type });
 	workerIndex[w.id] = type;
+	clusterLogger.error(`[${worker.id}:${worker.process.pid}] died :(`);
 });
 
 // Display detail of unhandled promise rejection
