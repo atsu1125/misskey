@@ -122,7 +122,7 @@ export default Vue.extend({
 			if (m) this.steamId = m[1];
 		}
 
-		if (requestUrl.hostname === 'twitter.com' || requestUrl.hostname === 'mobile.twitter.com') {
+		if (requestUrl.hostname === 'twitter.com' || requestUrl.hostname === 'mobile.twitter.com' || requestUrl.hostname === 'x.com') {
 			const mTweet = requestUrl.pathname.match(/^\/(\w+)\/status(?:es)?\/(\d+)/);
 			if (mTweet) {
 				this.twitterUser = mTweet[1];

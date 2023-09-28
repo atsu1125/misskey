@@ -109,3 +109,12 @@ node built/tools/resync-remote-emoji.js name@host
 
 ```sh
 node built/tools/clean-reactions.ts
+```
+
+## バグで残ったキューログを削除する
+
+https://github.com/mei23/misskey/issues/4674 のバグで残ってしまったRedis上のログを削除します
+
+```sh
+node built/tools/clean-queue-logs.js
+```
