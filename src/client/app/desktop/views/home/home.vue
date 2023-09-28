@@ -150,11 +150,11 @@ export default Vue.extend({
 	},
 
 	mounted() {
-		this.connection = this.$root.stream.useSharedConnection('main');
+		this.connection = this.$root.stream?.useSharedConnection('main');
 	},
 
 	beforeDestroy() {
-		this.connection.dispose();
+		this.connection?.dispose();
 	},
 
 	methods: {
