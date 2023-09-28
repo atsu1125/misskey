@@ -128,7 +128,6 @@ export default async (ctx: Router.RouterContext) => {
 		carefulMassive: true,
 		refuseFollow: false,
 		autoAcceptFollowed: true,
-		disableblock: true,
 		profile: {
 			bio: null,
 			birthday: null,

@@ -1002,7 +1002,6 @@ common/views/components/profile-editor.vue:
   auto-accept-followed: "フォローしているユーザーからのフォローを自動承認する"
   avoid-search-index: "検索エンジンによるインデックスを避ける"
   isExplorable: "みつけるに表示する"
-  disableblock: "ブロック操作を無効にする"
   searchableBy: "投稿検索を許可する"
   hideFollows-none: "フォロー/フォロー一覧を隠さない"
   hideFollows-follower: "フォロー/フォロー一覧はフォロワーにのみ公開する"

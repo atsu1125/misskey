@@ -154,11 +154,6 @@ type IUserBase = {
 	searchableBy?: 'public' | 'none' | null;
 
 	/**
-	 * ブロックボタンを有効化するか
-	 */
-	disableblock?: boolean;
-
-	/**
 	 * このアカウントに届いているフォローリクエストの数
 	 */
 	pendingReceivedFollowRequestsCount: number;
@@ -562,7 +557,6 @@ export async function pack(
 			refuseFollow: !!db.refuseFollow,
 			autoAcceptFollowed: !!db.autoAcceptFollowed,
 			isExplorable: !!db.isExplorable,
-			disableblock: !!db.disableblock,
 			searchableBy: db.searchableBy || 'public',
 			hideFollows: db.hideFollows || '',
 

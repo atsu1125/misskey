@@ -103,7 +103,6 @@
 				<ui-switch v-model="autoAcceptFollowed" :disabled="!isLocked && !refuseFollow && !carefulBot && !carefulCat && !carefulRemote && !carefulMassive" @change="save(false)">{{ $t('auto-accept-followed') }}</ui-switch>
 				<ui-switch v-model="avoidSearchIndex" @change="save(false)">{{ $t('avoid-search-index') }}</ui-switch>
 				<ui-switch v-model="isExplorable" @change="save(false)">{{ $t('isExplorable') }}</ui-switch>
-				<ui-switch v-model="disableblock" @change="save(false)">{{ $t('disableblock') }}</ui-switch>
 				<ui-switch v-model="searchableBy" @change="save(false)">{{ $t('searchableBy') }}</ui-switch>
 				<ui-select v-model="hideFollows" @input="save(false)">
 					<option value="">{{ $t('hideFollows-none') }}</option>
@@ -200,7 +199,6 @@ export default Vue.extend({
 			autoAcceptFollowed: false,
 			avoidSearchIndex: false,
 			isExplorable: false,
-			disableblock: true,
 			searchableBy: true,
 			hideFollows: '',
 			noFederation: false,
@@ -259,7 +257,6 @@ export default Vue.extend({
 		this.autoAcceptFollowed = this.$store.state.i.autoAcceptFollowed;
 		this.avoidSearchIndex = this.$store.state.i.avoidSearchIndex;
 		this.isExplorable = this.$store.state.i.isExplorable;
-		this.disableblock = this.$store.state.i.disableblock;
 		this.searchableBy = this.$store.state.i.searchableBy === 'public';
 		this.hideFollows = this.$store.state.i.hideFollows;
 		this.noFederation = this.$store.state.i.noFederation;
@@ -364,7 +361,6 @@ export default Vue.extend({
 				autoAcceptFollowed: !!this.autoAcceptFollowed,
 				avoidSearchIndex: !!this.avoidSearchIndex,
 				isExplorable: !!this.isExplorable,
-				disableblock: !!this.disableblock,
 				hideFollows: this.hideFollows || '',
 				searchableBy: this.searchableBy ? 'public' : 'none',
 				fields,
