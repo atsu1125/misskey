@@ -95,7 +95,7 @@ setInterval(() => {
 export function deliver(user: ILocalUser, content: any, to: string, lowSeverity = false, inboxInfo?: InboxInfo) {
 	if (config.disableFederation) return;
 
-	const attempts = lowSeverity ? 2 : (config.deliverJobMaxAttempts || 12);
+	const attempts = lowSeverity ? 4 : (config.deliverJobMaxAttempts || 17);
 
 	if (content == null) return null;
 
@@ -145,7 +145,7 @@ export function inbox(activity: IActivity, signature: httpSignature.IParsedSigna
 	};
 
 	return inboxQueue.add(data, {
-		attempts: config.inboxJobMaxAttempts || 8,
+		attempts: config.inboxJobMaxAttempts || 10,
 		timeout: 5 * 60 * 1000,	// 5min
 		backoff: {
 			type: 'apBackoff'
