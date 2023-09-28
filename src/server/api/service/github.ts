@@ -109,6 +109,7 @@ router.get('/signin/github', async ctx => {
 		secure: config.url.startsWith('https'),
 		httpOnly: true
 	});
+	// Cache-Controlは/api/でprivateになっている
 
 	redis.set(sessid, JSON.stringify(params));
 

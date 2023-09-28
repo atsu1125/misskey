@@ -1,5 +1,9 @@
 import * as sharp from 'sharp';
 
+if (sharp.concurrency() > 2) {
+	sharp.concurrency(2);
+}
+
 export type IImage = {
 	data: Buffer;
 	ext: string;

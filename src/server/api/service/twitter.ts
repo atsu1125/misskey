@@ -100,6 +100,7 @@ router.get('/signin/twitter', async ctx => {
 		secure: config.url.startsWith('https'),
 		httpOnly: true
 	});
+	// Cache-Controlは/api/でprivateになっている
 
 	ctx.redirect(twCtx.url);
 });

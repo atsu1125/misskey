@@ -18,6 +18,8 @@ export default function(ctx: Router.RouterContext, user: ILocalUser, redirect = 
 		});
 		//#endregion
 
+		// Cache-Controlは/api/でprivateになっている
+
 		ctx.redirect(config.url);
 	} else {
 		ctx.body = { i: user.token };
