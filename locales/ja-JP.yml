@@ -1005,6 +1005,7 @@ common/views/components/profile-editor.vue:
   avoid-search-index: "検索エンジンによるインデックスを避ける"
   isExplorable: "みつけるに表示する"
   searchableBy: "投稿検索を許可する"
+  disable-like-broadcast: "Like (リアクション) を直接した相手のインスタンス以外に配信しない"
   hideFollows-none: "フォロー/フォロー一覧を隠さない"
   hideFollows-follower: "フォロー/フォロー一覧はフォロワーにのみ公開する"
   hideFollows-always: "フォロー/フォロー一覧を常に隠す"

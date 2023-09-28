@@ -59,7 +59,7 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 			score: (user.isBot || inserted.dislike) ? 0 : 1
 		}
 	});
-	
+
 	// Increment reactions count / stats
 	incReactionsCount(user);
 
@@ -99,7 +99,9 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 		}
 
 		if (!config.disableLikeBroadcast && ['public', 'home'].includes(note.visibility)) {
-			dm.addFollowersRecipe();
+			if (!user.disableLikeBroadcast) {
+				dm.addFollowersRecipe();
+			}
 		}
 
 		dm.execute(true);

@@ -147,6 +147,11 @@ type IUserBase = {
 	noFederation?: boolean;
 
 	/**
+	 * リアクションブロードキャストを無効にするか
+	 */
+	disableLikeBroadcast?: boolean;
+
+	/**
 	 * みつけるに表示するか
 	 */
 	isExplorable?: boolean;
@@ -558,6 +563,7 @@ export async function pack(
 			autoAcceptFollowed: !!db.autoAcceptFollowed,
 			isExplorable: !!db.isExplorable,
 			searchableBy: db.searchableBy || 'public',
+			disableLikeBroadcast: !!db.disableLikeBroadcast,
 			hideFollows: db.hideFollows || '',
 
 			wallpaperId: toOidStringOrNull(db.wallpaperId),
