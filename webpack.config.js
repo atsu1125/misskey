@@ -31,6 +31,7 @@ const meta = require('./package.json');
 const codename = meta.codename;
 
 const version = isProduction ? meta.version : meta.version + '-' + (0, rndstr_1.default)({ length: 8, chars: '0-9a-z' });
+const software = meta.name;
 
 const postcss = {
 	loader: 'postcss-loader',
@@ -140,6 +141,7 @@ module.exports = {
 		new webpack.DefinePlugin({
 			_CONSTANTS_: JSON.stringify(constants),
 			_VERSION_: JSON.stringify(version),
+			_SOFTWARE_: JSON.stringify(software),
 			_CODENAME_: JSON.stringify(codename),
 			_LANGS_: JSON.stringify(Object.entries(locales).map(([k, v]) => [k, v && v.meta && v.meta.lang])),
 			_ENV_: JSON.stringify(process.env.NODE_ENV),

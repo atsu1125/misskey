@@ -48,6 +48,8 @@
 				<ui-switch v-model="disableAnimatedMfm">{{ $t('@._settings.disable-animated-mfm') }}</ui-switch>
 				<ui-switch v-model="disableShowingAnimatedImages">{{ $t('@._settings.disable-showing-animated-images') }}</ui-switch>
 				<ui-switch v-model="showInstanceInfo">{{ $t('@._settings.showInstanceInfo') }}</ui-switch>
+				<ui-switch v-model="showInstanceSoftwareName">{{ $t('@._settings.showInstanceSoftwareName') }}</ui-switch>
+				<ui-switch v-model="showInstanceSoftwareVersion">{{ $t('@._settings.showInstanceSoftwareVersion') }}</ui-switch>
 				<ui-switch v-model="showTlPin">{{ $t('@._settings.showTlPin') }}</ui-switch>
 			</section>
 			<section v-if="$root.isMobile">
@@ -646,6 +648,16 @@ export default Vue.extend({
 		showInstanceInfo: {
 			get() { return !!this.$store.state.device.showInstanceInfo; },
 			set(value) { this.$store.commit('device/set', { key: 'showInstanceInfo', value }); }
+		},
+
+		showInstanceSoftwareName: {
+			get() { return !!this.$store.state.device.showSoftwareName; },
+			set(value) { this.$store.commit('device/set', { key: 'showSoftwareName', value }); }
+		},
+
+		showInstanceSoftwareVersion: {
+			get() { return !!this.$store.state.device.showSoftwareVersion; },
+			set(value) { this.$store.commit('device/set', { key: 'showSoftwareVersion', value }); }
 		},
 
 		showTlPin: {

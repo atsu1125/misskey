@@ -5,6 +5,7 @@ declare const _CONSTANTS_: {
 	feedbackUrl: string;
 };
 declare const _VERSION_: string;
+declare const _SOFTWARE_: string;
 declare const _CODENAME_: string;
 declare const _ENV_: string;
 declare const _MODS_: {
@@ -23,6 +24,7 @@ export const langs = _LANGS_;
 export const locale = JSON.parse(localStorage.getItem('locale'));
 export const constants = _CONSTANTS_;
 export const version = _VERSION_;
+export const software = _SOFTWARE_;
 export const codename = _CODENAME_;
 export const env = _ENV_;
 export const mods = _MODS_;

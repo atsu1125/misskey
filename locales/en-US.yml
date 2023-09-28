@@ -296,6 +296,8 @@ common:
     disable-animated-mfm: "Disable animated texts in a post"
     disable-showing-animated-images: "Do not play animated images"
     showInstanceInfo: "Show instance information"
+    showInstanceSoftwareName: "Show instance Software Name"
+    showInstanceSoftwareVersion: "Show instance Software Version"
     showTlPin: "Show TL pin buttons"
     enableKeyboardShortcutInNote: "Enable keyboard shortcut in post"
     suggest-recent-hashtags: "Show recent popular hashtags on the post form"

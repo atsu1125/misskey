@@ -5,6 +5,12 @@
 		<div class="name">
 			{{ (instance.name && instance.name !== instance.host) ? `${instance.name} (${instance.host})` : `${instance.host}` }}
 		</div>
+		<div class="name" v-if="instance.softwareName && $store.state.device.showSoftwareName">
+			{{ `${instance.softwareName}` }}
+		</div>
+		<div class="name" v-if="instance.softwareVersion && $store.state.device.showSoftwareVersion">
+			{{ `${instance.softwareVersion}` }}
+		</div>
 	</div>
 </router-link>
 </template>
@@ -22,7 +28,7 @@ type II = {
 	iconUrl?: string;
 };
 
-export default Vue.extend({ 
+export default Vue.extend({
 	props: ['instance'],
 	data() {
 		return {
@@ -61,7 +67,7 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 	.instance-info-wrap
-		text-decoration none 
+		text-decoration none
 		cursor pointer
 
 		.instance-info
