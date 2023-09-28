@@ -67,7 +67,7 @@ export default Vue.extend({
 			}]);
 		}
 
-		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id && !this.$store.state.i.disableblock && !this.user.isBlocking) {
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id && !this.user.isBlocking) {
 			menu = menu.concat([null, {
 				icon: 'ban',
 				text: this.$t('block'),
