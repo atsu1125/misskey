@@ -49,15 +49,17 @@ export default async (ctx: Router.RouterContext) => {
 		return;
 	}
 
-	if (user.hideFollows === 'always' || user.hideFollows === 'follower') {
-		ctx.status = 403;
-		return;
-	}
+	const followingCount = (user.hideFollows === '') ? user.followingCount : 0;
 
 	const limit = 10;
 	const partOf = `${config.url}/users/${userId}/following`;
 
 	if (page) {
+		if (user.hideFollows === 'always' || user.hideFollows === 'follower') {
+			ctx.status = 403;
+			return;
+		}
+
 		const query = {
 			followerId: user._id
 		} as any;
@@ -86,7 +88,7 @@ export default async (ctx: Router.RouterContext) => {
 				page: 'true',
 				cursor
 			})}`,
-			user.followingCount, renderedFollowees, partOf,
+			followingCount, renderedFollowees, partOf,
 			null,
 			inStock ? `${partOf}?${url.query({
 				page: 'true',
@@ -98,7 +100,7 @@ export default async (ctx: Router.RouterContext) => {
 		setResponseType(ctx);
 	} else {
 		// index page
-		const rendered = renderOrderedCollection(partOf, user.followingCount, user.hideFollows ? null : `${partOf}?page=true`, null);
+		const rendered = renderOrderedCollection(partOf, followingCount, user.hideFollows ? null : `${partOf}?page=true`, null);
 		ctx.body = renderActivity(rendered);
 		ctx.set('Cache-Control', 'public, max-age=180');
 		setResponseType(ctx);
