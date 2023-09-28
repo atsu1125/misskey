@@ -45,7 +45,6 @@ export default Vue.extend({
 			host: toUnicode(host),
 			name: 'Misskey',
 			description: '',
-			photos: [],
 			announcements: []
 		};
 	},
@@ -60,17 +59,6 @@ export default Vue.extend({
 
 		this.$root.api('stats', {}, false, true).then((stats: any) => {
 			this.stats = stats;
-		});
-
-		const image = ['image/jpeg','image/png','image/apng','image/gif','image/webp', 'image/avif'];
-
-		this.$root.api('notes/featured', {
-			fileType: image,
-			limit: 6,
-			excludeNsfw: true,
-		}, false, true).then((notes: any[]) => {
-			const files = concat(notes.map((n: any): any[] => n.files));
-			this.photos = files.filter(f => image.includes(f.type)).slice(0, 6);
 		});
 	},
 	methods: {

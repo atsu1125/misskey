@@ -14,6 +14,10 @@ if (process.env.UV_THREADPOOL_SIZE == null) {
 	process.env.UV_THREADPOOL_SIZE = uvThreadpoolSize.toString();
 }
 
+process.on('SIGUSR2', () => {
+	console.log(JSON.stringify({ memoryUsage: process.memoryUsage() }));
+});
+
 import * as os from 'os';
 import * as cluster from 'cluster';
 import Xev from 'xev';
