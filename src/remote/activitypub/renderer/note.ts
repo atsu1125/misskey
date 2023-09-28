@@ -145,6 +145,10 @@ export default async function renderNote(note: INote, dive = true): Promise<any>
 		summary,
 		content,
 		_misskey_content: text,
+		source: {
+			content: text,
+			mediaType: "text/x.misskeymarkdown",
+		},
 		_misskey_quote: quote,
 		quoteUri: quote,
 		published: note.createdAt.toISOString(),
