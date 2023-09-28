@@ -27,6 +27,7 @@ let inboxDeltaCounts = 0;
 
 export const deliverJobConcurrency = config.deliverJobConcurrency || ((cpus().length || 4) * 8);
 export const inboxJobConcurrency = config.inboxJobConcurrency || ((cpus().length || 4) * 1);
+export const inboxLazyJobConcurrency = config.inboxLazyJobConcurrency || 1;
 
 deliverQueue
 	.on('waiting', (jobId) => {
@@ -368,7 +369,7 @@ export default function() {
 	deliverQueue.process(deliverJobConcurrency, processDeliver);
 	webpushDeliverQueue.process(8, processWebpushDeliver);
 	inboxQueue.process(inboxJobConcurrency, processInbox);
-	inboxLazyQueue.process(1, processInbox);
+	inboxLazyQueue.process(inboxLazyJobConcurrency, processInbox);
 	processDb(dbQueue);
 }
 
@@ -378,6 +379,7 @@ export function destroy(domain?: string) {
 			deliverLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		deliverQueue.clean(0, 'delayed');
+		deliverQueue.clean(0, 'wait');
 	}
 
 	if (domain == null || domain === 'inbox') {
@@ -385,6 +387,7 @@ export function destroy(domain?: string) {
 			inboxLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		inboxQueue.clean(0, 'delayed');
+		inboxQueue.clean(0, 'wait');
 	}
 
 	if (domain == null || domain === 'inboxLazy') {
@@ -392,6 +395,7 @@ export function destroy(domain?: string) {
 			inboxLazyLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		inboxLazyQueue.clean(0, 'delayed');
+		inboxLazyQueue.clean(0, 'wait');
 	}
 
 	if (domain === 'db') {
@@ -399,5 +403,6 @@ export function destroy(domain?: string) {
 			dbLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		dbQueue.clean(0, 'delayed');
+		dbQueue.clean(0, 'wait');
 	}
 }

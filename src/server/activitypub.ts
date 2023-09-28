@@ -87,6 +87,10 @@ async function inbox(ctx: Router.RouterContext) {
 			await limiter(ep, undefined, undefined);
 		} catch (e) {
 			console.log(`InboxLimit: ${actor}`);
+			if (config.inboxMassDelOpeMode === 'ignore') {
+				ctx.status = 202;
+				return;
+			}
 			lazy = true;
 		}
 	}

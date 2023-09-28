@@ -1,9 +1,10 @@
+import * as Bull from 'bull';
 import * as Deque from 'double-ended-queue';
 import Xev from 'xev';
 import { deliverQueue, inboxQueue, inboxLazyQueue } from '../queue/queues';
 import config from '../config';
 import { getWorkerStrategies } from '..';
-import { deliverJobConcurrency, inboxJobConcurrency } from '../queue';
+import { deliverJobConcurrency, inboxJobConcurrency, inboxLazyJobConcurrency } from '../queue';
 
 const ev = new Xev();
 
@@ -26,16 +27,32 @@ export default function() {
 	let activeInboxJobs = 0;
 	let activeInboxLazyJobs = 0;
 
-	deliverQueue.on('global:active', () => {
+	let deliverDelay: number | null = null;
+	let inboxDelay: number | null = null;
+	let inboxLazyDelay: number | null = null;
+
+	deliverQueue.on('global:active', async (jobId) => {
 		activeDeliverJobs++;
+		if (activeDeliverJobs === 1) {	// 各tickの最初でサンプリング
+			const delay = await getDelay(deliverQueue, jobId);
+			if (delay != null) deliverDelay = delay;
+		}
 	});
 
-	inboxQueue.on('global:active', () => {
+	inboxQueue.on('global:active', async (jobId) => {
 		activeInboxJobs++;
+		if (activeInboxJobs === 1) {
+			const delay = await getDelay(inboxQueue, jobId);
+			if (delay != null) inboxDelay = delay;
+		}
 	});
 
-	inboxLazyQueue.on('global:active', () => {
+	inboxLazyQueue.on('global:active', async (jobId) => {
 		activeInboxLazyJobs++;
+		if (activeInboxLazyJobs === 1) {
+			const delay = await getDelay(inboxLazyQueue, jobId);
+			if (delay != null) inboxLazyDelay = delay;
+		}
 	});
 
 	async function tick() {
@@ -49,21 +66,24 @@ export default function() {
 				activeSincePrevTick: activeDeliverJobs,
 				active: deliverJobCounts.active,
 				waiting: deliverJobCounts.waiting,
-				delayed: deliverJobCounts.delayed
+				delayed: deliverJobCounts.delayed,
+				delay: deliverDelay,
 			},
 			inbox: {
 				limit: inboxJobConcurrency * workers,
 				activeSincePrevTick: activeInboxJobs,
 				active: inboxJobCounts.active,
 				waiting: inboxJobCounts.waiting,
-				delayed: inboxJobCounts.delayed
+				delayed: inboxJobCounts.delayed,
+				delay: inboxDelay,
 			},
 			inboxLazy: {
-				limit: 1 * workers,
+				limit: inboxLazyJobConcurrency * workers,
 				activeSincePrevTick: activeInboxLazyJobs,
 				active: inboxLazyJobCounts.active,
 				waiting: inboxLazyJobCounts.waiting,
-				delayed: inboxLazyJobCounts.delayed
+				delayed: inboxLazyJobCounts.delayed,
+				delay: inboxLazyDelay,
 			},
 		};
 
@@ -80,4 +100,16 @@ export default function() {
 	tick();
 
 	setInterval(tick, interval);
+}
+
+async function getDelay(queue: Bull.Queue<any>, jobId: number) {
+	const job = await queue.getJob(jobId);
+
+	// たまたまリトライだったら諦める
+	if (job && job.attemptsMade === 0 && job.opts?.delay === 0 && job.processedOn) {
+		const delay = job.processedOn - job.timestamp;
+		return delay;
+	}
+
+	return null;
 }

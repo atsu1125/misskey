@@ -7,25 +7,30 @@
 		<section class="wptihjuy">
 			<header><fa :icon="faPaperPlane"/> Deliver</header>
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
-				<ui-input :value="latestStats.deliver.activeSincePrevTick" type="text" readonly>
+				<ui-input :value="latestStats.deliver.activeSincePrevTick | number" type="text" readonly>
 					<span>Process</span>
 					<template #prefix><fa :icon="fasPlayCircle"/></template>
 					<template #suffix>jobs/tick</template>
 				</ui-input>
-				<ui-input :value="latestStats.deliver.active" type="text" readonly>
+				<ui-input :value="latestStats.deliver.active | number" type="text" readonly>
 					<span>Active</span>
 					<template #prefix><fa :icon="farPlayCircle"/></template>
 					<template #suffix>{{ `/ ${latestStats.deliver.limit} jobs` }}</template>
 				</ui-input>
-				<ui-input :value="latestStats.deliver.waiting" type="text" readonly>
+				<ui-input :value="latestStats.deliver.waiting | number" type="text" readonly>
 					<span>Waiting</span>
 					<template #prefix><fa :icon="faStopCircle"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
 				<ui-input :value="latestStats.deliver.delayed" type="text" readonly>
 					<span>Delayed</span>
-					<template #prefix><fa :icon="faStopwatch"/></template>
+					<template #prefix><fa :icon="faStopwatch | number"/></template>
 					<template #suffix>jobs</template>
+				</ui-input>
+				<ui-input :value="latestStats.deliver.delay | number" type="text" readonly>
+					<span>Delay</span>
+					<template #prefix><fa :icon="faStopwatch"/></template>
+					<template #suffix>ms</template>
 				</ui-input>
 			</ui-horizon-group>
 			<div ref="deliverChart" class="chart"></div>
@@ -39,25 +44,30 @@
 		<section class="wptihjuy">
 			<header><fa :icon="faInbox"/> Inbox</header>
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
-				<ui-input :value="latestStats.inbox.activeSincePrevTick" type="text" readonly>
+				<ui-input :value="latestStats.inbox.activeSincePrevTick | number" type="text" readonly>
 					<span>Process</span>
 					<template #prefix><fa :icon="fasPlayCircle"/></template>
 					<template #suffix>jobs/tick</template>
 				</ui-input>
-				<ui-input :value="latestStats.inbox.active" type="text" readonly>
+				<ui-input :value="latestStats.inbox.active | number" type="text" readonly>
 					<span>Active</span>
 					<template #prefix><fa :icon="farPlayCircle"/></template>
 					<template #suffix>{{ `/ ${latestStats.inbox.limit} jobs` }}</template>
 				</ui-input>
-				<ui-input :value="latestStats.inbox.waiting" type="text" readonly>
+				<ui-input :value="latestStats.inbox.waiting | number" type="text" readonly>
 					<span>Waiting</span>
 					<template #prefix><fa :icon="faStopCircle"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
-				<ui-input :value="latestStats.inbox.delayed" type="text" readonly>
+				<ui-input :value="latestStats.inbox.delayed | number" type="text" readonly>
 					<span>Delayed</span>
 					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
+				</ui-input>
+				<ui-input :value="latestStats.inbox.delay | number" type="text" readonly>
+					<span>Delay</span>
+					<template #prefix><fa :icon="faStopwatch"/></template>
+					<template #suffix>ms</template>
 				</ui-input>
 			</ui-horizon-group>
 			<div ref="inboxChart" class="chart"></div>
@@ -71,25 +81,30 @@
 		<section class="wptihjuy">
 			<header><fa :icon="faInbox"/> Inbox (Lazy)</header>
 			<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
-				<ui-input :value="latestStats.inboxLazy.activeSincePrevTick" type="text" readonly>
+				<ui-input :value="latestStats.inboxLazy.activeSincePrevTick | number" type="text" readonly>
 					<span>Process</span>
 					<template #prefix><fa :icon="fasPlayCircle"/></template>
 					<template #suffix>jobs/tick</template>
 				</ui-input>
-				<ui-input :value="latestStats.inboxLazy.active" type="text" readonly>
+				<ui-input :value="latestStats.inboxLazy.active | number" type="text" readonly>
 					<span>Active</span>
 					<template #prefix><fa :icon="farPlayCircle"/></template>
 					<template #suffix>{{ `/ ${latestStats.inboxLazy.limit} jobs` }}</template>
 				</ui-input>
-				<ui-input :value="latestStats.inboxLazy.waiting" type="text" readonly>
+				<ui-input :value="latestStats.inboxLazy.waiting | number" type="text" readonly>
 					<span>Waiting</span>
 					<template #prefix><fa :icon="faStopCircle"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
-				<ui-input :value="latestStats.inboxLazy.delayed" type="text" readonly>
+				<ui-input :value="latestStats.inboxLazy.delayed | number" type="text" readonly>
 					<span>Delayed</span>
 					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
+				</ui-input>
+				<ui-input :value="latestStats.inboxLazy.delay | number" type="text" readonly>
+					<span>Delay</span>
+					<template #prefix><fa :icon="faStopwatch"/></template>
+					<template #suffix>ms</template>
 				</ui-input>
 			</ui-horizon-group>
 			<div ref="inboxLazyChart" class="chart"></div>
@@ -110,7 +125,7 @@
 					<template #label>{{ $t('queue') }}</template>
 					<option value="deliver">{{ $t('domains.deliver') }}</option>
 					<option value="inbox">{{ $t('domains.inbox') }}</option>
-					<option value="inboxLazy">{{ $t('domains.inboxLazy') }}</option>
+					<option value="inboxLazy">Inbox (Lazy)</option>
 					<option value="db">{{ $t('domains.db') }}</option>
 				</ui-select>
 				<ui-select v-model="state">

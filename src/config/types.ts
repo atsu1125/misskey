@@ -72,10 +72,12 @@ export type Source = {
 
 	deliverJobConcurrency?: number;
 	inboxJobConcurrency?: number;
+	inboxLazyJobConcurrency?: number;
 	deliverJobPerSec?: number;
 	inboxJobPerSec?: number;
 	deliverJobMaxAttempts?: number;
 	inboxJobMaxAttempts?: number;
+	inboxMassDelOpeMode?: 'lazy' | 'ignore';
 
 	mecabSearch?: {
 		mecabBin?: string;
