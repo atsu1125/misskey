@@ -15,7 +15,7 @@ import Outbox, { packActivity } from './activitypub/outbox';
 import Followers from './activitypub/followers';
 import Following from './activitypub/following';
 import Featured from './activitypub/featured';
-import { inbox as processInbox } from '../queue';
+import { inbox as processInbox, inboxLazy as processInboxLazy } from '../queue';
 import { isSelfHost } from '../misc/convert-host';
 import NoteReaction from '../models/note-reaction';
 import { renderLike } from '../remote/activitypub/renderer/like';
@@ -25,6 +25,10 @@ import fetchMeta from '../misc/fetch-meta';
 import { isBlockedHost } from '../services/instance-moderation';
 import { toUnicode } from 'punycode/';
 import Logger from '../services/logger';
+import limiter from './api/limiter';
+import { IEndpoint } from './api/endpoints';
+import { IActivity } from '../remote/activitypub/type';
+import { toSingle } from '../prelude/array';
 
 const logger = new Logger('activitypub');
 
@@ -62,7 +66,32 @@ async function inbox(ctx: Router.RouterContext) {
 		return;
 	}
 
-	const queue = await processInbox(ctx.request.body, signature, {
+	const actor = signature.keyId.replace(/[^0-9A-Za-z]/g, '_');
+	const activity = ctx.request.body as IActivity;
+
+	let lazy = false;
+
+	if (actor && ['Delete', 'Undo'].includes(toSingle(activity.type)!)) {
+		const ep = {
+			name: `inboxDeletex60-${actor}`,
+			exec: null,
+			meta: {
+				limit: {
+					duration: 60 * 1000,
+					max: 10, //TODO
+				}
+			}
+		} as IEndpoint;
+
+		try {
+			await limiter(ep, undefined, undefined);
+		} catch (e) {
+			console.log(`InboxLimit: ${actor}`);
+			lazy = true;
+		}
+	}
+	
+	const queue = await (lazy ? processInboxLazy : processInbox)(activity, signature, {
 		ip: ctx.request.ip
 	});
 
