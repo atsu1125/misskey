@@ -102,3 +102,10 @@ node built/tools/recount-stats.js
 ```sh
 node built/tools/resync-remote-emoji.js name@host
 ```
+
+## 古いリモート間リアクションを削除する
+
+現在はリモート→リモートリアクションの詳細は保存しません。これは過去分を削除します。
+
+```sh
+node built/tools/clean-reactions.ts

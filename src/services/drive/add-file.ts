@@ -15,7 +15,7 @@ import instanceChart from '../../services/chart/instance';
 import fetchMeta from '../../misc/fetch-meta';
 import { generateVideoThumbnail } from './generate-video-thumbnail';
 import { driveLogger } from './logger';
-import { IImage, convertSharpToJpeg, convertSharpToWebp, convertSharpToPng, convertSharpToAvif } from './image-processor';
+import { IImage, convertSharpToJpeg, convertSharpToWebp, convertSharpToPng, convertSharpToAvif, convertSharpToPngOrJpeg } from './image-processor';
 import Instance from '../../models/instance';
 import { contentDisposition } from '../../misc/content-disposition';
 import { getFileInfo, FileInfo, FILE_TYPE_BROWSERSAFE } from '../../misc/get-file-info';
@@ -237,7 +237,7 @@ export async function generateAlts(path: string, type: string, generateWeb: bool
 		logger.debug(`creating web image`);
 
 		if (['image/jpeg'].includes(type) && !webpulicSafe) { 
-			webpublic = await convertSharpToJpeg(img, 2048, 2048, { useMozjpeg: true });
+			webpublic = await convertSharpToJpeg(img, 2048, 2048);
 		} else if (['image/webp'].includes(type) && !webpulicSafe) {
 			webpublic = await convertSharpToWebp(img, 2048, 2048);
 		} else if (['image/avif'].includes(type) && !webpulicSafe) {
@@ -258,9 +258,9 @@ export async function generateAlts(path: string, type: string, generateWeb: bool
 	let thumbnail: IImage | null = null;
 
 	if (['image/jpeg', 'image/webp', 'image/avif'].includes(type)) {
-		thumbnail = await convertSharpToWebp(img, 530, 255);
+		thumbnail = await convertSharpToJpeg(img, 530, 255);
 	} else if (['image/png', 'image/svg+xml'].includes(type)) {
-		thumbnail = await convertSharpToWebp(img, 530, 255, { smartSubsample: true });
+		thumbnail = await convertSharpToPngOrJpeg(img, 530, 255);
 	}
 	// #endregion thumbnail
 

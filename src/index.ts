@@ -24,7 +24,6 @@ import queueStats from './daemons/queue-stats';
 import loadConfig from './config/load';
 import { Config } from './config/types';
 import { envOption } from './env';
-import { checkMongoDB } from './misc/check-mongodb';
 import { showMachineInfo } from './misc/show-machine-info';
 
 const logger = new Logger('core', 'cyan');
@@ -85,7 +84,7 @@ function main() {
 			}
 
 			workerMain(config).then(() => {
-				bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, undefined, true);
+				bootLogger.succ(`Now listening on ${config.socket || `${config.addr}:${config.port}`}`, undefined, true);
 
 				// ユニットテストから起動された場合用
 				if (process.send) {
@@ -103,7 +102,7 @@ function main() {
 			}
 
 			spawnWorkers(config).then(() => {
-				bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, undefined, true);
+				bootLogger.succ(`Now listening on ${config.socket || `${config.addr}:${config.port}`}`, undefined, true);
 
 				// ユニットテストから起動された場合用
 				if (process.send) {
@@ -237,14 +236,6 @@ async function init(config: Config) {
 	nodejsLogger.info(`Version ${runningNodejsVersion.join('.')}`);
 
 	await showMachineInfo(bootLogger);
-
-	// Try to connect to MongoDB
-	try {
-		await checkMongoDB(config, bootLogger);
-	} catch (e) {
-		bootLogger.error('Cannot connect to database', null, true);
-		process.exit(1);
-	}
 }
 
 async function spawnWorkers(config: Config) {

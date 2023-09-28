@@ -5,11 +5,14 @@ url: https://example.tld/
 port: 3000
 
 # Listen address (default is probably any)
-# addr: '127.0.0.0'
+#addr: '127.0.0.0'
+# or Listen UNIX socket
+#socket: '/home/misskey/misskey/unix.sock'
 
 mongodb:
   host: localhost
   port: 27017
+  #path: /tmp/mongodb-27017.sock
   db: misskey
   user: example-misskey-user
   pass: example-misskey-pass
@@ -20,7 +23,9 @@ mongodb:
 redis:
   host: localhost
   port: 6379
+  #path: /var/run/redis/redis-server.sock
   #family: 0 # 0=Both, 4=IPv4, 6=IPv6
+  #user: example-user
   #pass: example-pass
   #prefix: example-prefix
   #db: 0

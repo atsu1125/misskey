@@ -9,7 +9,7 @@ import DriveFileThumbnail, { getDriveFileThumbnailBucket } from '../../models/dr
 import DriveFileWebpublic, { getDriveFileWebpublicBucket } from '../../models/drive-file-webpublic';
 import { serverLogger } from '..';
 
-import { convertToWebp } from '../../services/drive/image-processor';
+import { convertToJpeg, convertToPngOrJpeg } from '../../services/drive/image-processor';
 import { generateVideoThumbnail } from '../../services/drive/generate-video-thumbnail';
 import { contentDisposition } from '../../misc/content-disposition';
 import { detectTypeWithCheck, FILE_TYPE_BROWSERSAFE } from '../../misc/get-file-info';
@@ -63,9 +63,9 @@ export default async function(ctx: Router.RouterContext) {
 			const convertFile = async () => {
 				if ('thumbnail' in ctx.query) {
 					if (['image/jpeg', 'image/webp', 'image/avif'].includes(mime)) {
-						return await convertToWebp(path, 530, 255);
+						return await convertToJpeg(path, 530, 255);
 					} else if (['image/png', 'image/svg+xml'].includes(mime)) {
-						return await convertToWebp(path, 530, 255, { smartSubsample: true });
+						return await convertToPngOrJpeg(path, 530, 255);
 					} else if (mime.startsWith('video/')) {
 						return await generateVideoThumbnail(path);
 					}
