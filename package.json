@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.668-m544",
+	"version": "10.102.670-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -150,7 +150,7 @@
 		"summaly": "mei23/summaly#3.8.3",
 		"suncalc": "1.9.0",
 		"syslog-pro": "1.0.0",
-		"systeminformation": "5.17.12",
+		"systeminformation": "5.21.7",
 		"syuilo-password-strength": "0.0.1",
 		"terser-webpack-plugin": "4.2.3",
 		"textarea-caret": "3.1.0",

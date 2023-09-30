@@ -23,8 +23,7 @@ export async function getIndexer(note: Partial<Record<'text' | 'cw', string>>): 
 	const tokens = await me(text);
 
 	const words = unique(tokens.filter(token => ['フィラー', '感動詞', '形容詞', '連体詞', '動詞', '副詞', '名詞'].includes(token[1])).map(token => token[0]));
-	const filtered = filterStopWords(words);
-	return filtered;
+	return words;
 }
 
 export async function getWordIndexer(note: Partial<Record<'text' | 'cw', string>>): Promise<string[]> {

@@ -1,10 +1,8 @@
-import * as promiseLimit from 'promise-limit';
-
 import config from '../../../config';
 import Resolver from '../resolver';
 import { INote } from '../../../models/note';
 import post from '../../../services/note/create';
-import { IPost, IObject, getOneApId, getApId, getOneApHrefNullable, isPost, isEmoji, IApImage, getApType, IOrderedCollection, ICollection, isCollectionOrOrderedCollection, isCollection, isCollectionPage, ICollectionPage } from '../type';
+import { IPost, IObject, getOneApId, getApId, getOneApHrefNullable, isPost, isEmoji, IApImage, getApType, isCollection, isCollectionPage, ICollectionPage } from '../type';
 import { resolvePerson, updatePerson } from './person';
 import { resolveImage } from './image';
 import { IRemoteUser } from '../../../models/user';
@@ -13,7 +11,7 @@ import Emoji, { IEmoji } from '../../../models/emoji';
 import { extractApMentions } from './mention';
 import { extractApHashtags } from './tag';
 import { toUnicode } from 'punycode/';
-import { unique, toArray, toSingle } from '../../../prelude/array';
+import { toArray, toSingle } from '../../../prelude/array';
 import { extractPollFromQuestion } from './question';
 import vote from '../../../services/note/polls/vote';
 import { apLogger } from '../logger';
@@ -64,25 +62,22 @@ export async function fetchNote(object: string | IObject): Promise<INote | null>
 
 /**
  * Noteを作成します。
+ * @returns INote (success), null (skip) or Error
  */
 export async function createNote(value: string | IObject, resolver?: Resolver | null, silent = false): Promise<INote | null> {
+	// 必要だったらresolve
 	if (resolver == null) resolver = new Resolver();
 
 	const object = await resolver.resolve(value);
 
 	const entryUri = getApId(value);
 
+	// validate
 	let note: IPost;
 	try {
 		note = toNote(object, entryUri);
-	} catch (err) {
-		logger.error(`${err.message}`, {
-			resolver: {
-				history: resolver.getHistory()
-			},
-			value: value,
-			object: object
-		});
+	} catch (err: any) {
+		logger.error(err);
 		return null;
 	}
 
@@ -99,100 +94,32 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 		return null;
 	}
 
-	const noteAudience = await parseAudience(actor, note.to, note.cc, resolver);
-	let visibility = noteAudience.visibility;
-	const visibleUsers = noteAudience.visibleUsers;
-
-	// Audience (to, cc) が指定されてなかった場合
+	// 公開範囲
+	const { visibility, visibleUsers } = await parseAudience(actor, note.to, note.cc, resolver);
+	// Audience (to, cc) が指定されてなかった場合はスキップ
 	if (visibility === 'specified' && visibleUsers.length === 0) {
-		if (typeof value === 'string') {	// 入力がstringならばresolverでGETが発生している
-			// こちらから匿名GET出来たものならばpublic
-			visibility = 'public';
-		}
+		logger.info(`No audience: ${note.id}`);
+		return null;
 	}
 
+	// メンション
 	const apMentions = await extractApMentions(note.tag, resolver);
+
+	// ハッシュタグ
 	const apHashtags = await extractApHashtags(note.tag);
 
 	// 添付ファイル
-	// Noteがsensitiveなら添付もsensitiveにする
-	const limit = promiseLimit<IDriveFile>(2);
-
-	note.attachment = toArray(note.attachment);
-
-	// 添付が多すぎたら無視
-	if (note.attachment.length > 100) return null;
-
-	const files = note.attachment
-		.map(attach => attach.sensitive = note.sensitive)
-		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x)))))
-			.filter(image => image != null)
-		: [];
+	const files = await fetchAttachments(note, actor);
 
 	// リプライ
-	let replyError = false;
-	const reply: INote | null = note.inReplyTo
-		? await resolveNote(getOneApId(note.inReplyTo), resolver).then(x => {
-			if (x == null) {
-				logger.warn(`Specified inReplyTo, but not found`);
-				throw new Error('inReplyTo not found');
-			} else {
-				return x;
-			}
-		}).catch(async e => {
-			logger.warn(`Error in inReplyTo reply:${note.inReplyTo} - ${e.statusCode || e}`);
-			replyError = true;
-			return null;
-		})
-		: null;
-
-	if (replyError) return null;
+	const reply = note.inReplyTo ? await resolveNote(getOneApId(note.inReplyTo), resolver).catch(() => null) : null;
 
 	// 引用
-	let quote: INote | undefined | null;
-
-	if (note._misskey_quote || note.quoteUri || note.quoteUrl) {
-		const tryResolveNote = async (uri: string): Promise<{
-			status: 'ok' | 'permerror' | 'temperror';
-			res?: INote | null;
-		}> => {
-			if (typeof uri !== 'string' || !uri.match(/^https?:/)) return { status: 'permerror' };
-			try {
-				const res = await resolveNote(uri);
-				if (res) {
-					return {
-						status: 'ok',
-						res
-					};
-				} else {
-					return {
-						status: 'permerror'
-					};
-				}
-			} catch (e) {
-				return {
-					status: (e instanceof StatusError && e.isClientError) ? 'permerror' : 'temperror'
-				};
-			}
-		};
-
-		const uris = unique([note._misskey_quote, note.quoteUri, note.quoteUrl].filter(x => typeof x === 'string') as string[]);
-		const results = await Promise.all(uris.map(uri => tryResolveNote(uri)));
-
-		quote = results.filter(x => x.status === 'ok').map(x => x.res).find(x => x);
-		if (!quote) {
-			logger.warn(`Error in quote note:${note.id}`);
-			return null;
-		}
-	}
+	const q = note._misskey_quote || note.quoteUri || note.quoteUrl;
+	const quote = q ? await resolveNote(q).catch(() => null) : null;
 
 	// 参照
-	let references: INote[] = [];
-	if (note.references) {
-		references = await fetchReferences(note.references, resolver).catch(e => {
-			return [];
-		});
-	}
+	const references = await fetchReferences(note, resolver).catch(() => []);
 
 	const cw = note.summary === '' ? null : note.summary;
 
@@ -206,7 +133,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 		text = htmlToMfm(note.content, note.tag);
 	}
 
-	// vote
+	// 投票
 	if (reply && reply.poll) {
 		const tryCreateVote = async (name: string, index: number): Promise<null> => {
 			if (reply.poll.expiresAt && Date.now() > new Date(reply.poll.expiresAt).getTime()) {
@@ -226,6 +153,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 		}
 	}
 
+	// 絵文字
 	const emojis = await extractEmojis(note.tag || [], actor.host).catch(e => {
 		logger.info(`extractEmojis: ${e}`);
 		return [] as IEmoji[];
@@ -233,6 +161,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 
 	const apEmojis = emojis.map(emoji => emoji.name);
 
+	// アンケート
 	const poll = await extractPollFromQuestion(note, resolver).catch(() => undefined);
 
 	// ユーザーの情報が古かったらついでに更新しておく
@@ -357,9 +286,11 @@ export async function extractEmojis(tags: IObject | IObject[], host_: string) {
 	);
 }
 
-export async function fetchReferences(src: string | IOrderedCollection | ICollection , resolver: Resolver) {
+async function fetchReferences(note: IPost, resolver: Resolver) {
+	if (!note.references) return [];
+
 	// get root
-	const root = await resolver.resolve(src);
+	const root = await resolver.resolve(note.references);
 
 	// get firstPage
 	let page: ICollectionPage | undefined;
@@ -401,4 +332,17 @@ export async function fetchReferences(src: string | IOrderedCollection | ICollec
 	}
 
 	return [];
+}
+
+async function fetchAttachments(note: IPost, actor: IRemoteUser) {
+	let attachment = toArray(note.attachment).slice(0, 16);
+
+	let files: IDriveFile[] = [];
+
+	for (const attach of attachment) {
+		const file = await resolveImage(actor, attach).catch(null);
+		if (file) files.push(file);
+	}
+
+	return files;
 }

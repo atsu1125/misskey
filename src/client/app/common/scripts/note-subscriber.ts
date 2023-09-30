@@ -171,6 +171,13 @@ export default prop => ({
 					this.$_ns_target.cw = null;
 					break;
 				}
+
+				case 'updated': {
+					Vue.set(this.$_ns_target, 'updatedAt', body.updatedAt);
+					Vue.set(this.$_ns_target, 'text', body.text);
+					Vue.set(this.$_ns_target, 'cw', body.cw);
+					break;
+				}
 			}
 
 			this.$emit(`update:${prop}`, this.$_ns_note_);

@@ -109,6 +109,7 @@ export default async (user: ILocalUser) => {
 		discoverable: !!user.isExplorable,
 		published: user.createdAt.toISOString(),
 		searchableBy: user.searchableBy === 'none' ? [] : ['https://www.w3.org/ns/activitystreams#Public'],
+		indexable: user.searchableBy !== 'none',
 		publicKey: renderKey(user, `#main-key`),
 		isCat: user.isCat,
 		attachment: attachment.length ? attachment : undefined,
