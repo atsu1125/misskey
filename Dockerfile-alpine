@@ -1,4 +1,4 @@
-FROM 18.17.1-alpine3.18 AS base
+FROM node:18.17.1-alpine3.18 AS base
 
 ENV NODE_ENV=production
 
@@ -19,8 +19,9 @@ RUN apk add --no-cache \
     make \
     nasm \
     pkgconfig \
-    python \
-    zlib-dev
+    python3 \
+    zlib-dev \
+    git
 
 COPY package.json pnpm-lock.yaml ./
 
