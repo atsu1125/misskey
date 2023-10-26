@@ -30,6 +30,9 @@ export async function deliverQuestionUpdate(noteId: mongo.ObjectID) {
 		_id: noteId,
 	});
 
+	if (note == null) return;
+	if (note.localOnly) return;
+
 	const user = await User.findOne({
 		_id: note.userId
 	});

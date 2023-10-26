@@ -110,6 +110,14 @@ export default define(meta, async (ps, me) => {
 			sort = {
 				caughtAt: 1
 			};
+		} else if (ps.sort == '+infoUpdatedAt') {
+			sort = {
+				infoUpdatedAt: -1
+			};
+		} else if (ps.sort == '-infoUpdatedAt') {
+			sort = {
+				infoUpdatedAt: 1
+			};
 		} else if (ps.sort == '+lastCommunicatedAt') {
 			sort = {
 				lastCommunicatedAt: -1

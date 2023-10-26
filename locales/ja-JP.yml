@@ -1871,6 +1871,7 @@ admin/views/federation.vue:
   following: "フォロー中"
   followers: "フォロワー"
   caught-at: "登録日時"
+  infoUpdatedAt: "情報更新日時"
   status: "ステータス"
   activeHalfyear: "Users 6m"
   activeMonth: "Users 1m"
@@ -1888,6 +1889,8 @@ admin/views/federation.vue:
   sorts:
     caughtAtAsc: "登録日時が古い順"
     caughtAtDesc: "登録日時が新しい順"
+    infoUpdatedAtAsc: "情報更新日時が古い順"
+    infoUpdatedAtDesc: "情報更新日時が新しい順"
     lastCommunicatedAtAsc: "最後にやり取りした日時が古い順"
     lastCommunicatedAtDesc: "最後にやり取りした日時が新しい順"
     notesAsc: "投稿が少ない順"

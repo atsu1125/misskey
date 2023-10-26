@@ -4,9 +4,6 @@ import { getApLock } from '../../../../misc/app-lock';
 import DbResolver from '../../db-resolver';
 import { getApId, IPost } from '../../type';
 import { extractApHost } from '../../../../misc/convert-host';
-import { parseBasic } from '../../../../mfm/parse';
-import { extractEmojis } from '../../../../mfm/extract-emojis';
-import { extractHashtags } from '../../../../mfm/extract-hashtags';
 import Note from '../../../../models/note';
 import { publishNoteStream } from '../../../../services/stream';
 import { htmlToMfm } from '../../misc/html-to-mfm';
@@ -50,20 +47,11 @@ export default async function(actor: IRemoteUser, note: IPost): Promise<string> 
 		const text = note._misskey_content || (note.content ? htmlToMfm(note.content, note.tag) : null);
 		const cw = note.summary === '' ? null : note.summary;
 
-		// extract emojis, tags, mentions
-		const tokens = text ? (parseBasic(text) || []) : [];
-		const cwTokens = cw ? (parseBasic(cw) || []) : [];
-		const combinedTokens = tokens.concat(cwTokens);
-		const emojis = extractEmojis(combinedTokens);
-		const tags = extractHashtags(combinedTokens).filter(tag => Array.from(tag || '').length <= 128).splice(0, 64);
-
 		// Update
 		const updates = {
 			updatedAt: new Date(),
 			text: text?.trim(),
 			cw: cw ?? null,
-			emojis,
-			tags,
 		};
 
 		await Note.update({ _id: origin._id }, {

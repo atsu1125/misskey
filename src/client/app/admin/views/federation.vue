@@ -16,6 +16,9 @@
 					<ui-input :value="instance.caughtAt | date" type="text" readonly>
 						<span>{{ $t('caught-at') }}</span>
 					</ui-input>
+					<ui-input :value="instance.infoUpdatedAt | date" type="text" readonly>
+						<span>{{ $t('infoUpdatedAt') }}</span>
+					</ui-input>
 				</ui-horizon-group>
 				<ui-horizon-group inputs>
 					<ui-input :value="instance.notesCount" type="text" readonly>
@@ -132,6 +135,8 @@
 					<template #label>{{ $t('sort') }}</template>
 					<option value="-caughtAt">{{ $t('sorts.caughtAtAsc') }}</option>
 					<option value="+caughtAt">{{ $t('sorts.caughtAtDesc') }}</option>
+					<option value="-infoUpdatedAt">{{ $t('sorts.infoUpdatedAtAsc') }}</option>
+					<option value="+infoUpdatedAt">{{ $t('sorts.infoUpdatedAtDesc') }}</option>
 					<option value="-lastCommunicatedAt">{{ $t('sorts.lastCommunicatedAtAsc') }}</option>
 					<option value="+lastCommunicatedAt">{{ $t('sorts.lastCommunicatedAtDesc') }}</option>
 					<option value="-notes">{{ $t('sorts.notesAsc') }}</option>
@@ -182,15 +187,15 @@
 					<span>{{ $t('status') }}</span>
 				</header>
 				<div v-for="instance in instances" :key="instance.host" :style="{ opacity: instance.isNotResponding ? 0.5 : 1 }">
-					<a @click.prevent="showInstance(instance.host)" rel="nofollow noopener" target="_blank" :href="`https://${instance.host}`" :style="{ textDecoration: instance.isMarkedAsClosed ? 'line-through' : 'none', display: 'inline-flex', overflow: 'hidden', 'word-break': 'break-all' }">
+					<a @click.prevent="showInstance(instance.host)" rel="nofollow noopener" target="_blank" :href="`https://${instance.host}`" :title="instance.name" :style="{ textDecoration: instance.isMarkedAsClosed ? 'line-through' : 'none', display: 'inline-flex', overflow: 'hidden', 'word-break': 'break-all' }">
 						<img v-if="instance.iconUrl != null" :src="`/proxy/icon.ico?${urlQuery({ url: instance.iconUrl })}`" :style="{ width: '1em', height: '1em' }"/>
-						{{ `${instance.host} ${instance.name ? ` (${instance.name})` : ''}` }}
+						{{ `${instance.host }` }}
 					</a>
 					<span>{{ `${instance.softwareName || 'unknown'}` }} <small :style="{ opacity: 0.7 }">{{ `${instance.softwareVersion || ''}` }}</small></span>
-					<span>{{ instance.notesCount }}</span>
-					<span>{{ instance.usersCount }}</span>
-					<span>{{ instance.activeHalfyear }}</span>
-					<span>{{ instance.activeMonth }}</span>
+					<span>{{ instance.notesCount | kmg }}</span>
+					<span>{{ instance.usersCount | kmg }}</span>
+					<span>{{ instance.activeHalfyear | kmg }}</span>
+					<span>{{ instance.activeMonth | kmg }}</span>
 					<span>{{ instance.latestStatus }}</span>
 				</div>
 			</div>
@@ -226,7 +231,7 @@ export default defineComponent({
 			$root: getCurrentInstance() as any,
 			instance: null as Record<string, any> | null,
 			target: null as any,
-			sort: '+lastCommunicatedAt',
+			sort: '+infoUpdatedAt',
 			state: 'all',
 			softwareName: '',
 			softwareVersion: '',
