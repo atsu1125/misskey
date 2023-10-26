@@ -23,4 +23,6 @@ RUN apt-get install -y build-essential \
                        tini \
                        wget
 
+RUN corepack enable pnpm
+
 CMD ["/misskey/docker-entrypoint.sh"]

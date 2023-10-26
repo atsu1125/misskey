@@ -24,13 +24,11 @@ RUN ARCH= && \
 
 ENV PATH="${PATH}:/opt/node/bin"
 
-RUN npm install -g npm@latest && \
-	npm install -g yarn
-
-COPY package.json yarn.lock ./
-RUN yarn install --network-timeout 100000
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable pnpm
+RUN pnpm i --frozen-lockfile
 COPY . ./
-RUN yarn build
+RUN pnpm build
 
 FROM fedora:38 AS runner
 
@@ -41,6 +39,8 @@ RUN dnf update -y \
  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
  && dnf install -y ffmpeg mecab tini wget
+
+RUN corepack enable pnpm
 
 COPY --from=builder /misskey/node_modules ./node_modules
 COPY --from=builder /misskey/built ./built
@@ -53,4 +53,4 @@ ENV PATH="${PATH}:/opt/node/bin"
 
 ENV NODE_ENV=production
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
