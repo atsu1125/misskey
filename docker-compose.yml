@@ -21,7 +21,7 @@ services:
 
   redis:
     restart: always
-    image: redis:bullseye
+    image: redis:bookworm
     networks:
       - internal_network
     healthcheck:
