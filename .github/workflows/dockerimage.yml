@@ -12,3 +12,23 @@ jobs:
       run: docker build . --file Dockerfile --tag my-image-name
     - run: docker image ls my-image-name
     - run: docker history my-image-name
+
+  build-alpine:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image for alpine
+      run: docker build . --file Dockerfile-alpine --tag my-image-name-alpine
+    - run: docker image ls my-image-name-alpine
+    - run: docker history my-image-name-alpine
+
+  build-fedora:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image for fedora
+      run: docker build . --file Dockerfile-fedora --tag my-image-name-fedora
+    - run: docker image ls my-image-name-fedora
+    - run: docker history my-image-name-fedora
