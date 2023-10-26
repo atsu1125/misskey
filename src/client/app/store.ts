@@ -100,6 +100,7 @@ const defaultDeviceSettings = Object.assign({
 	nitter: '',
 	showSoftwareName: false,
 	showSoftwareVersion: false,
+	altYoutube: '',
 }, mods.defaultDeviceSettings || {});
 
 export default (os: MiOS) => new Vuex.Store({

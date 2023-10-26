@@ -51,7 +51,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
-import { url as misskeyUrl, lang } from '../../../config';
+import { url as misskeyUrl } from '../../../config';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/url-preview.vue'),
@@ -109,7 +109,7 @@ export default Vue.extend({
 	},
 
 	created() {
-		const requestUrl = new URL(this.url);
+		let requestUrl = new URL(this.url);
 
 		if (this.isBlokedUrl(requestUrl)) {
 			return;
@@ -135,15 +135,21 @@ export default Vue.extend({
 			}
 		}
 
+		// Alt YouTube
+		if (this.$store.state.device.altYoutube) {
+			if (requestUrl.hostname === 'www.youtube.com' || requestUrl.hostname === 'm.youtube.com' || requestUrl.hostname === 'youtu.be') {
+				const youtubePath = `${requestUrl.pathname}${requestUrl.search}`;
+				requestUrl = new URL(`https://${this.$store.state.device.altYoutube}${youtubePath}`);
+			}
+		}
+
 		if (requestUrl.hostname === 'music.youtube.com' && requestUrl.pathname.match('^/(?:watch|channel)')) {
 			requestUrl.hostname = 'www.youtube.com';
 		}
 
-		const requestLang = (lang || 'ja-JP').replace('ja-KS', 'ja-JP');
-
 		requestUrl.hash = '';
 
-		fetch(`/url?url=${encodeURIComponent(requestUrl.href)}&lang=${requestLang}`).then(res => {
+		fetch(`/url?url=${encodeURIComponent(requestUrl.href)}`).then(res => {
 			res.json().then(info => {
 				if (info.url == null) return;
 				this.landingUrl = info.url;

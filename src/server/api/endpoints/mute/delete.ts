@@ -58,16 +58,10 @@ export default define(meta, async (ps, user) => {
 		throw new ApiError(meta.errors.muteeIsYourself);
 	}
 
-	// Get mutee
-	const mutee = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
-		throw e;
-	});
-
 	// Check not muting (期限切れのがあるかもしれないので期限問わず消す)
 	const exist = await Mute.findOne({
-		muterId: transform(muter._id),
-		muteeId: transform(mutee._id)
+		muterId: muter._id,
+		muteeId: ps.userId
 	});
 
 	if (exist == null) {

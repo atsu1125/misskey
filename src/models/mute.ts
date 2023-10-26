@@ -58,6 +58,7 @@ export const pack = async (
 		dbLogger.warn(`[DAMAGED DB] (missing) pkg: mute -> mutee :: ${_mute.muteeId}`);
 		_mute.mutee = {
 			// deleted
+			id: _mute.muteeId,
 		};
 	}
 

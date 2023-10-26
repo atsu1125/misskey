@@ -340,6 +340,7 @@ async function fetchAttachments(note: IPost, actor: IRemoteUser) {
 	let files: IDriveFile[] = [];
 
 	for (const attach of attachment) {
+		attach.sensitive ||= note.sensitive
 		const file = await resolveImage(actor, attach).catch(null);
 		if (file) files.push(file);
 	}

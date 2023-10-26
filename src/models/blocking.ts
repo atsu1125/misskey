@@ -56,7 +56,7 @@ export const pack = async (
 	if (_blocking.blockee == null) {
 		dbLogger.warn(`[DAMAGED DB] (missing) pkg: blocking -> blockee :: ${_blocking.blockeeId}`);
 		_blocking.blockee = {
-			// deleted
+			id: _blocking.blockeeId,
 		};
 	}
 

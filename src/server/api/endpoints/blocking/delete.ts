@@ -67,20 +67,27 @@ export default define(meta, async (ps, user) => {
 		throw new ApiError(meta.errors.blockeeIsYourself);
 	}
 
-	// Get blockee
-	const blockee = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
-		throw e;
-	});
-
 	// Check not blocking
 	const exist = await Blocking.findOne({
 		blockerId: blocker._id,
-		blockeeId: blockee._id
+		blockeeId: ps.userId
 	});
 
-	if (exist === null) {
+	if (exist == null) {
 		throw new ApiError(meta.errors.notBlocking);
+	}
+
+	// Get blockee
+	const blockee = await getUser(ps.userId).catch(e => {
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') {
+			return null;
+		}
+		throw e;
+	});
+
+	if (blockee == null) {
+		await Blocking.remove({ _id: exist._id });
+		return;
 	}
 
 	// Delete blocking
