@@ -25,8 +25,8 @@ RUN ARCH= && \
 ENV PATH="${PATH}:/opt/node/bin"
 
 COPY package.json pnpm-lock.yaml ./
+RUN npm install -g npm@latest
 RUN corepack enable pnpm
-RUN pnpm i --frozen-lockfile
 COPY . ./
 RUN pnpm build
 
@@ -40,13 +40,14 @@ RUN dnf update -y \
  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
  && dnf install -y ffmpeg mecab tini wget
 
-RUN corepack enable pnpm
-
 COPY --from=builder /misskey/node_modules ./node_modules
 COPY --from=builder /misskey/built ./built
 # Copy over all the langs needed for runtime
 COPY --from=builder /opt/node /opt/node
 COPY . ./
+
+RUN npm install -g npm@latest
+RUN corepack enable pnpm
 
 # Add more PATHs to the PATH
 ENV PATH="${PATH}:/opt/node/bin"
