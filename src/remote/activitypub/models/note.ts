@@ -112,11 +112,11 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 	const files = await fetchAttachments(note, actor);
 
 	// リプライ
-	const reply = note.inReplyTo ? await resolveNote(getOneApId(note.inReplyTo), resolver).catch(() => null) : null;
+	const reply = note.inReplyTo ? await resolveNote(getOneApId(note.inReplyTo), resolver) : null;
 
 	// 引用
 	const q = note._misskey_quote || note.quoteUri || note.quoteUrl;
-	const quote = q ? await resolveNote(q).catch(() => null) : null;
+	const quote = q ? await resolveNote(q, resolver) : null;
 
 	// 参照
 	const references = await fetchReferences(note, resolver).catch(() => []);
@@ -341,7 +341,7 @@ async function fetchAttachments(note: IPost, actor: IRemoteUser) {
 
 	for (const attach of attachment) {
 		attach.sensitive ||= note.sensitive
-		const file = await resolveImage(actor, attach).catch(null);
+		const file = await resolveImage(actor, attach);
 		if (file) files.push(file);
 	}
 

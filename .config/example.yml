@@ -194,7 +194,7 @@ themeColor: '#fb4e4e'
 # inboxJobPerSec: 16
 
 # deliverJobMaxAttempts: 17
-# inboxJobMaxAttempts: 10
+# inboxJobMaxAttempts: 4
 
 # Proxy for HTTP/HTTPS
 #proxy: http://127.0.0.1:3128
