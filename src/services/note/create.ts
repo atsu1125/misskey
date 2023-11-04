@@ -99,6 +99,19 @@ class NotificationManager {
 	}
 }
 
+//#region NoteError
+type NoteErrorType = 'cannotReRenote' | 'cannotReplyToPureRenote' | 'contentRequired';
+
+export class NoteError extends Error {
+	public type?: NoteErrorType;
+	constructor(message: string, type?: NoteErrorType) {
+		super(message);
+		this.name = 'NoteError';
+		this.type = type;
+	}
+}
+//#endregion NoteError
+
 type Option = {
 	createdAt?: Date;
 	expiresAt?: Date;
@@ -129,7 +142,11 @@ export default async (user: IUser, data: Option, silent = false) => {
 	if (config.disablePosts) throw { status: 451 };
 
 	const isFirstNote = user.notesCount === 0;
-	const isPureRenote = data.text == null && data.poll == null && (data.files == null || data.files.length == 0);
+	const isPureRenote = data.renote && data.text == null && data.poll == null && (data.files == null || data.files.length == 0);
+
+	const targetIsPureRenote = (target: INote) => {
+		return target.renoteId && target.text == null && (target.fileIds == null || target.fileIds.length === 0) && target.poll == null;
+	};
 
 	if (data.createdAt == null) data.createdAt = new Date();
 	if (data.visibility == null) data.visibility = 'public';
@@ -144,13 +161,13 @@ export default async (user: IUser, data: Option, silent = false) => {
 	// 本文/CW/投票のハードリミット
 	// サロゲートペアは2文字扱い/合字は複数文字扱いでかける
 	if (data.text && data.text.length > 16384) {
-		throw 'text limit exceeded';
+		throw new NoteError('text limit exceeded');
 	}
 	if (data.cw && data.cw.length > 16384) {
-		throw 'cw limit exceeded';
+		throw new NoteError('cw limit exceeded');
 	}
 	if (data.poll && JSON.stringify(data.poll).length > 16384) {
-		throw 'poll limit exceeded';
+		throw new NoteError('poll limit exceeded');
 	}
 
 	// インスタンスサイレンス
@@ -160,19 +177,38 @@ export default async (user: IUser, data: Option, silent = false) => {
 		}
 	}
 
+	if (data.copyOnce && data.visibility === 'specified') {
+		throw new NoteError('Deny remote follower only');
+	}
+
 	// リプライ対象が削除された投稿だったらreject
 	if (data.reply && data.reply.deletedAt != null) {
-		throw 'Reply target has been deleted';
+		throw new NoteError('Reply target has been deleted');
 	}
 
 	// Renote/Quote対象が削除された投稿だったらreject
 	if (data.renote && data.renote.deletedAt != null) {
-		throw 'Renote target has been deleted';
+		throw new NoteError('Renote target has been deleted');
 	}
 
 	// Renote/Quote対象が「ホームまたは全体」以外の公開範囲ならreject
 	if (data.renote && data.renote.visibility != 'public' && data.renote.visibility != 'home') {
-		throw 'Renote target is not public or home';
+		throw new NoteError('Renote target is not public or home');
+	}
+
+	// PureRenoteはRenote/引用できない
+	if (data.renote && targetIsPureRenote(data.renote)) {
+		throw new NoteError('You can not Renote a pure Renote.', 'cannotReRenote');
+	}
+
+	// PureRenoteには返信できない
+	if (data.reply && targetIsPureRenote(data.reply)) {
+		throw new NoteError('You can not reply to a pure Renote.', 'cannotReplyToPureRenote');
+	}
+
+	// テキストが無いかつ添付ファイルが無いかつRenoteも無いかつ投票も無かったらエラー
+	if (data.renote == null && data.text == null && data.poll == null && (data.files == null || data.files.length === 0)) {
+		throw new NoteError('Content required. You need to set text, fileIds, renoteId or poll.', 'contentRequired');
 	}
 
 	// Renote/Quote対象がホームだったらホームに

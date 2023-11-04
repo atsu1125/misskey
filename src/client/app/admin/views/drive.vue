@@ -212,6 +212,14 @@ export default Vue.extend({
 		},
 
 		async del(file: any) {
+			const confirm = await this.$root.dialog({
+				type: 'warning',
+				showCancelButton: true,
+				title: 'confirm',
+				text: 'Do you want to delete the file?',
+			});
+			if (confirm.canceled) return;
+
 			const process = async () => {
 				await this.$root.api('drive/files/delete', { fileId: file.id });
 				this.$root.dialog({
