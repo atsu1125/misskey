@@ -135,7 +135,8 @@ function objectAssignWithLcKey(a: Record<string, string>, b: Record<string, stri
 const cache = new CacheableLookup({
 	maxTtl: 3600,	// 1hours
 	errorTtl: 30,	// 30secs
-	lookup: false,	// nativeのdns.lookupにfallbackしない
+	// testの場合のみnativeのdns.lookupにfallbackする
+	...(process.env.NODE_ENV === 'test' ? {} : { lookup: false }),
 });
 
 /**

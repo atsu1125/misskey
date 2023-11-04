@@ -16,7 +16,7 @@ let maxNoteTextLength = 1000;
 
 setInterval(() => {
 	fetchMeta().then(m => {
-		maxNoteTextLength = m.maxNoteTextLength;
+		maxNoteTextLength = m.maxNoteTextLength || maxNoteTextLength;
 	});
 }, 30000);
 
@@ -263,17 +263,17 @@ export default define(meta, async (ps, user, app) => {
 	let files: IDriveFile[] = [];
 	const fileIds = ps.fileIds != null ? ps.fileIds : ps.mediaIds != null ? ps.mediaIds : null;
 	if (fileIds != null) {
-		files = await Promise.all(fileIds.map(fileId => {
+		const _files = await Promise.all(fileIds.map(fileId => {
 			return DriveFile.findOne({
 				_id: fileId,
 				'metadata.userId': user._id
 			});
 		}));
 
-		files = files.filter(file => file != null);
+		files = removeNull(_files);
 	}
 
-	let renote: INote = null;
+	let renote: INote | null | undefined = null;
 	if (ps.renoteId != null) {
 		// Fetch renote to note
 		renote = await Note.findOne({
@@ -287,14 +287,14 @@ export default define(meta, async (ps, user, app) => {
 		}
 	}
 
-	let reply: INote = null;
+	let reply: INote | null | undefined = null;
 	if (ps.replyId != null) {
 		// Fetch reply
 		reply = await Note.findOne({
 			_id: ps.replyId
 		});
 
-		if (reply === null) {
+		if (reply == null) {
 			throw new ApiError(meta.errors.noSuchReplyTarget);
 		}
 

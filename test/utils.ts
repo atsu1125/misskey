@@ -2,14 +2,13 @@ import * as childProcess from 'child_process';
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
-import got from 'got';
+import got, * as Got from 'got';
 import loadConfig from '../src/config/load';
 import { SIGKILL } from 'constants';
 import { getHtml } from '../src/misc/fetch';
 import { JSDOM } from 'jsdom';
 import * as FormData from 'form-data';
 import * as WebSocket from 'ws';
-import { inspect } from 'util';
 
 export const port = loadConfig().port;
 
@@ -78,6 +77,14 @@ export const api = async (endpoint: string, params: any, me?: any): Promise<{ bo
 		i: me.token
 	} : {};
 
+	const tryJsonParse = (s: any) => {
+		try {
+			return JSON.parse(s);
+		} catch {
+			return s;
+		}
+	}
+
 	const res = await got<string>(`http://localhost:${port}/api/${endpoint}`, {
 		method: 'POST',
 		headers: {
@@ -86,24 +93,22 @@ export const api = async (endpoint: string, params: any, me?: any): Promise<{ bo
 		body: JSON.stringify(Object.assign(auth, params)),
 		timeout: 30 * 1000,
 		retry: 0,
-		hooks: {
-			beforeError: [
-				error => {
-					const { response } = error;
-					if (response && response.body) console.warn(response.body);
-					return error;
-				}
-			]
-		},
+	}).then(async r => {
+		return {
+			status: r.statusCode,
+			body: tryJsonParse(r.body),
+		};
+	}).catch(e => {
+		if (e instanceof Got.HTTPError) {
+			return {
+				status: e.response.statusCode,
+				body: tryJsonParse(e.response.body),
+			};
+		}
+		throw e;
 	});
 
-	const status = res.statusCode;
-	const body = res.statusCode !== 204 ? await JSON.parse(res.body) : null;
-
-	return {
-		status,
-		body
-	};
+	return res;
 };
 
 export const signup = async (params?: any): Promise<any> => {

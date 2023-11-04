@@ -48,7 +48,7 @@ export default Vue.extend({
 				.map(x => ({
 					imageUrl: x.url,
 					thumbUrl: x.thumbnailUrl,
-					caption: x.nane,
+					caption: x.name,
 				}));
 		},
 		images(): any[] {

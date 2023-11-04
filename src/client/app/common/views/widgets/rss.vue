@@ -22,7 +22,7 @@ export default define({
 	name: 'rss',
 	props: () => ({
 		compact: false,
-		url: 'https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss'
+		url: 'https://crd.ndl.go.jp/jp/public/rss2/rss.xml'
 	})
 }).extend({
 	i18n: i18n(),
