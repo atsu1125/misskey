@@ -132,6 +132,8 @@ const angleDb: MfmDef[] = [
 ];
 
 const fnDb: MfmDef[] = [
+	{ name: 'ruby', head: '$[ruby ', tail: '文字 ルビ]', desc: '$[ruby 文字 ルビ]' },
+
 	{ name: 'jelly', head: '$[jelly ', tail: ']', desc: '$[jelly 🍮]' },
 	{ name: 'tada', head: '$[tada ', tail: ']', desc: '$[tada 🍮]' },
 	{ name: 'jump', head: '$[jump ', tail: ']', desc: '$[jump 🍮]' },
@@ -156,8 +158,6 @@ const fnDb: MfmDef[] = [
 
 	{ name: 'font.serif', head: '$[font.serif ', tail: ']', desc: '$[font.serif serif]' },
 	{ name: 'font.monospace', head: '$[font.monospace ', tail: ']', desc: '$[font.monospace monospace]' },
-
-	{ name: 'ruby', head: '$[ruby ', tail: ']', desc: '$[ruby 文字 ルビ]' },
 ];
 
 export default Vue.extend({

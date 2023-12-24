@@ -216,7 +216,7 @@ export function fromHtml(html: string, hashtagNames?: string[]): string | null {
 						} else if (n.nodeName === 'rp') {
 							continue;
 						} else {
-							ts.push(getText(n));
+							ts.push(getText(n));	// TODO: appendChildrenに回すべき？
 						}
 					}
 				}
