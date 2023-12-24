@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.677-m544",
+	"version": "10.102.678-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -138,7 +138,7 @@
 		"rndstr": "1.0.0",
 		"sanitize-html": "2.5.3",
 		"seedrandom": "3.0.5",
-		"sharp": "0.32.1",
+		"sharp": "0.32.6",
 		"showdown": "2.1.0",
 		"showdown-highlightjs-extension": "0.1.2",
 		"speakeasy": "2.0.0",
