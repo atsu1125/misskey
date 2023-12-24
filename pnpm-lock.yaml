@@ -41,6 +41,9 @@ dependencies:
   '@koa/router':
     specifier: 8.0.8
     version: 8.0.8
+  '@peertube/http-signature':
+    specifier: 1.7.0
+    version: 1.7.0
   '@prezzemolo/rap':
     specifier: 0.1.2
     version: 0.1.2
@@ -170,9 +173,6 @@ dependencies:
   http-proxy-agent:
     specifier: 5.0.0
     version: 5.0.0
-  http-signature:
-    specifier: git+https://github.com/mei23/node-http-signature#v1.6.0-mei
-    version: github.com/mei23/node-http-signature/4a6ed5def40b9b24f52e44aab229d6dd74895275
   https-proxy-agent:
     specifier: 5.0.1
     version: 5.0.1
@@ -1646,6 +1646,15 @@ packages:
       node-fetch: 2.6.7
     transitivePeerDependencies:
       - encoding
+    dev: false
+
+  /@peertube/http-signature@1.7.0:
+    resolution: {integrity: sha512-aGQIwo6/sWtyyqhVK4e1MtxYz4N1X8CNt6SOtCc+Wnczs5S5ONaLHDDR8LYaGn0MgOwvGgXyuZ5sJIfd7iyoUw==}
+    engines: {node: '>=0.10'}
+    dependencies:
+      assert-plus: 1.0.0
+      jsprim: 1.4.2
+      sshpk: 1.18.0
     dev: false
 
   /@prezzemolo/rap@0.1.2:
@@ -7452,9 +7461,9 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /jsprim@2.0.2:
-    resolution: {integrity: sha512-gqXddjPqQ6G40VdnI6T6yObEC+pDNvyP95wdQhkWkg7crHH3km5qP1FsOXEkzEQwnz6gz5qGTn1c2Y52wP3OyQ==}
-    engines: {'0': node >=0.6.0}
+  /jsprim@1.4.2:
+    resolution: {integrity: sha512-P2bSOMAc/ciLz6DzgjVlGJP9+BrJWu5UDGK70C2iweC5QBIeFf0ZXRvGjEj2uYgrY2MkAAhsSWHDWlFtEroZWw==}
+    engines: {node: '>=0.6.0'}
     dependencies:
       assert-plus: 1.0.0
       extsprintf: 1.3.0
@@ -10628,8 +10637,8 @@ packages:
     resolution: {integrity: sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==}
     dev: false
 
-  /sshpk@1.17.0:
-    resolution: {integrity: sha512-/9HIEs1ZXGhSPE8X6Ccm7Nam1z8KcoCqPdI7ecm1N33EzAetWahvQWVqLZtaZQ+IDKX4IyA2o0gBzqIMkAagHQ==}
+  /sshpk@1.18.0:
+    resolution: {integrity: sha512-2p2KJZTSqQ/I3+HX42EpYOa2l3f8Erv8MWKsy2I9uf4wA7yFIkXRffYdsx86y6z4vHtV8u7g+pPlr8/4ouAxsQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     dependencies:
@@ -12412,17 +12421,6 @@ packages:
     resolution: {tarball: https://codeload.github.com/mei23/memoji/tar.gz/2ac2e9ba5b82b017373dda6ccf745dc315aa1592}
     name: memoji
     version: 15.0.1
-    dev: false
-
-  github.com/mei23/node-http-signature/4a6ed5def40b9b24f52e44aab229d6dd74895275:
-    resolution: {tarball: https://codeload.github.com/mei23/node-http-signature/tar.gz/4a6ed5def40b9b24f52e44aab229d6dd74895275}
-    name: http-signature
-    version: 1.6.0
-    engines: {node: '>=0.10'}
-    dependencies:
-      assert-plus: 1.0.0
-      jsprim: 2.0.2
-      sshpk: 1.17.0
     dev: false
 
   github.com/mei23/summaly/aed7c5aa9df7d54b37c1935dd8b2277919f0dfb2:

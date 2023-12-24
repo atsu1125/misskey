@@ -2,12 +2,12 @@ url: 'http://misskey.local'
 port: 8010
 
 mongodb:
-  host: localhost
+  host: 127.0.0.1
   port: 57010
   db: test-misskey
 
 redis:
-  host: localhost
+  host: 127.0.0.1
   port: 56310
 
 autoAdmin: true

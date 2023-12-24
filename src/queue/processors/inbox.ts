@@ -1,5 +1,5 @@
 import * as Bull from 'bull';
-import * as httpSignature from 'http-signature';
+import * as httpSignature from '@peertube/http-signature';
 import { IRemoteUser } from '../../models/user';
 import perform from '../../remote/activitypub/perform';
 import { resolvePerson } from '../../remote/activitypub/models/person';

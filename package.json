@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.681-m544",
+	"version": "10.102.682-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -85,7 +85,7 @@
 		"highlight.js": "10.6.0",
 		"htmlescape": "1.1.1",
 		"http-proxy-agent": "5.0.0",
-		"http-signature": "git+https://github.com/mei23/node-http-signature#v1.6.0-mei",
+		"@peertube/http-signature": "1.7.0",
 		"https-proxy-agent": "5.0.1",
 		"insert-text-at-cursor": "0.3.0",
 		"ioredis": "5.3.2",

@@ -1,4 +1,4 @@
-import * as httpSignature from 'http-signature';
+import * as httpSignature from '@peertube/http-signature';
 import config from '../config';
 import { InboxInfo, InboxRequestData, WebpushDeliverJobData } from './types';
 import { deliverQueue, webpushDeliverQueue, inboxQueue, inboxLazyQueue, dbQueue } from './queues';
