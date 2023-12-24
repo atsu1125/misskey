@@ -1411,6 +1411,14 @@ describe('fromHtml', () => {
 	it('title', () => {
 		assert.deepStrictEqual(fromHtml('<p>a<h1>b</h1>c</p>'), 'a【b】\nc');
 	});
+
+	it('ruby', () => {
+		assert.deepStrictEqual(fromHtml('<p><ruby>魑魅魍魎<rp>(</rp><rt>ちみもうりょう</rt><rp>)</rp></ruby></p>'), '$[ruby 魑魅魍魎 ちみもうりょう]');
+	});
+
+	it('ruby - multi', () => {
+		assert.deepStrictEqual(fromHtml('<p><ruby><rb>魑魅魍魎</rb>百鬼夜行<rp>(</rp><rt>ちみもうりょう</rt><rt>ひゃっきやこう</rt><rp>)</rp></ruby></p>'), '$[ruby 魑魅魍魎百鬼夜行 ちみもうりょうひゃっきやこう]');
+	});
 });
 
 describe('toHtml', () => {
@@ -1471,6 +1479,11 @@ describe('toHtml', () => {
 	it('title', () => {
 		assert.equal(toHtml(parseFull('【a】')!), `<p><h1><span>a</span></h1></p>`);
 	});
+
+	it('ruby', () => {
+		assert.equal(toHtml(parseFull('$[ruby 魑魅魍魎 ちみもうりょう]')!), `<p><ruby>魑魅魍魎<rp>(</rp><rt>ちみもうりょう</rt><rp>)</rp></ruby></p>`);
+	});
+
 
 	/*
 	it('fn', () => {
