@@ -83,10 +83,6 @@ export function publishHotStream(note: PackedNote): void {
 	publish(`hotStream`, null, note);
 }
 
-export function publishAdminStream(userId: ID, type: string, value?: unknown): void {
-	publish(`adminStream:${userId}`, type, typeof value === 'undefined' ? null : value);
-}
-
 export function publishServerEvent(userId: ID | null, type: string, value?: unknown): void {
 	const name = userId ? `serverEvent:${userId}` : `serverEvent`;
 	publish(name, type, typeof value === 'undefined' ? null : value);
