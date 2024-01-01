@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: mei23
+ * SPDX-License-Identifier: MIT
+ */
+
 import * as crypto from 'crypto';
 
 type Request = {

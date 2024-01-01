@@ -72,6 +72,14 @@ export default async (endpoint: string, user: IUser | null | undefined, app: IAp
 		});
 	}
 
+	if (app && ep.meta.requireAdmin) {
+		throw new ApiError(accessDenied, { reason: 'Apps cannot use admin privileges.' });
+	}
+
+	if (app && ep.meta.requireModerator) {
+		throw new ApiError(accessDenied, { reason: 'Apps cannot use moderator privileges.' });
+	}
+
 	if (ep.meta.limit) {
 		// Rate limit
 		await limiter(ep, user, ctx?.ip).catch(e => {

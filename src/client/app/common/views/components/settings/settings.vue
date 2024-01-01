@@ -748,7 +748,7 @@ export default Vue.extend({
 			this.reactions = '👍❤😆🤔😮🎉💢😥😇' + (this.$store.state.settings.iLikeSushi ? '🍣' : '🍮');
 		},
 		setRandomReactions() {
-			const list = emojilist.filter(x => x.category !== 'flags');
+			const list = emojilist;
 			const a = [];
 			for (let i = 0; i < 15; i++) {
 				const index = Math.floor(Math.random() * list.length);

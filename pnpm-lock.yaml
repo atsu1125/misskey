@@ -17,6 +17,9 @@ dependencies:
   '@aws-sdk/node-http-handler':
     specifier: 3.370.0
     version: 3.370.0
+  '@discordapp/twemoji':
+    specifier: 15.0.2
+    version: 15.0.2
   '@fortawesome/fontawesome-svg-core':
     specifier: 1.2.36
     version: 1.2.36
@@ -33,8 +36,8 @@ dependencies:
     specifier: 2.0.10
     version: 2.0.10(@fortawesome/fontawesome-svg-core@1.2.36)(vue@2.7.14)
   '@koa/cors':
-    specifier: 4.0.0
-    version: 4.0.0
+    specifier: 5.0.0
+    version: 5.0.0
   '@koa/multer':
     specifier: 3.0.0
     version: 3.0.0(multer@1.4.5-lts.1)
@@ -50,6 +53,9 @@ dependencies:
   '@swc/core':
     specifier: 1.3.80
     version: 1.3.80
+  '@twemoji/parser':
+    specifier: 15.0.0
+    version: 15.0.0
   animejs:
     specifier: 3.2.1
     version: 3.2.1
@@ -207,8 +213,8 @@ dependencies:
     specifier: 2.14.2
     version: 2.14.2
   koa-bodyparser:
-    specifier: 4.4.0
-    version: 4.4.0
+    specifier: 4.4.1
+    version: 4.4.1
   koa-favicon:
     specifier: 2.1.0
     version: 2.1.0
@@ -230,9 +236,6 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
-  memoji:
-    specifier: mei23/memoji#15.0.1
-    version: github.com/mei23/memoji/2ac2e9ba5b82b017373dda6ccf745dc315aa1592
   memory-streams:
     specifier: 0.1.3
     version: 0.1.3
@@ -392,9 +395,6 @@ dependencies:
   ts-node:
     specifier: 10.9.1
     version: 10.9.1(@swc/core@1.3.80)(@types/node@18.11.18)(typescript@5.1.6)
-  twemoji-parser:
-    specifier: git+https://github.com/mei23/twemoji-parser.git#15.0.1
-    version: github.com/mei23/twemoji-parser/75831bfddb415cefc1e89ac5232e883daf91a624
   typescript:
     specifier: 5.1.6
     version: 5.1.6
@@ -506,8 +506,8 @@ devDependencies:
     specifier: 2.13.8
     version: 2.13.8
   '@types/koa-bodyparser':
-    specifier: 4.3.10
-    version: 4.3.10
+    specifier: 4.3.12
+    version: 4.3.12
   '@types/koa-favicon':
     specifier: 2.0.21
     version: 2.0.21
@@ -533,8 +533,8 @@ devDependencies:
     specifier: 8.0.11
     version: 8.0.11
   '@types/lodash':
-    specifier: 4.14.195
-    version: 4.14.195
+    specifier: 4.14.202
+    version: 4.14.202
   '@types/mocha':
     specifier: 10.0.1
     version: 10.0.1
@@ -614,8 +614,8 @@ devDependencies:
     specifier: 5.28.1
     version: 5.28.1(@swc/core@1.3.80)(webpack-cli@4.10.0)
   '@types/websocket':
-    specifier: 1.0.5
-    version: 1.0.5
+    specifier: 1.0.10
+    version: 1.0.10
   '@types/ws':
     specifier: 8.5.5
     version: 8.5.5
@@ -1350,6 +1350,15 @@ packages:
       - web-streams-polyfill
     dev: false
 
+  /@discordapp/twemoji@15.0.2:
+    resolution: {integrity: sha512-SrWKcv3SrGfrLQ/vfUnA+bAG73Q6Yjys01UuoY5SzUlc9iS03amQ6DxLhzVsjW/aTdgiMQdUatLidD+YPfYMCw==}
+    dependencies:
+      '@twemoji/parser': 15.0.0
+      fs-extra: 8.1.0
+      jsonfile: 5.0.0
+      universalify: 0.1.2
+    dev: false
+
   /@discoveryjs/json-ext@0.5.7:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
@@ -1524,8 +1533,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: false
 
-  /@koa/cors@4.0.0:
-    resolution: {integrity: sha512-Y4RrbvGTlAaa04DBoPBWJqDR5gPj32OOz827ULXfgB1F7piD1MB/zwn8JR2LAnvdILhxUbXbkXGWuNVsFuVFCQ==}
+  /@koa/cors@5.0.0:
+    resolution: {integrity: sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==}
     engines: {node: '>= 14.0.0'}
     dependencies:
       vary: 1.1.2
@@ -2265,6 +2274,10 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: false
 
+  /@twemoji/parser@15.0.0:
+    resolution: {integrity: sha512-lh9515BNsvKSNvyUqbj5yFu83iIDQ77SwVcsN/SnEGawczhsKU6qWuogewN1GweTi5Imo5ToQ9s+nNTf97IXvg==}
+    dev: false
+
   /@types/accepts@1.3.5:
     resolution: {integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==}
     dependencies:
@@ -2412,8 +2425,8 @@ packages:
       '@types/node': 18.11.18
     dev: false
 
-  /@types/koa-bodyparser@4.3.10:
-    resolution: {integrity: sha512-6ae05pjhmrmGhUR8GYD5qr5p9LTEMEGfGXCsK8VaSL+totwigm8+H/7MHW7K4854CMeuwRAubT8qcc/EagaeIA==}
+  /@types/koa-bodyparser@4.3.12:
+    resolution: {integrity: sha512-hKMmRMVP889gPIdLZmmtou/BijaU1tHPyMNmcK7FAHAdATnRcGQQy78EqTTxLH1D4FTsrxIzklAQCso9oGoebQ==}
     dependencies:
       '@types/koa': 2.13.8
     dev: true
@@ -2483,8 +2496,8 @@ packages:
       '@types/koa': 2.13.8
     dev: true
 
-  /@types/lodash@4.14.195:
-    resolution: {integrity: sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==}
+  /@types/lodash@4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
     dev: true
 
   /@types/mime@3.0.1:
@@ -2675,8 +2688,8 @@ packages:
       - webpack-cli
     dev: true
 
-  /@types/websocket@1.0.5:
-    resolution: {integrity: sha512-NbsqiNX9CnEfC1Z0Vf4mE1SgAJ07JnRYcNex7AJ9zAVzmiGHmjKFEk7O4TJIsgv2B1sLEb6owKFZrACwdYngsQ==}
+  /@types/websocket@1.0.10:
+    resolution: {integrity: sha512-svjGZvPB7EzuYS94cI7a+qhwgGU1y89wUgjT6E2wVUfmAGIvRfT7obBvRtnhXCSsoMdlG4gBFGE7MfkIXZLoww==}
     dependencies:
       '@types/node': 18.11.18
     dev: true
@@ -6015,6 +6028,15 @@ packages:
     resolution: {integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==}
     dev: false
 
+  /fs-extra@8.1.0:
+    resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
+    engines: {node: '>=6 <7 || >=8'}
+    dependencies:
+      graceful-fs: 4.2.10
+      jsonfile: 4.0.0
+      universalify: 0.1.2
+    dev: false
+
   /fs-minipass@2.1.0:
     resolution: {integrity: sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg==}
     engines: {node: '>= 8'}
@@ -7443,6 +7465,20 @@ packages:
     hasBin: true
     dev: false
 
+  /jsonfile@4.0.0:
+    resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
+    optionalDependencies:
+      graceful-fs: 4.2.10
+    dev: false
+
+  /jsonfile@5.0.0:
+    resolution: {integrity: sha512-NQRZ5CRo74MhMMC3/3r5g2k4fjodJ/wh8MxjFbCViWKFjxrnudWSY5vomh+23ZaXzAS7J3fBZIR2dV6WbmfM0w==}
+    dependencies:
+      universalify: 0.1.2
+    optionalDependencies:
+      graceful-fs: 4.2.10
+    dev: false
+
   /jsonld@5.2.0:
     resolution: {integrity: sha512-JymgT6Xzk5CHEmHuEyvoTNviEPxv6ihLWSPu1gFdtjSAyM6cFqNrv02yS/SIur3BBIkCf0HjizRc24d8/FfQKw==}
     engines: {node: '>=12'}
@@ -7540,12 +7576,13 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  /koa-bodyparser@4.4.0:
-    resolution: {integrity: sha512-AXPY7wwKZUmbgb8VkTEUFoRNOlx6aWRJwEnQD+zfNf33/7KSAkN4Oo9BqlIk80D+5TvuqlhpQT5dPVcyxl5Zsw==}
+  /koa-bodyparser@4.4.1:
+    resolution: {integrity: sha512-kBH3IYPMb+iAXnrxIhXnW+gXV8OTzCu8VPDqvcDHW9SQrbkHmqPQtiZwrltNmSq6/lpipHnT7k7PsjlVD7kK0w==}
     engines: {node: '>=8.0.0'}
     dependencies:
       co-body: 6.1.0
       copy-to: 2.0.1
+      type-is: 1.6.18
     dev: false
 
   /koa-compose@4.1.0:
@@ -11595,6 +11632,11 @@ packages:
       through2-filter: 3.0.0
     dev: false
 
+  /universalify@0.1.2:
+    resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
+    engines: {node: '>= 4.0.0'}
+    dev: false
+
   /universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
@@ -12417,12 +12459,6 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  github.com/mei23/memoji/2ac2e9ba5b82b017373dda6ccf745dc315aa1592:
-    resolution: {tarball: https://codeload.github.com/mei23/memoji/tar.gz/2ac2e9ba5b82b017373dda6ccf745dc315aa1592}
-    name: memoji
-    version: 15.0.1
-    dev: false
-
   github.com/mei23/summaly/aed7c5aa9df7d54b37c1935dd8b2277919f0dfb2:
     resolution: {tarball: https://codeload.github.com/mei23/summaly/tar.gz/aed7c5aa9df7d54b37c1935dd8b2277919f0dfb2}
     name: summaly
@@ -12439,10 +12475,4 @@ packages:
       jschardet: 3.0.0
       private-ip: 2.3.4
       typescript: 5.2.2
-    dev: false
-
-  github.com/mei23/twemoji-parser/75831bfddb415cefc1e89ac5232e883daf91a624:
-    resolution: {tarball: https://codeload.github.com/mei23/twemoji-parser/tar.gz/75831bfddb415cefc1e89ac5232e883daf91a624}
-    name: twemoji-parser
-    version: 15.0.1
     dev: false

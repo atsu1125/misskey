@@ -170,7 +170,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 	}
 
 	return await post(actor, {
-		createdAt: parseDateWithLimit(note.published, 600 * 1000) || new Date(),
+		createdAt: parseDateWithLimit(note.published) || new Date(),
 		files,
 		reply,
 		renote: quote,

@@ -54,7 +54,7 @@ export default async function(resolver: Resolver, actor: IRemoteUser, activity: 
 		const activityAudience = await parseAudience(actor, activity.to, activity.cc);
 
 		await post(actor, {
-			createdAt: parseDateWithLimit(activity.published, 600 * 1000) || new Date(),
+			createdAt: parseDateWithLimit(activity.published) || new Date(),
 			renote,
 			visibility: activityAudience.visibility,
 			visibleUsers: activityAudience.visibleUsers,

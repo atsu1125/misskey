@@ -48,7 +48,7 @@ type EmojiDef = {
 	isCustomEmoji?: boolean;
 };
 
-const lib = emojilist.filter(x => x.category !== 'flags');
+const lib = emojilist;
 
 const char2file = (char: string) => {
 	let codes = Array.from(char).map(x => x.codePointAt(0).toString(16));

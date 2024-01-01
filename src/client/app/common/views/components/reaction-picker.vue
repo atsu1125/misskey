@@ -65,7 +65,7 @@ export default Vue.extend({
 
 	created() {
 		if (this.$store.state.device.enableRandomReactionPicker) {
-			const list = emojilist.filter(x => x.category !== 'flags').map((x: any) => x.char);
+			const list = emojilist.map((x: any) => x.char);
 			const result = [];
 
 			for (let i = 0; i < 10; i++) {
@@ -179,7 +179,7 @@ export default Vue.extend({
 		},
 
 		reactRandom() {
-			let list = emojilist.filter(x => x.category !== 'flags').map((x: any) => x.char);
+			let list = emojilist.map((x: any) => x.char);
 			let local = ((this.$root.getMetaSync() || { emojis: [] }).emojis || []).map((x: any) => `:${x.name}:`);
 			list = list.concat(local);
 
