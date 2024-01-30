@@ -8,6 +8,8 @@ export const logger = new Logger('email');
 export async function sendEmail(to: string, subject: string, html: string, text: string) {
 	const meta = await fetchMeta();
 
+	if (!meta.enableEmail) return;
+
 	const emailSettingUrl = `${config.url}/i/settings/profile`;
 
 	const enableAuth = meta.smtpUser != null && meta.smtpUser !== '';
