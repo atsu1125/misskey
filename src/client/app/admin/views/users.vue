@@ -17,7 +17,7 @@
 						<ui-button v-if="user.isVerified" @click="unverifyUser" :disabled="unverifying">{{ $t('unverify') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button v-if="!user.isSilenced" @click="silenceUser"><fa :icon="faMicrophoneSlash"/> {{ $t('make-silence') }}</ui-button>
+						<ui-button v-if="!user.isSilenced" @click="silenceUser" :disabled="user.isAdmin"><fa :icon="faMicrophoneSlash"/> {{ $t('make-silence') }}</ui-button>
 						<ui-button v-if="user.isSilenced" @click="unsilenceUser">{{ $t('unmake-silence') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
