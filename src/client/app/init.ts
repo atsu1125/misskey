@@ -418,6 +418,10 @@ export default (callback: (launch: (router: VueRouter) => [Vue, MiOS], os: MiOS)
 				console.log(`Cannot reapply theme. ${e}`);
 			}
 
+			//#region line width
+			document.documentElement.style.setProperty('--lineWidth', `1px`);
+			//#endregion
+
 			//#region fontSize
 			if (os.store.state.device.fontSize >= -0.5) {
 				document.documentElement.style.setProperty('--fontSize', `${os.store.state.device.fontSize}em`);

@@ -6,12 +6,13 @@ import * as httpSignature from '@peertube/http-signature';
 
 import { renderActivity } from '../remote/activitypub/renderer';
 import Note, { INote } from '../models/note';
-import User, { isLocalUser, ILocalUser, IUser } from '../models/user';
+import User, { isLocalUser, ILocalUser, IUser, isRemoteUser } from '../models/user';
 import Emoji from '../models/emoji';
 import renderNote from '../remote/activitypub/renderer/note';
 import renderKey from '../remote/activitypub/renderer/key';
 import renderPerson from '../remote/activitypub/renderer/person';
 import renderEmoji from '../remote/activitypub/renderer/emoji';
+import Likes from './activitypub/likes';
 import Outbox, { packActivity } from './activitypub/outbox';
 import Followers from './activitypub/followers';
 import Following from './activitypub/following';
@@ -239,7 +240,7 @@ export function setResponseType(ctx: Router.RouterContext) {
 router.post('/inbox', inbox);
 router.post('/users/:user/inbox', inbox);
 
-const isNoteUserAvailable = async (note: INote) => {
+export const isNoteUserAvailable = async (note: INote) => {
 	const user = await User.findOne({
 		_id: note.userId,
 		isDeleted: { $ne: true },
@@ -330,6 +331,9 @@ router.get('/notes/:note/activity', async ctx => {
 	setResponseType(ctx);
 });
 
+// likes
+router.get('/notes/:note/likes', Likes);
+
 // outbox
 router.get('/users/:user/outbox', Outbox);
 
@@ -404,8 +408,12 @@ router.get('/users/:user', async (ctx, next) => {
 		isDeleted: { $ne: true },
 		isSuspended: { $ne: true },
 		noFederation: { $ne: true },
-		host: null
 	});
+
+	if (isRemoteUser(user)) {
+		ctx.redirect(user.uri);
+		return;
+	}
 
 	await userInfo(ctx, user);
 });
