@@ -188,6 +188,7 @@ themeColor: '#fb4e4e'
 
 # lazy / ignore
 # inboxMassDelOpeMode: lazy
+# inboxForeignLikeOpeMode: lazy
 
 # Job late limiter (Default: nolimit, 変更しないことを推奨)
 # deliverJobPerSec: 128

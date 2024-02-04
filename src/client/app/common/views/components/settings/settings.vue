@@ -52,6 +52,12 @@
 				<ui-switch v-model="showInstanceSoftwareVersion">{{ $t('@._settings.showInstanceSoftwareVersion') }}</ui-switch>
 				<ui-switch v-model="showTlPin">{{ $t('@._settings.showTlPin') }}</ui-switch>
 			</section>
+			<section>
+				<header>{{ $t('@._settings.font-size') }}</header>
+				<ui-radio v-model="fontSize" :value="0">{{ $t('@._settings.font-size-medium') }}</ui-radio>
+				<ui-radio v-model="fontSize" :value="0.125">{{ $t('@._settings.font-size-large') }}</ui-radio>
+				<ui-radio v-model="fontSize" :value="0.25">{{ $t('@._settings.font-size-x-large') }}</ui-radio>
+			</section>
 			<section v-if="$root.isMobile">
 				<header>{{ $t('@._settings.post-style') }}</header>
 				<ui-radio v-model="postStyle" value="standard">{{ $t('@._settings.post-style-standard') }}</ui-radio>
@@ -492,6 +498,11 @@ export default Vue.extend({
 		disableViaMobile: {
 			get() { return this.$store.state.settings.disableViaMobile; },
 			set(value) { this.$store.dispatch('settings/set', { key: 'disableViaMobile', value }); }
+		},
+
+		fontSize: {
+			get() { return this.$store.state.device.fontSize; },
+			set(value) { this.$store.commit('device/set', { key: 'fontSize', value }); }
 		},
 
 		fetchOnScroll: {

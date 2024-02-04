@@ -378,7 +378,7 @@ export default async (user: IUser, data: Option, silent = false) => {
 			(noteObj as any).isFirstNote = true;
 		}
 
-		if (note.createdAt.getTime() > new Date().getTime() - 1000 * 60 * 10) {
+		if (note.createdAt.getTime() > new Date().getTime() - 1000 * 60 * 60) {
 			publishNotesStream(noteObj);
 		}
 		//publishHotStream(noteObj);

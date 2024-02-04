@@ -5,7 +5,7 @@ import Instance from '../../models/instance';
 import instanceChart from '../../services/chart/instance';
 import Logger from '../../services/logger';
 import { UpdateInstanceinfo } from '../../services/update-instanceinfo';
-import { isBlockedHost, isClosedHost, isSelfSilencedHost } from '../../services/instance-moderation';
+import { isBlockedHost, isClosedHost } from '../../services/instance-moderation';
 import { DeliverJobData, ThinUser } from '../types';
 import { publishInstanceModUpdated } from '../../services/server-event';
 import { StatusError } from '../../misc/fetch';
@@ -28,12 +28,9 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 		return 'skip (closed)';
 	}
 
-	if (await isSelfSilencedHost(host)) {
-		job.data.content = publicToHome(job.data.content, job.data.user);
-	}
 
 	try {
-		const res = await request(job.data.user, job.data.to, job.data.content);
+		const res = await request(job.data.user, job.data.to, job.data.content, job.data.digest);
 
 		// Update stats
 		registerOrFetchInstanceDoc(host).then(i => {
@@ -119,8 +116,10 @@ type DeliverContent = {
 	};
 };
 
-function publicToHome(content: DeliverContent, user: ThinUser): DeliverContent {
-	if (content.type === 'Create' && content.object.type === 'Note') {
+export function publicToHome(org: DeliverContent, user: ThinUser): DeliverContent {
+	if (org.type === 'Create' && org.object.type === 'Note') {
+		const content: DeliverContent = JSON.parse(JSON.stringify(org));
+
 		const asPublic = 'https://www.w3.org/ns/activitystreams#Public';
 		const followers = `${config.url}/users/${user._id}/followers`;
 
@@ -140,6 +139,6 @@ function publicToHome(content: DeliverContent, user: ThinUser): DeliverContent {
 
 		return content;
 	} else {
-		return content;
+		return org;
 	}
 }
