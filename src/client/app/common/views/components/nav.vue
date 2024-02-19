@@ -42,7 +42,7 @@ export default defineComponent({
 				if (u.hostname === 'github.com') {
 					const m = u.pathname.match(/([/][^/]+[/][^/]+)/)	// eg: /user/repo
 					if (m) {
-						commitUrlBase = `https://github.com/${m[1]}`;	// eg: https://github.com/user/repo
+						commitUrlBase = `https://github.com${m[1]}`;	// eg: https://github.com/user/repo
 					}
 				}
 			} catch { }
