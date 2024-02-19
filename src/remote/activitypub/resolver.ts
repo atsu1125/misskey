@@ -1,8 +1,8 @@
-import { getJson, StatusError } from '../../misc/fetch';
+import { StatusError } from '../../misc/fetch';
 import { IObject, isCollection, isOrderedCollection, isCollectionPage, isOrderedCollectionPage } from './type';
 import { ILocalUser } from '../../models/user';
 import { getInstanceActor } from '../../services/instance-actor';
-import { signedGet } from './request';
+import { apGet } from './request';
 import config from '../../config';
 import { extractApHost } from '../../misc/convert-host';
 import { isBlockedHost } from '../../services/instance-moderation';
@@ -66,9 +66,7 @@ export default class Resolver {
 			this.user = await getInstanceActor();
 		}
 
-		const object = this.user
-			? await signedGet(value, this.user)
-			: await getJson(value, 'application/activity+json, application/ld+json');
+		const object = await apGet(value, this.user);
 
 		if (object === null || (
 			Array.isArray(object['@context']) ?

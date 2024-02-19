@@ -175,9 +175,20 @@ async function sendRaw(ctx: Router.RouterContext, file: IDriveFile): Promise<voi
 }
 
 async function sendNormal(ctx: Router.RouterContext, body: Buffer | stream.Stream, contentType: string, filename?: string): Promise<void> {
+	if (contentType === 'application/octet-stream') {
+		ctx.vary('Accept');
+		ctx.set('Cache-Control', 'private, max-age=0, must-revalidate');
+
+		if (ctx.header['accept']?.match(/activity\+json|ld\+json/)) {
+			ctx.status = 400;	// 微妙に406ではない
+			return;
+		}
+	} else {
+		ctx.set('Cache-Control', 'max-age=2592000, s-maxage=172800, immutable');
+	}
+
 	ctx.body = body;
 	ctx.set('Content-Type', FILE_TYPE_BROWSERSAFE.includes(contentType) ? contentType : 'application/octet-stream');
-	ctx.set('Cache-Control', 'max-age=2592000, s-maxage=172800, immutable');
 	if (filename) ctx.set('Content-Disposition', contentDisposition('inline', filename));
 }
 
