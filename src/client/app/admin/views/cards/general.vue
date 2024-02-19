@@ -13,10 +13,10 @@
 		</section>
 		<!-- maintainer -->
 		<section class="fit-bottom">
-			<header><fa :icon="faHeadset"/> {{ $t('maintainer-config') }}</header>
+			<header><fa :icon="faCrown"/> {{ $t('maintainer-config') }}</header>
 			<ui-horizon-group inputs>
 				<ui-input v-model="maintainerName">{{ $t('maintainer-name') }}</ui-input>
-				<ui-input v-model="maintainerEmail" type="email"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('maintainer-email') }}</ui-input>
+				<ui-input v-model="maintainerEmail" type="text">{{ $t('maintainer-email') }}</ui-input>
 			</ui-horizon-group>
 		</section>
 		<!-- extra -->
@@ -42,7 +42,7 @@ import { defineComponent, getCurrentInstance } from 'vue';
 import i18n from '../../../i18n';
 
 // アイコンを追加したらここをいじる 1/2
-import { faHeadset } from '@fortawesome/free-solid-svg-icons';
+import { faCrown } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope as farEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 export default defineComponent({
@@ -68,7 +68,7 @@ export default defineComponent({
 			disableInvitation: false,
 
 			// icons アイコンを追加したらここをいじる 2/2
-			faHeadset, farEnvelope,
+			faCrown, farEnvelope,
 		};
 	},
 

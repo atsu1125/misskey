@@ -1675,8 +1675,7 @@ admin/views/instance.vue:
   smtp-auth: "SMTP認証を行う"
   smtp-user: "SMTPユーザー"
   smtp-pass: "SMTPパスワード"
-  test-email-address: "テストメールの送信先"
-  test-mail: "テストメールを送信"
+  test-mail: "テスト送信"
   serviceworker-config: "ServiceWorker"
   enable-serviceworker: "ServiceWorkerを有効にする"
   serviceworker-info: "プッシュ通知を行うには有効する必要があります。"
@@ -1949,6 +1948,8 @@ admin/views/instanceblocks.vue:
   silencedInstances-info: "最大公開範囲ホームで受信するインスタンス。1行に1ホスト記述します。/正規表現/ が使えます。"
   selfSilencedInstances: "セルフサイレンスするインスタンス"
   selfSilencedInstances-info: "最大公開範囲ホームで配信するインスタンス。1行に1ホスト記述します。/正規表現/ が使えます。"
+  mutedFiles: "ミュートする添付ファイル"
+  mutedFiles-info: "指定のファイルが投稿に添付されている場合にミュートします。MD5小文字。"
   exposeHome: 取得されるときの最大公開範囲はホームにする
   exposeHome-info: "フォロワーのいないインスタンスなどから投稿を取得されるときの最大公開範囲をホームにします。"
 

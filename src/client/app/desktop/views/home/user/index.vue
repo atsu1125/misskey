@@ -50,7 +50,8 @@ export default Vue.extend({
 				if (this.$store.state.i || !user.host) this.user = user;
 				this.fetching = false;
 				Progress.done();
-			}).catch(() => {
+			}).catch((e: any) => {
+				this.$root.dialog({ type: 'error', text: e.message || 'Error' });
 				this.fetching = false;
 				Progress.done();
 			});

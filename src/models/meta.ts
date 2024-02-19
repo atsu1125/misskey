@@ -195,6 +195,7 @@ export type IMeta = {
 	blockedInstances?: string[];
 	silencedInstances?: string[];
 	selfSilencedInstances?: string[];
+	mutedFiles?: string[];
 	exposeHome?: boolean;
 	mascotImageUrl?: string;
 	bannerUrl?: string;

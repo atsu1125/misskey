@@ -1,4 +1,5 @@
-// 消したリモートユーザーを物理削除する、削除フラグリセット、clean-deleted-user-objsをやった後にやる、使うな
+// 消したリモートユーザーを物理削除する by host
+import Note from '../models/note';
 import User, { IUser } from '../models/user';
 
 async function main(host: string) {
@@ -22,6 +23,10 @@ async function main(host: string) {
 		}) as IUser;
 
 		console.log(`user(${prs}/${users.length}): ${user.username}@${user.host}`);
+
+		await Note.remove({
+			userId: user._id
+		});
 
 		await User.remove({
 			_id: u._id

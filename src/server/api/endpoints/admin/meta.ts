@@ -160,6 +160,7 @@ export default define(meta, async (ps, me) => {
 		response.blockedInstances = instance.blockedInstances;
 		response.silencedInstances = instance.silencedInstances;
 		response.selfSilencedInstances = instance.selfSilencedInstances;
+		response.mutedFiles = instance.mutedFiles;
 		response.exposeHome = instance.exposeHome;
 		response.recaptchaSecretKey = instance.recaptchaSecretKey;
 		response.proxyAccount = instance.proxyAccount;

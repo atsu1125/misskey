@@ -113,6 +113,13 @@ export const meta = {
 			}
 		},
 
+		mutedFiles: {
+			validator: $.optional.nullable.arr($.str),
+			desc: {
+				'ja-JP': 'ミュートする添付ファイル'
+			}
+		},
+
 		exposeHome: {
 			validator: $.optional.boolean,
 			desc: {
@@ -223,7 +230,7 @@ export const meta = {
 		maintainerEmail: {
 			validator: $.optional.nullable.str,
 			desc: {
-				'ja-JP': 'インスタンス管理者の連絡先メールアドレス'
+				'ja-JP': 'インスタンス管理者の連絡先'
 			}
 		},
 
@@ -442,6 +449,10 @@ export default define(meta, async (ps) => {
 		set.selfSilencedInstances = ps.selfSilencedInstances.map(x => x.trim()).filter(x => x !== '').map(x => toApHost(x));
 	}
 
+	if (Array.isArray(ps.mutedFiles)) {
+		set.mutedFiles = ps.mutedFiles.map(x => x.trim()).filter(x => x !== '');
+	}
+
 	if (typeof ps.exposeHome === 'boolean') {
 		set.exposeHome = ps.exposeHome;
 	}
@@ -598,7 +609,7 @@ export default define(meta, async (ps) => {
 		$set: set
 	}, { upsert: true });
 
-	if (set.blockedInstances || set.silencedInstances || set.selfSilencedInstances) {
+	if (set.blockedInstances || set.silencedInstances || set.selfSilencedInstances || set.mutedFiles) {
 		publishInstanceModUpdated();
 	}
 

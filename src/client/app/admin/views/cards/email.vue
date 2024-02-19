@@ -17,7 +17,6 @@
 				<ui-input v-model="smtpPass" type="password" :withPasswordToggle="true" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-pass') }}</ui-input>
 			</ui-horizon-group>
 			<ui-switch v-model="smtpSecure" :disabled="!enableEmail || !$store.getters.isAdmin">{{ $t('smtp-secure') }}<template #desc>{{ $t('smtp-secure-info') }}</template></ui-switch>
-			<ui-input v-model="testEmailAddress" type="email" :disabled="!enableEmail"><template #icon><fa :icon="farEnvelope"/></template>{{ $t('test-email-address') }}</ui-input>
 			<ui-button @click="testEmail()" :disabled="!$store.getters.isAdmin">{{ $t('test-mail') }}</ui-button>
 		</section>
 		<!-- save -->
@@ -57,9 +56,6 @@ export default defineComponent({
 			smtpUser: null,
 			smtpPass: null,
 			smtpAuth: false,
-			testEmailAddress: null,
-
-			maintainerEmail: null,
 
 			// icons アイコンを追加したらここをいじる 2/2
 			farEnvelope,
@@ -84,9 +80,6 @@ export default defineComponent({
 				this.smtpUser = meta.smtpUser;
 				this.smtpPass = meta.smtpPass;
 				this.smtpAuth = meta.smtpUser != null && meta.smtpUser !== '';
-				this.testEmailAddress = meta.testEmailAddress;
-
-				this.maintainerEmail = meta.maintainer.email;
 			});
 		},
 
@@ -108,7 +101,6 @@ export default defineComponent({
 				smtpPort: parseInt(this.smtpPort, 10),
 				smtpUser: this.smtpAuth ? this.smtpUser : '',
 				smtpPass: this.smtpAuth ? this.smtpPass : '',
-				testEmailAddress: this.testEmailAddress,
 			}).then(() => {
 				this.fetchMeta();
 				this.$root.dialog({
@@ -124,10 +116,18 @@ export default defineComponent({
 		},
 
 		async testEmail() {
+			const { canceled, result } = await this.$root.dialog({
+				title: 'To',
+				input: {
+					type: 'text'
+				}
+			});
+			if (canceled) return;
+
 			this.$root.api('admin/send-email', {
-				to: this.testEmailAddress,
-				subject: 'Test email from Misskey',
-				text: 'Test email from your Misskey instance.'
+				to: result,
+				subject: 'Test email',
+				text: 'Na'
 			}).then((e: Error) => {
 				this.$root.dialog({
 					type: 'success',

@@ -35,6 +35,9 @@ import { IActivity } from '../../remote/activitypub/type';
 import { normalizeTag } from '../../misc/normalize-tag';
 import * as ms from 'ms';
 import { isSilencedHost } from '../../services/instance-moderation'
+import { isMutedFile } from '../instance-moderation';
+import Logger from '../logger';
+export const noteLogger = new Logger('note');
 
 type NotificationType = 'reply' | 'renote' | 'quote' | 'mention' | 'highlight';
 
@@ -83,6 +86,15 @@ class NotificationManager {
 		// サイレンスされていたらスキップ
 		if (this.notifier.isSilenced) {
 			return;
+		}
+
+		if (this.queue.length === 0) return;
+
+		for (const atc of this.note._files || []) {
+			if (await isMutedFile(atc.md5)) {
+				noteLogger.info(`muted file: note=${this.note._id} md5=${atc.md5}`);
+				return;
+			}
 		}
 
 		for (const x of this.queue) {

@@ -11,6 +11,7 @@ const defaultMeta: any = {
 	blockedInstances: [],
 	silencedInstances: [],
 	selfSilencedInstances: [],
+	mutedFiles: [],
 	exposeHome: false,
 	stats: {
 		// Object.assignじゃマージされない
