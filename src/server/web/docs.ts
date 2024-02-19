@@ -11,7 +11,6 @@ import * as Router from '@koa/router';
 import * as send from 'koa-send';
 import * as glob from 'glob';
 import config from '../../config';
-import { copyright } from '../../const.json';
 import * as locales from '../../../locales';
 import * as nestedProperty from 'nested-property';
 import { genCsp } from '.';
@@ -47,8 +46,6 @@ async function genVars(lang: string): Promise<{ [key: string]: any }> {
 	vars['kebab'] = (string: string) => string.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase();
 
 	vars['config'] = config;
-
-	vars['copyright'] = copyright;
 
 	vars['i18n'] = (key: string) => nestedProperty.get(locales[lang], key);
 

@@ -26,6 +26,11 @@ export const meta = {
 				'en-US': 'Host'
 			}
 		},
+
+		limit: {
+			validator: $.optional.num.range(1, 1000),
+			default: 50,
+		},
 	}
 };
 
@@ -42,6 +47,8 @@ export default define(meta, async (ps) => {
 	const users = await User.find({
 		host,
 		isDeleted: { $ne: true },
+	}, {
+		limit: ps.limit,
 	});
 
 	for (const user of users) {

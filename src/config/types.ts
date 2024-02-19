@@ -2,8 +2,6 @@
  * ユーザーが設定する必要のある情報
  */
 export type Source = {
-	repository_url?: string;
-	feedback_url?: string;
 	url: string;
 	port?: number;
 	addr?: string;

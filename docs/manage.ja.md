@@ -118,3 +118,12 @@ https://github.com/mei23/misskey/issues/4674 のバグで残ってしまったRe
 ```sh
 node built/tools/clean-queue-logs.js
 ```
+
+## 削除された/削除したリモートユーザーを復活させる
+
+リモートからDelete/Undo.Deleteされた または こちらで削除した リモートユーザーを復活させます。  
+userIdは管理画面からリモートユーザーを削除済みでフィルタして`_id`を参照します。
+
+```sh
+node built/tools/undelete-remote-user.js userId
+```

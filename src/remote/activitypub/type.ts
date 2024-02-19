@@ -137,8 +137,8 @@ export interface IPost extends IObject {
 	type: 'Note' | 'Question' | 'Article' | 'Audio' | 'Document' | 'Image' | 'Page' | 'Video' | 'Event';
 	_misskey_content?: string;
 	source?: {
-		content: string;
-		mediaType: string;
+		content?: string;
+		mediaType?: string;
 	};
 	_misskey_quote?: string;
 	quoteUrl?: string;
@@ -164,8 +164,8 @@ export interface IQuestion extends IObject {
 	type: 'Note' | 'Question';
 	_misskey_content?: string;
 	source?: {
-		content: string;
-		mediaType: string;
+		content?: string;
+		mediaType?: string;
 	};
 	_misskey_quote?: string;
 	quoteUrl?: string;

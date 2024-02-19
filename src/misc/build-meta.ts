@@ -18,7 +18,10 @@ export async function buildMeta(instance: IMeta, detail = true) {
 	]);
 
 	const response: any = {
-		maintainer: instance.maintainer,
+		maintainer: {
+			name: instance.maintainer?.name,
+			email: instance.maintainer?.email,
+		},
 
 		version: config.version,
 

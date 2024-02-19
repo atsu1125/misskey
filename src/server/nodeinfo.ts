@@ -65,7 +65,10 @@ const nodeinfo2 = async () => {
 			nodeDescription,
 			name: nodeName,
 			description: nodeDescription,
-			maintainer: meta.maintainer,
+			maintainer: {
+				name: meta.maintainer?.name,
+				email: meta.maintainer?.email,
+			},
 			langs: meta.langs,
 			announcements: meta.announcements,
 			relayActor: relayActor ? `${config.url}/users/${relayActor._id}` : null,

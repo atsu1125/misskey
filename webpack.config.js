@@ -4,6 +4,7 @@
  */
 
 const fs = require('fs');
+const child_process = require('child_process');
 const webpack = require('webpack');
 const rndstr_1 = require('rndstr');
 const chalk = require('chalk');
@@ -32,6 +33,18 @@ const codename = meta.codename;
 
 const version = isProduction ? meta.version : meta.version + '-' + (0, rndstr_1.default)({ length: 8, chars: '0-9a-z' });
 const software = meta.name;
+
+const commit = {
+	id: undefined,
+	tag: undefined,
+};
+
+try {
+	commit.id = child_process.execSync('git rev-parse HEAD').toString().trim();
+	commit.tag = child_process.execSync('git tag --points-at HEAD').toString().trim().split('\n')[0];
+} catch(e) {
+	console.warn(e);
+}
 
 const postcss = {
 	loader: 'postcss-loader',
@@ -143,6 +156,7 @@ module.exports = {
 			_VERSION_: JSON.stringify(version),
 			_SOFTWARE_: JSON.stringify(software),
 			_CODENAME_: JSON.stringify(codename),
+			_COMMIT_: JSON.stringify(commit),
 			_LANGS_: JSON.stringify(Object.entries(locales).map(([k, v]) => [k, v && v.meta && v.meta.lang])),
 			_ENV_: JSON.stringify(process.env.NODE_ENV),
 			_MODS_: JSON.stringify(mods)
