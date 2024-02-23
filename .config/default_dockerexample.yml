@@ -1,25 +1,34 @@
 # Final accessible URL seen by a user.
-url: http://localhost:3000/
+url: https://example.tld/
 
 # Listen port
 port: 3000
 
 # Listen address (default is probably any)
-# addr: '127.0.0.0'
+#addr: '127.0.0.0'
+# or Listen UNIX socket
+#socket: '/home/misskey/misskey/unix.sock'
 
 mongodb:
   host: mongo
   port: 27017
+  #path: /tmp/mongodb-27017.sock
   db: misskey
-#  user: example-misskey-user
-#  pass: example-misskey-pass
+  user: example-misskey-user
+  pass: example-misskey-pass
+  #options:
+  #  poolSize: 10
 
 # Redis
 redis:
   host: redis
   port: 6379
+  #path: /var/run/redis/redis-server.sock
+  #family: 0 # 0=Both, 4=IPv4, 6=IPv6
+  #user: example-user
   #pass: example-pass
-
+  #prefix: example-prefix
+  #db: 0
 
 ### drive ###
 drive:
@@ -36,6 +45,7 @@ drive:
 #  storage: 'minio'
 #  bucket: <bucket>
 #  prefix: <prefix>
+#  baseUrl: <baseUrl>
 #  config:
 #    endPoint: <endPoint>
 #    region: <region>
@@ -46,6 +56,12 @@ drive:
 #    setPublicRead: false
 #    s3ForcePathStyle: true
 #
+# * baseurl
+#     If using Proxy or CDN, its URL. (eg: https://media.example.com)
+#     S3: https://<bucket>.s3.amazonaws.com
+#     GCS: https://storage.googleapis.com/<bucket>
+#     Other services: https://s3.example.com/<bucket>
+#
 # * endPoint
 #     S3: Leave empty
 #     GCS: 'storage.googleapis.com'
@@ -55,12 +71,6 @@ drive:
 # * region
 #     Specify a region such like 'xx-east-1'.
 #     If your service is region independent (eg: GCS/Minio) leave empty or specify 'us-east-1'
-#
-# * baseurl
-#     If using Proxy or CDN, its URL. (eg: https://media.example.com)
-#     S3: https://<bucket>.s3.amazonaws.com
-#     GCS: https://storage.googleapis.com/<bucket>
-#     Other services: https://s3.example.com/<bucket>
 #
 # * useProxy
 #     Use proxy
@@ -88,8 +98,14 @@ drive:
 # Disable Federation: (default: false)
 #disableFederation: true
 
-# Ignore AP forwarded activities (default: false)
+# 自インスタンスが関係してないActivityを無視する (default: false, リレー使用時には有効にしてはいけない)
 #ignoreApForwarded: true
+
+# 自インスタンスが関係してないLike (リアクション) を無視する (default: false)
+#ignoreForeignLike: true
+
+# Like (リアクション) を直接した相手のインスタンス以外に配信しない (default: false)
+#disableLikeBroadcast: true
 
 # Disable URL Preview (default: false)
 #disableUrlPreview: true
@@ -97,15 +113,19 @@ drive:
 # Disable Posts (default: false)
 #disablePosts: true
 
+# リバースプロキシからのreal IP addressを取得するためのヘッダー
+# X-Forwarded-For, CF-Connecting-IP など
+proxyIpHeader: 'X-Forwarded-For'
+
 # Enable instance GeoIP lookup (default: false)
 # Non-commercial use only
 #enableInstanceGeoIp: true
 
-# Sign to ActivityPub GET request (default: false)
-#signToActivityPubGet: true
+# Sign to ActivityPub GET request (default: true)
+#signToActivityPubGet: flase
 
-# 最初に作成したユーザーを管理者にする (default: true)
-autoAdmin: true
+# 最初に作成したユーザーを管理者にする (default: false)
+#autoAdmin: true
 
 # アイコン等の設定
 # favicon.urlをpngにする場合は、favicon.typeを'image/png'にする
@@ -136,6 +156,9 @@ themeColor: '#fb4e4e'
 # Whether disable HSTS
 #disableHsts: true
 
+# APIでCORSを無効にする (defaut: false, たぶんイントラ等に構築している非公開インスタンス等で有効にする)
+#disableApiCors: false
+
 # 各Workerの設定
 # workerWorkerCount: server+queue両方を処理するworkerの数
 # serverWorkerCount: server処理のみをするworkerの数
@@ -158,16 +181,21 @@ themeColor: '#fb4e4e'
 # IP address family used for outgoing request (ipv4, ipv6 or dual)
 #outgoingAddressFamily: ipv4
 
-# Job concurrency per worker
+# Job concurrency per worker (Default: deliver=cpu x 8, inbox=cpu x 1)
 # deliverJobConcurrency: 128
 # inboxJobConcurrency: 16
+# inboxLazyJobConcurrency: 1
 
-# Job late limiter
+# lazy / ignore
+# inboxMassDelOpeMode: lazy
+# inboxForeignLikeOpeMode: lazy
+
+# Job late limiter (Default: nolimit, 変更しないことを推奨)
 # deliverJobPerSec: 128
 # inboxJobPerSec: 16
 
-# deliverJobMaxAttempts: 12
-# inboxJobMaxAttempts: 8
+# deliverJobMaxAttempts: 17
+# inboxJobMaxAttempts: 4
 
 # Proxy for HTTP/HTTPS
 #proxy: http://127.0.0.1:3128
@@ -177,9 +205,9 @@ themeColor: '#fb4e4e'
 #proxySmtp: socks4://127.0.0.1:1080 # use SOCKS4
 #proxySmtp: socks5://127.0.0.1:1080 # use SOCKS5
 
-allowedPrivateNetworks: [
-  '127.0.0.1/32'
-]
+#allowedPrivateNetworks: [
+#  '127.0.0.1/32'
+#]
 
 # Upload or download file size limits (bytes)
 #maxFileSize: 262144000
@@ -188,4 +216,12 @@ allowedPrivateNetworks: [
 #hideServerInfo: true
 
 # 設定できる最低年齢
-# minimumAge: 13
+#minimumAge: 13
+
+# ホーム/ハイブリッドタイムラインでこの日数以内に投稿していない場合はAPI pullではクエリ対象にしない
+#homeTlActiveLimitDays: 3
+
+# Syslog option
+#syslog:
+#  host: localhost
+#  port: 514
