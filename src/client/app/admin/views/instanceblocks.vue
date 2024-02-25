@@ -22,14 +22,14 @@
 		</section>
 
 		<section>
-			<header>{{ $t('mutedFiles') }}</header>
-			<ui-textarea v-model="mutedFiles"></ui-textarea>
-			<ui-info>{{ $t('mutedFiles-info') }}</ui-info>
+			<ui-switch v-model="exposeHome">{{ $t('exposeHome') }}</ui-switch>
+			<ui-info>{{ $t('exposeHome-info') }}</ui-info>
 		</section>
 
 		<section>
-			<ui-switch v-model="exposeHome">{{ $t('exposeHome') }}</ui-switch>
-			<ui-info>{{ $t('exposeHome-info') }}</ui-info>
+			<header>{{ $t('mutedFiles') }}</header>
+			<ui-textarea v-model="mutedFiles"></ui-textarea>
+			<ui-info>{{ $t('mutedFiles-info') }}</ui-info>
 		</section>
 
 		<section>
