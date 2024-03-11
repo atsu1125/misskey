@@ -5,7 +5,7 @@ import define from '../../define';
 import User from '../../../../models/user';
 import AbuseUserReport from '../../../../models/abuse-user-report';
 import { ApiError } from '../../error';
-import { getUser } from '../../common/getters';
+import { GetterError, getUser } from '../../common/getters';
 import { sendEmail } from '../../../../services/send-email';
 import fetchMeta from '../../../../misc/fetch-meta';
 
@@ -69,7 +69,7 @@ export const meta = {
 export default define(meta, async (ps, me) => {
 	// Lookup user
 	const user = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e instanceof GetterError && e.type === 'noSuchUser') throw new ApiError(meta.errors.noSuchUser);
 		throw e;
 	});
 

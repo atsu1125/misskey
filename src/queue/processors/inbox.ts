@@ -40,7 +40,6 @@ export const tryProcessInbox = async (data: InboxJobData, ctx?: ApContext): Prom
 	const activity = data.activity;
 
 	const resolver = ctx?.resolver || new Resolver();
-	const dbResolver = ctx?.dbResolver || new DbResolver();
 
 	//#region Log
 	logger.debug(inspect(signature));
@@ -58,19 +57,14 @@ export const tryProcessInbox = async (data: InboxJobData, ctx?: ApContext): Prom
 	//#region resolve http-signature signer
 	let user: IRemoteUser | null;
 
-	// keyIdを元にDBから取得
-	user = await dbResolver.getRemoteUserFromKeyId(signature.keyId);
-
-	// || activity.actorを元にDBから取得 || activity.actorを元にリモートから取得
-	if (user == null) {
-		try {
-			user = await resolvePerson(getApId(activity.actor), undefined, resolver, isDelete(activity) || isUndo(activity)) as IRemoteUser;
-		} catch (e) {
-			if (e instanceof StatusError && e.isPermanentError) {
-				return `skip: Ignored actor ${activity.actor} - ${e.statusCode}`;
-			}
-			throw `Error in actor ${activity.actor} - ${e.statusCode || e}`;
+	// activity.actorを元にDBから取得 || activity.actorを元にリモートから取得
+	try {
+		user = await resolvePerson(getApId(activity.actor), undefined, resolver, isDelete(activity) || isUndo(activity)) as IRemoteUser;
+	} catch (e) {
+		if (e instanceof StatusError && e.isPermanentError) {
+			return `skip: Ignored actor ${activity.actor} - ${e.statusCode}`;
 		}
+		throw `Error in actor ${activity.actor} - ${e.statusCode || e}`;
 	}
 
 	// http-signature signer がわからなければ終了
@@ -95,20 +89,13 @@ export const tryProcessInbox = async (data: InboxJobData, ctx?: ApContext): Prom
 	// また、http-signatureのsignerは、activity.actorと一致する必要がある
 	if (!httpSignatureValidated || user.uri !== activity.actor) {
 		// でもLD-Signatureがありそうならそっちも見る
-		if (!config.ignoreApForwarded && activity.signature) {
+		if (!config.ignoreApForwarded && activity.signature?.creator) {
 			if (activity.signature.type !== 'RsaSignature2017') {
 				return `skip: unsupported LD-signature type ${activity.signature.type}`;
 			}
 
-			// activity.signature.creator: https://example.oom/users/user#main-key
-			// みたいになっててUserを引っ張れば公開キーも入ることを期待する
-			if (activity.signature.creator) {
-				const candicate = activity.signature.creator.replace(/#.*/, '');
-				await resolvePerson(candicate).catch(() => null);
-			}
+			user = await resolvePerson(activity.signature.creator.replace(/#.*/, '')).catch(() => null) as IRemoteUser | null;
 
-			// keyIdからLD-Signatureのユーザーを取得
-			user = await dbResolver.getRemoteUserFromKeyId(activity.signature.creator);
 			if (user == null) {
 				return `skip: LD-Signatureのユーザーが取得できませんでした`;
 			}

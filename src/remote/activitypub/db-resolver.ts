@@ -5,6 +5,7 @@ import Note, { INote } from '../../models/note';
 import { IObject, getApId } from './type';
 import * as escapeRegexp from 'escape-regexp';
 import MessagingMessage, { IMessagingMessage } from '../../models/messaging-message';
+import { toDbHost } from '../../misc/convert-host';
 
 export default class DbResolver {
 	constructor() {
@@ -54,8 +55,15 @@ export default class DbResolver {
 	}
 
 	public async getRemoteUserFromKeyId(keyId: string): Promise<IRemoteUser | null> {
+		let u: URL | null = null;
+		try {
+			u = new URL(keyId);
+		} catch {
+			return null;
+		}
+
 		const user = await User.findOne({
-			host: { $ne: null },
+			host: toDbHost(u.hostname),
 			'publicKey.id': keyId,
 			deletedAt: { $exists: false }
 		}) as IRemoteUser;
