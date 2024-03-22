@@ -48,6 +48,7 @@ export default [
   "admin/verify-user",
   "aggregation/hashtags",
   "ap/fetch-outbox",
+  "ap/get",
   "ap/interact",
   "ap/show",
   "app/create",
