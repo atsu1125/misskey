@@ -107,7 +107,7 @@ class Autocomplete {
 
 		if (isMention) {
 			const username = text.substr(mentionIndex + 1);
-			if (username.match(/^[\w-]+$/)) {
+			if (username.match(/^[\w.-]+$/)) {
 				this.open('user', username.toLowerCase());
 				opened = true;
 			}

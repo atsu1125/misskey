@@ -262,8 +262,7 @@ export const mfmLanguage = P.createLanguage({
 	mention: () => {
 		return P((input, i) => {
 			const text = input.substr(i);
-			// eslint-disable-next-line no-useless-escape
-			const match = text.match(/^@\w([\w-]*\w)?(?:@[\w\.\-]+\w)?/);
+			const match = text.match(/^@([\w.-]+)(?:@[\w.-]+\w)?/);
 			if (!match) return P.makeFailure(i, 'not a mention');
 			// @ の前に何かあればハッシュタグ扱いしない
 			if (input[i - 1]?.match(/[^\s\u200b]/)) return P.makeFailure(i, 'not a mention');

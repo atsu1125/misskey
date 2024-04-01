@@ -5,7 +5,7 @@ import DriveFile from '../models/drive-file';
 
 const host = 'misskey.io';
 const from = /^https:[/][/]media[.]misskeyusercontent[.]com[/]/;
-///const from = /^https:(?:[/][/]media[.]misskeyusercontent[.]com[/]|s3[.]arkjp[.]net)/;
+//const from = /^https:[/][/](?:media[.]misskeyusercontent[.]com|s3[.]arkjp[.]net)[/]/;
 const to = 'https://media.misskeyusercontent.jp/';
 
 async function main() {

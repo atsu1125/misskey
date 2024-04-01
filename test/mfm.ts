@@ -427,6 +427,19 @@ describe('parse', () => {
 				]);
 			});
 
+			it('remote with dot', () => {
+				const tokens = parseFull('@hima.sub@namori.net foo');
+				assert.deepStrictEqual(tokens, [
+					leaf('mention', {
+						acct: '@hima.sub@namori.net',
+						canonical: '@hima.sub@namori.net',
+						username: 'hima.sub',
+						host: 'namori.net'
+					}),
+					text(' foo')
+				]);
+			});
+
 			it('ignore', () => {
 				const tokens = parseFull('idolm@ster');
 				assert.deepStrictEqual(tokens, [
