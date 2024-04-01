@@ -57,7 +57,7 @@ module.exports = async (ctx: Router.RouterContext) => {
 			url: url,
 			lang: lang
 		})}`) : await getSummaryInstance().summary(url, {
-			lang: lang
+			lang: typeof lang === 'string' ? lang : null,
 		});
 
 		logger.succ(`Got preview of ${url}: ${summary.title}`);
