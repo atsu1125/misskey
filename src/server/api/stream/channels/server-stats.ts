@@ -7,22 +7,23 @@ const ev = new Xev();
 
 export default class extends Channel {
 	public readonly chName = 'serverStats';
-	public static requireCredential = false;
+	public static requireCredential = true;
+	private active = false;
 
 	@autobind
 	public async init(params: any) {
-		ev.addListener('serverStats', this.onStats);
+		this.active = !config.hideServerInfo || !!(this.user?.isAdmin || this.user?.isModerator);
+		if (this.active) ev.addListener('serverStats', this.onStats);
 	}
 
 	@autobind
 	private onStats(stats: any) {
-		if (config.hideServerInfo) return;
 		this.send('stats', stats);
 	}
 
 	@autobind
 	public onMessage(type: string, body: any) {
-		if (config.hideServerInfo) return;
+		if (!this.active) return;
 		switch (type) {
 			case 'requestLog':
 				ev.once(`serverStatsLog:${body.id}`, statsLog => {
@@ -38,6 +39,6 @@ export default class extends Channel {
 
 	@autobind
 	public dispose() {
-		ev.removeListener('serverStats', this.onStats);
+		if (this.active) ev.removeListener('serverStats', this.onStats);
 	}
 }
