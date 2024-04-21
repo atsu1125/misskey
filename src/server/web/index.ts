@@ -25,6 +25,7 @@ import { getJSONFeed } from './feed/json';
 import { buildMeta } from '../../misc/build-meta';
 import Page, { packPage } from '../../models/page';
 import { fromHtml } from '../../mfm/from-html';
+import { twemojiSvgBase } from '../../misc/twemoji-base';
 const htmlescape = require('htmlescape');
 
 const staticAssets = `${__dirname}/../../../assets/`;
@@ -95,12 +96,8 @@ router.get('/twemoji/*', async ctx => {
 		return;
 	}
 
-	ctx.set('Content-Security-Policy', `default-src 'none'; style-src 'unsafe-inline'`);
-
-	await send(ctx as any, path, {
-		root: `${__dirname}/../../../node_modules/@discordapp/twemoji/dist/svg/`,
-		maxage: ms('7 days'),
-	});
+	ctx.redirect(`${twemojiSvgBase}/${path}`);
+	ctx.set('Cache-Control', 'public, max-age=86400');
 });
 
 // ServiceWorker

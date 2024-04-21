@@ -410,6 +410,11 @@ router.get('/users/:user', async (ctx, next) => {
 		noFederation: { $ne: true },
 	});
 
+	if (user == null) {
+		ctx.status = 404;
+		return;
+	}
+
 	if (isRemoteUser(user)) {
 		ctx.redirect(user.uri);
 		return;

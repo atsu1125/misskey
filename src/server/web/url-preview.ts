@@ -60,6 +60,8 @@ module.exports = async (ctx: Router.RouterContext) => {
 			lang: typeof lang === 'string' ? lang : null,
 		});
 
+		if (typeof summary !== 'object') throw new Error('Invalid summaly');
+
 		logger.succ(`Got preview of ${url}: ${summary.title}`);
 
 		summary.icon = await wrap(summary.icon, 32);

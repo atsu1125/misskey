@@ -27,6 +27,7 @@ router.get('/.well-known/host-meta', async ctx => {
 	if (config.disableFederation) ctx.throw(404);
 
 	ctx.set('Content-Type', xrd);
+	ctx.set('Cache-Control', 'public, max-age=86400');
 	ctx.body = XRD({ element: 'Link', attributes: {
 		rel: 'lrdd',
 		type: xrd,
@@ -38,6 +39,7 @@ router.get('/.well-known/host-meta.json', async ctx => {
 	if (config.disableFederation) ctx.throw(404);
 
 	ctx.set('Content-Type', jrd);
+	ctx.set('Cache-Control', 'public, max-age=86400');
 	ctx.body = {
 		links: [{
 			rel: 'lrdd',
@@ -49,7 +51,7 @@ router.get('/.well-known/host-meta.json', async ctx => {
 
 router.get('/.well-known/nodeinfo', async ctx => {
 	if (config.disableFederation) ctx.throw(404);
-
+	ctx.set('Cache-Control', 'public, max-age=86400');
 	ctx.body = { links };
 });
 

@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.697-m544",
+	"version": "10.102.698-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -10,7 +10,7 @@
 	"main": "./index.js",
 	"private": true,
 	"engines": {
-		"node": ">=14.15.0"
+		"node": ">=18.17.0"
 	},
 	"scripts": {
 		"start": "node ./index.js",
@@ -34,7 +34,6 @@
 		"@aws-sdk/client-s3": "3.549.0",
 		"@aws-sdk/lib-storage": "3.549.0",
 		"@aws-sdk/node-http-handler": "3.374.0",
-		"@discordapp/twemoji": "15.0.3",
 		"@fortawesome/fontawesome-svg-core": "1.2.36",
 		"@fortawesome/free-brands-svg-icons": "5.15.4",
 		"@fortawesome/free-regular-svg-icons": "5.15.4",
@@ -210,7 +209,7 @@
 		"@types/lodash": "4.17.0",
 		"@types/mocha": "10.0.6",
 		"@types/mongodb": "3.6.20",
-		"@types/node": "18.19.29",
+		"@types/node": "20.12.7",
 		"@types/nodemailer": "6.4.14",
 		"@types/nprogress": "0.2.3",
 		"@types/oauth": "0.9.4",

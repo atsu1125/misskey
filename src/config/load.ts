@@ -32,7 +32,7 @@ export default function load() {
 
 	config.port = config.port || parseInt(process.env.PORT || '', 10);
 
-	config.proxyRemoteFiles = !config.proxyRemoteFiles === false;
+	config.proxyRemoteFiles = typeof config.proxyRemoteFiles === 'boolean' ? config.proxyRemoteFiles : true;
 
 	const icons = {
 		favicon: {
