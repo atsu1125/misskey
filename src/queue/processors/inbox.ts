@@ -22,6 +22,7 @@ import resolveUser from '../../remote/resolve-user';
 import config from '../../config';
 import { publishInstanceModUpdated } from '../../services/server-event';
 import { StatusError } from '../../misc/fetch';
+import { FIXED_CONTEXT } from '../../remote/activitypub/misc/contexts';
 
 const logger = new Logger('inbox');
 
@@ -37,7 +38,7 @@ type ApContext = {
 
 export const tryProcessInbox = async (data: InboxJobData, ctx?: ApContext): Promise<string> => {
 	const signature = data.signature;
-	const activity = data.activity;
+	let activity = data.activity;
 
 	const resolver = ctx?.resolver || new Resolver();
 
@@ -110,6 +111,11 @@ export const tryProcessInbox = async (data: InboxJobData, ctx?: ApContext): Prom
 			if (!verified) {
 				return `skip: LD-Signatureの検証に失敗しました`;
 			}
+
+			const activity2 = JSON.parse(JSON.stringify(activity));
+			delete activity2.signature;
+			const compacted = await ldSignature.compact(activity2, FIXED_CONTEXT);
+			activity = compacted as any;
 
 			// もう一度actorチェック
 			if (user.uri !== activity.actor) {

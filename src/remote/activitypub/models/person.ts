@@ -629,7 +629,7 @@ function parseSearchableBy(actor: IActor): 'public' | 'none' | null {
 
 	// searchableByでpublicならpublic
 	const searchableBy = toArray(actor.searchableBy);
-	if (searchableBy.includes('https://www.w3.org/ns/activitystreams#Public')) return 'public';
+	if (searchableBy.includes('https://www.w3.org/ns/activitystreams#Public') || searchableBy.includes('as:Public')) return 'public';
 
 	// indexableで明示的に拒否されていればnone
 	if (actor.indexable === false) return 'none';

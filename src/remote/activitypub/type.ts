@@ -192,7 +192,7 @@ export interface IApDocument extends IObject {
 export const isDocument = (object: IObject): object is IApDocument =>
 	['Audio', 'Document', 'Image', 'Page', 'Video'].includes(getApType(object));
 
-export interface IApImage extends IObject {
+export interface IApImage extends IApDocument {
 	type: 'Image';
 }
 

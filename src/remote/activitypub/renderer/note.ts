@@ -8,6 +8,7 @@ import Note, { INote } from '../../../models/note';
 import User from '../../../models/user';
 import { getNoteHtml } from '../misc/get-note-html';
 import Emoji, { IEmoji } from '../../../models/emoji';
+import { removeNull } from '../../../prelude/array';
 
 export default async function renderNote(note: INote, dive = true): Promise<any> {
 	let inReplyTo;
@@ -151,8 +152,8 @@ export default async function renderNote(note: INote, dive = true): Promise<any>
 		to,
 		cc,
 		inReplyTo,
-		attachment: files.map(renderDocument),
-		sensitive: note.cw != null || files.some(file => file.metadata.isSensitive),
+		attachment: removeNull(files).map(renderDocument),
+		sensitive: note.cw != null || files.some(file => file?.metadata?.isSensitive),
 		likes: `${config.url}/notes/${note._id}/likes`,
 		tag,
 		...asPoll,

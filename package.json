@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.698-m544",
+	"version": "10.102.699-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -95,7 +95,7 @@
 		"jsdom": "20.0.3",
 		"json5": "2.2.3",
 		"json5-loader": "4.0.1",
-		"jsonld": "5.2.0",
+		"jsonld": "8.3.2",
 		"katex": "0.16.10",
 		"koa": "2.15.2",
 		"koa-bodyparser": "4.4.1",

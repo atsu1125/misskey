@@ -23,7 +23,7 @@ export async function createImage(actor: IRemoteUser, value: IObject): Promise<I
 	if (!isDocument(image)) return null;
 
 	if (typeof image.url !== 'string') {
-		throw new Error('invalid image: url not privided');
+		return null;
 	}
 
 	logger.info(`Creating the Image: ${image.url}`);
@@ -68,7 +68,7 @@ export async function createImage(actor: IRemoteUser, value: IObject): Promise<I
  * Misskeyに対象のImageが登録されていればそれを返し、そうでなければ
  * リモートサーバーからフェッチしてMisskeyに登録しそれを返します。
  */
-export async function resolveImage(actor: IRemoteUser, value: IObject): Promise<IDriveFile> {
+export async function resolveImage(actor: IRemoteUser, value: IObject): Promise<IDriveFile | null | undefined> {
 	// TODO
 
 	// リモートサーバーからフェッチしてきて登録
