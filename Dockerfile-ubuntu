@@ -1,4 +1,4 @@
-FROM ubuntu:23.10 as builder
+FROM ubuntu:24.04 as builder
 
 # Use bash for the shell
 SHELL ["/bin/bash", "-c"]
@@ -40,7 +40,7 @@ COPY . ./
 
 RUN pnpm build
 
-FROM ubuntu:23.10
+FROM ubuntu:24.04
 
 WORKDIR /misskey
 
