@@ -55,7 +55,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN apt-get update && \
   apt-get -y --no-install-recommends install \
 	  ffmpeg mecab mecab-ipadic-utf8 tini wget && \
-	ln -s /opt/misskey /misskey && \
 	rm -rf /var/cache && \
 	rm -rf /var/lib/apt/lists/*
 
