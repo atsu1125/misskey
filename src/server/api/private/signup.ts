@@ -9,9 +9,26 @@ import usersChart from '../../../services/chart/users';
 import fetchMeta from '../../../misc/fetch-meta';
 import { verifyRecaptcha } from '../../../misc/captcha';
 import { genRsaKeyPair } from '../../../misc/gen-key-pair';
+import limiter from '../limiter';
+import { IEndpoint } from '../endpoints';
 
 export default async (ctx: Router.RouterContext) => {
 	const body = ctx.request.body;
+
+	const ep = {
+		name: 'signup',
+		exec: null,
+		meta: {
+			limit: {
+				duration: 300 * 1000,
+				max: 5,
+			}
+		}
+	} as IEndpoint;
+
+	await limiter(ep, undefined, ctx.ip).catch(e => {
+		ctx.throw(429);
+	});
 
 	const instance = await fetchMeta();
 
