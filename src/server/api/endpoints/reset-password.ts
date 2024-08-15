@@ -1,5 +1,6 @@
 import $ from 'cafy';
 import * as bcrypt from 'bcryptjs';
+import * as ms from 'ms';
 import define from '../define';
 import PasswordResetRequest from '../../../models/password-reset-request';
 import User from '../../../models/user';
@@ -8,6 +9,11 @@ export const meta = {
 	tags: ['reset password'],
 
 	requireCredential: false as const,
+
+	limit: {
+		duration: ms('1hour'),
+		max: 3
+	},
 
 	params: {
 		token: {
@@ -34,6 +40,9 @@ export default define(meta, async (ps, user) => {
 
 	// 発行してから30分以上経過していたら無効
 	if (Date.now() - req.createdAt.getTime() > 1000 * 60 * 30) {
+		await PasswordResetRequest.remove({
+			_id: req._id
+		});
 		throw new Error(); // TODO
 	}
 
@@ -49,7 +58,7 @@ export default define(meta, async (ps, user) => {
 		}
 	});
 
-	PasswordResetRequest.remove({
+	await PasswordResetRequest.remove({
 		_id: req._id
 	});
 });
