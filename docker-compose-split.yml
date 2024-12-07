@@ -33,7 +33,7 @@ services:
 
   mongo:
     restart: always
-    image: mongo:5-focal
+    image: mongo:6-jammy
     networks:
       - internal_network
     healthcheck:

@@ -7,6 +7,6 @@ services:
       - "127.0.0.1:56310:6379"
 
   mongotest:
-    image: mongo:5-focal
+    image: mongo:6-jammy
     ports:
       - "127.0.0.1:57010:27017"

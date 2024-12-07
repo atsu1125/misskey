@@ -8,7 +8,7 @@ jobs:
 
     services:
       mongo:
-        image: mongo:5-focal
+        image: mongo:6-jammy
         ports:
           - 57010:27017
       redis:
@@ -47,7 +47,7 @@ jobs:
 
     services:
       mongo:
-        image: mongo:5-focal
+        image: mongo:6-jammy
         ports:
           - 57010:27017
       redis:
@@ -86,7 +86,7 @@ jobs:
 
     services:
       mongo:
-        image: mongo:5-focal
+        image: mongo:6-jammy
         ports:
           - 57010:27017
       redis:
@@ -125,7 +125,7 @@ jobs:
 
     services:
       mongo:
-        image: mongo:5-focal
+        image: mongo:6-jammy
         ports:
           - 57010:27017
       redis:
