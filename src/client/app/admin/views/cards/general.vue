@@ -23,8 +23,8 @@
 		<section>
 			<ui-switch v-model="disableRegistration" :disabled="!$store.getters.isAdmin">{{ $t('disable-registration') }}</ui-switch>
 			<ui-switch v-model="disableDeletion" :disabled="!$store.getters.isAdmin">{{ $t('disable-deletion') }}</ui-switch>
+			<ui-info v-if="disableDeletion">{{ $t('disable-deletion-info') }}</ui-info>
 			<ui-switch v-model="disableInvitation" :disabled="!$store.getters.isAdmin">{{ $t('disable-invitation') }}</ui-switch>
-			<ui-info>{{ $t('disable-deletion-info') }}</ui-info>
 		</section>
 		<!-- save -->
 		<section>
