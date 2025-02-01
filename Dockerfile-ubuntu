@@ -54,7 +54,7 @@ ENV PATH="${PATH}:/opt/node/bin"
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get update && \
   apt-get -y --no-install-recommends install \
-	  ffmpeg mecab mecab-ipadic-utf8 tini wget && \
+	  ffmpeg mecab mecab-ipadic-utf8 tini curl wget && \
 	rm -rf /var/cache && \
 	rm -rf /var/lib/apt/lists/*
 

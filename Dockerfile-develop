@@ -21,7 +21,7 @@ FROM node:20.12.2-bookworm-slim AS runner
 WORKDIR /misskey
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends ffmpeg mecab mecab-ipadic-utf8 tini wget\
+ && apt-get install -y --no-install-recommends ffmpeg mecab mecab-ipadic-utf8 tini curl wget\
  && apt-get -y clean \
  && rm -rf /var/lib/apt/lists/* \
  && corepack enable pnpm

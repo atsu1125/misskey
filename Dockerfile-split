@@ -21,7 +21,7 @@ RUN apt-get install -y build-essential \
                        mecab \
                        mecab-ipadic-utf8 \
                        tini \
-                       wget
+                       curl
 
 RUN corepack enable pnpm
 
