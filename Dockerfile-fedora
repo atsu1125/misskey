@@ -1,6 +1,7 @@
 FROM fedora:40 AS builder
 
 ENV NODE_ENV=production
+ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey
 
 RUN dnf update -y \
@@ -32,6 +33,7 @@ RUN pnpm build
 
 FROM fedora:40 AS runner
 
+ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey
 
 RUN dnf update -y \

@@ -5,6 +5,7 @@ SHELL ["/bin/bash", "-c"]
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 ENV NODE_ENV=production
+ENV COREPACK_DEFAULT_TO_LATEST=0
 
 ENV NODE_VER="20.12.2"
 RUN ARCH= && \
@@ -42,6 +43,7 @@ RUN pnpm build
 
 FROM ubuntu:24.04
 
+ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey
 
 # Copy over all the langs needed for runtime

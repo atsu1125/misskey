@@ -1,6 +1,7 @@
 FROM node:20.12.2-bookworm AS builder
 
 ENV NODE_ENV=production
+ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey
 
 RUN apt-get update \
@@ -18,6 +19,7 @@ RUN pnpm build
 
 FROM node:20.12.2-bookworm-slim AS runner
 
+ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey
 
 RUN apt-get update \

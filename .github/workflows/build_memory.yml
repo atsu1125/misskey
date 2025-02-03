@@ -2,6 +2,9 @@ name: Build with 1GB
 
 on: [push]
 
+env:
+  COREPACK_DEFAULT_TO_LATEST: 0
+
 jobs:
   build_and_test:
 
@@ -21,4 +24,3 @@ jobs:
     - run: NODE_ENV=production pnpm i --frozen-lockfile
     - run: NODE_ENV=production NODE_OPTIONS=--max-old-space-size=464 pnpm run build
     - run: ls built/meta.json
-
