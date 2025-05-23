@@ -17,6 +17,8 @@ export async function parseAudience(actor: IRemoteUser, to?: ApObject, cc?: ApOb
 	const toGroups = groupingAudience(getApIds(to), actor);
 	const ccGroups = groupingAudience(getApIds(cc), actor);
 
+	if (resolver == null) resolver = new Resolver();
+
 	const others = unique(concat([toGroups.other, ccGroups.other]));
 
 	const limit = promiseLimit<IUser | null>(2);
