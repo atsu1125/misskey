@@ -82,6 +82,9 @@ async function fetchAny(uri: string) {
 	const packed = await processRemote(uri);
 	if (packed != null) return packed;
 
+	// local object, not found in db? fail
+	if (isSelfOrigin(uri)) return null;
+
 	// disableFederationならリモート解決しない
 	if (config.disableFederation) throw new RejectedError('Federation disabled');
 
