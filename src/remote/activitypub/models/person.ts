@@ -186,7 +186,7 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 				birthday: bday ? bday[0] : undefined,
 				location: person['vcard:Address'] || undefined,
 			},
-			isBot: getApType(object) === 'Service',
+			isBot: getApType(object) === 'Service' || getApType(object) === 'Application',
 			isGroup: getApType(object) === 'Group',
 			isOrganization: getApType(object) === 'Organization',
 			isCat: (person as any).isCat === true
@@ -385,7 +385,7 @@ export async function updatePerson(uri: string, resolver?: Resolver, hint?: IAct
 			birthday: bday ? bday[0] : undefined,
 			location: person['vcard:Address'] || undefined,
 		},
-		isBot: getApType(object) === 'Service',
+		isBot: getApType(object) === 'Service' || getApType(object) === 'Application',
 		isGroup: getApType(object) === 'Group',
 		isOrganization: getApType(object) === 'Organization',
 		isCat: (person as any).isCat === true,
