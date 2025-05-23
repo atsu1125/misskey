@@ -31,6 +31,10 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 	//   LL => local to local, LR => local to remote, RL => remote to local, RR => remote to remote
 	const direction = `${ isLocalUser(user) ? 'L' : 'R' }${ note._user.host == null ? 'L' : 'R' }`;
 
+	// check renote
+	if (note.renoteId && note.text == null && (note.fileIds == null || note.fileIds.length === 0) && note.poll == null) {
+			throw new ReactionError('cannotReactToRenote');
+	}
 	// check blocking
 	if ((direction === 'LL' || direction === 'RL') && note.userId !== user._id) {	// 受けがローカルユーザーであり本人からのリアクションではない？
 		const blocked = await Blocking.findOne({
