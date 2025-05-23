@@ -3,6 +3,7 @@ import ID, { transform } from '../../../../../misc/cafy-id';
 import { isValidText } from '../../../../../models/messaging-message';
 import DriveFile from '../../../../../models/drive-file';
 import define from '../../../define';
+import * as ms from 'ms';
 import { ApiError } from '../../../error';
 import { GetterError, getUser } from '../../../common/getters';
 import { createMessage } from '../../../../../services/messages/create';
@@ -19,6 +20,12 @@ export const meta = {
 	requireCredential: true,
 
 	kind: ['write:messaging', 'messaging-write'],
+
+	limit: {
+		duration: ms('1hour'),
+		max: 500,
+		minInterval: ms('1sec')
+	},
 
 	params: {
 		userId: {
