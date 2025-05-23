@@ -134,10 +134,12 @@ export default define(meta, async (ps, user) => {
 	});
 
 	// Notify
-	createNotification(note.userId, user._id, 'poll_vote', {
-		noteId: note._id,
-		choice: ps.choice
-	});
+	if (note._user.host == null) {
+		createNotification(note.userId, user._id, 'poll_vote', {
+			noteId: note._id,
+			choice: ps.choice
+		});
+	}
 
 	// Fetch watchers
 	Watching
