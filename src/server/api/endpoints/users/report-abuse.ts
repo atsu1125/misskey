@@ -4,6 +4,7 @@ import ID, { transform } from '../../../../misc/cafy-id';
 import define from '../../define';
 import User from '../../../../models/user';
 import AbuseUserReport from '../../../../models/abuse-user-report';
+import * as ms from 'ms';
 import { ApiError } from '../../error';
 import { GetterError, getUser } from '../../common/getters';
 import { sendEmail } from '../../../../services/send-email';
@@ -17,6 +18,12 @@ export const meta = {
 	tags: ['users'],
 
 	requireCredential: true,
+
+	limit: {
+		duration: ms('1hour'),
+		max: 10,
+		minInterval: ms('1min')
+	},
 
 	params: {
 		userId: {
