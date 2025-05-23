@@ -48,6 +48,12 @@ export default async function(follower: IUser, followee: IUser, requestId?: stri
 	if (blocking != null) throw new Error('blocking');
 	if (blocked || userRefused) throw new Error('blocked');
 
+	// Remove old follow requests before creating a new one.
+	await FollowRequest.remove({
+		followerId: follower._id,
+		followeeId: followee._id
+	});
+
 	await FollowRequest.insert({
 		createdAt: new Date(),
 		followerId: follower._id,
