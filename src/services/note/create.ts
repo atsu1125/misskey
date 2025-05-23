@@ -435,7 +435,7 @@ export default async (user: IUser, data: Option, silent = false) => {
 		});
 
 		// AP deliver
-		if (isLocalUser(user)) {
+		if (!data.localOnly && isLocalUser(user)) {
 			(async () => {
 				let noteActivity: IActivity | null;
 
