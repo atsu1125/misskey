@@ -1,4 +1,4 @@
-FROM node:20.15.1-bookworm AS builder
+FROM node:22.12.0-bookworm AS builder
 
 ENV NODE_ENV=production
 ENV COREPACK_DEFAULT_TO_LATEST=0
@@ -17,7 +17,7 @@ COPY . ./
 
 RUN pnpm build
 
-FROM node:20.15.1-bookworm-slim AS runner
+FROM node:22.12.0-bookworm-slim AS runner
 
 ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey

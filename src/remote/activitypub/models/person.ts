@@ -27,7 +27,7 @@ import { toArray, toSingle } from '../../../prelude/array';
 import { UpdateInstanceinfo } from '../../../services/update-instanceinfo';
 import { extractDbHost, isSelfOrigin } from '../../../misc/convert-host';
 import DbResolver from '../db-resolver';
-import resolveUser from '../../resolve-user';
+import resolveUser, { checkCanonical } from '../../resolve-user';
 import { normalizeTag } from '../../../misc/normalize-tag';
 import { substr } from 'stringz';
 import { resolveAnotherUser } from '../resolve-another-user';
@@ -79,12 +79,13 @@ function validateActor(x: IObject, uri: string): IActor {
 		throw new Error('invalid Actor: id has different host');
 	}
 
-	if (x.publicKey) {
-		if (typeof x.publicKey.id !== 'string') {
+	const publicKey = toSingle(x.publicKey);
+	if (publicKey) {
+		if (typeof publicKey.id !== 'string') {
 			throw new Error('invalid Actor: publicKey.id is not a string');
 		}
 
-		const publicKeyIdHost = toUnicode(new URL(x.publicKey.id).hostname.toLowerCase());
+		const publicKeyIdHost = toUnicode(new URL(publicKey.id).hostname.toLowerCase());
 		if (publicKeyIdHost !== expectHost) {
 			throw new Error('invalid Actor: publicKey.id has different host');
 		}
@@ -145,6 +146,8 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 
 	const bday = person['vcard:bday']?.match(/^[0-9]{4,8}-\d{2}-\d{2}/);
 
+	const publicKey = toSingle(person.publicKey);
+
 	// Create user
 	let user: IRemoteUser | undefined;
 	try {
@@ -164,9 +167,9 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 			username: person.preferredUsername,
 			usernameLower: person.preferredUsername.toLowerCase(),
 			host,
-			publicKey: person.publicKey ? {
-				id: person.publicKey.id,
-				publicKeyPem: person.publicKey.publicKeyPem
+			publicKey: publicKey ? {
+				id: publicKey.id,
+				publicKeyPem: publicKey.publicKeyPem
 			} : undefined,
 			inbox: person.inbox,
 			sharedInbox: person.sharedInbox || (person.endpoints ? person.endpoints.sharedInbox : undefined),
@@ -212,6 +215,8 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<IR
 			throw e;
 		}
 	}
+
+	checkCanonical(uri);
 
 	// Register host
 	registerOrFetchInstanceDoc(host).then(i => {
@@ -356,6 +361,8 @@ export async function updatePerson(uri: string, resolver?: Resolver, hint?: IAct
 
 	const bday = person['vcard:bday']?.match(/^[0-9]{4,8}-\d{2}-\d{2}/);
 
+	const publicKey = toSingle(person.publicKey);
+
 	const updates = {
 		lastFetchedAt: new Date(),
 		inbox: person.inbox,
@@ -385,9 +392,9 @@ export async function updatePerson(uri: string, resolver?: Resolver, hint?: IAct
 		isLocked: person.manuallyApprovesFollowers,
 		isExplorable: !!person.discoverable,
 		searchableBy: parseSearchableBy(person),
-		publicKey: person.publicKey ? {
-			id: person.publicKey.id,
-			publicKeyPem: person.publicKey.publicKeyPem
+		publicKey: publicKey ? {
+			id: publicKey.id,
+			publicKeyPem: publicKey.publicKeyPem
 		} : undefined,
 	} as any;
 
@@ -423,6 +430,8 @@ export async function updatePerson(uri: string, resolver?: Resolver, hint?: IAct
 	});
 
 	await updateFeatured(exist._id, resolver).catch(err => logger.error(err));
+
+	checkCanonical(uri);
 
 	registerOrFetchInstanceDoc(extractDbHost(uri)).then(i => {
 		UpdateInstanceinfo(i);
