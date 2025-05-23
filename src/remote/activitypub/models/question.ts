@@ -1,6 +1,7 @@
 import Note, { IChoice, IPoll } from '../../../models/note';
+import User, { IRemoteUser } from '../../../models/user';
 import Resolver from '../resolver';
-import { IObject, IQuestion, isQuestion,  } from '../type';
+import { getOneApId, IObject, IQuestion, isQuestion,  } from '../type';
 import { apLogger } from '../logger';
 import { isSelfOrigin } from '../../../misc/convert-host';
 
@@ -41,7 +42,7 @@ export async function extractPollFromQuestion(source: string | IObject, resolver
  * @param uri URI of AP Question object
  * @returns true if updated
  */
-export async function updateQuestion(value: any, resolver?: Resolver) {
+export async function updateQuestion(value: any, actor?: IRemoteUser, resolver?: Resolver) {
 	const uri = typeof value == 'string' ? value : value.id;
 
 	// URIがこのサーバーを指しているならスキップ
@@ -50,15 +51,28 @@ export async function updateQuestion(value: any, resolver?: Resolver) {
 	//#region このサーバーに既に登録されているか
 	const note = await Note.findOne({ uri });
 
-	if (note == null) throw 'Question is not registed';
+	if (note == null) throw 'Question is not registered';
+
+	const user = await User.findOne({
+		_id: note.userId
+	});
+
+	if (note == null) throw 'Question is not registered';
 	//#endregion
 
 	// resolve new Question object
 	if (resolver == null) resolver = new Resolver();
-	const question = await resolver.resolve(value) as IQuestion;
+	const question = await resolver.resolve(value);
 	apLogger.debug(`fetched question: ${JSON.stringify(question, null, 2)}`);
 
-	if (question.type !== 'Question') throw 'object is not a Question';
+	if (!isQuestion(question)) throw new Error('object is not a Question');
+
+	const attribution = (question.attributedTo) ? getOneApId(question.attributedTo) : user.uri;
+	const attributionMatchesExisting = attribution === user.uri;
+	const actorMatchesAttribution = (actor) ? attribution === actor.uri : true;
+	if (!attributionMatchesExisting || !actorMatchesAttribution) {
+		throw new Error('Refusing to ingest update for poll by different user');
+	}
 
 	const apChoices = question.oneOf || question.anyOf;
 	const dbChoices = note.poll.choices;
@@ -68,6 +82,7 @@ export async function updateQuestion(value: any, resolver?: Resolver) {
 	for (const db of dbChoices) {
 		const oldCount = db.votes;
 		const newCount = apChoices.filter(ap => ap.name === db.text)[0].replies.totalItems;
+		if (newCount == null || !(Number.isInteger(newCount) && newCount >= 0)) throw new Error('invalid newCount: ' + newCount);
 
 		if (oldCount != newCount) {
 			changed = true;
