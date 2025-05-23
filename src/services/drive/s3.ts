@@ -1,5 +1,5 @@
 import { S3Client } from '@aws-sdk/client-s3';
-import { NodeHttpHandler } from '@aws-sdk/node-http-handler';
+import { NodeHttpHandler } from '@smithy/node-http-handler';
 import { DriveConfig } from '../../config/types';
 import { getAgentByUrl } from '../../misc/fetch';
 
