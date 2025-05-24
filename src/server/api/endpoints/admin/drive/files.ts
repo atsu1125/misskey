@@ -8,7 +8,7 @@ import define from '../../../define';
 export const meta = {
 	tags: ['admin'],
 
-	requireCredential: false,
+	requireCredential: true,
 	requireModerator: true,
 
 	params: {
