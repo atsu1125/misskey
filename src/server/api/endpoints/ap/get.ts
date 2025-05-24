@@ -12,6 +12,7 @@ export const meta = {
 	},
 
 	requireCredential: true as const,
+	requireModerator: true,
 
 	limit: {
 		duration: ms('1hour'),
