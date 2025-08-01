@@ -13,6 +13,65 @@ import config from '../../config';
 
 const logger = new Logger('deliver');
 
+type StoplightState = 'blue' | 'yellow' | 'red';
+
+interface StoplightStatus {
+	state: StoplightState;
+	failureCount: number;
+	lastFailure: number;
+	redUntil?: number;
+}
+
+const stoplightMap = new Map<string, StoplightStatus>();
+
+function canDeliverToHost(host: string): boolean {
+	const status = stoplightMap.get(host);
+	const now = Date.now();
+
+	if (!status) return true;
+
+	if (status.state === 'red') {
+		if (status.redUntil && now > status.redUntil) {
+			// Expire Red State → Turn Yellow and Decrement 1 count
+			stoplightMap.set(host, { state: 'yellow', failureCount: 9 });
+			return true;
+		}
+		return false; // Red State
+	}
+
+	return true;
+}
+
+function reportDeliveryResult(host: string, success: boolean) {
+	const now = Date.now();
+	const status = stoplightMap.get(host) ?? { state: 'blue', failureCount: 0, lastFailure: 0 };
+
+	if (success) {
+		if (status.state !== 'blue') {
+			stoplightMap.set(host, { state: 'blue', failureCount: 0, lastFailure: 0 });
+		}
+		return;
+	}
+
+	// if fails
+	// Increment 1 count
+	let failureCount = status.failureCount + 1;
+
+	if (status.state === 'blue') {
+		stoplightMap.set(host, { state: 'yellow', failureCount, lastFailure: now });
+	} else if (status.state === 'yellow' && failureCount >= 10) {
+		stoplightMap.set(host, {
+			state: 'red',
+			failureCount,
+			lastFailure: now,
+			redUntil: now + 1000 * 60 * 1 // 1 minute
+		});
+	} else {
+		// (Yellow State and failureCount is less than 10) Or Red State
+		stoplightMap.set(host, { ...status, failureCount, lastFailure: now });
+	}
+}
+
 export default async (job: Bull.Job<DeliverJobData>) => {
 	if (!job.data.to?.match(/^https?:/)) {
 		return 'skip (invalid URL)';
@@ -28,6 +87,10 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 		return 'skip (closed)';
 	}
 
+	// 赤信号(10回以上連続失敗中)なら即エラーを返して後で再試行（サーキットブレーカー）
+	if (!canDeliverToHost(host)) {
+    throw `[STOPLIGHT] Delivery to ${host} is blocked (RED)`;
+  }
 
 	try {
 		const res = await request(job.data.user, job.data.to, job.data.content, job.data.digest);
@@ -47,6 +110,8 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 
 			instanceChart.requestSent(i.host, true);
 		});
+
+		reportDeliveryResult(host, true);
 
 		return `ok: ${res?.substring(0, 256)}`;
 	} catch (res) {
@@ -72,6 +137,8 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 
 			instanceChart.requestSent(i.host, false);
 		});
+
+		reportDeliveryResult(host, false);
 
 		if (res instanceof StatusError) {
 			// 4xx
