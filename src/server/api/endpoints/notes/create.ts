@@ -302,6 +302,10 @@ export default define(meta, async (ps, user, app) => {
 		if (reply == null) {
 			throw new ApiError(meta.errors.noSuchReplyTarget);
 		}
+
+		if (reply.visibility === 'specified' && ps.visibility !== 'specified') {
+			ps.visibility = 'specified';
+		}
 	}
 
 	if (ps.poll) {
