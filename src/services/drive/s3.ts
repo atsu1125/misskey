@@ -22,8 +22,8 @@ export function getS3Client(drive: DriveConfig) {
 			? false
 			: drive.config.s3ForcePathStyle == null ? true : !!drive.config.s3ForcePathStyle,
 		requestHandler: new NodeHttpHandler({
-			httpAgent: getAgentByUrl(new URL(`http://${h}`), bypassProxy) as any,
-			httpsAgent: getAgentByUrl(new URL(`https://${h}`), bypassProxy) as any,
+			httpAgent: getAgentByUrl(new URL(`http://${h}`), bypassProxy, true) as any,
+			httpsAgent: getAgentByUrl(new URL(`https://${h}`), bypassProxy, true) as any,
 			connectionTimeout: 10 * 1000,
 			socketTimeout: 30 * 1000,
 		}),

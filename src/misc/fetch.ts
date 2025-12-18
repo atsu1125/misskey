@@ -1,5 +1,6 @@
 import * as http from 'http';
 import * as https from 'https';
+import net from 'net';
 import CacheableLookup from 'cacheable-lookup';
 import got, * as Got from 'got';
 import { HttpProxyAgent } from 'http-proxy-agent';
@@ -7,6 +8,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 import config from '../config';
 import { checkPrivateIp } from './check-private-ip';
 import { checkAllowedUrl } from './check-allowed-url';
+import { CheckedHttpAgent, CheckedHttpsAgent } from './checked-fetch';
 
 export async function getJson(url: string, accept = 'application/json, */*', timeout = 10000, headers?: Record<string, string>): Promise<any> {
 	const res = await getResponse({
@@ -21,7 +23,7 @@ export async function getJson(url: string, accept = 'application/json, */*', tim
 
 	if (res.body.length > 65536) throw new Error('too large JSON');
 
-	return await JSON.parse(res.body); 
+	return await JSON.parse(res.body);
 }
 
 export async function getHtml(url: string, accept = 'text/html, */*', timeout = 10000, headers?: Record<string, string>): Promise<string> {
@@ -140,9 +142,27 @@ const cache = new CacheableLookup({
 });
 
 /**
+ * Get http non-proxy agent (without local address filtering)
+ */
+const httpNative = new http.Agent({
+	keepAlive: true,
+	keepAliveMsecs: 30 * 1000,
+	lookup: cache.lookup,
+} as http.AgentOptions);
+
+/**
+ * Get https non-proxy agent (without local address filtering)
+ */
+const httpsNative = new https.Agent({
+	keepAlive: true,
+	keepAliveMsecs: 30 * 1000,
+	lookup: cache.lookup,
+} as https.AgentOptions);
+
+/**
  * Get http non-proxy agent
  */
-const _http = new http.Agent({
+const _http = new CheckedHttpAgent({
 	keepAlive: true,
 	keepAliveMsecs: 30 * 1000,
 	lookup: cache.lookup,
@@ -151,7 +171,7 @@ const _http = new http.Agent({
 /**
  * Get https non-proxy agent
  */
-const _https = new https.Agent({
+const _https = new CheckedHttpsAgent({
 	keepAlive: true,
 	keepAliveMsecs: 30 * 1000,
 	lookup: cache.lookup,
@@ -176,10 +196,16 @@ export const httpsAgent = config.proxy
  * @param url URL
  * @param bypassProxy Allways bypass proxy
  */
-export function getAgentByUrl(url: URL, bypassProxy = false): http.Agent | https.Agent {
-	if (bypassProxy) {
+export function getAgentByUrl(url: URL, bypassProxy = false, isLocalAddressAllowed = false): http.Agent | https.Agent {
+	if (bypassProxy || (config.proxyBypassHosts || []).includes(url.hostname)) {
+		if (isLocalAddressAllowed) {
+			return url.protocol === 'http:' ? httpNative : httpsNative;
+		}
 		return url.protocol == 'http:' ? _http : _https;
 	} else {
+		if (isLocalAddressAllowed && (!config.proxy)) {
+			return url.protocol === 'http:' ? httpNative : httpsNative;
+		}
 		return url.protocol == 'http:' ? httpAgent : httpsAgent;
 	}
 }
