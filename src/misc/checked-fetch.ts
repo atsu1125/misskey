@@ -1,6 +1,7 @@
 import * as http from 'http';
 import * as https from 'https';
 import net from 'net';
+import * as IPCIDR from 'ip-cidr';
 import { checkPrivateIp } from './check-private-ip';
 
 declare module 'http' {
