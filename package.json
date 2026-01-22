@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "mei23 <m@m544.net>",
-	"version": "10.102.704-m544",
+	"version": "10.102.705-m544",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -241,5 +241,19 @@
 		"mocha": "10.8.2",
 		"npm-run-all": "4.1.5"
 	},
-	"packageManager": "pnpm@10.7.1"
+	"packageManager": "pnpm@10.28.1",
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"@fortawesome/fontawesome-common-types",
+			"@fortawesome/fontawesome-svg-core",
+			"@fortawesome/free-brands-svg-icons",
+			"@fortawesome/free-regular-svg-icons",
+			"@fortawesome/free-solid-svg-icons",
+			"@swc/core",
+			"bootstrap-vue",
+			"es5-ext",
+			"msgpackr-extract",
+			"sharp"
+		]
+	}
 }
