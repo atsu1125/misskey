@@ -37,7 +37,7 @@ importers:
         version: 5.0.0
       '@koa/multer':
         specifier: 3.0.2
-        version: 3.0.2(multer@1.4.5-lts.1)
+        version: 3.0.2(multer@2.0.2)
       '@koa/router':
         specifier: 8.0.8
         version: 8.0.8
@@ -57,8 +57,8 @@ importers:
         specifier: 1.11.16
         version: 1.11.16
       '@twemoji/parser':
-        specifier: 15.1.1
-        version: 15.1.1
+        specifier: 16.0.0
+        version: 16.0.0
       animejs:
         specifier: 3.2.2
         version: 3.2.2
@@ -148,7 +148,7 @@ importers:
         version: 4.0.2
       gulp-postcss:
         specifier: 9.0.1
-        version: 9.0.1(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.14.0)(typescript@5.5.3))
+        version: 9.0.1(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.19.6)(typescript@5.5.3))
       gulp-rename:
         specifier: 2.0.0
         version: 2.0.0
@@ -195,8 +195,8 @@ importers:
         specifier: 3.1.0
         version: 3.1.0
       js-yaml:
-        specifier: 4.1.0
-        version: 4.1.0
+        specifier: 4.1.1
+        version: 4.1.1
       jsdom:
         specifier: 20.0.3
         version: 20.0.3
@@ -213,8 +213,8 @@ importers:
         specifier: 0.16.21
         version: 0.16.21
       koa:
-        specifier: 2.16.1
-        version: 2.16.1
+        specifier: 2.16.3
+        version: 2.16.3
       koa-bodyparser:
         specifier: 4.4.1
         version: 4.4.1
@@ -252,8 +252,8 @@ importers:
         specifier: 2.1.3
         version: 2.1.3
       multer:
-        specifier: 1.4.5-lts.1
-        version: 1.4.5-lts.1
+        specifier: 2.0.2
+        version: 2.0.2
       neologd-normalizer:
         specifier: 0.0.3
         version: 0.0.3
@@ -261,8 +261,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       nodemailer:
-        specifier: 6.9.16
-        version: 6.9.16
+        specifier: 7.0.11
+        version: 7.0.11
       nprogress:
         specifier: 0.2.0
         version: 0.2.0
@@ -369,8 +369,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       systeminformation:
-        specifier: 5.23.8
-        version: 5.23.8
+        specifier: 5.27.14
+        version: 5.27.14
       syuilo-password-strength:
         specifier: 0.0.1
         version: 0.0.1
@@ -387,14 +387,14 @@ importers:
         specifier: 1.4.2
         version: 1.4.2
       tmp:
-        specifier: 0.2.3
-        version: 0.2.3
+        specifier: 0.2.4
+        version: 0.2.4
       ts-loader:
         specifier: 9.5.1
         version: 9.5.1(typescript@5.5.3)(webpack@5.94.0)
       ts-node:
         specifier: 10.9.2
-        version: 10.9.2(@swc/core@1.11.16)(@types/node@22.14.0)(typescript@5.5.3)
+        version: 10.9.2(@swc/core@1.11.16)(@types/node@22.19.6)(typescript@5.5.3)
       typescript:
         specifier: 5.5.3
         version: 5.5.3
@@ -538,8 +538,8 @@ importers:
         specifier: 3.6.20
         version: 3.6.20
       '@types/node':
-        specifier: 22.14.0
-        version: 22.14.0
+        specifier: 22.19.6
+        version: 22.19.6
       '@types/nodemailer':
         specifier: 6.4.17
         version: 6.4.17
@@ -1740,8 +1740,8 @@ packages:
   '@tsconfig/node16@1.0.3':
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
 
-  '@twemoji/parser@15.1.1':
-    resolution: {integrity: sha512-CChRzIu6ngkCJOmURBlYEdX5DZSu+bBTtqR60XjBkFrmvplKW7OQsea+i8XwF4bLVlUXBO7ZmHhRPDzfQyLwwg==}
+  '@twemoji/parser@16.0.0':
+    resolution: {integrity: sha512-jmuIjkp3OIaEemwMy3sArBwZSuZkRqmueGwRe2Zk4cFzbUJISFBJSZLDUUBNIgq3c+nY49ideYN2OiII6JUqwA==}
 
   '@types/accepts@1.3.5':
     resolution: {integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==}
@@ -1873,8 +1873,8 @@ packages:
   '@types/needle@3.2.0':
     resolution: {integrity: sha512-6XzvzEyJ2ozFNfPajFmqH9JOt0Hp+9TawaYpJT59iIP/zR0U37cfWCRwosyIeEBBZBi021Osq4jGAD3AOju5fg==}
 
-  '@types/node@22.14.0':
-    resolution: {integrity: sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==}
+  '@types/node@22.19.6':
+    resolution: {integrity: sha512-qm+G8HuG6hOHQigsi7VGuLjUVu6TtBo/F05zvX04Mw2uCg9Dv0Qxy3Qw7j41SidlTcl5D/5yg0SEZqOB+EqZnQ==}
 
   '@types/nodemailer@6.4.17':
     resolution: {integrity: sha512-I9CCaIp6DTldEg7vyUTZi8+9Vo0hi1/T8gv3C89yk1rSAAzoKQ8H8ki/jBYJSFoH/BisgLP8tkZMlQ91CIquww==}
@@ -2780,6 +2780,10 @@ packages:
   concat-stream@1.6.2:
     resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==}
     engines: {'0': node >= 0.8}
+
+  concat-stream@2.0.0:
+    resolution: {integrity: sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==}
+    engines: {'0': node >= 6.0}
 
   condense-newlines@0.2.1:
     resolution: {integrity: sha512-P7X+QL9Hb9B/c8HI5BFFKmjgBu2XpQuF98WZ9XkO+dBGgk5XgwiQz7o1SmpglNWId3581UcS0SFAWfoIhMHPfg==}
@@ -4508,6 +4512,10 @@ packages:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
 
+  js-yaml@4.1.1:
+    resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
+    hasBin: true
+
   jsbn@0.1.1:
     resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
 
@@ -4599,6 +4607,7 @@ packages:
   keygrip@1.1.0:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
     engines: {node: '>= 0.6'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   keyv@4.5.2:
     resolution: {integrity: sha512-5MHbFaKn8cNSmVW7BYnijeAVlE4cYA/SVkifVgrh7yotnfhKmjuXpDKjrABLnT0SfHWV21P8ow07OGfRrNDg8g==}
@@ -4649,8 +4658,8 @@ packages:
     resolution: {integrity: sha512-ii6s1zuZ51p+SY7WIrwjRi1tmPrNpeHEaw5UYi4h1QzAPmIcNk16e9zwKd9+eNNzI9n+Q2LXHAvt1MCfs7j/8w==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
 
-  koa@2.16.1:
-    resolution: {integrity: sha512-umfX9d3iuSxTQP4pnzLOz0HKnPg0FaUUIKcye2lOiz3KPu1Y3M3xlz76dISdFPQs37P9eJz1wUpcTS6KDPn9fA==}
+  koa@2.16.3:
+    resolution: {integrity: sha512-zPPuIt+ku1iCpFBRwseMcPYQ1cJL8l60rSmKeOuGfOXyE6YnTBmf2aEFNL2HQGrD0cPcLO/t+v9RTgC+fwEh/g==}
     engines: {node: ^4.8.4 || ^6.10.1 || ^7.10.1 || >= 8.1.4}
 
   ky-universal@0.11.0:
@@ -5072,9 +5081,9 @@ packages:
   msgpackr@1.10.1:
     resolution: {integrity: sha512-r5VRLv9qouXuLiIBrLpl2d5ZvPt8svdQTl5/vMvE4nzDMyEX4sgW5yWhuBBj5UmgwOTWj8CIdSXn5sAfsHAWIQ==}
 
-  multer@1.4.5-lts.1:
-    resolution: {integrity: sha512-ywPWvcDMeH+z9gQq5qYHCCy+ethsk4goepZ45GLD63fOu0YcNecQxi64nDs3qluZB+murG3/D4dJ7+dGctcCQQ==}
-    engines: {node: '>= 6.0.0'}
+  multer@2.0.2:
+    resolution: {integrity: sha512-u7f2xaZ/UG8oLXHvtF/oWTRvT44p9ecwBBqTwgJVq0+4BW1g8OW01TyMEGWBHbyMOYVHXslaut7qEQ1meATXgw==}
+    engines: {node: '>= 10.16.0'}
 
   multipipe@0.1.2:
     resolution: {integrity: sha512-7ZxrUybYv9NonoXgwoOqtStIu18D1c3eFZj27hqgf5kBrBF8Q+tE8V0MW8dKM5QLkQPh1JhhbKgHLY9kifov4Q==}
@@ -5162,8 +5171,8 @@ packages:
   node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
 
-  nodemailer@6.9.16:
-    resolution: {integrity: sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ==}
+  nodemailer@7.0.11:
+    resolution: {integrity: sha512-gnXhNRE0FNhD7wPSCGhdNh46Hs6nm+uTyg+Kq0cZukNQiYdnCsoQjodNP9BQVG9XrcK/v6/MgpAPBUFyzh9pvw==}
     engines: {node: '>=6.0.0'}
 
   nopt@6.0.0:
@@ -6579,8 +6588,8 @@ packages:
     resolution: {integrity: sha512-7SNMJKtQBJlwBUp1jxFT7bXya71cnINXPCYJ2AVhlQE4MKL7o2QiPdAXbMdWRiLeykQ2rx+7TNrnoGzvzhO+eA==}
     engines: {node: '>=10.0.0'}
 
-  systeminformation@5.23.8:
-    resolution: {integrity: sha512-Osd24mNKe6jr/YoXLLK3k8TMdzaxDffhpCxgkfgBHcapykIkd50HXThM3TCEuHO2pPuCsSx2ms/SunqhU5MmsQ==}
+  systeminformation@5.27.14:
+    resolution: {integrity: sha512-3DoNDYSZBLxBwaJtQGWNpq0fonga/VZ47HY1+7/G3YoIPaPz93Df6egSzzTKbEMmlzUpy3eQ0nR9REuYIycXGg==}
     engines: {node: '>=8.0.0'}
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
@@ -6670,8 +6679,8 @@ packages:
   tinycolor2@1.4.2:
     resolution: {integrity: sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==}
 
-  tmp@0.2.3:
-    resolution: {integrity: sha512-nZD7m9iCPC5g0pYmcaxogYKggSfLsdxl8of3Q/oIbqCqLLIO9IAF0GWjX1z9NZRHPiXv8Wex4yDCaZsgEw0Y8w==}
+  tmp@0.2.4:
+    resolution: {integrity: sha512-UdiSoX6ypifLmrfQ/XfiawN6hkjSBpCjhKxxZcWlUUmoXLaCKQU0bx4HF/tdDK2uzRuchf1txGvrWBzYREssoQ==}
     engines: {node: '>=14.14'}
 
   to-absolute-glob@2.0.2:
@@ -8013,7 +8022,7 @@ snapshots:
       globals: 13.24.0
       ignore: 5.2.4
       import-fresh: 3.3.0
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       minimatch: 3.1.2
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -8186,10 +8195,10 @@ snapshots:
     dependencies:
       vary: 1.1.2
 
-  '@koa/multer@3.0.2(multer@1.4.5-lts.1)':
+  '@koa/multer@3.0.2(multer@2.0.2)':
     dependencies:
       fix-esm: 1.0.1
-      multer: 1.4.5-lts.1
+      multer: 2.0.2
     transitivePeerDependencies:
       - supports-color
 
@@ -8346,7 +8355,7 @@ snapshots:
       colorette: 1.4.0
       https-proxy-agent: 7.0.4
       js-levenshtein: 1.1.6
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       minimatch: 5.1.6
       node-fetch: 2.6.7
       pluralize: 8.0.0
@@ -8775,18 +8784,18 @@ snapshots:
 
   '@tsconfig/node16@1.0.3': {}
 
-  '@twemoji/parser@15.1.1': {}
+  '@twemoji/parser@16.0.0': {}
 
   '@types/accepts@1.3.5':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/bcryptjs@2.4.6': {}
 
   '@types/body-parser@1.19.2':
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/bson@4.2.0':
     dependencies:
@@ -8796,17 +8805,17 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       '@types/responselike': 1.0.0
 
   '@types/co-body@6.1.3':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       '@types/qs': 6.9.7
 
   '@types/connect@3.4.35':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/content-disposition@0.5.5': {}
 
@@ -8815,7 +8824,7 @@ snapshots:
       '@types/connect': 3.4.35
       '@types/express': 4.17.15
       '@types/keygrip': 1.0.2
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/double-ended-queue@2.1.7': {}
 
@@ -8825,7 +8834,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.17.32':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
 
@@ -8838,12 +8847,12 @@ snapshots:
 
   '@types/fluent-ffmpeg@2.1.27':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/glob@8.1.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/http-assert@1.5.3': {}
 
@@ -8855,7 +8864,7 @@ snapshots:
 
   '@types/jsdom@20.0.1':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       '@types/tough-cookie': 4.0.2
       parse5: 7.1.2
 
@@ -8871,7 +8880,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/koa-bodyparser@4.3.12':
     dependencies:
@@ -8906,7 +8915,7 @@ snapshots:
       '@types/http-errors': 2.0.1
       '@types/keygrip': 1.0.2
       '@types/koa-compose': 3.2.5
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/koa__cors@5.0.0':
     dependencies:
@@ -8931,25 +8940,25 @@ snapshots:
   '@types/mongodb@3.6.20':
     dependencies:
       '@types/bson': 4.2.0
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/needle@3.2.0':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
-  '@types/node@22.14.0':
+  '@types/node@22.19.6':
     dependencies:
       undici-types: 6.21.0
 
   '@types/nodemailer@6.4.17':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/nprogress@0.2.3': {}
 
   '@types/oauth@0.9.6':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/parse5@6.0.3': {}
 
@@ -8958,7 +8967,7 @@ snapshots:
   '@types/probe-image-size@7.2.5':
     dependencies:
       '@types/needle': 3.2.0
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/pug@2.0.10': {}
 
@@ -8968,7 +8977,7 @@ snapshots:
 
   '@types/qrcode@1.5.5':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/qs@6.9.7': {}
 
@@ -8980,11 +8989,11 @@ snapshots:
 
   '@types/request-stats@3.0.3':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/responselike@1.0.0':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/seedrandom@3.0.8': {}
 
@@ -8993,7 +9002,7 @@ snapshots:
   '@types/serve-static@1.15.0':
     dependencies:
       '@types/mime': 3.0.1
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/sharp@0.32.0':
     dependencies:
@@ -9003,7 +9012,7 @@ snapshots:
 
   '@types/speakeasy@2.0.10':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/suncalc@1.9.2': {}
 
@@ -9018,15 +9027,15 @@ snapshots:
   '@types/vinyl@2.0.7':
     dependencies:
       '@types/expect': 1.20.4
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/web-push@3.6.4':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/webpack@5.28.5(@swc/core@1.11.16)(webpack-cli@4.10.0)':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       tapable: 2.2.1
       webpack: 5.94.0(@swc/core@1.11.16)(webpack-cli@4.10.0)
     transitivePeerDependencies:
@@ -9037,11 +9046,11 @@ snapshots:
 
   '@types/websocket@1.0.10':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@types/ws@8.5.10':
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
 
   '@typescript-eslint/eslint-plugin@7.5.0(@typescript-eslint/parser@7.5.0(eslint@8.57.1)(typescript@5.5.3))(eslint@8.57.1)(typescript@5.5.3)':
     dependencies:
@@ -9085,7 +9094,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 7.5.0(typescript@5.5.3)
       '@typescript-eslint/utils': 7.5.0(eslint@8.57.1)(typescript@5.5.3)
-      debug: 4.3.4
+      debug: 4.4.1(supports-color@8.1.1)
       eslint: 8.57.1
       ts-api-utils: 1.3.0(typescript@5.5.3)
     optionalDependencies:
@@ -10047,6 +10056,13 @@ snapshots:
       readable-stream: 2.3.7
       typedarray: 0.0.6
 
+  concat-stream@2.0.0:
+    dependencies:
+      buffer-from: 1.1.2
+      inherits: 2.0.4
+      readable-stream: 3.6.0
+      typedarray: 0.0.6
+
   condense-newlines@0.2.1:
     dependencies:
       extend-shallow: 2.0.1
@@ -10108,7 +10124,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.0
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.5.3
@@ -10763,7 +10779,7 @@ snapshots:
       imurmurhash: 0.1.4
       is-glob: 4.0.3
       is-path-inside: 3.0.3
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash.merge: 4.6.2
@@ -11250,12 +11266,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  gulp-postcss@9.0.1(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.14.0)(typescript@5.5.3)):
+  gulp-postcss@9.0.1(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.19.6)(typescript@5.5.3)):
     dependencies:
       fancy-log: 1.3.3
       plugin-error: 1.0.1
       postcss: 8.4.49
-      postcss-load-config: 3.1.4(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.14.0)(typescript@5.5.3))
+      postcss-load-config: 3.1.4(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.19.6)(typescript@5.5.3))
       vinyl-sourcemaps-apply: 0.2.1
     transitivePeerDependencies:
       - ts-node
@@ -11264,7 +11280,7 @@ snapshots:
 
   gulp-replace@1.1.4:
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       '@types/vinyl': 2.0.7
       istextorbinary: 3.3.0
       replacestream: 4.0.3
@@ -11856,13 +11872,13 @@ snapshots:
 
   jest-worker@26.6.2:
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       merge-stream: 2.0.0
       supports-color: 7.2.0
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -11889,6 +11905,10 @@ snapshots:
       esprima: 4.0.1
 
   js-yaml@4.1.0:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@4.1.1:
     dependencies:
       argparse: 2.0.1
 
@@ -12064,7 +12084,7 @@ snapshots:
       lodash.isregexp: 3.0.5
       q: 1.4.1
 
-  koa@2.16.1:
+  koa@2.16.3:
     dependencies:
       accepts: 1.3.8
       cache-content-type: 1.0.1
@@ -12455,7 +12475,7 @@ snapshots:
       find-up: 5.0.0
       glob: 8.1.0
       he: 1.2.0
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       log-symbols: 4.1.0
       minimatch: 5.1.6
       ms: 2.1.3
@@ -12533,11 +12553,11 @@ snapshots:
     optionalDependencies:
       msgpackr-extract: 3.0.2
 
-  multer@1.4.5-lts.1:
+  multer@2.0.2:
     dependencies:
       append-field: 1.0.0
       busboy: 1.6.0
-      concat-stream: 1.6.2
+      concat-stream: 2.0.0
       mkdirp: 0.5.6
       object-assign: 4.1.1
       type-is: 1.6.18
@@ -12623,7 +12643,7 @@ snapshots:
 
   node-releases@2.0.14: {}
 
-  nodemailer@6.9.16: {}
+  nodemailer@7.0.11: {}
 
   nopt@6.0.0:
     dependencies:
@@ -12996,13 +13016,13 @@ snapshots:
     dependencies:
       postcss: 8.4.49
 
-  postcss-load-config@3.1.4(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.14.0)(typescript@5.5.3)):
+  postcss-load-config@3.1.4(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.19.6)(typescript@5.5.3)):
     dependencies:
       lilconfig: 2.0.6
       yaml: 1.10.2
     optionalDependencies:
       postcss: 8.4.49
-      ts-node: 10.9.2(@swc/core@1.11.16)(@types/node@22.14.0)(typescript@5.5.3)
+      ts-node: 10.9.2(@swc/core@1.11.16)(@types/node@22.19.6)(typescript@5.5.3)
 
   postcss-loader@8.1.1(postcss@8.4.49)(typescript@5.5.3)(webpack@5.94.0):
     dependencies:
@@ -13989,7 +14009,7 @@ snapshots:
   stylus@0.59.0:
     dependencies:
       '@adobe/css-tools': 4.3.3
-      debug: 4.3.4
+      debug: 4.4.1(supports-color@8.1.1)
       glob: 7.2.3
       sax: 1.2.4
       source-map: 0.7.4
@@ -14110,7 +14130,7 @@ snapshots:
     dependencies:
       moment: 2.30.1
 
-  systeminformation@5.23.8: {}
+  systeminformation@5.27.14: {}
 
   syuilo-password-strength@0.0.1: {}
 
@@ -14209,7 +14229,7 @@ snapshots:
 
   tinycolor2@1.4.2: {}
 
-  tmp@0.2.3: {}
+  tmp@0.2.4: {}
 
   to-absolute-glob@2.0.2:
     dependencies:
@@ -14278,14 +14298,14 @@ snapshots:
       typescript: 5.5.3
       webpack: 5.94.0(@swc/core@1.11.16)(webpack-cli@4.10.0)
 
-  ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.14.0)(typescript@5.5.3):
+  ts-node@10.9.2(@swc/core@1.11.16)(@types/node@22.19.6)(typescript@5.5.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.9
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 22.14.0
+      '@types/node': 22.19.6
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3
