@@ -60,6 +60,16 @@ export async function listRelay() {
 	return relays;
 }
 
+export async function isRelayActor(actor: { inbox: string | null; sharedInbox: string | null }): Promise<boolean> {
+	const relays = await Relay.find({
+		status: 'accepted',
+	});
+	return relays.some(relay =>
+		(actor.inbox != null && relay.inbox === actor.inbox)
+		|| (actor.sharedInbox != null && relay.inbox === actor.sharedInbox),
+	);
+}
+
 export async function relayAccepted(id: string) {
 	const result = await Relay.update(new mongo.ObjectID(id), {
 		$set: {
