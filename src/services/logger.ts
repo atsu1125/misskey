@@ -3,7 +3,7 @@ import * as os from 'os';
 import * as Chalk from 'chalk';
 import { format } from 'date-fns';
 import { envOption } from '../env';
-import Log from '../models/log';
+//import Log from '../models/log';
 import config from '../config';
 //import { processLabel } from '..';
 
@@ -23,7 +23,7 @@ export default class Logger {
 	private store: boolean;
 	private syslogClient: any | null = null;
 
-	constructor(domain: string, color?: string, store = false) {
+	constructor(domain: string, color?: string, store = true) {
 		this.domain = {
 			name: domain,
 			color: color,
@@ -32,7 +32,7 @@ export default class Logger {
 
 		if (config.syslog) {
 			this.syslogClient = new SyslogPro.RFC5424({
-				applacationName: 'Misskey',
+				applicationName: 'Misskey',
 				timestamp: true,
 				encludeStructuredData: true,
 				color: true,
@@ -45,13 +45,13 @@ export default class Logger {
 		}
 	}
 
-	public createSubLogger(domain: string, color?: string, store = false): Logger {
+	public createSubLogger(domain: string, color?: string, store = true): Logger {
 		const logger = new Logger(domain, color, store);
 		logger.parentLogger = this;
 		return logger;
 	}
 
-	private log(level: Level, message: string, data: Record<string, any> | null | undefined, important = false, subDomains: Domain[] = [], store = false): void {
+	private log(level: Level, message: string, data: Record<string, any> | null | undefined, important = false, subDomains: Domain[] = [], store = true): void {
 		if (envOption.quiet) return;
 		//if (process.env.NODE_ENV === 'test') return;
 		if (!this.store) store = false;
@@ -98,15 +98,15 @@ export default class Logger {
 				send.bind(this.syslogClient)(message).catch(() => {});
 			}
 
-			Log.insert({
-				createdAt: new Date(),
-				machine: os.hostname(),
-				worker: worker,
-				domain: [this.domain].concat(subDomains).map(d => d.name),
-				level: level,
-				message: message,
-				data: data,
-			}).then(() => {});
+			//Log.insert({
+			//	createdAt: new Date(),
+			//	machine: os.hostname(),
+			//	worker: worker,
+			//	domain: [this.domain].concat(subDomains).map(d => d.name),
+			//	level: level,
+			//	message: message,
+			//	data: data,
+			//}).then(() => {});
 		}
 	}
 
