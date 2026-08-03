@@ -558,7 +558,10 @@ describe('Fetch resource', () => {
 		});
 
 		it('Accepted', async () => {
-			const object = { a: 1, b: 2, };
+			const host = 'https://host1.test';
+			const preferredUsername = `${rndstr('A-Z', 4)}${rndstr('a-z', 4)}`;
+			const actorId = `${host}/users/${preferredUsername.toLowerCase()}`;
+			const object = { a: 1, b: 2, actor: actorId, };
 			const body = JSON.stringify(object);
 
 			const req = createSignedPost({
