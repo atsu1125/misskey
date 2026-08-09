@@ -18,7 +18,8 @@ export async function getJson(url: string, accept = 'application/json, */*', tim
 			'User-Agent': config.userAgent,
 			Accept: accept
 		}, headers || {}),
-		timeout
+		timeout,
+		size: 1024 * 256
 	});
 
 	if (res.body.length > 65536) throw new Error('too large JSON');
