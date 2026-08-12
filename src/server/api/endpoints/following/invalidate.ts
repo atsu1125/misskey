@@ -85,5 +85,5 @@ export default define(meta, async (ps, user) => {
 
 	await deleteFollowing(follower, followee);
 
-	return await pack(followee._id, user);
+	return await pack(follower._id, user);
 });
