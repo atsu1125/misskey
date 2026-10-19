@@ -1,5 +1,4 @@
 import $ from 'cafy';
-import * as sanitizeHtml from 'sanitize-html';
 import ID, { transform } from '../../../../misc/cafy-id';
 import define from '../../define';
 import User from '../../../../models/user';
@@ -100,9 +99,7 @@ export default define(meta, async (ps, me) => {
 	setTimeout(async () => {
 		const meta = await fetchMeta();
 		if (meta.email) {
-			sendEmail(meta.maintainer.email, 'New abuse report',
-				sanitizeHtml(ps.comment),
-				sanitizeHtml(ps.comment));
+			sendEmail(meta.maintainer.email, 'New abuse report', ps.comment);
 		}
 	}, 1);
 });
