@@ -57,7 +57,7 @@ export async function updateQuestion(value: any, actor?: IRemoteUser, resolver?:
 		_id: note.userId
 	});
 
-	if (note == null) throw 'Question is not registered';
+	if (user == null) throw 'Question is not registered';
 	//#endregion
 
 	// resolve new Question object
