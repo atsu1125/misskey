@@ -1,4 +1,4 @@
-FROM node:22.22.0-bullseye AS builder
+FROM node:22.22.0-trixie AS builder
 
 ENV NODE_ENV=production
 ENV COREPACK_DEFAULT_TO_LATEST=0
@@ -17,7 +17,7 @@ COPY . ./
 
 RUN pnpm build
 
-FROM node:22.22.0-bullseye-slim AS runner
+FROM node:22.22.0-trixie-slim AS runner
 
 ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey

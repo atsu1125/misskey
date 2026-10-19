@@ -1,11 +1,11 @@
-FROM fedora:40 AS builder
+FROM fedora:44 AS builder
 
 ENV NODE_ENV=production
 ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey
 
 RUN dnf update -y \
- && dnf groupinstall -y "Development Tools" \
+ && dnf install -y @development-tools \
  && dnf install -y wget gcc-c++
 
 ENV NODE_VER="22.22.0"
@@ -31,7 +31,7 @@ RUN pnpm i --frozen-lockfile
 COPY . ./
 RUN pnpm build
 
-FROM fedora:40 AS runner
+FROM fedora:44 AS runner
 
 ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey

@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 as builder
+FROM ubuntu:26.04 as builder
 
 # Use bash for the shell
 SHELL ["/bin/bash", "-c"]
@@ -41,7 +41,7 @@ COPY . ./
 
 RUN pnpm build
 
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 ENV COREPACK_DEFAULT_TO_LATEST=0
 WORKDIR /misskey
